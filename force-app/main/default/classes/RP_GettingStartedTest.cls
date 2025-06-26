@@ -53,14 +53,14 @@ public with sharing class RP_GettingStartedTest {
         Test.stopTest();
 
         // Asserting that the page controller isn't null
-        System.assertNotEquals(controller, null);
+        System.assertNotEquals(controller, null, 'Assert that the controller is not null.');
 
         // Asserting that the wrapper object isn't returning null
-        System.assertNotEquals(controller.linksData, null);
+        System.assertNotEquals(controller.linksData, null, 'Checks that the linksData is not null.');
 
         // Asserting that each property isn't returning null
-        System.assertNotEquals(controller.linksData.trailheadLink, null);
-        System.assertNotEquals(controller.linksData.usLink, null);
-        System.assertNotEquals(controller.linksData.customerJourneyLink, null);
+        System.assertNotEquals(controller.linksData.trailheadLink, null, 'Checks that the trailheadLink is not null.');
+        System.assertNotEquals(controller.linksData.usLink, null, 'This method asserts that the controller s linksData. usLink is not null.');
+        System.assertNotEquals(controller.linksData.customerJourneyLink, null, 'This method asserts that the link is not null.');
     }
 }

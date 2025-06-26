@@ -46,24 +46,24 @@ private class BDE_BatchEntry_TEST {
         system.currentPageReference().getParameters().put('obj', 'Opportunity');        
         BDE_BatchEntry_CTRL ctrl = new BDE_BatchEntry_CTRL(new ApexPages.standardController(new Batch__c() ));
         ctrl.initializeBatchEntry();
-        system.assertEquals('Opportunity', ctrl.objname);
-        system.assertNotEquals(null, ctrl.batch);
-        system.assertNotEquals(null, ctrl.batchLookupField);
-        system.assertNotEquals(null, ctrl.pageSubtitle);
-        system.assertNotEquals(0, ctrl.entryFieldList.size());
-        system.assertNotEquals(0, ctrl.listFieldList.size());
-        system.assertNotEquals(null, ctrl.bdec);
-        system.assertNotEquals(null, ctrl.currentItem);
+        system.assertEquals('Opportunity', ctrl.objname, 'assert that the opportunity is the same as the opportunity');
+        system.assertNotEquals(null, ctrl.batch, 'asserts that batch is not null');
+        system.assertNotEquals(null, ctrl.batchLookupField, 'This method asserts that the batchLookupField is not null.');
+        system.assertNotEquals(null, ctrl.pageSubtitle, 'Asserts that pageSubtitle is not null.');
+        system.assertNotEquals(0, ctrl.entryFieldList.size(), 'This will assert that the size of the list of fields is not 0.');
+        system.assertNotEquals(0, ctrl.listFieldList.size(), 'This function asserts that the listFieldList is not empty.');
+        system.assertNotEquals(null, ctrl.bdec, 'asserts that ctrl. bdec is not null');
+        system.assertNotEquals(null, ctrl.currentItem, 'Assert that the currently selected item is not null.');
         ctrl.currentItem.sobj.put('Name', 'my test opp');
         ctrl.currentItem.sobj.put('Amount',100);
         ctrl.currentItem.sobj.put('StageName','Closed Won');
         ctrl.currentItem.sobj.put('CloseDate', system.Today());
         ctrl.saveBatch();
         list<Batch__c> listBatch = [select Id, Name, Number_of_Items__c from Batch__c where Id = :ctrl.batch.Id];
-        system.assertEquals(1, listBatch.size());
+        system.assertEquals(1, listBatch.size(), 'Asserts that the size of the batch is equal to 1.');
         ctrl.save();
         list<Opportunity> listOpp = [select Id, Name from Opportunity where Batch__c = :ctrl.batch.Id];
-        system.assertEquals(1, listOpp.size());
+        system.assertEquals(1, listOpp.size(), 'Assert that the size of the list is equal to 1.');
     }        
     /*******************************************************************************************************
     * @description load the batch data entry page for a new contact batch, save and reload the page with
@@ -77,7 +77,7 @@ private class BDE_BatchEntry_TEST {
         BDE_BatchEntry_CTRL ext = new BDE_BatchEntry_CTRL(sc);
         ext.displayBatchSection = true;  
         ext.initializeBatchEntry();
-        system.assertNotEquals(null, ext.currentItem);
+        system.assertNotEquals(null, ext.currentItem, 'Assert that current item is not null.');
         
         // set some fields
         ext.currentItem.sobj.put('LastName', 'Test');

@@ -51,17 +51,17 @@ private with sharing class BDI_SettingsUI_TEST {
         ctrl.diBatch = new DataImportBatch__c();
 
         Test.startTest();
-        System.assertEquals(false, ctrl.isEditMode);
-        System.assertEquals(true, ctrl.isReadOnlyMode);
-        System.assertNotEquals(null, ctrl.listSODonationFields);
-        System.assertNotEquals(null, ctrl.listSOContactUniqueID);
-        System.assertNotEquals(null, ctrl.listSOAccountUniqueID);
-        System.assertEquals(BDI_DataImport_API.DoNotMatch, ctrl.getDoNotMatch());
-        System.assertEquals(BDI_DataImport_API.RequireNoMatch, ctrl.getRequireNoMatch());
-        System.assertEquals(BDI_DataImport_API.RequireExactMatch, ctrl.getRequireExactMatch());
-        System.assertEquals(BDI_DataImport_API.ExactMatchOrCreate, ctrl.getExactMatchOrCreate());
-        System.assertEquals(BDI_DataImport_API.RequireBestMatch, ctrl.getRequireBestMatch());
-        System.assertEquals(BDI_DataImport_API.BestMatchOrCreate, ctrl.getBestMatchOrCreate());
+        System.assertEquals(false, ctrl.isEditMode, 'Checks if the current mode is edit mode.');
+        System.assertEquals(true, ctrl.isReadOnlyMode, 'Tests if the current mode is read - only.');
+        System.assertNotEquals(null, ctrl.listSODonationFields, 'This function asserts that the list of SODonationFields is not null.');
+        System.assertNotEquals(null, ctrl.listSOContactUniqueID, 'This method asserts that the listSOContactUniqueID is not null.');
+        System.assertNotEquals(null, ctrl.listSOAccountUniqueID, 'This method asserts that the listSOAccountUniqueID property is not null.');
+        System.assertEquals(BDI_DataImport_API.DoNotMatch, ctrl.getDoNotMatch(), 'This method asserts that the current ctrl s DoNotMatch value is the same as the current');
+        System.assertEquals(BDI_DataImport_API.RequireNoMatch, ctrl.getRequireNoMatch(), 'This method should only be used for testing.');
+        System.assertEquals(BDI_DataImport_API.RequireExactMatch, ctrl.getRequireExactMatch(), 'This method asserts that the RequireExactMatch value is the same as the current RequireExactMatch');
+        System.assertEquals(BDI_DataImport_API.ExactMatchOrCreate, ctrl.getExactMatchOrCreate(), 'This method asserts that the current data import is exactly the same as the current data import.');
+        System.assertEquals(BDI_DataImport_API.RequireBestMatch, ctrl.getRequireBestMatch(), 'This method should only be called if the RequireBestMatch is the same as the current Require');
+        System.assertEquals(BDI_DataImport_API.BestMatchOrCreate, ctrl.getBestMatchOrCreate(), 'This method asserts that the best match is created.');
         Test.stopTest();
     }
 

@@ -46,7 +46,7 @@ public with sharing class UTIL_HtmlOutput_TEST {
         controller.unsafeHtml = html;
         controller.hasUrl = false;
 
-        System.assertEquals(html, controller.getSafeHtml());
+        System.assertEquals(html, controller.getSafeHtml(), 'Assert that the html is the same as the html of the controller.');
     }
 
     /*******************************************************************************************************
@@ -60,7 +60,7 @@ public with sharing class UTIL_HtmlOutput_TEST {
         controller.unsafeHtml = html;
         controller.hasUrl = false;
 
-        System.assertEquals(html, controller.getSafeHtml());
+        System.assertEquals(html, controller.getSafeHtml(), 'Assert that the html is the same as the html of the controller.');
     }
 
     /*******************************************************************************************************
@@ -75,8 +75,8 @@ public with sharing class UTIL_HtmlOutput_TEST {
         controller.hasUrl = false;
         String actualHtml = controller.getSafeHtml();
 
-        System.assert(actualHtml.startsWith('&lt;'));
-        System.assertNotEquals(html, actualHtml);
+        System.assert(actualHtml.startsWith('&lt;'), 'Checks that the actual html starts with a &lt ;.');
+        System.assertNotEquals(html, actualHtml, 'Assert that the html is not equal to the actual html.');
     }
 
     /*******************************************************************************************************
@@ -90,7 +90,7 @@ public with sharing class UTIL_HtmlOutput_TEST {
         controller.unsafeHtml = html;
         controller.hasUrl = true;
 
-        System.assertEquals(html, controller.getSafeHtml());
+        System.assertEquals(html, controller.getSafeHtml(), 'Assert that the html is the same as the html of the controller.');
     }
 
     /*******************************************************************************************************
@@ -104,7 +104,7 @@ public with sharing class UTIL_HtmlOutput_TEST {
         controller.unsafeHtml = html;
         controller.hasUrl = true;
 
-        System.assertEquals(html, controller.getSafeHtml());
+        System.assertEquals(html, controller.getSafeHtml(), 'Assert that the html is the same as the html of the controller.');
     }
 
     /*******************************************************************************************************
@@ -119,8 +119,8 @@ public with sharing class UTIL_HtmlOutput_TEST {
         controller.hasUrl = true;
         String actualHtml = controller.getSafeHtml();
 
-        System.assert(actualHtml.startsWith('&lt;'));
-        System.assertNotEquals(html, actualHtml);
+        System.assert(actualHtml.startsWith('&lt;'), 'Checks that the actual html starts with a &lt ;.');
+        System.assertNotEquals(html, actualHtml, 'Assert that the html is not equal to the actual html.');
     }
 
     /*******************************************************************************************************
@@ -135,7 +135,7 @@ public with sharing class UTIL_HtmlOutput_TEST {
         controller.unsafeHtml = html;
         controller.hasUrl = true;
 
-        System.assertEquals(cleanHtml, controller.getSafeHtml());
+        System.assertEquals(cleanHtml, controller.getSafeHtml(), 'Assert that cleanHtml equals the html of the controller.');
     }
 
     /*******************************************************************************************************
@@ -152,7 +152,7 @@ public with sharing class UTIL_HtmlOutput_TEST {
         controller.unsafeHtml = html;
         controller.hasUrl = true;
 
-        System.assertEquals(cleanHtml, controller.getSafeHtml());
+        System.assertEquals(cleanHtml, controller.getSafeHtml(), 'Assert that cleanHtml equals the html of the controller.');
     }
 
 }

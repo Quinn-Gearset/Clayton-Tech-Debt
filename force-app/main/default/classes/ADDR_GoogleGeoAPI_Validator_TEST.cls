@@ -76,12 +76,12 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{ a }, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('1600 Amphitheatre Pkwy', returnedAddress[0].MailingStreet__c);
-        System.assertEquals('CA', returnedAddress[0].MailingState__c);
-        System.assertEquals('Mountain View', returnedAddress[0].MailingCity__c);
-        System.assertEquals('94043', returnedAddress[0].MailingPostalCode__c);
-        System.assertEquals(true, returnedAddress[0].Verified__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('1600 Amphitheatre Pkwy', returnedAddress[0].MailingStreet__c, 'Assert that the returned address is the same as the one in the address table.');
+        System.assertEquals('CA', returnedAddress[0].MailingState__c, 'Assert that the CA returned is the same as the CA.');
+        System.assertEquals('Mountain View', returnedAddress[0].MailingCity__c, 'This is a test function to assert that the first address is Mountain View.');
+        System.assertEquals('94043', returnedAddress[0].MailingPostalCode__c, 'This function asserts that the first address is the same as the last one.');
+        System.assertEquals(true, returnedAddress[0].Verified__c, 'This is a test to make sure that the address returned is verified.');
     }
 
     /**
@@ -105,12 +105,12 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('Prälat-Zistl-Straße 8', returnedAddress[0].MailingStreet__c);
-        System.assertEquals('BY', returnedAddress[0].MailingState__c);
-        System.assertEquals('München', returnedAddress[0].MailingCity__c);
-        System.assertEquals('80331', returnedAddress[0].MailingPostalCode__c);
-        System.assertEquals(true, returnedAddress[0].Verified__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('Prälat-Zistl-Straße 8', returnedAddress[0].MailingStreet__c, 'Assert that the returned address is the same as the one returned by the function.');
+        System.assertEquals('BY', returnedAddress[0].MailingState__c, 'Assert that the returned address is the same as the one returned by the calling function.');
+        System.assertEquals('München', returnedAddress[0].MailingCity__c, 'Assert that the returned address is the same as the one provided.');
+        System.assertEquals('80331', returnedAddress[0].MailingPostalCode__c, 'Checks that the returned address is the same as the one provided.');
+        System.assertEquals(true, returnedAddress[0].Verified__c, 'This is a test to make sure that the address returned is verified.');
     }
 
     @IsTest
@@ -126,12 +126,12 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('1600 Amphitheatre Pkwy, #8', returnedAddress[0].MailingStreet__c);
-        System.assertEquals('CA', returnedAddress[0].MailingState__c);
-        System.assertEquals('Mountain View', returnedAddress[0].MailingCity__c);
-        System.assertEquals('94043', returnedAddress[0].MailingPostalCode__c);
-        System.assertEquals(true, returnedAddress[0].Verified__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('1600 Amphitheatre Pkwy, #8', returnedAddress[0].MailingStreet__c, 'This test asserts that the returned address is the same as the one in the address table.');
+        System.assertEquals('CA', returnedAddress[0].MailingState__c, 'Assert that the CA returned is the same as the CA.');
+        System.assertEquals('Mountain View', returnedAddress[0].MailingCity__c, 'This is a test function to assert that the first address is Mountain View.');
+        System.assertEquals('94043', returnedAddress[0].MailingPostalCode__c, 'This function asserts that the first address is the same as the last one.');
+        System.assertEquals(true, returnedAddress[0].Verified__c, 'This is a test to make sure that the address returned is verified.');
     }
 
     @IsTest
@@ -148,12 +148,12 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('1600 Amphitheatre Pkwy', returnedAddress[0].MailingStreet__c);
-        System.assertEquals('CA', returnedAddress[0].MailingState__c);
-        System.assertEquals('Mountain View', returnedAddress[0].MailingCity__c);
-        System.assertEquals('94043-9475', returnedAddress[0].MailingPostalCode__c);
-        System.assertEquals(true, returnedAddress[0].Verified__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('1600 Amphitheatre Pkwy', returnedAddress[0].MailingStreet__c, 'Assert that the returned address is the same as the one in the address table.');
+        System.assertEquals('CA', returnedAddress[0].MailingState__c, 'Assert that the CA returned is the same as the CA.');
+        System.assertEquals('Mountain View', returnedAddress[0].MailingCity__c, 'This is a test function to assert that the first address is Mountain View.');
+        System.assertEquals('94043-9475', returnedAddress[0].MailingPostalCode__c, 'This function asserts that the returned address is the same as the one in the returned address array');
+        System.assertEquals(true, returnedAddress[0].Verified__c, 'This is a test to make sure that the address returned is verified.');
     }
 
     @IsTest
@@ -168,9 +168,9 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals(true, returnedAddress[0].Verified__c);
-        System.assertEquals(true, returnedAddress[0].Ambiguous__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals(true, returnedAddress[0].Verified__c, 'This is a test to make sure that the address returned is verified.');
+        System.assertEquals(true, returnedAddress[0].Ambiguous__c, 'This is a test to make sure that the address returned is ambiguous.');
     }
 
     @IsTest
@@ -185,9 +185,9 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('OVER_QUERY_LIMIT: indicates that you are over your quota.', returnedAddress[0].API_Response__c);
-        System.assertEquals(false, returnedAddress[0].Verified__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('OVER_QUERY_LIMIT: indicates that you are over your quota.', returnedAddress[0].API_Response__c, 'Checks that the quota of the API is over your quota limit.');
+        System.assertEquals(false, returnedAddress[0].Verified__c, 'This is a test to make sure that the address returned is the same as the one we');
     }
 
     @IsTest
@@ -202,8 +202,8 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('REQUEST_DENIED: indicates that your request was denied.', returnedAddress[0].API_Response__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('REQUEST_DENIED: indicates that your request was denied.', returnedAddress[0].API_Response__c, 'This is a workaround to ensure that the request was denied.');
     }
 
     @IsTest
@@ -218,8 +218,8 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('UNKNOWN_ERROR: indicates that the request could not be processed due to a server error. The request may succeed if you try again.', returnedAddress[0].API_Response__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('UNKNOWN_ERROR: indicates that the request could not be processed due to a server error. The request may succeed if you try again.', returnedAddress[0].API_Response__c, 'This method is used to assert that the request was not processed due to a server error.');
     }
 
     @IsTest
@@ -234,8 +234,8 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('INVALID_REQUEST: generally indicates that the query (address, components or latlng) is missing.', returnedAddress[0].API_Response__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('INVALID_REQUEST: generally indicates that the query (address, components or latlng) is missing.', returnedAddress[0].API_Response__c, 'This method is called when the API response is malformed.');
     }
 
     @IsTest
@@ -250,8 +250,8 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('ZERO_RESULTS: indicates that the geocode was successful but returned no results. This may occur if the geocoder was passed a non-existent address.', returnedAddress[0].API_Response__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('ZERO_RESULTS: indicates that the geocode was successful but returned no results. This may occur if the geocoder was passed a non-existent address.', returnedAddress[0].API_Response__c, 'Checks that the geocode was successful but returned no results.');
     }
 
     @IsTest
@@ -266,8 +266,8 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('401: Not authenticated.', returnedAddress[0].API_Response__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('401: Not authenticated.', returnedAddress[0].API_Response__c, 'Assert that the API response code is 401.');
     }
 
     @IsTest
@@ -286,14 +286,14 @@ private class ADDR_GoogleGeoAPI_Validator_TEST {
         List<Address__c> returnedAddress = testValidator.verifyRecords(new List<Address__c>{a}, settings);
         Test.StopTest();
 
-        System.assertEquals(1, returnedAddress.size());
-        System.assertEquals('MISSING AUTHID OR ENDPOINT.  Please see the Address Verification menu in the NPSP Settings tab for more information', returnedAddress[0].API_Response__c);
+        System.assertEquals(1, returnedAddress.size(), 'This is a test to make sure that the size of the returned address is equal to 1');
+        System.assertEquals('MISSING AUTHID OR ENDPOINT.  Please see the Address Verification menu in the NPSP Settings tab for more information', returnedAddress[0].API_Response__c, 'MISSING AUTHID OR ENDPOINT.');
     }
 
     @IsTest
     private static void shouldEnsureServiceNameStringsArePopulated(){
         ADDR_GoogleGeoAPI_Validator testValidator = new ADDR_GoogleGeoAPI_Validator();
-        System.assertEquals('The Google Geocoding API', testValidator.getServiceName());
-        System.assertEquals('https://maps.googleapis.com/maps/api/geocode/json?', testValidator.getDefaultURL());
+        System.assertEquals('The Google Geocoding API', testValidator.getServiceName(), 'Checks that the Google Geocoding API is the same as the service name provided by the');
+        System.assertEquals('https://maps.googleapis.com/maps/api/geocode/json?', testValidator.getDefaultURL(), 'Checks that the default URL of the test validator is the same as the URL of the Google');
     }
 }

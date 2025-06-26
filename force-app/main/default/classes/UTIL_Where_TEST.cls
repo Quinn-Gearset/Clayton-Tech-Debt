@@ -55,7 +55,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpEqualsSetsCorrectOperatorAndValue() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.equals('foo').toString();
 
-        System.assertEquals('Name = \'foo\'', fieldExp);
+        System.assertEquals('Name = \'foo\'', fieldExp, 'This test is used to assert that the field expression is equal to the field expression.');
     }
 
     /*******************************************************************************************************
@@ -64,7 +64,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpNotEqualsSetsCorrectOperatorAndValue() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.notEquals('foo').toString();
 
-        System.assertEquals('Name != \'foo\'', fieldExp);
+        System.assertEquals('Name != \'foo\'', fieldExp, 'Checks that the field expression is not the same as the field expression.');
     }
 
     /*******************************************************************************************************
@@ -73,7 +73,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetSetsCorrectOperatorAndValue() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<String>{'foo', 'bar'}).toString();
 
-        System.assertEquals('Name IN (\'foo\', \'bar\')', fieldExp);
+        System.assertEquals('Name IN (\'foo\', \'bar\')', fieldExp, 'Checks that the field expression is equal to the field expression.');
     }
 
     /*******************************************************************************************************
@@ -82,7 +82,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpToStringEscapesSingleQuotes() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.equals('foo\'s').toString();
 
-        System.assertEquals('Name = \'foo\\\'s\'', fieldExp);
+        System.assertEquals('Name = \'foo\\\'s\'', fieldExp, 'Checks that the field expression is equal to the field expression.');
     }
 
     /*******************************************************************************************************
@@ -91,7 +91,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpToStringReturnsExpressionOnNullValueWhenValueIsNull() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.equals(null).toString();
 
-        System.assertEquals('Name = null', fieldExp);
+        System.assertEquals('Name = null', fieldExp, 'This is a hack to avoid the fact that the field expression is null.');
     }
     /*******************************************************************************************************
     * @description Verifies toString() returns correct criteria when value is an empty string
@@ -99,7 +99,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpToStringReturnsExpressionOnNullValueWhenValueIsEmptyString() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.equals('').toString();
 
-        System.assertEquals('Name = null', fieldExp);
+        System.assertEquals('Name = null', fieldExp, 'This is a hack to avoid the fact that the field expression is null.');
     }
 
     /*******************************************************************************************************
@@ -108,7 +108,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpToStringReturnsExpressionOnId() {
         String fieldExp = ACCOUNT_ID_FIELD_EXP.equals(MOCK_ACCOUNT_ID).toString();
 
-        System.assertEquals('Id = \'' + MOCK_ACCOUNT_ID + '\'', fieldExp);
+        System.assertEquals('Id = \'' + MOCK_ACCOUNT_ID + '\'', fieldExp, 'Checks that the field expression is equal to the MOCK_ACCOUNT_ID.');
     }
 
     /*******************************************************************************************************
@@ -117,7 +117,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetToStringReturnsCommaSeparatedElementsInQuotes() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<String>{'foo', 'bar'}).toString();
 
-        System.assertEquals('Name IN (\'foo\', \'bar\')', fieldExp);
+        System.assertEquals('Name IN (\'foo\', \'bar\')', fieldExp, 'Checks that the field expression is equal to the field expression.');
     }
 
     /*******************************************************************************************************
@@ -126,7 +126,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetToStringReturnsValueWhenSetHasOneElement() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<String>{'foo'}).toString();
 
-        System.assertEquals('Name IN (\'foo\')', fieldExp);
+        System.assertEquals('Name IN (\'foo\')', fieldExp, 'Checks that the field expression is equal to the field expression.');
     }
 
     /*******************************************************************************************************
@@ -135,7 +135,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetToStringIncludesNullsAndEmptyStrings() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<String>{'foo', null, '', 'bar'}).toString();
 
-        System.assertEquals('Name IN (\'foo\', null, \'\', \'bar\')', fieldExp);
+        System.assertEquals('Name IN (\'foo\', null, \'\', \'bar\')', fieldExp, 'Checks that the field expression is equal to the field expression.');
     }
 
     /*******************************************************************************************************
@@ -144,7 +144,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetToStringReturnsIdValues() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<Id>{ MOCK_ACCOUNT_ID }).toString();
 
-        System.assertEquals('Name IN (\'' + MOCK_ACCOUNT_ID + '\')', fieldExp);
+        System.assertEquals('Name IN (\'' + MOCK_ACCOUNT_ID + '\')', fieldExp, 'Checks that the field expression matches the MOCK_ACCOUNT_ID.');
     }
 
     /*******************************************************************************************************
@@ -169,7 +169,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpGetSearchValueReturnsEmptyStringWhenValueIsNull() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.equals(null).getSearchValue();
 
-        System.assertEquals('', fieldExp);
+        System.assertEquals('', fieldExp, 'This is a hack to avoid the string equality check.');
     }
 
     /*******************************************************************************************************
@@ -178,7 +178,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpGetSearchValueReturnsValue() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.equals('foo').getSearchValue();
 
-        System.assertEquals('foo', fieldExp);
+        System.assertEquals('foo', fieldExp, 'Assert that foo is equal to fieldExp.');
     }
 
     /*******************************************************************************************************
@@ -187,7 +187,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpGetSearchValueEscapesSingleQuotes() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.equals('foo\'s').getSearchValue();
 
-        System.assertEquals('foo\\\'s', fieldExp);
+        System.assertEquals('foo\\\'s', fieldExp, 'Checks that the field expression matches the field expression.');
     }
 
     /*******************************************************************************************************
@@ -211,7 +211,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetGetSearchValueReturnsValuesConnectedWithOR() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<String>{'foo', 'bar'}).getSearchValue();
 
-        System.assertEquals('(foo OR bar)', fieldExp);
+        System.assertEquals('(foo OR bar)', fieldExp, 'Checks that the expression is equal to the field expression.');
     }
 
     /*******************************************************************************************************
@@ -220,7 +220,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetGetSearchValueReturnsValueWhenSetHasOneElement() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<String>{'foo'}).getSearchValue();
 
-        System.assertEquals('foo', fieldExp);
+        System.assertEquals('foo', fieldExp, 'Assert that foo is equal to fieldExp.');
     }
 
     /*******************************************************************************************************
@@ -229,7 +229,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetGetSearchValueExcludesNullsAndEmptyStrings() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<String>{'foo', null, '', 'bar'}).getSearchValue();
 
-        System.assertEquals('(foo OR bar)', fieldExp);
+        System.assertEquals('(foo OR bar)', fieldExp, 'Checks that the expression is equal to the field expression.');
     }
 
     /*******************************************************************************************************
@@ -238,7 +238,7 @@ private class UTIL_Where_TEST {
     @isTest static void fieldExpInSetGetSearchValueReturnsIdValues() {
         String fieldExp = ACCOUNT_NAME_FIELD_EXP.inSet(new Set<Id>{ MOCK_ACCOUNT_ID }).getSearchValue();
 
-        System.assertEquals(MOCK_ACCOUNT_ID, fieldExp);
+        System.assertEquals(MOCK_ACCOUNT_ID, fieldExp, 'Assert that the fieldExp is equal to the MOCK_ACCOUNT_ID.');
     }
 
     /*******************************************************************************************************
@@ -293,7 +293,7 @@ private class UTIL_Where_TEST {
             .add(WEBSITE_FIELD_EXP.equals('bar.com'))
             .toString();
 
-        System.assertEquals('(Name = \'foo\' AND Website = \'bar.com\')', groupExp);
+        System.assertEquals('(Name = \'foo\' AND Website = \'bar.com\')', groupExp, 'Checks that groupExp is equal to groupExp.');
     }
 
     /*******************************************************************************************************
@@ -306,7 +306,7 @@ private class UTIL_Where_TEST {
             .withOr()
             .toString();
 
-        System.assertEquals('(Name = \'foo\' OR Website = \'bar.com\')', groupExp);
+        System.assertEquals('(Name = \'foo\' OR Website = \'bar.com\')', groupExp, 'Checks that groupExp is equal to groupExp.');
     }
 
     /*******************************************************************************************************
@@ -318,7 +318,7 @@ private class UTIL_Where_TEST {
             .add(ACCOUNT_NAME_FIELD_EXP.equals('foo'))
             .toString();
 
-        System.assertEquals('Name = \'foo\'', groupExp);
+        System.assertEquals('Name = \'foo\'', groupExp, 'Assert that the group expression is equal to the group expression.');
     }
 
     /*******************************************************************************************************
@@ -327,7 +327,7 @@ private class UTIL_Where_TEST {
     @isTest static void groupExpToStringReturnsEmptyStringWhenNoFieldExpIsProvided() {
         String groupExp = new UTIL_Where.GroupExpression().toString();
 
-        System.assertEquals('', groupExp);
+        System.assertEquals('', groupExp, 'Assert that groupExp is empty.');
     }
 
     /*******************************************************************************************************
@@ -339,7 +339,7 @@ private class UTIL_Where_TEST {
             .add(WEBSITE_FIELD_EXP.equals('bar.com'))
             .getSearchValue();
 
-        System.assertEquals('(foo AND bar.com)', groupExp);
+        System.assertEquals('(foo AND bar.com)', groupExp, 'Assert that groupExp is equal to groupExp.');
     }
 
     /*******************************************************************************************************
@@ -352,7 +352,7 @@ private class UTIL_Where_TEST {
             .withOr()
             .getSearchValue();
 
-        System.assertEquals('(foo OR bar.com)', groupExp);
+        System.assertEquals('(foo OR bar.com)', groupExp, 'Assert that groupExp is equal to groupExp.');
     }
 
     /*******************************************************************************************************
@@ -362,7 +362,7 @@ private class UTIL_Where_TEST {
     @isTest static void groupExpGetSearchValueReturnsEmptyStringWhenNoFieldExpIsProvided() {
         String groupExp = new UTIL_Where.GroupExpression().getSearchValue();
 
-        System.assertEquals('', groupExp);
+        System.assertEquals('', groupExp, 'Assert that groupExp is empty.');
     }
 
     /*******************************************************************************************************
@@ -411,7 +411,7 @@ private class UTIL_Where_TEST {
             .add(new UTIL_Where.GroupExpression().add(WEBSITE_FIELD_EXP.equals('bar.com')))
             .build();
 
-        System.assertEquals('Name = \'foo\' AND Website = \'bar.com\'', soql);
+        System.assertEquals('Name = \'foo\' AND Website = \'bar.com\'', soql, 'Asserts that the name and website are equal.');
     }
 
     /*******************************************************************************************************
@@ -426,7 +426,7 @@ private class UTIL_Where_TEST {
             .withOr()
             .build();
 
-        System.assertEquals('(Name = \'foo\' AND Id = \'' + MOCK_ACCOUNT_ID + '\') OR Website = \'bar.com\'', soql);
+        System.assertEquals('(Name = \'foo\' AND Id = \'' + MOCK_ACCOUNT_ID + '\') OR Website = \'bar.com\'', soql, 'Checks that foo and foo. com are equal to the given values.');
     }
 
     /*******************************************************************************************************
@@ -581,7 +581,7 @@ private class UTIL_Where_TEST {
 			.withOr();
 		
 		Set<String> fields = utilWhere.getFields();
-		System.assertEquals(3, fields.size());
+		System.assertEquals(3, fields.size(), 'Checks that the size of the fields array is equal to 3.');
 
 		for (String fieldName : new String[] { 'Account.Name', 'LastName', 'FirstName' }) {
 			System.assert(fields.contains(fieldName), fieldName + ' should be returned: ' + fields);

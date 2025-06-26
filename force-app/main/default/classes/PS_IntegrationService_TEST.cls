@@ -64,14 +64,14 @@ private class PS_IntegrationService_TEST {
                 FROM Payment_Services_Configuration__c
         ];
         Test.stopTest();
-        System.assert(!configurations.isEmpty());
+        System.assert(!configurations.isEmpty(), 'Checks that there are no configurations in the configuration map.');
         for (Payment_Services_Configuration__c config : configurations) {
             if (config.Service__c == PAYMENTS_APPLICATION_TYPE) {
-                System.assertEquals(paymentConfigParams.get(config.Key__c).value, config.Value__c);
+                System.assertEquals(paymentConfigParams.get(config.Key__c).value, config.Value__c, 'This method is used to assert that the payment config parameters are equal.');
             }
 
             if (config.Service__c == MAKANA_APPLICATION_TYPE) {
-                System.assertEquals(makanaConfigParams.get(config.Key__c).value, config.Value__c);
+                System.assertEquals(makanaConfigParams.get(config.Key__c).value, config.Value__c, 'Assert that the config. Key and config. Value are equal.');
             }
         }
     }
@@ -95,14 +95,14 @@ private class PS_IntegrationService_TEST {
         ];
         Test.stopTest();
 
-        System.assert(!configurations.isEmpty());
+        System.assert(!configurations.isEmpty(), 'Checks that there are no configurations in the configuration map.');
         for (Payment_Services_Configuration__c config : configurations) {
             if (config.Service__c == PAYMENTS_APPLICATION_TYPE) {
-                System.assertEquals(paymentConfigParams.get(config.Key__c).value, config.Value__c);
+                System.assertEquals(paymentConfigParams.get(config.Key__c).value, config.Value__c, 'This method is used to assert that the payment config parameters are equal.');
             }
 
             if (config.Service__c == MAKANA_APPLICATION_TYPE) {
-                System.assertEquals(makanaConfigParams.get(config.Key__c).value, config.Value__c);
+                System.assertEquals(makanaConfigParams.get(config.Key__c).value, config.Value__c, 'Assert that the config. Key and config. Value are equal.');
             }
         }
     }
@@ -134,7 +134,7 @@ private class PS_IntegrationService_TEST {
 
         System.assertEquals('CRM', PS_IntegrationService.configurationsToUpsertByServiceKey
             .get('payments::sfdo.product')
-            .get(Schema.Payment_Services_Configuration__c.Value__c));
+            .get(Schema.Payment_Services_Configuration__c.Value__c), 'System. assertEquals method.');
         System.assertEquals(2, PS_IntegrationService.configurationsToUpsertByServiceKey.keySet().size(),
             'Should have 2 configuration records to upsert.');
         System.assertEquals(2, PS_IntegrationService.configurationsToInsertByServiceKey.keySet().size(),
@@ -151,7 +151,7 @@ private class PS_IntegrationService_TEST {
 
         System.assertEquals('TEST_CRM', PS_IntegrationService.configurationsToUpsertByServiceKey
             .get('payments::sfdo.product')
-            .get(Schema.Payment_Services_Configuration__c.Value__c));
+            .get(Schema.Payment_Services_Configuration__c.Value__c), 'This method should only be used for testing.');
         System.assertEquals(2, PS_IntegrationService.configurationsToUpsertByServiceKey.keySet().size(),
             'Should have 2 configuration record to upsert.');
         System.assertEquals(1, PS_IntegrationService.configurationsToInsertByServiceKey.keySet().size(),
@@ -177,7 +177,7 @@ private class PS_IntegrationService_TEST {
         try {
             PS_IntegrationService.setConfiguration(configParams);
         } catch (PS_IntegrationService.IntegrationServiceException ex) {
-            System.assertEquals(PS_IntegrationService.INVALID_CONFIG_PARAMS, ex.getMessage());
+            System.assertEquals(PS_IntegrationService.INVALID_CONFIG_PARAMS, ex.getMessage(), 'Checks if the exception message is the same as the exception message.');
         }
         Test.stopTest();
     }

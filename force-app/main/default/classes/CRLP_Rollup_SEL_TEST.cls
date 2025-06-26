@@ -73,7 +73,7 @@ public class CRLP_Rollup_SEL_TEST {
         // so don't attempt to validate the result.
         String queryFields = CRLP_Rollup_SEL.getReferencedFieldsByObjectAsString(Opportunity.SObjectType);
         String soql = 'SELECT Id,' + queryFields + ' FROM Opportunity LIMIT 1';
-        System.assertEquals(0, Database.query(soql).size());
+        System.assertEquals(0, Database.query(soql).size(), 'Checks that the number of queries in the database is equal to the number of rows in the');
     }
 
     /**

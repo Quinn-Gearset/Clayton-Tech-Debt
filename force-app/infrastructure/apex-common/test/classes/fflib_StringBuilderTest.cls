@@ -32,7 +32,7 @@ private with sharing class fflib_StringBuilderTest
 		fflib_StringBuilder sb = new fflib_StringBuilder();
 		sb.add('this is a string');
 		sb.add(new List<String>{', which is made',' up from\r ','a number of smaller strings', '. 5 in this case!'});
-		system.assertEquals(sb.getStringValue(),'this is a string, which is made up from\r a number of smaller strings. 5 in this case!');	
+		system.assertEquals(sb.getStringValue(),'this is a string, which is made up from\r a number of smaller strings. 5 in this case!', 'This is a string which is made up from smaller strings.');	
 	}
 
 	static testMethod void testfflib_StringBuilder2()
@@ -40,7 +40,7 @@ private with sharing class fflib_StringBuilderTest
 		fflib_StringBuilder sb = new fflib_StringBuilder(new List<String>{'apples',' and ','pears',': stairs. '});
 		sb.add('this is a string');
 		sb.add(new List<String>{', which is made',' up from\r ','a number of smaller strings', '. 5 in this case!'});
-		system.assertEquals(sb.getStringValue(),'apples and pears: stairs. this is a string, which is made up from\r a number of smaller strings. 5 in this case!');	
+		system.assertEquals(sb.getStringValue(),'apples and pears: stairs. this is a string, which is made up from\r a number of smaller strings. 5 in this case!', 'This is a string which is made up from smaller strings.');	
 	}
 
 	static testMethod void testCommaDelimitedBuilder1()
@@ -48,7 +48,7 @@ private with sharing class fflib_StringBuilderTest
 		fflib_StringBuilder.CommaDelimitedListBuilder sb = new fflib_StringBuilder.CommaDelimitedListBuilder();
 		sb.add('a');
 		sb.add(new List<String>{'b','c','d'});
-		system.assertEquals(sb.getStringValue(),'a,b,c,d');	
+		system.assertEquals(sb.getStringValue(),'a,b,c,d', 'assertEquals - Tests if string value is equal to all other values.');	
 	}
 
 	static testMethod void testCommaDelimitedBuilder2()
@@ -56,7 +56,7 @@ private with sharing class fflib_StringBuilderTest
 		fflib_StringBuilder.CommaDelimitedListBuilder sb = new fflib_StringBuilder.CommaDelimitedListBuilder(new List<String>{'x','y'});
 		sb.add('a');
 		sb.add(new List<String>{'b','c','d'});
-		system.assertEquals(sb.getStringValue(),'x,y,a,b,c,d');	
+		system.assertEquals(sb.getStringValue(),'x,y,a,b,c,d', 'assertEquals - Tests if x y a b c d are equal');	
 	}
 	
 	static testMethod void testCommanDelimitedBuilderWithItemPrefix()
@@ -64,7 +64,7 @@ private with sharing class fflib_StringBuilderTest
 		fflib_StringBuilder.CommaDelimitedListBuilder sb = new fflib_StringBuilder.CommaDelimitedListBuilder(new List<String>{'x','y'});
 		sb.add('a');
 		sb.add(new List<String>{'b','c','d'});
-		system.assertEquals(sb.getStringValue('$'),'$x,$y,$a,$b,$c,$d');	
+		system.assertEquals(sb.getStringValue('$'),'$x,$y,$a,$b,$c,$d', 'assertEquals - Tests the values of the sb are the same.');	
 	}
 	
 	static testMethod void testCommanDelimitedBuilderWithAlternativeDelimiter()
@@ -73,7 +73,7 @@ private with sharing class fflib_StringBuilderTest
 		sb.setDelimiter(';');
 		sb.add('a');
 		sb.add(new List<String>{'b','c','d'});
-		system.assertEquals(sb.getStringValue(),'x;y;a;b;c;d');	
+		system.assertEquals(sb.getStringValue(),'x;y;a;b;c;d', 'assertEquals - Tests the string value of the wrapped string.');	
 	}
 	
 	static testMethod void testCommanDelimitedBuilderWithAlternativeDelimiterAndPrefix()
@@ -83,7 +83,7 @@ private with sharing class fflib_StringBuilderTest
 		sb.setDelimiter(':');
 		sb.add('a');
 		sb.add(new List<String>{'b','c','d'});
-		system.assertEquals(sb.getStringValue(),'#x:#y:#a:#b:#c:#d');
+		system.assertEquals(sb.getStringValue(),'#x:#y:#a:#b:#c:#d', 'Checks that the string value of the System property is equal to the string value of the System');
 	}
 
 	static testMethod void testFieldListBuilder()
@@ -92,11 +92,11 @@ private with sharing class fflib_StringBuilderTest
 		fflib_StringBuilder.FieldListBuilder sb = new fflib_StringBuilder.FieldListBuilder(fields);
 		List<String> fieldList = sb.getStringValue().split(',');
 		Set<String> fieldSet = new Set<String>(fieldList);
-		system.assertEquals(4, fieldSet.size());
-		system.assert(fieldSet.contains('Name'));
-		system.assert(fieldSet.contains('Id'));
-		system.assert(fieldSet.contains('AccountNumber'));
-		system.assert(fieldSet.contains('AnnualRevenue'));
+		system.assertEquals(4, fieldSet.size(), 'Checks that the size of the field set is equal to 4.');
+		system.assert(fieldSet.contains('Name'), 'Checks that the field set contains only Name.');
+		system.assert(fieldSet.contains('Id'), 'Checks that the field set contains only Id');
+		system.assert(fieldSet.contains('AccountNumber'), 'Checks that AccountNumber is not empty.');
+		system.assert(fieldSet.contains('AnnualRevenue'), 'This is a test method.');
 	}
 
 	static testMethod void testMultiCurrencyFieldListBuilder()
@@ -105,11 +105,11 @@ private with sharing class fflib_StringBuilderTest
 		fflib_StringBuilder.MultiCurrencyFieldListBuilder sb = new fflib_StringBuilder.MultiCurrencyFieldListBuilder(fields);
 		List<String> fieldList = sb.getStringValue().split(',');
 		Set<String> fieldSet = new Set<String>(fieldList);
-		system.assert(fieldSet.contains('Name'));
-		system.assert(fieldSet.contains('Id'));
-		system.assert(fieldSet.contains('AccountNumber'));
-		system.assert(fieldSet.contains('AnnualRevenue'));
+		system.assert(fieldSet.contains('Name'), 'Checks that the field set contains only Name.');
+		system.assert(fieldSet.contains('Id'), 'Checks that the field set contains only Id');
+		system.assert(fieldSet.contains('AccountNumber'), 'Checks that AccountNumber is not empty.');
+		system.assert(fieldSet.contains('AnnualRevenue'), 'This is a test method.');
 		if(UserInfo.isMultiCurrencyOrganization())
-			system.assert(fieldSet.contains('CurrencyIsoCode'));
+			system.assert(fieldSet.contains('CurrencyIsoCode'), 'This method checks that the currencyIsoCode field is present in the fieldSet.');
 	}
 }

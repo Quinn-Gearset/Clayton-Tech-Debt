@@ -14,7 +14,7 @@ private class fflib_SystemTest
 		}
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
-			System.assertEquals('fflib_System.assertEquals expects you to register exactly 1 fflib_IMatcher (typically through the helpers in fflib_Match).', e.getMessage());
+			System.assertEquals('fflib_System.assertEquals expects you to register exactly 1 fflib_IMatcher (typically through the helpers in fflib_Match).', e.getMessage(), 'assertEquals expects that you register exactly 1 fflib_IMatcher and not through the helpers in');
 		}
 	}
 
@@ -33,7 +33,7 @@ private class fflib_SystemTest
 		}
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
-			System.assertEquals('fflib_System.assertEquals expects you to register exactly 1 fflib_IMatcher (typically through the helpers in fflib_Match).', e.getMessage());
+			System.assertEquals('fflib_System.assertEquals expects you to register exactly 1 fflib_IMatcher (typically through the helpers in fflib_Match).', e.getMessage(), 'assertEquals expects that you register exactly 1 fflib_IMatcher and not through the helpers in');
 		}
 	}
 
@@ -79,7 +79,7 @@ private class fflib_SystemTest
 		}
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
-			System.assertEquals('fflib_System.assertEquals expects you to register exactly 1 fflib_IMatcher (typically through the helpers in fflib_Match).', e.getMessage());
+			System.assertEquals('fflib_System.assertEquals expects you to register exactly 1 fflib_IMatcher (typically through the helpers in fflib_Match).', e.getMessage(), 'assertEquals expects that you register exactly 1 fflib_IMatcher and not through the helpers in');
 		}
 	}
 
@@ -98,7 +98,7 @@ private class fflib_SystemTest
 		}
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
-			System.assertEquals('fflib_System.assertEquals expects you to register exactly 1 fflib_IMatcher (typically through the helpers in fflib_Match).', e.getMessage());
+			System.assertEquals('fflib_System.assertEquals expects you to register exactly 1 fflib_IMatcher (typically through the helpers in fflib_Match).', e.getMessage(), 'assertEquals expects that you register exactly 1 fflib_IMatcher and not through the helpers in');
 		}
 	}
 

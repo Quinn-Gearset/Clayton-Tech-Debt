@@ -101,7 +101,7 @@ class BDI_DataImportDeleteBTN_TEST {
         
         Test.startTest();
         ctrl = clickButton(BDI_DataImportDeleteBTN_CTRL.ACTION_DELETE_ALL);
-        System.assertEquals(records.size(), ctrl.dataImports.size());
+        System.assertEquals(records.size(), ctrl.dataImports.size(), 'Checks that the size of records and dataImports are the same.');
         ctrl.deleteFoundRecords();
         Test.stopTest();
 
@@ -146,9 +146,9 @@ class BDI_DataImportDeleteBTN_TEST {
         Test.stopTest();
 
         records = [SELECT Id, Status__c FROM DataImport__c ORDER BY Status__c];
-        System.assertEquals(2, records.size());
-        System.assertEquals(null, records[0].Status__c);
-        System.assertEquals(BDI_DataImport_API.bdiFailed, records[1].Status__c);
+        System.assertEquals(2, records.size(), 'Checks that the size of the record set is equal to 2.');
+        System.assertEquals(null, records[0].Status__c, 'Assert that the status of the first record is the same as the status of the first record');
+        System.assertEquals(BDI_DataImport_API.bdiFailed, records[1].Status__c, 'Checks that the status of the first record is equal to the status of the second record.');
     }
 
     /**
@@ -279,7 +279,7 @@ class BDI_DataImportDeleteBTN_TEST {
      * @return void
      */
     static void assertExpectedRecordSize(Integer expectedSize) {
-        System.assertEquals(expectedSize, [SELECT COUNT() FROM DataImport__c]);
+        System.assertEquals(expectedSize, [SELECT COUNT() FROM DataImport__c], 'Asserts that the size of the imported data is equal to the number of imported data.');
     }
 
     /**
@@ -346,9 +346,9 @@ class BDI_DataImportDeleteBTN_TEST {
      * @param actual Page to verify
      */
     static void assertPage(String expectedUrl, PageReference actual) {
-        System.assertNotEquals(null, actual);
-        System.assert(actual.getRedirect());
-        System.assertEquals(expectedUrl, actual.getUrl());
+        System.assertNotEquals(null, actual, 'Assert that actual is not null.');
+        System.assert(actual.getRedirect(), 'Assert that the redirect is the same as the redirect in the response.');
+        System.assertEquals(expectedUrl, actual.getUrl(), 'Assert that the actual url is the same as the expected url.');
     }
 
     /**

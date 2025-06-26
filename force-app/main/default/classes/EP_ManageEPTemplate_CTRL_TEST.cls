@@ -289,7 +289,7 @@ private with sharing class EP_ManageEPTemplate_CTRL_TEST {
         for (Engagement_Plan_Task__c task : [
             SELECT Id, Name, Engagement_Plan_Template__c, Parent_Task__c FROM Engagement_Plan_Task__c
         ]) {
-            System.assertEquals(template.Id, task.Engagement_Plan_Template__c);
+            System.assertEquals(template.Id, task.Engagement_Plan_Template__c, 'This method is used to assert that the template is the same as the plan template.');
             actualTasks.put(task.Id, task);
         }
 

@@ -33,17 +33,17 @@ private class fflib_OperatorUtilsTest
 	@IsTest
 	static void testBehavior()
 	{
-		System.assertEquals('=', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.EQUALS));
-		System.assertEquals('!=', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.NOT_EQUALS));
-		System.assertEquals('<', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.LESS_THAN));
-		System.assertEquals('<=', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.LESS_THAN_OR_EQUAL_TO));
-		System.assertEquals('>', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.GREATER_THAN));
-		System.assertEquals('>=', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.GREATER_THAN_OR_EQUAL_TO));
-		System.assertEquals('like', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.LIKEx));
-		System.assertEquals('IN', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.INx));
-		System.assertEquals('NOT IN', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.NOT_IN));
-		System.assertEquals('INCLUDES', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.INCLUDES));
-		System.assertEquals('EXCLUDES', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.EXCLUDES));
-		System.assertEquals(null, fflib_OperatorUtils.operatorToString(null));
+		System.assertEquals('=', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.EQUALS), 'Assert that all binary values are equal.');
+		System.assertEquals('!=', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.NOT_EQUALS), 'Assert that all values in the string are not equal.');
+		System.assertEquals('<', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.LESS_THAN), 'Assert that all binary operators are less than or equal to <.');
+		System.assertEquals('<=', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.LESS_THAN_OR_EQUAL_TO), 'Assert that all binary values are less than or equals to.');
+		System.assertEquals('>', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.GREATER_THAN), 'Assert that all binary operators are greater than or equal to >.');
+		System.assertEquals('>=', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.GREATER_THAN_OR_EQUAL_TO), 'Assert that all values in the range are greater than or equal to.');
+		System.assertEquals('like', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.LIKEx), 'Assert that like operator is true.');
+		System.assertEquals('IN', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.INx), 'Assert that all operands are the same as in.');
+		System.assertEquals('NOT IN', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.NOT_IN), 'Assert that all operators in the array are NOT IN.');
+		System.assertEquals('INCLUDES', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.INCLUDES), 'Assert that all include operators are equal.');
+		System.assertEquals('EXCLUDES', fflib_OperatorUtils.operatorToString(fflib_OperatorUtils.EXCLUDES), 'Assert that all exclude operators in the exclude list are true.');
+		System.assertEquals(null, fflib_OperatorUtils.operatorToString(null), 'Assert that all null operators are equal.');
 	}
 }

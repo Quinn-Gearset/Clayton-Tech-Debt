@@ -37,7 +37,7 @@ public with sharing class fflib_MatchTest
 		Boolean match = fflib_Match.matchesAllArgs(argValues, targetMatchers);
 
 		//Then
-		System.assert(match);
+		System.assert(match, 'Assert that the match is true.');
 	}
 	
 	@isTest
@@ -62,7 +62,7 @@ public with sharing class fflib_MatchTest
 		Boolean match = fflib_Match.matchesAllArgs(argValues, targetMatchers);
 
 		//Then
-		System.assert(match);
+		System.assert(match, 'Assert that the match is true.');
 	}
 	
 	@isTest
@@ -76,7 +76,7 @@ public with sharing class fflib_MatchTest
 		Boolean match = fflib_Match.matchesAllArgs(argValues, targetMatchers);
 
 		//Then
-		System.assert(!match);
+		System.assert(!match, 'Assert that the match is not true.');
 	}
 	
 	@isTest
@@ -101,7 +101,7 @@ public with sharing class fflib_MatchTest
 		Boolean match = fflib_Match.matchesAllArgs(argValues, targetMatchers);
 
 		//Then
-		System.assert(!match);
+		System.assert(!match, 'Assert that the match is not true.');
 	}
 	
 	@isTest
@@ -126,7 +126,7 @@ public with sharing class fflib_MatchTest
 		Boolean match = fflib_Match.matchesAllArgs(argValues, targetMatchers);
 
 		//Then
-		System.assert(!match);
+		System.assert(!match, 'Assert that the match is not true.');
 	}
 	
 	@isTest
@@ -145,7 +145,7 @@ public with sharing class fflib_MatchTest
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
 			//Then
-			System.assertEquals('MethodArgs cannot be null', e.getMessage());
+			System.assertEquals('MethodArgs cannot be null', e.getMessage(), 'Assert that MethodArgs cannot be null');
 		}
 	}
 	
@@ -165,7 +165,7 @@ public with sharing class fflib_MatchTest
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
 			//Then
-			System.assertEquals('MethodArgs.argValues cannot be null', e.getMessage());
+			System.assertEquals('MethodArgs.argValues cannot be null', e.getMessage(), 'Assert that MethodArgs. argValues is not null.');
 		}
 	}
 	
@@ -185,7 +185,7 @@ public with sharing class fflib_MatchTest
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
 			//Then
-			System.assertEquals('Matchers cannot be null', e.getMessage());
+			System.assertEquals('Matchers cannot be null', e.getMessage(), 'Assert that the message of the matcher is equal to the message of the matcher.');
 		}
 	}
 	
@@ -209,7 +209,7 @@ public with sharing class fflib_MatchTest
 				+ ', MethodArgs: (' + methodArg.argValues.size() + ') ' + methodArg.argValues
 				+ ', Matchers: (' + targetMatchers.size() + ') ' + targetMatchers;
 
-			System.assertEquals(expectedMessage, e.getMessage());
+			System.assertEquals(expectedMessage, e.getMessage(), 'Assert that the message of the wrapped exception is the same as the expected message.');
 		}
 	}
 	
@@ -223,7 +223,7 @@ public with sharing class fflib_MatchTest
 		fflib_Match.matches(matcher);
 		
 		//Then
-		System.assert(fflib_Match.Matching);
+		System.assert(fflib_Match.Matching, 'Assert that the match is valid.');
 	}
 	
 	@isTest
@@ -238,9 +238,9 @@ public with sharing class fflib_MatchTest
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
 		
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(matcher === registeredMatchers[0]);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(matcher === registeredMatchers[0], 'Assert that the matcher is the same as the first registered matcher.');
 	}
 	
 	@isTest
@@ -253,7 +253,7 @@ public with sharing class fflib_MatchTest
 		Object retval = fflib_Match.matches(matcher);
 		
 		//Then
-		System.assertEquals(null, retval);
+		System.assertEquals(null, retval, 'Assert that the return value is null.');
 	}
 
 	@isTest
@@ -268,7 +268,7 @@ public with sharing class fflib_MatchTest
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
 			//Then
-			System.assertEquals('Must register matchers to combine', e.getMessage());
+			System.assertEquals('Must register matchers to combine', e.getMessage(), 'Assert that the message of the matcher is equal to the message of the matcher to combine.');
 		}
 	}
 
@@ -284,7 +284,7 @@ public with sharing class fflib_MatchTest
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
 			//Then
-			System.assertEquals('Must register matchers to combine', e.getMessage());
+			System.assertEquals('Must register matchers to combine', e.getMessage(), 'Assert that the message of the matcher is equal to the message of the matcher to combine.');
 		}
 	}
 
@@ -304,7 +304,7 @@ public with sharing class fflib_MatchTest
 			//Then
 			String expectedMessage = 'Error reclaiming inner matchers for combined matcher. '
 				+ 'Wanted 1 matchers but only got ' + new List<fflib_IMatcher>();
-			System.assertEquals(expectedMessage, e.getMessage());
+			System.assertEquals(expectedMessage, e.getMessage(), 'Assert that the message of the wrapped exception is the same as the expected message.');
 		}
 	}
 	
@@ -316,9 +316,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -329,9 +329,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -342,9 +342,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -355,9 +355,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -368,9 +368,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -381,9 +381,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -394,9 +394,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -407,9 +407,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -420,9 +420,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -433,9 +433,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -446,9 +446,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -459,9 +459,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -472,9 +472,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Combined, 'Check if there are any combined matchers registered.');
 	}
 
 	@isTest
@@ -485,9 +485,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -498,9 +498,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -511,9 +511,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -524,9 +524,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -537,9 +537,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -550,9 +550,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -563,9 +563,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -576,9 +576,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -589,9 +589,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -602,9 +602,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -616,9 +616,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -630,9 +630,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -643,9 +643,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.Eq, 'Check if registered matchers are equivalent.');
 	}
 
 	@isTest
@@ -656,9 +656,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.RefEq);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.RefEq, 'Checks if registered matchers are RefEq.');
 	}
 
 	@isTest
@@ -669,9 +669,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyBoolean);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyBoolean, 'Checks if there are any matchers registered.');
 	}
 
 	@isTest
@@ -682,9 +682,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyDate);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyDate, 'Ensure that there are no more matchers registered.');
 	}
 
 	@isTest
@@ -695,9 +695,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyDatetime);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyDatetime, 'Checks if there are any registered matchers.');
 	}
 
 	@isTest
@@ -708,9 +708,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyDecimal);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyDecimal, 'Checks if there are any decimal matchers registered.');
 	}
 
 	@isTest
@@ -721,9 +721,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyDouble);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyDouble, 'Checks if there are any double matchers registered.');
 	}
 
 	@isTest
@@ -734,9 +734,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyFieldSet);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyFieldSet, 'Checks if there are any matchers registered.');
 	}
 
 	@isTest
@@ -747,9 +747,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyId);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyId, 'Ensure that there are no registered matchers.');
 	}
 
 	@isTest
@@ -760,9 +760,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyInteger);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyInteger, 'Checks if there are any registered matchers.');
 	}
 
 	@isTest
@@ -773,9 +773,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyList);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyList, 'Check if registered matchers are AnyList.');
 	}
 
 	@isTest
@@ -786,9 +786,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyLong);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyLong, 'Check if there are any long matchers registered.');
 	}
 
 	@isTest
@@ -799,9 +799,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyObject);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyObject, 'Check if registered matchers are any object.');
 	}
 
 	@isTest
@@ -812,9 +812,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyString);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnyString, 'Check if registered matchers are any string.');
 	}
 
 	@isTest
@@ -825,9 +825,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnySObject);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnySObject, 'Check if registered matchers are any of type fflib_MatcherDefinitions. AnySObject');
 	}
 
 	@isTest
@@ -838,9 +838,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnySObjectField);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnySObjectField, 'Checks if there are any matchers registered.');
 	}
 
 	@isTest
@@ -851,9 +851,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnySObjectType);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.AnySObjectType, 'Check if registered matchers are any type.');
 	}
 
 	@isTest
@@ -864,9 +864,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeAfter);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeAfter, 'Dont match datetime after');
 	}
 
 	@isTest
@@ -877,9 +877,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeBefore);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeBefore, 'Dont match datetime before');
 	}
 
 	@isTest
@@ -890,9 +890,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeBetween);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeBetween, 'Dont match datetime between matchers');
 	}
 
 	@isTest
@@ -903,9 +903,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeAfter);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeAfter, 'Dont match datetime after');
 	}
 
 	@isTest
@@ -916,9 +916,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeBefore);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeBefore, 'Dont match datetime before');
 	}
 
 	@isTest
@@ -929,9 +929,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeBetween);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DatetimeBetween, 'Dont match datetime between matchers');
 	}
 
 	@isTest
@@ -942,9 +942,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalBetween);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalBetween, 'Dll - check if any of the matchers in the system are decimal between.');
 	}
 
 	@isTest
@@ -955,9 +955,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalLessThan);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalLessThan, 'Dll - check if any of the matchers in the system are decimal less than decimal less');
 	}
 
 	@isTest
@@ -968,9 +968,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalMoreThan);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalMoreThan, 'Dll - check if any of the matchers in the system are decimal more than');
 	}
 
 	@isTest
@@ -981,9 +981,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalBetween);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalBetween, 'Dll - check if any of the matchers in the system are decimal between.');
 	}
 
 	@isTest
@@ -994,9 +994,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalLessThan);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalLessThan, 'Dll - check if any of the matchers in the system are decimal less than decimal less');
 	}
 
 	@isTest
@@ -1007,9 +1007,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalMoreThan);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalMoreThan, 'Dll - check if any of the matchers in the system are decimal more than');
 	}
 
 	@isTest
@@ -1022,7 +1022,7 @@ public with sharing class fflib_MatchTest
 		}
 		catch (fflib_ApexMocks.ApexMocksException e)
 		{
-			System.assertEquals('Arg cannot be null: null', e.getMessage());
+			System.assertEquals('Arg cannot be null: null', e.getMessage(), 'Assert that the given argument is not null.');
 		}
 	}
 
@@ -1040,9 +1040,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.FieldSetEquivalentTo);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.FieldSetEquivalentTo, 'Ensure that all matchers in the system are FieldSetEquivalentTo.');
 	}
 
 	@isTest
@@ -1053,9 +1053,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalBetween);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalBetween, 'Dll - check if any of the matchers in the system are decimal between.');
 	}
 
 	@isTest
@@ -1066,9 +1066,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalLessThan);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalLessThan, 'Dll - check if any of the matchers in the system are decimal less than decimal less');
 	}
 
 	@isTest
@@ -1079,9 +1079,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalMoreThan);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalMoreThan, 'Dll - check if any of the matchers in the system are decimal more than');
 	}
 
 	@isTest
@@ -1092,9 +1092,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.IsNotNull);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.IsNotNull, 'Check if registered matchers are not null.');
 	}
 
 	@isTest
@@ -1105,9 +1105,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.IsNull);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.IsNull, 'Ensure that there are no registered matchers.');
 	}
 
 	@isTest
@@ -1118,9 +1118,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.ListContains);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.ListContains, 'Checks if registered matchers are ListContains.');
 	}
 
 	@isTest
@@ -1131,9 +1131,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.ListIsEmpty);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.ListIsEmpty, 'Check if registered matchers are empty.');
 	}
 
 	@isTest
@@ -1144,9 +1144,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalBetween);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalBetween, 'Dll - check if any of the matchers in the system are decimal between.');
 	}
 
 	@isTest
@@ -1157,9 +1157,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalLessThan);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalLessThan, 'Dll - check if any of the matchers in the system are decimal less than decimal less');
 	}
 
 	@isTest
@@ -1170,9 +1170,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalMoreThan);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.DecimalMoreThan, 'Dll - check if any of the matchers in the system are decimal more than');
 	}
 
 	@isTest
@@ -1190,9 +1190,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectOfType);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectOfType, 'Check if registered matchers are of type SObjectOfType.');
 	}
 
 	@isTest
@@ -1212,9 +1212,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectWith);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectWith, 'Check if registered matchers are of type SObjectWith.');
 	}
 
     @isTest
@@ -1236,9 +1236,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectsWith);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectsWith, 'Check if registered matchers are instances of fflib_MatcherDefinitions. SObjectsWith');
 	}
 
     @isTest
@@ -1260,8 +1260,8 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
 		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectsWith,registeredMatchers);
 	}
     
@@ -1273,9 +1273,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectWithId);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectWithId, 'Check if there are any registered matchers.');
 	}
 
 	@isTest
@@ -1286,9 +1286,9 @@ public with sharing class fflib_MatchTest
 
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectWithName);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.SObjectWithName, 'Check if registered matchers are of type SObjectWithName.');
 	}
 
 	@isTest
@@ -1299,9 +1299,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringContains);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringContains, 'Checks if there are any registered matchers that match string contains.');
 	}
 
 	@isTest
@@ -1312,9 +1312,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringEndsWith);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringEndsWith, 'Ensure that all matchers in the system are strings ending with.');
 	}
 
 	@isTest
@@ -1325,9 +1325,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringIsBlank);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringIsBlank, 'Checks if any of the registered matchers is a string blank.');
 	}
 
 	@isTest
@@ -1338,9 +1338,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringIsNotBlank);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringIsNotBlank, 'Checks if registered matchers are string not blank.');
 	}
 
 	@isTest
@@ -1351,9 +1351,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringMatches);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringMatches, 'Checks if the matcher is registered.');
 	}
 
 	@isTest
@@ -1364,9 +1364,9 @@ public with sharing class fflib_MatchTest
 		
 		//Then
 		List<fflib_IMatcher> registeredMatchers = fflib_Match.getAndClearMatchers(1);
-		System.assertNotEquals(null, registeredMatchers);
-		System.assertEquals(1, registeredMatchers.size());
-		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringStartsWith);
+		System.assertNotEquals(null, registeredMatchers, 'Assert that all registered matchers are not equal.');
+		System.assertEquals(1, registeredMatchers.size(), 'Asserts that the number of registered matchers is equal to 1.');
+		System.assert(registeredMatchers[0] instanceof fflib_MatcherDefinitions.StringStartsWith, 'Ensure that all registered matchers are strings starting with.');
 	}
 
 	private class AlwaysMatch implements fflib_IMatcher

@@ -86,8 +86,8 @@ private class GE_LookupController_TEST {
         // auto-builds do not deploy record types, but dev/qa builds do, run equivalent query and check results
         List<RecordType> recordTypes = [SELECT Id FROM RecordType WHERE SObjectType = 'Opportunity' AND DeveloperName LIKE '%Donation%' LIMIT 50];
 
-        System.assertNotEquals(null, results);
-        System.assertEquals(recordTypes.size(), results.size());
+        System.assertNotEquals(null, results, 'Assert that the results are not null.');
+        System.assertEquals(recordTypes.size(), results.size(), 'Checks that the size of the record types and the results are the same.');
     }
 
     @IsTest

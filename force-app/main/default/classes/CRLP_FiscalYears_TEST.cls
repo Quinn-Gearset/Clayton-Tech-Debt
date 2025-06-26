@@ -79,7 +79,7 @@ private class CRLP_FiscalYears_TEST {
             System.runAs(languageUser) {
                 CRLP_FiscalYears fiscalYrs = new CRLP_FiscalYears(false);
                 String yearString = fiscalYrs.getYearFormattedString(testDate);
-                System.assertEquals('2018', yearString);
+                System.assertEquals('2018', yearString, 'Checks that the year string is the same as the string 2017.');
             }
 
         }
@@ -99,8 +99,8 @@ private class CRLP_FiscalYears_TEST {
         CRLP_FiscalYears fiscalYrs = new CRLP_FiscalYears(false);
 
         // Calendar Year based
-        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2014, 1, 1)));
-        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2014, 10, 1)));
+        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2014, 1, 1)), 'Test for the same year as the fiscal year.');
+        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2014, 10, 1)), 'Test for the same year as the fiscal year.');
 
         // ----------------------------------------------------------------------------
         // Switch to using the Organization Fiscal Information
@@ -110,18 +110,18 @@ private class CRLP_FiscalYears_TEST {
         CRLP_FiscalYears.fiscalYearInfo.usesStartDateAsFiscalYearName = false;  // Fiscal Year is based on end date
 
         // Target date is in fiscal year Apr through Mar, year comes from end
-        System.assertEquals(2015, fiscalYrs.getYear(Date.newInstance(2014, 4, 1)));
-        System.assertEquals(2015, fiscalYrs.getYear(Date.newInstance(2014, 5, 1)));
-        System.assertEquals(2015, fiscalYrs.getYear(Date.newInstance(2015, 3, 1)));
-        System.assertEquals(2016, fiscalYrs.getYear(Date.newInstance(2015, 4, 1)));
+        System.assertEquals(2015, fiscalYrs.getYear(Date.newInstance(2014, 4, 1)), 'Test for the same year as fiscal Yrs');
+        System.assertEquals(2015, fiscalYrs.getYear(Date.newInstance(2014, 5, 1)), 'Test for the same year as fiscal Yrs');
+        System.assertEquals(2015, fiscalYrs.getYear(Date.newInstance(2015, 3, 1)), 'Test for the same year as fiscal Yrs.');
+        System.assertEquals(2016, fiscalYrs.getYear(Date.newInstance(2015, 4, 1)), 'Test for the same year as fiscal Yrs');
 
         CRLP_FiscalYears.fiscalYearInfo.fiscalYearStartMonth = 4;               // Fiscal Year starts on 4/1
         CRLP_FiscalYears.fiscalYearInfo.usesStartDateAsFiscalYearName = true;   // Fiscal Year is based on start date
 
         // Target date is in fiscal year Apr through Mar, year comes from Start
-        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2014, 4, 1)));
-        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2014, 5, 1)));
-        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2015, 3, 1)));
-        System.assertEquals(2015, fiscalYrs.getYear(Date.newInstance(2015, 12, 1)));
+        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2014, 4, 1)), 'Test for the same year as the fiscal year.');
+        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2014, 5, 1)), 'Test for the same year as the fiscal year.');
+        System.assertEquals(2014, fiscalYrs.getYear(Date.newInstance(2015, 3, 1)), 'Test for the same year as fiscal Yrs');
+        System.assertEquals(2015, fiscalYrs.getYear(Date.newInstance(2015, 12, 1)), 'Test for the same year as fiscal Yrs');
     }
 }

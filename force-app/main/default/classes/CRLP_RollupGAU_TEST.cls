@@ -230,10 +230,10 @@ private class CRLP_RollupGAU_TEST {
         General_Accounting_Unit__c gau = database.query(gauQuery);
 
         // Basic rollup asserts using existing NPSP rollup fields.
-        System.assertEquals(totalDonations, gau.Total_Allocations__c);
-        System.assertEquals((totalDonations / cnt), gau.Average_Allocation__c);
-        System.assertEquals(total2YearsAgo, gau.Total_Allocations_Two_Years_Ago__c);
-        System.assertEquals(maxAmt/2, gau.Largest_Allocation__c);
+        System.assertEquals(totalDonations, gau.Total_Allocations__c, 'This is a test function to assert that the totalDonations and totalAllocations are the');
+        System.assertEquals((totalDonations / cnt), gau.Average_Allocation__c, 'This is a test function to assert that the average allocation is the same as the total don');
+        System.assertEquals(total2YearsAgo, gau.Total_Allocations_Two_Years_Ago__c, 'This test is used to test the equality of the two - year allocations in the same order');
+        System.assertEquals(maxAmt/2, gau.Largest_Allocation__c, 'This is a test function to assert that the maximum amount of memory is the same as the');
 
         System.assertEquals(donationYears.size(), gau.Total_Allocations_Last_N_Days__c, 'The current streak should be all the years');
         System.assertEquals(donationYears.size(), gau.Description__c.split(';').size(), 'The list of donated years should match');

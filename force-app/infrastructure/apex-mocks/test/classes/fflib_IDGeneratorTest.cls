@@ -41,16 +41,16 @@ private class fflib_IDGeneratorTest
 		String id10 = fflib_IDGenerator.generate(Account.SObjectType);
 		String id11 = fflib_IDGenerator.generate(Account.SObjectType);
 
-		System.assertEquals('001000000000001AAA', id1);
-		System.assertEquals('001000000000002AAA', id2);
-		System.assertEquals('001000000000003AAA', id3);
-		System.assertEquals('001000000000004AAA', id4);
-		System.assertEquals('001000000000005AAA', id5);
-		System.assertEquals('001000000000006AAA', id6);
-		System.assertEquals('001000000000007AAA', id7);
-		System.assertEquals('001000000000008AAA', id8);
-		System.assertEquals('001000000000009AAA', id9);
-		System.assertEquals('001000000000010AAA', id10);
-		System.assertEquals('001000000000011AAA', id11);
+		System.assertEquals('001000000000001AAA', id1, 'Test for equality of id1.');
+		System.assertEquals('001000000000002AAA', id2, 'Test for equality of id2.');
+		System.assertEquals('001000000000003AAA', id3, 'Checks that id3 is equal to id3.');
+		System.assertEquals('001000000000004AAA', id4, 'Test for equality of id4');
+		System.assertEquals('001000000000005AAA', id5, 'Test for equality of id5');
+		System.assertEquals('001000000000006AAA', id6, 'Test for equality of id6');
+		System.assertEquals('001000000000007AAA', id7, 'Test for equality of id7');
+		System.assertEquals('001000000000008AAA', id8, 'Test for equality of id8.');
+		System.assertEquals('001000000000009AAA', id9, 'Test for equality of id9 to 000000000000000AAA');
+		System.assertEquals('001000000000010AAA', id10, 'Checks that id10 is equal to id01.');
+		System.assertEquals('001000000000011AAA', id11, 'Checks that id11 is equal to id01.');
 	}
 }

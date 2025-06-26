@@ -52,7 +52,7 @@ public with sharing class UTIL_FeatureManagement_TEST {
         );
 
         System.assertEquals(false, featureMgt.checkPackageBooleanValue(
-            UTIL_OrgTelemetry_SVC.TelemetryParameterName.IsEnabled_HouseholdAcctModel.name())
+            UTIL_OrgTelemetry_SVC.TelemetryParameterName.IsEnabled_HouseholdAcctModel.name()), 'This method checks if the featureMgt parameter is set to true and if it is false'
         );
     }
 
@@ -69,7 +69,7 @@ public with sharing class UTIL_FeatureManagement_TEST {
         );
 
         System.assertEquals(1, featureMgt.checkPackageIntegerValue(
-            UTIL_OrgTelemetry_SVC.TelemetryParameterName.Data_CountRdOppsAll.name())
+            UTIL_OrgTelemetry_SVC.TelemetryParameterName.Data_CountRdOppsAll.name()), 'This method checks the package integer value for the Data_CountRdOppsAll parameter'
         );
     }
 
@@ -85,7 +85,7 @@ public with sharing class UTIL_FeatureManagement_TEST {
         );
 
         System.assertEquals(true,
-            new UTIL_FeatureEnablement().isEnabled(UTIL_OrgTelemetry_SVC.TelemetryParameterName.IsEnabled_AddressVerification.name()));
+            new UTIL_FeatureEnablement().isEnabled(UTIL_OrgTelemetry_SVC.TelemetryParameterName.IsEnabled_AddressVerification.name()), 'Tests if the UTIL_OrgTelemetry_SVC is enabled.');
     }
 
     @isTest

@@ -381,7 +381,7 @@ private class ALLO_ManageAllocations_TEST {
         for (Apexpages.Message msg : msgs){
             if (msg.getDetail().contains(System.Label.alloObjectUnsupported)) errorFound = true;
         }
-        System.assert(errorFound);
+        System.assert(errorFound, 'Assert that error was found.');
     }
 
     /*******************************************************************************************************
@@ -407,7 +407,7 @@ private class ALLO_ManageAllocations_TEST {
         for (Apexpages.Message msg : msgs){
             if (msg.getDetail().contains(System.Label.alloObjectUnsupported)) errorFound = true;
         }
-        System.assert(!errorFound);
+        System.assert(!errorFound, 'Assert that no error was found.');
     }
 
     /*******************************************************************************************************
@@ -433,7 +433,7 @@ private class ALLO_ManageAllocations_TEST {
         for (Apexpages.Message msg : msgs){
             if (msg.getDetail().contains(System.Label.alloCantAllocateNothing)) errorFound = true;
         }
-        System.assert(errorFound);
+        System.assert(errorFound, 'Assert that error was found.');
     }
 
     /**
@@ -455,7 +455,7 @@ private class ALLO_ManageAllocations_TEST {
 
         System.assertEquals(
             'FOO',
-            controller.getCurrencySymbol()
+            controller.getCurrencySymbol(), 'Assertion. Assert equals.'
         );
     }
 
@@ -470,7 +470,7 @@ private class ALLO_ManageAllocations_TEST {
 
         System.assertEquals(
             'FOO',
-            controller.getCurrencySymbol()
+            controller.getCurrencySymbol(), 'Assertion. Assert equals.'
         );
     }
 
@@ -478,8 +478,8 @@ private class ALLO_ManageAllocations_TEST {
     @isTest
     private static void testGetSeparators() {
         ALLO_ManageAllocations_CTRL controller = new ALLO_ManageAllocations_CTRL();
-        system.AssertNotEquals(null, controller.getDecimalSeparator());
-        system.AssertNotEquals(null, controller.getThousandsSeparator());
+        system.AssertNotEquals(null, controller.getDecimalSeparator(), 'Checks that the decimal separator is not null.');
+        system.AssertNotEquals(null, controller.getThousandsSeparator(), 'This method asserts that the thousands separator is not null.');
     }
 
     /**

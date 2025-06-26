@@ -38,9 +38,9 @@ private class InboundGiftDTO_TEST {
         dummyGiftDTO.fields.Donation_Amount__c = 55.55;
         Gift dummyGift = dummyGiftDTO.asGift();
 
-        System.assertEquals(DUMMY_DATA_IMPORT_ID, dummyGift.fields().get('Id'));
-        System.assertEquals(DUMMY_ACCOUNT_ID, dummyGift.fields().get(ACCOUNT1_IMPORTED_FIELD));
-        System.assertEquals(55.55, dummyGift.fields().get(DONATION_AMOUNT_FIELD));
+        System.assertEquals(DUMMY_DATA_IMPORT_ID, dummyGift.fields().get('Id'), 'Checks that the DUMMY_DATA_IMPORT_ID is the same as the dummy');
+        System.assertEquals(DUMMY_ACCOUNT_ID, dummyGift.fields().get(ACCOUNT1_IMPORTED_FIELD), 'Assert that the AccountID field is the same as the Account1_IMPORTED_FIELD.');
+        System.assertEquals(55.55, dummyGift.fields().get(DONATION_AMOUNT_FIELD), 'Checks that the DonationAmount field is set to 55.');
     }
 
     @isTest
@@ -54,8 +54,8 @@ private class InboundGiftDTO_TEST {
         Gift dummyGift = dummyGiftDTO.asGift();
 
         System.debug(dummyGift.softCredits().all());
-        System.assertEquals(5, dummyGift.softCredits().size());
-        System.assertEquals(0, dummyGift.softCredits().unprocessed().size());
+        System.assertEquals(5, dummyGift.softCredits().size(), 'Checks that the number of soft credits is equal to 5.');
+        System.assertEquals(0, dummyGift.softCredits().unprocessed().size(), 'Checks that the number of soft credits is the same as the number of soft credits');
     }
 
     private static List<OpportunityContactRole> buildDummyOCRs(Integer count) {

@@ -132,7 +132,7 @@ private class TDTM_Config_API_Test {
         Account acct = UTIL_UnitTestData_TEST.createMultipleTestAccounts(1,null)[0];
         insert acct;
         List<Trigger_Handler__c> handlers = [select id, name from Trigger_Handler__c];
-        System.assertEquals(0, handlers.size());    
+        System.assertEquals(0, handlers.size(), 'Asserts that all handlers have been registered.');    
     }
 
 }

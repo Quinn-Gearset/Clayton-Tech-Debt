@@ -75,7 +75,7 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         // create some Contacts in Household Accounts
         insert listCon = UTIL_UnitTestData_TEST.CreateMultipleTestContacts(cContact);
         listCon = [select Id, Firstname,Lastname, AccountId from Contact];
-        system.assertEquals(cContact, listCon.size());
+        system.assertEquals(cContact, listCon.size(), 'Assert that cContact is the same as the list of contacts.');
 
         // create an Opportunity
         insert opp = new Opportunity(
@@ -108,16 +108,16 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         initTestDataWithoutPscs();
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(0, ctrl.softCredits.size());
-        system.assertEquals(0, ctrl.numberOfSoftCredits);
-        system.assertEquals(acc.Id, ctrl.PrimaryContactId);
-        system.assertEquals(acc.Name, ctrl.PrimaryContactName);
+        system.assertEquals(0, ctrl.softCredits.size(), 'Assert that soft credits are available.');
+        system.assertEquals(0, ctrl.numberOfSoftCredits, 'Checks that the number of soft credits is equal to the number of soft credits in');
+        system.assertEquals(acc.Id, ctrl.PrimaryContactId, 'assertEquals - This function is used to assert that the ContactId is the same as the');
+        system.assertEquals(acc.Name, ctrl.PrimaryContactName, 'assertEquals - This function is used to test if the Contacts are equal.');
 
         ctrl.addAnotherSoftCredit();
         ctrl.addAnotherSoftCredit();
         ctrl.addAnotherSoftCredit();
-        system.assertEquals(3, ctrl.softCredits.size());
-        system.assertEquals(3, ctrl.numberOfSoftCredits);
+        system.assertEquals(3, ctrl.softCredits.size(), 'Checks that the number of soft credits is equal to 3.');
+        system.assertEquals(3, ctrl.numberOfSoftCredits, 'Checks that the number of soft credits is equal to the number of soft credits in');
         ctrl.softCredits[0].contactRole.ContactId = listCon[0].Id;
         ctrl.softCredits[0].contactRole.Role = 'Soft Credit';
         ctrl.softCredits[0].partial.Amount__c = 100;
@@ -130,21 +130,21 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         ctrl.softCredits[2].contactRole.Role = 'Soft Credit';
         ctrl.softCredits[2].partial.Amount__c = 300;
 
-        system.assertEquals(600, ctrl.oppTotalSoftCredit.Amount);
+        system.assertEquals(600, ctrl.oppTotalSoftCredit.Amount, 'Checks that the total soft credit is equal to 600.');
         Test.startTest();
-        system.assertNotEquals(null, ctrl.save());
+        system.assertNotEquals(null, ctrl.save(), 'Assert that the current model is not null.');
         Test.stopTest();
 
         list<Partial_Soft_Credit__c> listPSC = [select Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c from Partial_Soft_Credit__c];
-        system.assertEquals(3, listPSC.size());
+        system.assertEquals(3, listPSC.size(), 'Checks that the number of PSCs is equal to 3.');
 
         double amount = 0;
         for (Partial_Soft_Credit__c psc : listPSC)
             amount += psc.Amount__c;
-        system.assertEquals(600, amount);
+        system.assertEquals(600, amount, 'Assert that amount is equal to 600.');
 
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role from OpportunityContactRole];
-        system.assertEquals(3, listOCR.size());
+        system.assertEquals(3, listOCR.size(), 'Checks that the OCR list is exactly 3.');
     }
 
     /*******************************************************************************************************
@@ -155,11 +155,11 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         initTestDataWithoutPscs();
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(0, ctrl.softCredits.size());
+        system.assertEquals(0, ctrl.softCredits.size(), 'Assert that soft credits are available.');
         ctrl.addAnotherSoftCredit();
         ctrl.addAnotherSoftCredit();
         ctrl.addAnotherSoftCredit();
-        system.assertEquals(3, ctrl.softCredits.size());
+        system.assertEquals(3, ctrl.softCredits.size(), 'Checks that the number of soft credits is equal to 3.');
 
 
         // switch to percents
@@ -183,27 +183,27 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         // update amounts
         ctrl.checkFullAndPartialCredit();
 
-        system.assertEquals(600, ctrl.oppTotalSoftCredit.Amount);
+        system.assertEquals(600, ctrl.oppTotalSoftCredit.Amount, 'Checks that the total soft credit is equal to 600.');
         Test.startTest();
-        system.assertNotEquals(null, ctrl.save());
+        system.assertNotEquals(null, ctrl.save(), 'Assert that the current model is not null.');
         Test.stopTest();
 
         list<Partial_Soft_Credit__c> listPSC = [select Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c from Partial_Soft_Credit__c];
-        system.assertEquals(3, listPSC.size());
+        system.assertEquals(3, listPSC.size(), 'Checks that the number of PSCs is equal to 3.');
 
         double amount = 0;
         for (Partial_Soft_Credit__c psc : listPSC)
             amount += psc.Amount__c;
-        system.assertEquals(600, amount);
+        system.assertEquals(600, amount, 'Assert that amount is equal to 600.');
 
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role from OpportunityContactRole];
-        system.assertEquals(3, listOCR.size());
+        system.assertEquals(3, listOCR.size(), 'Checks that the OCR list is exactly 3.');
 
         // switch back from percents
         ctrl.isAmount = false;
         ctrl.checkFullAndPartialCredit();
-        system.assertEquals(600, ctrl.oppTotalSoftCredit.Amount);
-        system.assertNotEquals(null, ctrl.save());
+        system.assertEquals(600, ctrl.oppTotalSoftCredit.Amount, 'Checks that the total soft credit is equal to 600.');
+        system.assertNotEquals(null, ctrl.save(), 'Assert that the current model is not null.');
 
     }
 
@@ -215,11 +215,11 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         initTestDataWithPscs();
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(cPSCExisting, ctrl.softCredits.size());
+        system.assertEquals(cPSCExisting, ctrl.softCredits.size(), 'asserts that cPSCExisting and ctrl. softCredits are the same');
         ctrl.addAnotherSoftCredit();
         ctrl.addAnotherSoftCredit();
         ctrl.addAnotherSoftCredit();
-        system.assertEquals(cPSCExisting + 3, ctrl.softCredits.size());
+        system.assertEquals(cPSCExisting + 3, ctrl.softCredits.size(), 'Checks that cPSCExisting + 3 is the same as the number of soft credits');
         ctrl.softCredits[cPSCExisting].contactRole.ContactId = listCon[cPSCExisting].Id;
         ctrl.softCredits[cPSCExisting].contactRole.Role = 'Soft Credit';
         ctrl.softCredits[cPSCExisting].partial.Amount__c = 100;
@@ -232,21 +232,21 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         ctrl.softCredits[cPSCExisting + 2].contactRole.Role = 'Soft Credit';
         ctrl.softCredits[cPSCExisting + 2].partial.Amount__c = 300;
 
-        system.assertEquals(cPSCExisting * 100 + 600, ctrl.oppTotalSoftCredit.Amount);
+        system.assertEquals(cPSCExisting * 100 + 600, ctrl.oppTotalSoftCredit.Amount, 'asserts that cPSCExisting and ctrl. oppTotalSoftCredit are equal');
         Test.startTest();
-        system.assertNotEquals(null, ctrl.save());
+        system.assertNotEquals(null, ctrl.save(), 'Assert that the current model is not null.');
         Test.stopTest();
 
         list<Partial_Soft_Credit__c> listPSC = [select Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c from Partial_Soft_Credit__c];
-        system.assertEquals(cPSCExisting + 3, listPSC.size());
+        system.assertEquals(cPSCExisting + 3, listPSC.size(), 'asserts that cPSCExisting + 3 is the number of existing PSCs');
 
         double amount = 0;
         for (Partial_Soft_Credit__c psc : listPSC)
             amount += psc.Amount__c;
-        system.assertEquals(cPSCExisting * 100 + 600, amount);
+        system.assertEquals(cPSCExisting * 100 + 600, amount, 'Assert that cPSCExisting is equal to amount.');
 
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role from OpportunityContactRole];
-        system.assertEquals(cPSCExisting + 3, listOCR.size());
+        system.assertEquals(cPSCExisting + 3, listOCR.size(), 'Checks that the number of OCRs in the list is equal to the number of O');
     }
 
     /*******************************************************************************************************
@@ -258,14 +258,14 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         // set the PSC's OCR lookups to invalid values
         list<Partial_Soft_Credit__c> listPSC = [select Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c,
             Contact_Role_ID__c from Partial_Soft_Credit__c];
-        system.assertEquals(cPSCExisting, listPSC.size());
+        system.assertEquals(cPSCExisting, listPSC.size(), 'asserts that cPSCExisting and cPSCList are the same');
         listPSC[0].Contact_Role_ID__c = opp.Id; // a bogus OCR id, but a valid Id for type checking!
         listPSC[1].Contact_Role_ID__c = null;
         update listPSC;
 
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(cPSCExisting + 2, ctrl.softCredits.size());
+        system.assertEquals(cPSCExisting + 2, ctrl.softCredits.size(), 'Checks that cPSCExisting + 2 is the same as cPSCExisting + 2');
     }
 
     /*******************************************************************************************************
@@ -284,7 +284,7 @@ public with sharing class PSC_ManageSoftCredits_TEST {
 
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(1, ctrl.softCredits.size());
+        system.assertEquals(1, ctrl.softCredits.size(), 'Checks that the size of soft credits is equal to 1.');
     }
 
     /*******************************************************************************************************
@@ -295,8 +295,8 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         initTestDataWithPscs();
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(cPSCExisting, ctrl.softCredits.size());
-        system.assertEquals(cPSCExisting * 100 , ctrl.oppTotalSoftCredit.Amount);
+        system.assertEquals(cPSCExisting, ctrl.softCredits.size(), 'asserts that cPSCExisting and ctrl. softCredits are the same');
+        system.assertEquals(cPSCExisting * 100 , ctrl.oppTotalSoftCredit.Amount, 'assertEquals - This is a test for the case where cPSCExisting is 100%');
         for (integer i = 0; i < cPSCExisting; i++)
             ctrl.softCredits[i].fullCredit = true;
         ctrl.checkFullCredit();
@@ -304,14 +304,14 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         ctrl.allowTooManySoftCredits = true;
 
         Test.startTest();
-        system.assertNotEquals(null, ctrl.save());
+        system.assertNotEquals(null, ctrl.save(), 'Assert that the current model is not null.');
         Test.stopTest();
 
         list<Partial_Soft_Credit__c> listPSC = [select Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c from Partial_Soft_Credit__c];
-        system.assertEquals(0, listPSC.size());
+        system.assertEquals(0, listPSC.size(), 'Assert that the list is empty.');
 
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role from OpportunityContactRole];
-        system.assertEquals(cPSCExisting, listOCR.size());
+        system.assertEquals(cPSCExisting, listOCR.size(), 'Checks that the number of OCR OCRs is the same as the number of O');
     }
 
     /*******************************************************************************************************
@@ -322,15 +322,15 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         initTestDataWithoutPscs();
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(0, ctrl.softCredits.size());
-        system.assertEquals(0 * 100 , ctrl.oppTotalSoftCredit.Amount);
-        system.assertEquals(true, ctrl.isAmount);  // amount mode, not percent mode.
+        system.assertEquals(0, ctrl.softCredits.size(), 'Assert that soft credits are available.');
+        system.assertEquals(0 * 100 , ctrl.oppTotalSoftCredit.Amount, 'This method should be used to assert that the total soft credit is equal to 100.');
+        system.assertEquals(true, ctrl.isAmount, 'Checks if isAmount is true.');  // amount mode, not percent mode.
 
         // create new soft credits that are full.
         ctrl.addAnotherSoftCredit();
         ctrl.addAnotherSoftCredit();
-        system.assertEquals(2, ctrl.softCredits.size());
-        system.assertEquals(2, ctrl.numberOfSoftCredits);
+        system.assertEquals(2, ctrl.softCredits.size(), 'Checks that the size of soft credits is 2.');
+        system.assertEquals(2, ctrl.numberOfSoftCredits, 'Checks that the number of soft credits is equal to the number of soft credits.');
         ctrl.softCredits[0].contactRole.ContactId = listCon[0].Id;
         ctrl.softCredits[0].contactRole.Role = 'Soft Credit';
         ctrl.softCredits[0].partial.Amount__c = opp.Amount;  // full amount should not create a PSC
@@ -343,14 +343,14 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         ctrl.allowTooManySoftCredits = true;
 
         Test.startTest();
-        system.assertNotEquals(null, ctrl.save());
+        system.assertNotEquals(null, ctrl.save(), 'Assert that the current model is not null.');
         Test.stopTest();
 
         list<Partial_Soft_Credit__c> listPSC = [select Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c from Partial_Soft_Credit__c];
-        system.assertEquals(0, listPSC.size());
+        system.assertEquals(0, listPSC.size(), 'Assert that the list is empty.');
 
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role from OpportunityContactRole];
-        system.assertEquals(2, listOCR.size());
+        system.assertEquals(2, listOCR.size(), 'Checks that the OCR list is exactly 2.');
     }
 
     /*******************************************************************************************************
@@ -362,8 +362,8 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         initTestDataWithPscs();
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        System.assertEquals(cPSCExisting, ctrl.softCredits.size());
-        System.assertEquals(cPSCExisting * 100 , ctrl.oppTotalSoftCredit.Amount);
+        System.assertEquals(cPSCExisting, ctrl.softCredits.size(), 'Checks that cPSCExisting and ctrl. softCredits are equal.');
+        System.assertEquals(cPSCExisting * 100 , ctrl.oppTotalSoftCredit.Amount, 'This method is used to assert that cPSCExisting and cPSCSoftCredit are');
 
         for (Integer i = 0; i < cPSCExisting; i++) {
             ctrl.softCredits[i].contactRole.ContactId = null;
@@ -372,15 +372,15 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         List<OpportunityContactRole> existingOCRs = [SELECT Id, ContactId, OpportunityId, Role FROM OpportunityContactRole];
 
         Test.startTest();
-        System.assertEquals(null, ctrl.save());
+        System.assertEquals(null, ctrl.save(), 'Test if the current model is the same as the one saved in the ctrl. save method');
         UTIL_UnitTestData_TEST.assertPageHasMessage(System.Label.pscManageSoftCreditsContactMissing, ApexPages.Severity.WARNING);
         Test.stopTest();
 
         List<Partial_Soft_Credit__c> listPSC = [SELECT Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c FROM Partial_Soft_Credit__c];
-        System.assertEquals(cPSCExisting, listPSC.size());
+        System.assertEquals(cPSCExisting, listPSC.size(), 'Assert that cPSCExisting and cPSCList are the same.');
 
         List<OpportunityContactRole> listOCR = [SELECT Id, ContactId, OpportunityId, Role FROM OpportunityContactRole];
-        System.assertEquals(existingOCRs.size(), listOCR.size());
+        System.assertEquals(existingOCRs.size(), listOCR.size(), 'Checks that the OCRs are the same.');
     }
 
     /*******************************************************************************************************
@@ -391,20 +391,20 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         initTestDataWithPscs();
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(cPSCExisting, ctrl.softCredits.size());
-        system.assertEquals(cPSCExisting * 100 , ctrl.oppTotalSoftCredit.Amount);
+        system.assertEquals(cPSCExisting, ctrl.softCredits.size(), 'asserts that cPSCExisting and ctrl. softCredits are the same');
+        system.assertEquals(cPSCExisting * 100 , ctrl.oppTotalSoftCredit.Amount, 'assertEquals - This is a test for the case where cPSCExisting is 100%');
         ctrl.rowNumber = 1;
         ctrl.delRow();
 
         Test.startTest();
-        system.assertNotEquals(null, ctrl.save());
+        system.assertNotEquals(null, ctrl.save(), 'Assert that the current model is not null.');
         Test.stopTest();
 
         list<Partial_Soft_Credit__c> listPSC = [select Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c from Partial_Soft_Credit__c];
-        system.assertEquals(cPSCExisting - 1, listPSC.size());
+        system.assertEquals(cPSCExisting - 1, listPSC.size(), 'asserts that cPSCExisting - 1 is the same as cPSC.');
 
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role from OpportunityContactRole];
-        system.assertEquals(cPSCExisting - 1, listOCR.size());
+        system.assertEquals(cPSCExisting - 1, listOCR.size(), 'Checks that cPSCExisting - 1 is the same as cPSCExisting - 1');
     }
 
     /*******************************************************************************************************
@@ -415,28 +415,28 @@ public with sharing class PSC_ManageSoftCredits_TEST {
         initTestDataWithPscs();
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(cPSCExisting, ctrl.softCredits.size());
-        system.assertEquals(cPSCExisting * 100 , ctrl.oppTotalSoftCredit.Amount);
-        system.assert(cPSCExisting >= 2);
+        system.assertEquals(cPSCExisting, ctrl.softCredits.size(), 'asserts that cPSCExisting and ctrl. softCredits are the same');
+        system.assertEquals(cPSCExisting * 100 , ctrl.oppTotalSoftCredit.Amount, 'assertEquals - This is a test for the case where cPSCExisting is 100%');
+        system.assert(cPSCExisting >= 2, 'asserts that cPSCExisting > = 2');
         // change to a different contact
         ctrl.softCredits[0].contactRole.ContactId = listCon[cPSCExisting].Id;
         // change Amount
         ctrl.softCredits[1].partial.Amount__c = 500;
 
         Test.startTest();
-        system.assertNotEquals(null, ctrl.save());
+        system.assertNotEquals(null, ctrl.save(), 'Assert that the current model is not null.');
         Test.stopTest();
 
         list<Partial_Soft_Credit__c> listPSC = [select Id, Contact__c, Opportunity__c, Amount__c, Role_Name__c from Partial_Soft_Credit__c];
-        system.assertEquals(cPSCExisting, listPSC.size());
+        system.assertEquals(cPSCExisting, listPSC.size(), 'asserts that cPSCExisting and cPSCList are the same');
 
         double amount = 0;
         for (Partial_Soft_Credit__c psc : listPSC)
             amount += psc.Amount__c;
-        system.assertEquals(600, amount);
+        system.assertEquals(600, amount, 'Assert that amount is equal to 600.');
 
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role from OpportunityContactRole];
-        system.assertEquals(cPSCExisting, listOCR.size());
+        system.assertEquals(cPSCExisting, listOCR.size(), 'Checks that the number of OCR OCRs is the same as the number of O');
     }
 
     /*********************************************************************************************************
@@ -540,38 +540,38 @@ public with sharing class PSC_ManageSoftCredits_TEST {
 
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(0, ctrl.softCredits.size());
+        system.assertEquals(0, ctrl.softCredits.size(), 'Assert that soft credits are available.');
 
         // test not allowing partial on the Primary OCR
         ctrl.addAnotherSoftCredit();
-        system.assertEquals(1, ctrl.softCredits.size());
+        system.assertEquals(1, ctrl.softCredits.size(), 'Checks that the size of soft credits is equal to 1.');
         ctrl.softCredits[0].contactRole.ContactId = listCon[0].Id;
         ctrl.softCredits[0].contactRole.Role = 'Soft Credit';
         ctrl.softCredits[0].partial.Amount__c = 100;
-        system.assertEquals(null, ctrl.save());
+        system.assertEquals(null, ctrl.save(), 'Assert that ctrl. save is null.');
 
         // test amount not filled in
         ctrl.softCredits[0].contactRole.ContactId = listCon[1].Id;
         ctrl.softCredits[0].contactRole.Role = 'Soft Credit';
         ctrl.softCredits[0].partial.Amount__c = null;
-        system.assertEquals(null, ctrl.save());
+        system.assertEquals(null, ctrl.save(), 'Assert that ctrl. save is null.');
 
         // test Role not filled in
         ctrl.softCredits[0].contactRole.ContactId = listCon[1].Id;
         ctrl.softCredits[0].contactRole.Role = null;
         ctrl.softCredits[0].partial.Amount__c = 100;
-        system.assertEquals(null, ctrl.save());
+        system.assertEquals(null, ctrl.save(), 'Assert that ctrl. save is null.');
 
         // test amount > opp.amount
         ctrl.softCredits[0].contactRole.ContactId = listCon[1].Id;
         ctrl.softCredits[0].contactRole.Role = 'Soft Credit';
         ctrl.softCredits[0].partial.Amount__c = opp.Amount + 100;
         ctrl.allowTooManySoftCredits = false;
-        system.assertEquals(null, ctrl.save());
+        system.assertEquals(null, ctrl.save(), 'Assert that ctrl. save is null.');
 
         // hit a few remaining code paths
         ctrl.refresh();
-        system.assertNotEquals(null, ctrl.cancel());
+        system.assertNotEquals(null, ctrl.cancel(), 'Asserts that the cancel button is not null.');
     }
 
     /*******************************************************************************************************
@@ -594,9 +594,9 @@ public with sharing class PSC_ManageSoftCredits_TEST {
 
         Test.setCurrentPage(Page.PSC_ManageSoftCredits);
         PSC_ManageSoftCredits_CTRL ctrl = new PSC_ManageSoftCredits_CTRL(new ApexPages.StandardController(opp));
-        system.assertEquals(0, ctrl.softCredits.size());
+        system.assertEquals(0, ctrl.softCredits.size(), 'Assert that soft credits are available.');
 
-        system.assertNotEquals(0, ApexPages.getMessages().size());
+        system.assertNotEquals(0, ApexPages.getMessages().size(), 'Checks that the number of messages is not zero.');
     }
 
     /*******************************************************************************************************

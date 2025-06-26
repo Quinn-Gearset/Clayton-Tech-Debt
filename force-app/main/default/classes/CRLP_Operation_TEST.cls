@@ -53,7 +53,7 @@ private class CRLP_Operation_TEST {
                 'The YearsDonated Operation Type is only valid for Date type fields');
         System.assertEquals(1, CRLP_Operation.getAvailableFieldTypesForDetailField(CRLP_Operation.RollupType.YEARS_DONATED).size(),
                 'The YearsDonated Operation Type is only valid for Date type fields');
-        System.assertEquals(CRLP_Operation.RollupType.SUM, CRLP_Operation.getRollupTypeFromString('Sum'));
+        System.assertEquals(CRLP_Operation.RollupType.SUM, CRLP_Operation.getRollupTypeFromString('Sum'), 'This function asserts that the RollupType is sum.');
     }
 
     /**

@@ -51,14 +51,14 @@ private with sharing class CONV_Account_Conversion_CTRL_TEST {
 
         Contact c = new Contact(LastName = 'Contact', FirstName = 'Test');
         insert c;
-        System.assertEquals(1, [select count() from Account where npe01__One2OneContact__c = :c.id]);
+        System.assertEquals(1, [select count() from Account where npe01__One2OneContact__c = :c.id], 'Checks that the number of accounts in the database is equal to 1.');
         String HHName = 'Contact ' + System.label.npo02.DefaultHouseholdName;
-        System.assertEquals(1, [select count() from npo02__Household__c where Name = :HHName]);
+        System.assertEquals(1, [select count() from npo02__Household__c where Name = :HHName], 'Test for equality of the number of households in the database.');
 
         //add an oppty to the Contact as well
         Opportunity o = new Opportunity(Name = 'Test Oppty', Amount = 1000, StageName = UTIL_UnitTestData_TEST.getClosedWonStage(), CloseDate = System.today(), Primary_Contact__c = c.Id);
         insert o;
-        System.assertEquals(1, [select count() from OpportunityContactRole where isPrimary = true and ContactId = :c.Id]);
+        System.assertEquals(1, [select count() from OpportunityContactRole where isPrimary = true and ContactId = :c.Id], 'Checks that the number of opportunity contact roles is equal to 1.');
 
         Test.startTest();
 
@@ -69,7 +69,7 @@ private with sharing class CONV_Account_Conversion_CTRL_TEST {
         // instantiate the controller
         CONV_Account_Conversion_CTRL controller = new CONV_Account_Conversion_CTRL();
         AsyncApexJob aaj = controller.apexjob;
-        System.assertEquals(null, aaj);
+        System.assertEquals(null, aaj, 'Assert that null is equal to Aaj.');
         List<SelectOption> testList = controller.getTargetAccountFields();
 
         // convert up everyone
@@ -79,14 +79,14 @@ private with sharing class CONV_Account_Conversion_CTRL_TEST {
         Test.stopTest();
 
         aaj = controller.apexjob;
-        System.assertNotEquals(null, aaj.Id);
-        System.assertEquals('Completed', aaj.Status);
+        System.assertNotEquals(null, aaj.Id, 'Assert that Aaj. Id is not null.');
+        System.assertEquals('Completed', aaj.Status, 'Checks that Aaj. Status is Completed.');
         Boolean testBool;
         testBool = CONV_Account_Conversion_CTRL.verifyFieldTypeForIds('garbagefield');
-        System.assertEquals(false, testBool);
+        System.assertEquals(false, testBool, 'Test for equality.');
 
         testBool = CONV_Account_Conversion_CTRL.verifyFieldTypeForIds('Name');
-        System.assert(testBool);
+        System.assert(testBool, 'Test if the testBool is true.');
     }
 
     /***
@@ -117,14 +117,14 @@ private with sharing class CONV_Account_Conversion_CTRL_TEST {
         Task t = new Task(WhatId = a.Id, OwnerId = u.Id, Status = 'Completed', Subject = 'Other');
         insert t;
 
-        System.assertEquals(u.Id, [select OwnerId from Account where Id = :a.Id].OwnerId);
-        System.assertEquals(u.Id, [select OwnerId from Contact where Id = :c.Id].OwnerId);
-        System.assertEquals(u.Id, [select OwnerId from Task where Id = :t.Id].OwnerId);
+        System.assertEquals(u.Id, [select OwnerId from Account where Id = :a.Id].OwnerId, 'Assert that Account. Id equals Account. OwnerId');
+        System.assertEquals(u.Id, [select OwnerId from Contact where Id = :c.Id].OwnerId, 'Assert that Contacts are owned by the same user.');
+        System.assertEquals(u.Id, [select OwnerId from Task where Id = :t.Id].OwnerId, 'Assert that the Task s OwnerId is the same as the OwnerId of the Owner of');
 
         //add an oppty to the Contact as well
         Opportunity o = new Opportunity(OwnerId = u.Id, Name = 'Test Oppty', Amount = 1000, StageName = UTIL_UnitTestData_TEST.getClosedWonStage(), CloseDate = System.today(), Primary_Contact__c = c.Id);
         insert o;
-        System.assertEquals(1, [select count() from OpportunityContactRole where isPrimary = true and ContactId = :c.Id]);
+        System.assertEquals(1, [select count() from OpportunityContactRole where isPrimary = true and ContactId = :c.Id], 'Checks that the number of opportunity contact roles is equal to 1.');
 
         User thisUser = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
 
@@ -147,7 +147,7 @@ private with sharing class CONV_Account_Conversion_CTRL_TEST {
             Test.stopTest();
 
             //assert the warning exists
-            System.assertEquals(true, controller.runCheckErrorState);
+            System.assertEquals(true, controller.runCheckErrorState, 'Checks if the current status of the controller is the same as the status of the error.');
         }
     }
 

@@ -79,8 +79,8 @@ private with sharing class AggregateResultProxy_TEST {
         AggregateResultProxy resultProxy = new AggregateResultProxy()
             .withAliasAndValue('recordCount', 25)
             .withAliasAndValue('Payment_Status__c', 'DECLINED');
-        System.assertEquals('DECLINED', resultProxy.getValuesByAlias().get('Payment_Status__c'));
-        System.assertEquals(25, resultProxy.getValuesByAlias().get('recordCount'));
+        System.assertEquals('DECLINED', resultProxy.getValuesByAlias().get('Payment_Status__c'), 'Checks that the payment status is declined.');
+        System.assertEquals(25, resultProxy.getValuesByAlias().get('recordCount'), 'This test is used to assert that the recordCount of the resultProxy is equal to 25');
     }
 
     private static DataImport__c createDataImportTemp(String status, String paymentStatus, Id batchId) {

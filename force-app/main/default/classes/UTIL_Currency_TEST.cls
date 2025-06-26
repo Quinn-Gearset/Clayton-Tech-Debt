@@ -45,7 +45,7 @@ public class UTIL_Currency_TEST {
         UTIL_Currency actual = new UTIL_Currency();
         System.assertEquals(
             UserInfo.isMultiCurrencyOrganization(),
-            actual.isMultiCurrencyOrganization()
+            actual.isMultiCurrencyOrganization(), 'Tests if two objects are equal.'
         );
     }
 
@@ -58,7 +58,7 @@ public class UTIL_Currency_TEST {
         UTIL_Currency actual = new UTIL_Currency();
         System.assertEquals(
             UserInfo.getDefaultCurrency(),
-            actual.getDefaultCurrency()
+            actual.getDefaultCurrency(), 'Assert that two objects have the same currency.'
         );
     }
 
@@ -75,10 +75,10 @@ public class UTIL_Currency_TEST {
             String orgDefaultCurrency = (String)currObj.get('IsoCode');
             System.assertEquals(
                     orgDefaultCurrency,
-                    actual.getDefaultCurrency()
+                    actual.getDefaultCurrency(), 'This method is a utility method to assert that the two objects have the same currency.'
             );
         } else {
-            System.assert(String.isEmpty(actual.getOrgDefaultCurrency()));
+            System.assert(String.isEmpty(actual.getOrgDefaultCurrency()), 'Assert that the default currency is empty.');
         }
     }
 
@@ -94,7 +94,7 @@ public class UTIL_Currency_TEST {
 
         System.assertEquals(
             existingInstance,
-            UTIL_Currency.getInstance()
+            UTIL_Currency.getInstance(), 'System. assertEquals method.'
         );
     }
 
@@ -105,8 +105,8 @@ public class UTIL_Currency_TEST {
      */
     @isTest
     private static void testSingletonReturnsNewInstanceIfNoExisting() {
-        System.assertEquals(null, UTIL_Currency.instance);
-        System.assert(UTIL_Currency.getInstance() instanceof UTIL_Currency);
+        System.assertEquals(null, UTIL_Currency.instance, 'Assert that UTIL_Currency is null.');
+        System.assert(UTIL_Currency.getInstance() instanceof UTIL_Currency, 'Assert UTIL_Currency is instance of UTIL_Currency');
     }
 
     /**
@@ -123,7 +123,7 @@ public class UTIL_Currency_TEST {
 
         System.assertEquals(
             '€',
-            actual.getDefaultCurrencySymbol()
+            actual.getDefaultCurrencySymbol(), 'Asserts that the given sequence of conditions is equal to the default currency symbol.'
         );
     }
 
@@ -141,7 +141,7 @@ public class UTIL_Currency_TEST {
 
         System.assertEquals(
             'FOO',
-            actual.getDefaultCurrencySymbol()
+            actual.getDefaultCurrencySymbol(), 'Assert that two strings are equal.'
         );
     }
 
@@ -160,7 +160,7 @@ public class UTIL_Currency_TEST {
 
         System.assertEquals(
             '$',
-            actual.getCurrencySymbol('USD')
+            actual.getCurrencySymbol('USD'), 'Asserts that a managed object is equal to another object.'
         );
     }
 
@@ -179,7 +179,7 @@ public class UTIL_Currency_TEST {
 
         System.assertEquals(
             '$',
-            actual.getCurrencySymbol('USD')
+            actual.getCurrencySymbol('USD'), 'Asserts that a managed object is equal to another object.'
         );
     }
 

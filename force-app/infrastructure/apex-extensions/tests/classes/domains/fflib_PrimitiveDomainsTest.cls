@@ -52,8 +52,8 @@ private class fflib_PrimitiveDomainsTest
         fflib_Dates DatesB = new fflib_Dates(dateList);
         fflib_Dates DatesC = new fflib_Dates((List<Object>) dateList);
 
-        System.assert(datesA.getDateSet().containsAll(DatesB.getDates()));
-        System.assert(datesA.getDateSet().containsAll(DatesC.getDates()));
+        System.assert(datesA.getDateSet().containsAll(DatesB.getDates()), 'This method asserts that the dates A and B are in the same set.');
+        System.assert(datesA.getDateSet().containsAll(DatesC.getDates()), 'This method checks that the dates A and C are in the same set as the dates A');
     }
 
     @IsTest
@@ -77,8 +77,8 @@ private class fflib_PrimitiveDomainsTest
         fflib_DateTimes datetimeB = new fflib_DateTimes(dateList);
         fflib_DateTimes datetimeC = new fflib_DateTimes((List<Object>) dateList);
 
-        System.assert(datetimeA.getDateTimeSet().containsAll(datetimeB.getDateTimes()));
-        System.assert(datetimeA.getDateTimeSet().containsAll(datetimeC.getDateTimes()));
+        System.assert(datetimeA.getDateTimeSet().containsAll(datetimeB.getDateTimes()), 'Checks that the datetimeA and datetimeB are in the same set.');
+        System.assert(datetimeA.getDateTimeSet().containsAll(datetimeC.getDateTimes()), 'Checks that the datetimeA and datetimeC are in the same set as the datetimeA and');
     }
 
     @IsTest
@@ -91,8 +91,8 @@ private class fflib_PrimitiveDomainsTest
         fflib_Decimals domainB = new fflib_Decimals(dataList);
         fflib_Decimals domainC = new fflib_Decimals((List<Object>) dataList);
 
-        System.assert(domainA.getDecimalSet().containsAll(domainB.getDecimals()));
-        System.assert(domainA.getDecimalSet().containsAll(domainC.getDecimals()));
+        System.assert(domainA.getDecimalSet().containsAll(domainB.getDecimals()), 'Checks that the domainA and domainB are not empty.');
+        System.assert(domainA.getDecimalSet().containsAll(domainC.getDecimals()), 'Checks that the domain A and domain C are not duplicated.');
     }
 
     @IsTest
@@ -105,8 +105,8 @@ private class fflib_PrimitiveDomainsTest
         fflib_Doubles domainB = new fflib_Doubles(dataList);
         fflib_Doubles domainC = new fflib_Doubles((List<Object>) dataList);
 
-        System.assert(domainA.getDoubleSet().containsAll(domainB.getDoubles()));
-        System.assert(domainA.getDoubleSet().containsAll(domainC.getDoubles()));
+        System.assert(domainA.getDoubleSet().containsAll(domainB.getDoubles()), 'Checks that the two domains are all the same.');
+        System.assert(domainA.getDoubleSet().containsAll(domainC.getDoubles()), 'This method asserts that the domain A and domain C are contained in the domain A and domain');
     }
 
     @IsTest
@@ -123,8 +123,8 @@ private class fflib_PrimitiveDomainsTest
         fflib_Ids domainB = new fflib_Ids(new List<Id>(dataSet));
         fflib_Ids domainC = new fflib_Ids((List<Object>) new List<Id>(dataSet));
 
-        System.assert(domainA.getIds().containsAll(domainB.getIdList()));
-        System.assert(domainA.getIds().containsAll(domainC.getIdList()));
+        System.assert(domainA.getIds().containsAll(domainB.getIdList()), 'Checks that the two domains are contained in the same order.');
+        System.assert(domainA.getIds().containsAll(domainC.getIdList()), 'Checks that the domains A and C are contained in the domain A.');
     }
 
     @IsTest
@@ -140,7 +140,7 @@ private class fflib_PrimitiveDomainsTest
 
         fflib_Ids domainA = new fflib_Ids(data);
 
-        System.assert(domainA.getIds().containsAll((List<Id>) data.getObjects()));
+        System.assert(domainA.getIds().containsAll((List<Id>) data.getObjects()), 'Checks that the domainA is in the list of ids.');
     }
 
     @IsTest
@@ -152,8 +152,8 @@ private class fflib_PrimitiveDomainsTest
         fflib_Integers domainB = new fflib_Integers(new List<Integer>(dataSet));
         fflib_Integers domainC = new fflib_Integers((List<Object>) new List<Integer>(dataSet));
 
-        System.assert(domainA.getIntegerSet().containsAll(domainB.getIntegers()));
-        System.assert(domainA.getIntegerSet().containsAll(domainC.getIntegers()));
+        System.assert(domainA.getIntegerSet().containsAll(domainB.getIntegers()), 'Checks that the two domains are all in the same order.');
+        System.assert(domainA.getIntegerSet().containsAll(domainC.getIntegers()), 'This method asserts that the domain A and domain C are contained in the domain A and domain');
     }
 
     @IsTest
@@ -165,8 +165,8 @@ private class fflib_PrimitiveDomainsTest
         fflib_Longs domainB = new fflib_Longs(new List<Long>(dataSet));
         fflib_Longs domainC = new fflib_Longs((List<Object>) new List<Long>(dataSet));
 
-        System.assert(domainA.getLongSet().containsAll(domainB.getLongs()));
-        System.assert(domainA.getLongSet().containsAll(domainC.getLongs()));
+        System.assert(domainA.getLongSet().containsAll(domainB.getLongs()), 'Checks that the two domains are all the same.');
+        System.assert(domainA.getLongSet().containsAll(domainC.getLongs()), 'This method asserts that the domain A and domain C are in the same order as the domains');
     }
 
     @IsTest
@@ -178,7 +178,7 @@ private class fflib_PrimitiveDomainsTest
         fflib_Strings domainB = new fflib_Strings(new List<String>(dataSet));
         fflib_Strings domainC = new fflib_Strings((List<Object>) new List<String>(dataSet));
 
-        System.assert(domainA.getStringSet().containsAll(domainB.getStrings()));
-        System.assert(domainA.getStringSet().containsAll(domainC.getStrings()));
+        System.assert(domainA.getStringSet().containsAll(domainB.getStrings()), 'Checks that the domain A and domain B are contained in the domain A.');
+        System.assert(domainA.getStringSet().containsAll(domainC.getStrings()), 'Checks that the domain A and domain C are contained in the domain A and domain C.');
     }
 }

@@ -64,7 +64,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         listCon = UTIL_UnitTestData_TEST.CreateMultipleTestContacts(cContact);
         insert listCon;
         listCon = [select Id, Firstname,Lastname, AccountId from Contact];
-        system.assertEquals(cContact, listCon.size());
+        system.assertEquals(cContact, listCon.size(), 'Assert that cContact is the same as the list of contacts.');
         
         // create cOpp Opportunities
         listOpp = new list<Opportunity>();
@@ -89,7 +89,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         
         // check OCR's automatically created
         list<OpportunityContactRole> listOCR = getOpportunityContactRoles();
-        system.assertEquals(addOCRs ? cOpp : 0, listOCR.size());
+        system.assertEquals(addOCRs ? cOpp : 0, listOCR.size(), 'Assert that the OCR list is equal to the size of the OCR list.');
 
     }
 
@@ -102,7 +102,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         
         // make sure no OCR's exist
         list<OpportunityContactRole> listOCR = getOpportunityContactRoles();
-        system.assertEquals(0, listOCR.size());        
+        system.assertEquals(0, listOCR.size(), 'Checks that OCR list is empty.');        
         
         // create our Partial Soft Credits
         list<Partial_Soft_Credit__c> listPSC = new list<Partial_Soft_Credit__c>();
@@ -125,9 +125,9 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         // make sure new OCRs created
         listOCR = getOpportunityContactRoles();
         for (OpportunityContactRole ocr : listOCR) {
-            system.assertEquals('Soft Credit', ocr.Role);
+            system.assertEquals('Soft Credit', ocr.Role, 'Checks that the role is the same as the soft credit role.');
         }
-        system.assertEquals(cOppTest, listOCR.size());
+        system.assertEquals(cOppTest, listOCR.size(), 'asserts that the list of OCR is the same size');
         
         assertOpportunityContactRolesAreStoredInPartialSoftCredits(listOCR); 
     }      
@@ -141,7 +141,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         
         // make sure OCR's exist
         list<OpportunityContactRole> listOCR = getOpportunityContactRoles();
-        system.assertEquals(cOppTest, listOCR.size());        
+        system.assertEquals(cOppTest, listOCR.size(), 'asserts that the list of OCR is the same size');        
         
         // create our Partial Soft Credits
         list<Partial_Soft_Credit__c> listPSC = new list<Partial_Soft_Credit__c>();
@@ -164,9 +164,9 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         // make sure no new OCRs created
         listOCR = getOpportunityContactRoles();
         for (OpportunityContactRole ocr : listOCR) {
-            system.assertNotEquals('Soft Credit', ocr.Role);
+            system.assertNotEquals('Soft Credit', ocr.Role, 'Asserts that the OCR role is not soft credit.');
         }
-        system.assertEquals(cOppTest, listOCR.size());
+        system.assertEquals(cOppTest, listOCR.size(), 'asserts that the list of OCR is the same size');
                     
         assertOpportunityContactRolesAreStoredInPartialSoftCredits(listOCR);        
     }      
@@ -180,14 +180,14 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         
         // make sure OCR's exist
         list<OpportunityContactRole> listOCR = getOpportunityContactRoles();
-        system.assertEquals(cOppTest, listOCR.size());  
+        system.assertEquals(cOppTest, listOCR.size(), 'asserts that the list of OCR is the same size');  
         
         // now delete 1/2 our OCRs
         for (integer i = 0; i < listOCR.size(); i++) {
             if (system.math.mod(i, 2) == 0)
                 listOCR.remove(i);
         }
-        system.assert(listOCR.size() < cOppTest);      
+        system.assert(listOCR.size() < cOppTest, 'assert that the list of OCR is at least cOppTest');      
         delete listOCR;
         
         // create our Partial Soft Credits
@@ -210,7 +210,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         
         // make we get correct number of OCRs
         listOCR = getOpportunityContactRoles();
-        system.assertEquals(cOppTest, listOCR.size());
+        system.assertEquals(cOppTest, listOCR.size(), 'asserts that the list of OCR is the same size');
                 
         assertOpportunityContactRolesAreStoredInPartialSoftCredits(listOCR);
     }      
@@ -224,7 +224,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         
         // make sure OCR's exist
         list<OpportunityContactRole> listOCR = getOpportunityContactRoles();
-        system.assertEquals(cOppTest, listOCR.size());        
+        system.assertEquals(cOppTest, listOCR.size(), 'asserts that the list of OCR is the same size');        
         
         // create our Partial Soft Credits
         list<Partial_Soft_Credit__c> listPSC = new list<Partial_Soft_Credit__c>();
@@ -268,14 +268,14 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         
         // make sure OCR's exist
         list<OpportunityContactRole> listOCR = getOpportunityContactRoles();
-        system.assertEquals(cOppTest, listOCR.size());  
+        system.assertEquals(cOppTest, listOCR.size(), 'asserts that the list of OCR is the same size');  
         
         // now delete 1/2 our OCRs
         for (integer i = 0; i < listOCR.size(); i++) {
             if (system.math.mod(i, 2) == 0)
                 listOCR.remove(i);
         }
-        system.assert(listOCR.size() < cOppTest);      
+        system.assert(listOCR.size() < cOppTest, 'assert that the list of OCR is at least cOppTest');      
         delete listOCR;
         
         // create our Partial Soft Credits
@@ -298,7 +298,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         
         // make we get correct number of OCRs
         listOCR = getOpportunityContactRoles();
-        system.assertEquals(cOppTest, listOCR.size());
+        system.assertEquals(cOppTest, listOCR.size(), 'asserts that the list of OCR is the same size');
                 
         assertOpportunityContactRolesAreStoredInPartialSoftCredits(listOCR);
         
@@ -312,11 +312,11 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         // verify only OCR's that had a matching Role were changed
         integer cChanged = 0;
         for (OpportunityContactRole ocr : getOpportunityContactRoles()) {
-            system.assertNotEquals('Soft Credit', ocr.Role);
+            system.assertNotEquals('Soft Credit', ocr.Role, 'Asserts that the OCR role is not soft credit.');
             if (ocr.Role == 'Changed')
                 cChanged++;
         }
-        system.assert(cChanged > 0 && cChanged < listPSC.size());
+        system.assert(cChanged > 0 && cChanged < listPSC.size(), 'asserts that cChanged is > = 0 and cChanged < = listPSC.');
     }      
 
     /*******************************************************************************************************
@@ -326,7 +326,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         createTestData(cContactTest, cOppTest, amountTest, false);
         
         list<OpportunityContactRole> listOCR = getOpportunityContactRoles();
-        system.assertEquals(0, listOCR.size());        
+        system.assertEquals(0, listOCR.size(), 'Checks that OCR list is empty.');        
         
         list<Partial_Soft_Credit__c> listPSC = new list<Partial_Soft_Credit__c>();
             
@@ -347,7 +347,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         insert listPSC;
 
         listOCR = getOpportunityContactRoles();
-        system.assertEquals(2, listOCR.size());
+        system.assertEquals(2, listOCR.size(), 'Checks that the OCR list is exactly 2.');
 
         assertOpportunityContactRolesAreStoredInPartialSoftCredits(listOCR);
         
@@ -361,7 +361,7 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         insert psc;
         
         listOCR = getOpportunityContactRoles();
-        system.assertEquals(3, listOCR.size());
+        system.assertEquals(3, listOCR.size(), 'Checks that the OCR list is exactly 3.');
 
         assertOpportunityContactRolesAreStoredInPartialSoftCredits(listOCR);
     } 
@@ -378,14 +378,14 @@ public with sharing class PSC_PartialSoftCredit_TEST {
         Set<Id> contactRoleIds = new Set<Id>();
 
         for (Partial_Soft_Credit__c credit : getPartialSoftCredits()) {
-            System.assertNotEquals(null, credit.Contact_Role_ID__c);
+            System.assertNotEquals(null, credit.Contact_Role_ID__c, 'Assert that the Contact_Role_ID object is not null.');
             contactRoleIds.add(credit.Contact_Role_ID__c);
         }
 
         Set<Id> expectedContactRoleIds = (new Map<Id, OpportunityContactRole>(oppContactRoles)).keySet();
 
-        System.assertEquals(expectedContactRoleIds.size(), contactRoleIds.size());
-        System.assert(expectedContactRoleIds.containsAll(contactRoleIds));
+        System.assertEquals(expectedContactRoleIds.size(), contactRoleIds.size(), 'Checks that the expected role ids are the same.');
+        System.assert(expectedContactRoleIds.containsAll(contactRoleIds), 'Checks that the expected role IDs are present.');
     }
 
     /*********************************************************************************************************

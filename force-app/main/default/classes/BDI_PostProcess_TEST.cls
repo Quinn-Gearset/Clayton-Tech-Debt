@@ -69,20 +69,20 @@ public with sharing class BDI_PostProcess_TEST {
 
         // verify expected results
         list<Contact> listCon = [SELECT Id, Name, AccountId FROM Contact];
-        system.assertEquals(8, listCon.size());
+        system.assertEquals(8, listCon.size(), 'Checks that the size of the list is equal to 8.');
 
         List<npe4__Relationship__c> listRel = [SELECT npe4__Contact__c, npe4__RelatedContact__c, npe4__Type__c, npe4__Status__c
             FROM npe4__Relationship__c];
-        system.assertEquals(6, listRel.size());
+        system.assertEquals(6, listRel.size(), 'Assert that 6 entries are in the list.');
         for (integer i = 0; i < listRel.size(); i++) {
-            system.assertEquals('Spouse', listRel[i].npe4__Type__c);
-            system.assertEquals('Current', listRel[i].npe4__Status__c);
+            system.assertEquals('Spouse', listRel[i].npe4__Type__c, 'Assert that the current node is the Spouse node.');
+            system.assertEquals('Current', listRel[i].npe4__Status__c, 'asserts that current status is the same as current status');
         }
 
         listDI = [select Id, Status__c from DataImport__c];
-        system.assertEquals(6, listDI.size());
+        system.assertEquals(6, listDI.size(), 'Assert that listDI size equals 6');
         for (integer i = 0; i < listDI.size(); i++) {
-            system.assertEquals(BDI_DataImport_API.bdiImported, listDI[i].Status__c);
+            system.assertEquals(BDI_DataImport_API.bdiImported, listDI[i].Status__c, 'This function is used to assert that the BDI_DataImport_API. bdi');
         }
     }
 

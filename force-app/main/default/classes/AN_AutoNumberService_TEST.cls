@@ -72,10 +72,10 @@ private class AN_AutoNumberService_TEST {
 
         System.assertEquals(false,
                 utility.getAutoNumberById(
-                        autoNumberIdToActivate).IsActive__c);
+                        autoNumberIdToActivate).IsActive__c, 'Checks if the given auto number is active.');
         System.assertEquals(true,
                 utility.getAutoNumberById(
-                        activeAutoNumberId).IsActive__c);
+                        activeAutoNumberId).IsActive__c, 'Tests if the given auto number is active.');
 
         System.assertEquals(false, ans.isTriggerHandlerEnabled,
                 'The Trigger Handler table should not have an entry for AN_AutoNumber_TDTM if' +
@@ -104,7 +104,7 @@ private class AN_AutoNumberService_TEST {
                         false);
 
         System.assertEquals(true,
-                utility.getAutoNumberById(autoNumberId).IsActive__c);
+                utility.getAutoNumberById(autoNumberId).IsActive__c, 'Checks if the current auto number is active.');
 
         ans.deactivate(autoNumberId);
 

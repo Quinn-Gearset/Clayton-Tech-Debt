@@ -43,11 +43,11 @@ private class AdditionalObjectJSON_TEST {
         BDI_DynamicSourceGroup dummyDynamicSourceGroup = (BDI_DynamicSourceGroup)
             JSON.deserialize(convertedWidgetData, BDI_DynamicSourceGroup.class);
 
-        System.assertNotEquals(null, convertedWidgetData);
+        System.assertNotEquals(null, convertedWidgetData, 'Assert that the convertedWidgetData is not null.');
         System.assertEquals(
             dummyDynamicSourceGroup.name,
-            DataImport__c.Additional_Object_JSON__c.getDescribe().getName());
-        System.assertNotEquals(null, dummyDynamicSourceGroup.dynamicSourceByObjMappingDevName);
+            DataImport__c.Additional_Object_JSON__c.getDescribe().getName(), 'System. assertEquals method.');
+        System.assertNotEquals(null, dummyDynamicSourceGroup.dynamicSourceByObjMappingDevName, 'This method is called when the dynamic source group is not null.');
     }
 
     @isTest
@@ -58,8 +58,8 @@ private class AdditionalObjectJSON_TEST {
 
         System.assertEquals(
             dummyDynamicSourceGroup.name,
-            DataImport__c.Additional_Object_JSON__c.getDescribe().getName());
-        System.assertNotEquals(null, dummyDynamicSourceGroup.dynamicSourceByObjMappingDevName);
+            DataImport__c.Additional_Object_JSON__c.getDescribe().getName(), 'System. assertEquals method.');
+        System.assertNotEquals(null, dummyDynamicSourceGroup.dynamicSourceByObjMappingDevName, 'This method is called when the dynamic source group is not null.');
     }
 
     @isTest
@@ -67,7 +67,7 @@ private class AdditionalObjectJSON_TEST {
         AdditionalObjectJSON additionalObjectJSON = new AdditionalObjectJSON('{"GAU_Allocation_1_6f5a83b87":[]}');
         String asJSON = additionalObjectJSON.asJSON();
 
-        System.assertEquals(null, asJSON);
+        System.assertEquals(null, asJSON, 'Assert that null is equal to the JSON string.');
     }
 
     @isTest
@@ -85,8 +85,8 @@ private class AdditionalObjectJSON_TEST {
         additionalObjectJSON.add(dummySoftCredits);
 
         String backToJSON = additionalObjectJSON.asJSON();
-        System.assert(backToJSON.contains(dummyContactId0));
-        System.assert(backToJSON.contains(dummyContactId1));
+        System.assert(backToJSON.contains(dummyContactId0), 'This is a test method to ensure that the contact ID 0 is not in the backTo');
+        System.assert(backToJSON.contains(dummyContactId1), 'This is a test method. It asserts that the backToJSON is not empty.');
     }
 
     @isTest
@@ -99,7 +99,7 @@ private class AdditionalObjectJSON_TEST {
         AdditionalObjectJSON additionalObjectJSON = new AdditionalObjectJSON(additionalObjectString);
         SoftCredits softCredits = additionalObjectJSON.asSoftCredits();
 
-        System.assertEquals(2, softCredits.size());
+        System.assertEquals(2, softCredits.size(), 'Assert that the number of soft credits is equal to 2.');
     }
 
     @isTest
@@ -112,7 +112,7 @@ private class AdditionalObjectJSON_TEST {
         AdditionalObjectJSON additionalObjectJSON = new AdditionalObjectJSON(additionalObjectString);
         SoftCredits softCredits = additionalObjectJSON.asSoftCredits();
 
-        System.assertEquals(0, softCredits.size());
+        System.assertEquals(0, softCredits.size(), 'Assert that soft credits are not null.');
     }
 
     @isTest
@@ -120,7 +120,7 @@ private class AdditionalObjectJSON_TEST {
         AdditionalObjectJSON additionalObjectJSON = new AdditionalObjectJSON(null);
         SoftCredits softCredits = additionalObjectJSON.asSoftCredits();
 
-        System.assertEquals(0, softCredits.size());
+        System.assertEquals(0, softCredits.size(), 'Assert that soft credits are not null.');
     }
 
     @isTest
@@ -143,16 +143,16 @@ private class AdditionalObjectJSON_TEST {
         SoftCredits dummySoftCredits = new SoftCredits(dummyOCRs);
 
         BDI_DynamicSourceGroup dynamicSourceGroup = additionalObjectJSON.dynamicSourceGroup;
-        System.assertEquals(dynamicSourceGroup.dynamicSourceByObjMappingDevName.values().size(), 3);
+        System.assertEquals(dynamicSourceGroup.dynamicSourceByObjMappingDevName.values().size(), 3, 'This test checks that the dynamicSourceGroup has 3 dynamicSourceByObjMappingDevName entries');
 
         additionalObjectJSON.add(dummySoftCredits);
 
-        System.assertEquals(dynamicSourceGroup.dynamicSourceByObjMappingDevName.values().size(), 5);
+        System.assertEquals(dynamicSourceGroup.dynamicSourceByObjMappingDevName.values().size(), 5, 'This test checks that dynamicSourceGroup. dynamicSourceByObjMappingDevName is set to');
 
         String backToJSON = additionalObjectJSON.asJSON();
-        System.assert(backToJSON.contains(dummyContactId0));
-        System.assert(backToJSON.contains(dummyContactId1));
-        System.assert(!backToJSON.contains(dummyContactId2));
+        System.assert(backToJSON.contains(dummyContactId0), 'This is a test method to ensure that the contact ID 0 is not in the backTo');
+        System.assert(backToJSON.contains(dummyContactId1), 'This is a test method. It asserts that the backToJSON is not empty.');
+        System.assert(!backToJSON.contains(dummyContactId2), 'This is a test method. It is only used for testing.');
     }
 
     /***
@@ -193,13 +193,13 @@ private class AdditionalObjectJSON_TEST {
         testDI.Additional_Object_JSON__c = additionalObjectJSON.convertWidgetDataToObjectJSON(widgetDataString);
         Test.stopTest();
 
-        System.assertNotEquals(null,testDI.Additional_Object_JSON__c);
+        System.assertNotEquals(null,testDI.Additional_Object_JSON__c, 'This method asserts that the Additional_Object_JSON_c object is not null.');
 
         BDI_DynamicSourceGroup testDSG =
                 (BDI_DynamicSourceGroup)JSON.deserialize(testDI.Additional_Object_JSON__c, BDI_DynamicSourceGroup.class);
 
-        System.assertNotEquals(null,testDSG);
-        System.assertEquals(2,testDSG.dynamicSourceByObjMappingDevName.size());
+        System.assertNotEquals(null,testDSG, 'Assert that the DSG is not equal to the DSG.');
+        System.assertEquals(2,testDSG.dynamicSourceByObjMappingDevName.size(), 'Test for equality of dynamic source size.');
 
         BDI_DynamicSource dynSource1;
         BDI_DynamicSource dynSource2;
@@ -213,9 +213,9 @@ private class AdditionalObjectJSON_TEST {
             }
         }
 
-        System.assertNotEquals(null, dynSource1);
-        System.assertNotEquals(null, dynSource2);
-        System.assertEquals(75,dynSource1.sourceObj.get('GAU_Allocation_1_Percent__c'));
-        System.assertEquals(25,dynSource2.sourceObj.get('GAU_Allocation_1_Percent__c'));
+        System.assertNotEquals(null, dynSource1, 'This is a test case.');
+        System.assertNotEquals(null, dynSource2, 'Assert that the dynSource2 is not null.');
+        System.assertEquals(75,dynSource1.sourceObj.get('GAU_Allocation_1_Percent__c'), 'This test asserts that the value of the dynamic source object is 75%.');
+        System.assertEquals(25,dynSource2.sourceObj.get('GAU_Allocation_1_Percent__c'), 'This test asserts that the value of the constant GAU_Allocation_1_Percent is');
     }
 }

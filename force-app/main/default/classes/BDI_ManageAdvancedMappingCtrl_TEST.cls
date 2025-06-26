@@ -140,8 +140,8 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
         String namespace = nsWrapper.currentNamespace;
         namespace = namespace == '' ? null : namespace;
 
-        System.assertEquals(actualNamespace, namespace);
-        System.assertEquals(UTIL_Namespace.HARDCODED_NPSP_NAMESPACE, nsWrapper.npspNamespace);
+        System.assertEquals(actualNamespace, namespace, 'Asserts that the actual namespace is equal to the given namespace.');
+        System.assertEquals(UTIL_Namespace.HARDCODED_NPSP_NAMESPACE, nsWrapper.npspNamespace, 'Checks that the NPSP namespace is the same as the HARDCODED_');
     }
 
     /*******************************************************************************************************
@@ -151,7 +151,7 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
     static void shouldReturnDefaultDataImportFieldMappingSetName() {
         String defaultDataImportFieldMappingSetName = BDI_ManageAdvancedMappingCtrl.getFieldMappingSetName();
 
-        System.assertEquals(DEFAULT_FIELD_MAPPING_SET_NAME, defaultDataImportFieldMappingSetName);
+        System.assertEquals(DEFAULT_FIELD_MAPPING_SET_NAME, defaultDataImportFieldMappingSetName, 'This method will assert that the default field mapping set is the same as the one specified in');
     }
 
     /*******************************************************************************************************
@@ -171,7 +171,7 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
         BDI_ObjectMapping[] objectMappingWrappers =
             BDI_ManageAdvancedMappingCtrl.getObjectMappings();
 
-        System.assertEquals(defaultObjectMappings.size(), objectMappingWrappers.size());
+        System.assertEquals(defaultObjectMappings.size(), objectMappingWrappers.size(), 'Checks that the number of default object mappings and the number of object mapping wrappers is the same');
     }
 
     /*******************************************************************************************************
@@ -191,8 +191,8 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
         BDI_ManageAdvancedMappingCtrl.FieldInfo[] contactFieldInfos =
             BDI_ManageAdvancedMappingCtrl.getObjectFieldDescribes(CONTACT_OBJECT);
 
-        System.assertEquals(creatableAccountFields.size(), accountFieldInfos.size());
-        System.assertEquals(creatableContactFields.size(), contactFieldInfos.size());
+        System.assertEquals(creatableAccountFields.size(), accountFieldInfos.size(), 'Checks that the number of fields in the account fieldInfos is the same as the number of');
+        System.assertEquals(creatableContactFields.size(), contactFieldInfos.size(), 'Checks that the size of the creatableContactFields and contactFieldInfos are the same.');
     }
 
     /*******************************************************************************************************
@@ -222,7 +222,7 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
                 account1.DeveloperName,
                 fieldMappingSet.DeveloperName);
 
-        System.assertEquals(account1FieldMappings.size(), account1FieldMappingWrappers.size());
+        System.assertEquals(account1FieldMappings.size(), account1FieldMappingWrappers.size(), 'Checks that the number of mappings in the account1 field mappings is the same as the number');
     }
 
     /*******************************************************************************************************
@@ -239,7 +239,7 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
                 dataImportFieldMappingMdt,
                 Data_Import_Field_Mapping__mdt.class);
 
-        System.assert(fieldMapping != null);
+        System.assert(fieldMapping != null, 'This method is only used for testing.');
         System.assertEquals(
             'Account1 Test Field',
             fieldMapping.MasterLabel,
@@ -280,7 +280,7 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
                 dataImportObjectMapping,
                 Data_Import_Object_Mapping__mdt.class);
 
-        System.assert(objectMapping != null);
+        System.assert(objectMapping != null, 'This method is only used for testing.');
         System.assertEquals(
             'Account3',
             objectMapping.MasterLabel,
@@ -348,7 +348,7 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(BDI_ManageAdvancedMappingCtrl.deploymentEvents.size(), 1);
+        System.assertEquals(BDI_ManageAdvancedMappingCtrl.deploymentEvents.size(), 1, 'Test that the number of deployment events is equal to 1.');
     }
 
     /*******************************************************************************************************
@@ -382,7 +382,7 @@ private class BDI_ManageAdvancedMappingCtrl_TEST {
             BDI_ManageAdvancedMappingCtrl.flagFieldMappingsAsDeleted(account1.DeveloperName);
 
         for (Data_Import_Field_Mapping__mdt fieldMapping : deletedFieldMappings) {
-            System.assertEquals(fieldMapping.Is_Deleted__c, true);
+            System.assertEquals(fieldMapping.Is_Deleted__c, true, 'This method asserts that the field mapping is deleted.');
         }
     }
 

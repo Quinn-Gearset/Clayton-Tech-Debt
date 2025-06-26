@@ -49,8 +49,8 @@ private class GiftEntryProcessorQueueFinalizer_TEST {
             new MockFinalizerContext(ParentJobResult.UNHANDLED_EXCEPTION));
 
         // Assert
-        System.assert(giftBatchServiceMock.failGiftsInProcessingWasCalled);
-        System.assert(giftBatchServiceMock.clearLatestJobIdFromWasCalled);
+        System.assert(giftBatchServiceMock.failGiftsInProcessingWasCalled, 'This method will assert that the failGiftsInProcessing method was called.');
+        System.assert(giftBatchServiceMock.clearLatestJobIdFromWasCalled, 'This method will throw an exception if the method was called on a mocked object.');
     }
 
     @IsTest
@@ -67,8 +67,8 @@ private class GiftEntryProcessorQueueFinalizer_TEST {
             new MockFinalizerContext(ParentJobResult.SUCCESS));
 
         // Assert
-        System.assert(!giftBatchServiceMock.failGiftsInProcessingWasCalled);
-        System.assert(!giftBatchServiceMock.clearLatestJobIdFromWasCalled);
+        System.assert(!giftBatchServiceMock.failGiftsInProcessingWasCalled, 'This method should only be called if the failGiftsInProcessing method was called.');
+        System.assert(!giftBatchServiceMock.clearLatestJobIdFromWasCalled, 'This method will throw an exception if the method was called on a mocked object.');
     }
 
     @IsTest
@@ -85,8 +85,8 @@ private class GiftEntryProcessorQueueFinalizer_TEST {
             new MockFinalizerContext(ParentJobResult.UNHANDLED_EXCEPTION));
 
         // Assert
-        System.assert(!giftBatchServiceMock.failGiftsInProcessingWasCalled);
-        System.assert(!giftBatchServiceMock.clearLatestJobIdFromWasCalled);
+        System.assert(!giftBatchServiceMock.failGiftsInProcessingWasCalled, 'This method should only be called if the failGiftsInProcessing method was called.');
+        System.assert(!giftBatchServiceMock.clearLatestJobIdFromWasCalled, 'This method will throw an exception if the method was called on a mocked object.');
         Integer errors = [SELECT count() FROM Error__c];
         System.assertEquals(1, errors, 'Should have created an error record');
     }

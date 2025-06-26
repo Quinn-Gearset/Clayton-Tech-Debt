@@ -47,8 +47,8 @@ public with sharing class USER_UserService_TEST {
 
         Map<Id, Boolean> userIdToIsSysAdmin = USER_UserService.isSysAdmin(newUsers);
 
-        System.assertEquals(true, userIdToIsSysAdmin.get(newUsers[0].Id));
-        System.assertEquals(true, userIdToIsSysAdmin.get(newUsers[1].Id));
+        System.assertEquals(true, userIdToIsSysAdmin.get(newUsers[0].Id), 'Checks if the user is a system admin.');
+        System.assertEquals(true, userIdToIsSysAdmin.get(newUsers[1].Id), 'Checks if the user is the system admin.');
     }
 
 
@@ -61,8 +61,8 @@ public with sharing class USER_UserService_TEST {
 
         Map<Id, Boolean> userIdToIsActive = USER_UserService.isActiveUser(newUsers);
 
-        System.assertEquals(true, userIdToIsActive.get(newUsers[0].Id));
-        System.assertEquals(false, userIdToIsActive.get(newUsers[1].Id));
+        System.assertEquals(true, userIdToIsActive.get(newUsers[0].Id), 'Checks that the user is active.');
+        System.assertEquals(false, userIdToIsActive.get(newUsers[1].Id), 'Checks that the user is active.');
     }
 
     /**
@@ -117,7 +117,7 @@ public with sharing class USER_UserService_TEST {
         Test.stopTest();
 
         Error_Settings__c errorSettingsSysAdmin = UTIL_CustomSettingsFacade.getErrorSettings();
-        System.assertEquals(ERR_Notifier.ERROR_NOTIFICATION_RECIPIENT_ALL_SYS_ADMINS, errorSettingsSysAdmin.Error_Notifications_To__c);
+        System.assertEquals(ERR_Notifier.ERROR_NOTIFICATION_RECIPIENT_ALL_SYS_ADMINS, errorSettingsSysAdmin.Error_Notifications_To__c, 'Checks that the system - wide error notifications are available.');
     }
 
 
@@ -140,7 +140,7 @@ public with sharing class USER_UserService_TEST {
         Test.stopTest();
 
         Error_Settings__c errorSettingsSysAdmin = UTIL_CustomSettingsFacade.getErrorSettings();
-        System.assertEquals(ERR_Notifier.ERROR_NOTIFICATION_RECIPIENT_ALL_SYS_ADMINS, errorSettingsSysAdmin.Error_Notifications_To__c);
+        System.assertEquals(ERR_Notifier.ERROR_NOTIFICATION_RECIPIENT_ALL_SYS_ADMINS, errorSettingsSysAdmin.Error_Notifications_To__c, 'Checks that the system - wide error notifications are available.');
     }
 
 
@@ -173,8 +173,8 @@ public with sharing class USER_UserService_TEST {
         Test.stopTest();
 
         List<Error__c> retrievedErrorAfterEmailSent = getErrors();
-        System.assertNotEquals(null, retrievedErrorAfterEmailSent);
-        System.assertEquals(true, retrievedErrorAfterEmailSent[0].Email_Sent__c);
+        System.assertNotEquals(null, retrievedErrorAfterEmailSent, 'This method asserts that the retrieved error is not null.');
+        System.assertEquals(true, retrievedErrorAfterEmailSent[0].Email_Sent__c, 'Checks that the retrievedErrorAfterEmailSent property is true.');
     }
 
 
@@ -189,8 +189,8 @@ public with sharing class USER_UserService_TEST {
         Test.stopTest();
 
         List<Error__c> retrievedErrorAfterEmailSent = getErrors();
-        System.assertEquals(Label.InactiveScheduledJobsOwnerErrMsg, retrievedErrorAfterEmailSent[0].Full_Message__c);
-        System.assertEquals(true, retrievedErrorAfterEmailSent[0].Email_Sent__c);
+        System.assertEquals(Label.InactiveScheduledJobsOwnerErrMsg, retrievedErrorAfterEmailSent[0].Full_Message__c, 'Checks that the last retrieved job is inactive and that the last job is not scheduled.');
+        System.assertEquals(true, retrievedErrorAfterEmailSent[0].Email_Sent__c, 'Checks that the retrievedErrorAfterEmailSent property is true.');
     }
 
 
@@ -205,7 +205,7 @@ public with sharing class USER_UserService_TEST {
         Test.stopTest();
 
         List<Error__c> retrievedError = getErrors();
-        System.assertEquals(Label.InactiveScheduledJobsOwnerErrMsg, retrievedError[0].Full_Message__c);
+        System.assertEquals(Label.InactiveScheduledJobsOwnerErrMsg, retrievedError[0].Full_Message__c, 'This is a test to make sure that the label of the inactive scheduled jobs owner error message');
     }
 
 
@@ -222,7 +222,7 @@ public with sharing class USER_UserService_TEST {
         Test.stopTest();
 
         List<Error__c> retrievedErrorAfterEmailSent = getErrors();
-        System.assertEquals(true, retrievedErrorAfterEmailSent[0].Email_Sent__c);
+        System.assertEquals(true, retrievedErrorAfterEmailSent[0].Email_Sent__c, 'Checks that the retrievedErrorAfterEmailSent property is true.');
     }
 
     /**
@@ -233,10 +233,10 @@ public with sharing class USER_UserService_TEST {
     private static void testLEX() {
 
         if (USER_UserService.isUserRunningLightning()) {
-            System.assertEquals(true, USER_UserService.isUserRunningLightning());
+            System.assertEquals(true, USER_UserService.isUserRunningLightning(), 'Checks that the user is running lightning.');
         }
-        System.assertEquals(false, USER_UserService.isUserRunningMobile());
-        System.assertNotEquals(null, USER_UserService.getLightningBaseURL('Test'));
+        System.assertEquals(false, USER_UserService.isUserRunningMobile(), 'Checks if the current user is a mobile user.');
+        System.assertNotEquals(null, USER_UserService.getLightningBaseURL('Test'), 'This method is used to check that the Lightning API URL is not null.');
     }
 
     /**
@@ -247,7 +247,7 @@ public with sharing class USER_UserService_TEST {
         User sysAdmin = UTIL_UnitTestData_TEST.createUser(UTIL_Profile.SYSTEM_ADMINISTRATOR);
 
         System.runAs(sysAdmin) {
-            System.assertEquals(true, USER_UserService.isCustomizeApplicationUser());
+            System.assertEquals(true, USER_UserService.isCustomizeApplicationUser(), 'Checks if the user is a customize application user.');
         }
     }
 
@@ -260,7 +260,7 @@ public with sharing class USER_UserService_TEST {
         User readOnlyUser = UTIL_UnitTestData_TEST.createUser(UTIL_UnitTestData_TEST.PROFILE_READONLY_USER);
 
         System.runAs(readOnlyUser) {
-            System.assertEquals(false, USER_UserService.isCustomizeApplicationUser());
+            System.assertEquals(false, USER_UserService.isCustomizeApplicationUser(), 'Checks if the user is a customize application user.');
         }
     }
 
@@ -271,12 +271,12 @@ public with sharing class USER_UserService_TEST {
     @isTest
     private static void isCustomizeApplicationUserReturnsTrueWhenReadOnlyUserHasCustomizeAppPermissionSet() {
         User readOnlyUser = UTIL_UnitTestData_TEST.createUser(UTIL_UnitTestData_TEST.PROFILE_READONLY_USER);
-        SYstem.assertNotEquals(null, readOnlyUser.Id);
+        SYstem.assertNotEquals(null, readOnlyUser.Id, 'Assert that the current user is not null.');
 
         assignCustomizeApplicationPermissionSet(readOnlyUser.Id);
 
         System.runAs(readOnlyUser) {
-            System.assertEquals(true, USER_UserService.isCustomizeApplicationUser());
+            System.assertEquals(true, USER_UserService.isCustomizeApplicationUser(), 'Checks if the user is a customize application user.');
         }
     }
 

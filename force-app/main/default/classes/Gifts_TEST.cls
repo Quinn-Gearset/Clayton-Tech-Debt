@@ -136,7 +136,7 @@ private class Gifts_TEST {
         for (DataImport__c dataImport : gifts.giftsToUpdate.values()) {
             if (dataImport.Status__c == BDI_DataImport_API.bdiFailed) {
                 numberOfFailedGifts ++;
-                System.assertEquals(expectedFailureInformation, dataImport.FailureInformation__c);
+                System.assertEquals(expectedFailureInformation, dataImport.FailureInformation__c, 'Assert that the given failure information is equal to the given failure information.');
             }
 
             if (dataImport.Status__c == BDI_DataImport_API.bdiProcessing) {
@@ -144,8 +144,8 @@ private class Gifts_TEST {
             }
         }
 
-        System.assertEquals(2, numberOfFailedGifts);
-        System.assertEquals(3, numberOfProcessingGifts);
+        System.assertEquals(2, numberOfFailedGifts, 'Asserts that the number of failed gifts is equal to the number of failed gift');
+        System.assertEquals(3, numberOfProcessingGifts, 'Checks that the number of processing gifts is equal to the number of processing gift');
     }
 
     @isTest
@@ -161,7 +161,7 @@ private class Gifts_TEST {
         gifts.paymentIntegrationServiceConfig = stubFor(integrationServiceConfigMock);
 
         gifts.prepareForProcessing();
-        System.assertEquals(5, gifts.giftsToUpdate.size());
+        System.assertEquals(5, gifts.giftsToUpdate.size(), 'Checks that the number of gifts in the gifts list is equal to 5');
 
         Integer numberOfFailedGifts = 0;
         Integer numberOfProcessingGifts = 0;
@@ -175,8 +175,8 @@ private class Gifts_TEST {
             }
         }
 
-        System.assertEquals(0, numberOfFailedGifts);
-        System.assertEquals(5, numberOfProcessingGifts);
+        System.assertEquals(0, numberOfFailedGifts, 'Asserts that the number of failed gifts is equal to the number of failed gift');
+        System.assertEquals(5, numberOfProcessingGifts, 'Checks that the number of processing gifts is equal to the number of processing gift');
     }
 
     @isTest
@@ -198,8 +198,8 @@ private class Gifts_TEST {
 
         Gifts gifts = new Gifts(dummyGifts);
 
-        System.assertEquals(dummyGifts.size(), gifts.all().size());
-        System.assertEquals(2, gifts.elevateBatchIds()?.size());
+        System.assertEquals(dummyGifts.size(), gifts.all().size(), 'Assert that the number of dummy gifts is the same as the number of gift');
+        System.assertEquals(2, gifts.elevateBatchIds()?.size(), 'Assert that the number of batched gifts is equal to 2.');
     }
 
     @isTest
@@ -210,9 +210,9 @@ private class Gifts_TEST {
         Gifts gifts = new Gifts(dummyAuthorizedGifts);
         gifts.authorizedToPaymentProcessingStatus();
 
-        System.assertEquals(10, gifts.giftsToUpdate.size());
+        System.assertEquals(10, gifts.giftsToUpdate.size(), 'Checks that the number of gifts in the gifts list is equal to 10');
         for (DataImport__c gift : gifts.giftsToUpdate.values()) {
-            System.assertEquals(ElevateTransactionStatus.PAYMENTPROCESSING.name(), gift.Payment_Status__c);
+            System.assertEquals(ElevateTransactionStatus.PAYMENTPROCESSING.name(), gift.Payment_Status__c, 'This method is used to assert that the payment processing status of an Elevate transaction');
         }
     }
 
@@ -227,10 +227,10 @@ private class Gifts_TEST {
         Gifts gifts = new Gifts(dummyAuthorizedGifts);
         gifts.failGiftsByElevateBatchIdWithReason(buildFailReasonByElevateBatchId(numberOfFailedGifts, elevateBatchId));
 
-        System.assertEquals(numberOfFailedGifts, gifts.giftsToUpdate.size());
+        System.assertEquals(numberOfFailedGifts, gifts.giftsToUpdate.size(), 'Checks that the number of failed gifts is the same as the number of gift');
         for (DataImport__c gift : gifts.giftsToUpdate.values()) {
-            System.assertEquals(ElevateTransactionStatus.RETRYABLEERROR.name(), gift.Payment_Status__c);
-            System.assertEquals('DUMMY FAIL REASON', gift.FailureInformation__c);
+            System.assertEquals(ElevateTransactionStatus.RETRYABLEERROR.name(), gift.Payment_Status__c, 'This test asserts that the payment status is retryable error.');
+            System.assertEquals('DUMMY FAIL REASON', gift.FailureInformation__c, 'This is a hack to avoid the test code that is not used in the code.');
         }
     }
 
@@ -241,8 +241,8 @@ private class Gifts_TEST {
 
         Gifts gifts = new Gifts(mockedGiftBatchId, stubFor(giftSelectorMock));
 
-        System.assertEquals(2, gifts.size());
-        System.assertEquals(2, gifts.all().size());
+        System.assertEquals(2, gifts.size(), 'Asserts that 2 gifts are in the list.');
+        System.assertEquals(2, gifts.all().size(), 'Asserts that 2 gifts are in the cache.');
     }
 
     @isTest
@@ -254,8 +254,8 @@ private class Gifts_TEST {
         Gift dummyGift0 = gifts.findBy(new GiftId(DUMMY_GIFT_ID_0));
         Gift dummyGift1 = gifts.findBy(new GiftId(DUMMY_GIFT_ID_1));
 
-        System.assertEquals('Dummy First Name 0', dummyGift0.fields().get(CONTACT1_FIRST_NAME));
-        System.assertEquals('Dummy First Name 1', dummyGift1.fields().get(CONTACT1_FIRST_NAME));
+        System.assertEquals('Dummy First Name 0', dummyGift0.fields().get(CONTACT1_FIRST_NAME), 'This test asserts that the first name of the contact is the same as the first name of');
+        System.assertEquals('Dummy First Name 1', dummyGift1.fields().get(CONTACT1_FIRST_NAME), 'Dummy First Name 1 is the first name of the contact.');
     }
 
     @isTest
@@ -267,8 +267,8 @@ private class Gifts_TEST {
         Gift dummyGift0 = gifts.findBy(new GiftId(DUMMY_GIFT_ID_0));
         Gift dummyGift1 = gifts.findBy(new GiftId(DUMMY_GIFT_ID_1));
 
-        System.assertEquals(null, dummyGift0.fields().get(CONTACT1_FIRST_NAME));
-        System.assertEquals(null, dummyGift1.fields().get(CONTACT1_FIRST_NAME));
+        System.assertEquals(null, dummyGift0.fields().get(CONTACT1_FIRST_NAME), 'The first name of the contact.');
+        System.assertEquals(null, dummyGift1.fields().get(CONTACT1_FIRST_NAME), 'The first name of the contact.');
     }
 
     @isTest
@@ -284,7 +284,7 @@ private class Gifts_TEST {
 
         Gift dummyGift0 = gifts.findBy(new GiftId(DUMMY_GIFT_ID_0));
         String failureInformationField = String.valueOf(DataImport__c.FailureInformation__c);
-        System.assertEquals('Something went wrong!', dummyGift0.fields().get(failureInformationField));
+        System.assertEquals('Something went wrong!', dummyGift0.fields().get(failureInformationField), 'This is a test case. It is not a good idea to do this but it s');
     }
 
     @isTest
@@ -303,7 +303,7 @@ private class Gifts_TEST {
 
         Gift testGift = gifts.findBy(new GiftId(testDataImport.Id));
         String statusField = String.valueOf(DataImport__c.Status__c);
-        System.assertEquals(testGift.fields().get(statusField), BDI_DataImport_API.bdiProcessing);
+        System.assertEquals(testGift.fields().get(statusField), BDI_DataImport_API.bdiProcessing, 'Checks that the status field is the same as the BDI processing status.');
     }
 
     @IsTest
@@ -327,7 +327,7 @@ private class Gifts_TEST {
         List<Gift> processingGifts = gifts.standardGiftsInProcessing();
         Test.stopTest();
 
-        System.assertEquals(1 ,processingGifts.size());
+        System.assertEquals(1 ,processingGifts.size(), 'Checks that the number of processing gifts is equal to 1.');
     }
 
 

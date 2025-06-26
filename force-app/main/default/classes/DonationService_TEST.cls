@@ -44,9 +44,9 @@ private class DonationService_TEST {
 
         DonationsView donationView = donationService.getDonationsView(DUMMY_ORG_ID);
 
-        System.assertEquals(2, donationView.donations.size());
-        System.assertEquals(3, donationView.donations[0].unpaidPayments.size());
-        System.assertEquals(0, donationView.donations[1].unpaidPayments.size());
+        System.assertEquals(2, donationView.donations.size(), 'Asserts that 2 donations are visible.');
+        System.assertEquals(3, donationView.donations[0].unpaidPayments.size(), 'This method is used to check the number of unpaid payments in the donation view.');
+        System.assertEquals(0, donationView.donations[1].unpaidPayments.size(), 'This method asserts that the number of unpaid payments in the donation view is equal to');
     }
 
     private class DonationSelectorMock implements StubProvider {

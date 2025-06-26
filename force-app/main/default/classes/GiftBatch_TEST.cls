@@ -39,16 +39,16 @@ private class GiftBatch_TEST {
         giftBatch.gifts = authorizedGifts;
         ElevateBatchServiceMock elevateBatchServiceMock = new ElevateBatchServiceMock();
 
-        System.assert(authorizedGifts.giftsToUpdate.size() == 0);
+        System.assert(authorizedGifts.giftsToUpdate.size() == 0, 'This method is called when the user is not authorized to update the gifts.');
 
         giftBatch.elevateBatchService = stubFor(elevateBatchServiceMock);
         giftBatch.giftBatchId = DUMMY_GIFT_BATCH_ID;
         giftBatch.captureAuthorizedGifts();
 
-        System.assert(elevateBatchServiceMock.enqueuePaymentCaptureJobForCalled);
-        System.assert(authorizedGifts.giftsToUpdate.size() == numberOfGifts);
+        System.assert(elevateBatchServiceMock.enqueuePaymentCaptureJobForCalled, 'Enqueue a capture job for a payment.');
+        System.assert(authorizedGifts.giftsToUpdate.size() == numberOfGifts, 'Checks that the number of gifts is the same as the number of authorized gift');
         for (DataImport__c gift : authorizedGifts.giftsToUpdate.values()) {
-            System.assertEquals(ElevateTransactionStatus.PAYMENTPROCESSING.name(), gift.Payment_Status__c);
+            System.assertEquals(ElevateTransactionStatus.PAYMENTPROCESSING.name(), gift.Payment_Status__c, 'This method is used to assert that the payment processing status of an Elevate transaction');
         }
     }
 
@@ -60,15 +60,15 @@ private class GiftBatch_TEST {
         giftBatch.gifts = authorizedGifts;
         ElevateBatchServiceMock elevateBatchServiceMock = new ElevateBatchServiceMock();
 
-        System.assert(authorizedGifts.giftsToUpdate.size() == 0);
+        System.assert(authorizedGifts.giftsToUpdate.size() == 0, 'This method is called when the user is not authorized to update the gifts.');
 
         giftBatch.elevateBatchService = stubFor(elevateBatchServiceMock);
         giftBatch.failGiftsWithReason(buildFailReasonByElevateBatchId(numberOfGifts));
 
-        System.assert(authorizedGifts.giftsToUpdate.size() == numberOfGifts);
+        System.assert(authorizedGifts.giftsToUpdate.size() == numberOfGifts, 'Checks that the number of gifts is the same as the number of authorized gift');
         for (DataImport__c gift : authorizedGifts.giftsToUpdate.values()) {
-            System.assertEquals(ElevateTransactionStatus.RETRYABLEERROR.name(), gift.Payment_Status__c);
-            System.assertEquals('DUMMY FAIL REASON', gift.FailureInformation__c);
+            System.assertEquals(ElevateTransactionStatus.RETRYABLEERROR.name(), gift.Payment_Status__c, 'This test asserts that the payment status is retryable error.');
+            System.assertEquals('DUMMY FAIL REASON', gift.FailureInformation__c, 'This is a hack to avoid the test code that is not used in the code.');
         }
     }
 
@@ -84,8 +84,8 @@ private class GiftBatch_TEST {
         GiftBatch giftBatch = new GiftBatch();
         giftBatch.totals = totals;
 
-        System.assertEquals(10, giftBatch.totals().get('TOTAL'));
-        System.assertEquals(350.50, giftBatch.totalDonations().amount());
+        System.assertEquals(10, giftBatch.totals().get('TOTAL'), 'Test for equality of the total number of gift batches.');
+        System.assertEquals(350.50, giftBatch.totalDonations().amount(), 'This test asserts that the total number of donations in the batch is equal to 350');
     }
 
     @isTest
@@ -93,7 +93,7 @@ private class GiftBatch_TEST {
         GiftBatch giftBatch = new GiftBatch();
         giftBatch.giftTemplate = createDummyGiftTemplate(true);
 
-        System.assertEquals(true, giftBatch.hasElevateWidget());
+        System.assertEquals(true, giftBatch.hasElevateWidget(), 'Checks that the gift batch contains an elevate widget.');
     }
 
     @isTest
@@ -101,7 +101,7 @@ private class GiftBatch_TEST {
         GiftBatch giftBatch = new GiftBatch();
         giftBatch.giftTemplate = createDummyGiftTemplate(false);
 
-        System.assertEquals(false, giftBatch.hasElevateWidget());
+        System.assertEquals(false, giftBatch.hasElevateWidget(), 'Checks that the gift batch has an elevate widget.');
     }
 
     @isTest
@@ -110,7 +110,7 @@ private class GiftBatch_TEST {
         GiftBatch giftBatch = new GiftBatch();
         giftBatch.gifts = gifts;
 
-        System.assertEquals(3, giftBatch.gifts().size());
+        System.assertEquals(3, giftBatch.gifts().size(), 'Test that the number of gifts in the batch is equal to 3.');
     }
 
     @isTest
@@ -126,17 +126,17 @@ private class GiftBatch_TEST {
         GiftBatch giftBatch = new GiftBatch();
         giftBatch.batch = dummyDataImportBatch;
 
-        System.assertEquals('DUMMY_GIFT_BATCH_NAME', giftBatch.name());
-        System.assertEquals(false, giftBatch.requireTotalMatch());
-        System.assertEquals(5, giftBatch.expectedCountOfGifts());
-        System.assertEquals(100.25, giftBatch.expectedTotalBatchAmount());
-        System.assertEquals('[dummy_batch_table_columns]', giftBatch.batchTableColumns());
+        System.assertEquals('DUMMY_GIFT_BATCH_NAME', giftBatch.name(), 'DUMMY_GIFT_BATCH_NAME is a dummy string.');
+        System.assertEquals(false, giftBatch.requireTotalMatch(), 'Checks that the total number of requests is equal to the total number of requests in the batch');
+        System.assertEquals(5, giftBatch.expectedCountOfGifts(), 'Test for the number of expected gifts.');
+        System.assertEquals(100.25, giftBatch.expectedTotalBatchAmount(), 'The expected total batch amount is 100%.');
+        System.assertEquals('[dummy_batch_table_columns]', giftBatch.batchTableColumns(), 'Dummy batch table columns.');
 
         DateTime expectedLastModifiedDate = dummyDataImportBatch.LastModifiedDate;
-        System.assertEquals(expectedLastModifiedDate, giftBatch.lastModifiedDate());
+        System.assertEquals(expectedLastModifiedDate, giftBatch.lastModifiedDate(), 'Asserts that the last modified date of the batch is equal to the one provided.');
 
         if (!UserInfo.isMultiCurrencyOrganization()) {
-            System.assertEquals(UserInfo.getDefaultCurrency(), giftBatch.currencyIsoCode());
+            System.assertEquals(UserInfo.getDefaultCurrency(), giftBatch.currencyIsoCode(), 'This method is used to assert that the default currency is the same as the one in the');
         }
     }
 
@@ -153,12 +153,12 @@ private class GiftBatch_TEST {
         Gift dummyGift = new Gift(dummyDataImport);
         GiftBatch dummyGiftBatch = new GiftBatch();
 
-        System.assertEquals(0, dummyGiftBatch.gifts().size());
+        System.assertEquals(0, dummyGiftBatch.gifts().size(), 'Test that the number of gifts in the batch is equal to zero.');
 
         dummyGiftBatch.add(dummyGift);
 
-        System.assertEquals(1, dummyGiftBatch.gifts().size());
-        System.assertEquals(3, dummyGiftBatch.gifts().findBy(new GiftId(dummyGift.id())).softCredits().size());
+        System.assertEquals(1, dummyGiftBatch.gifts().size(), 'Test that the number of gifts in the batch is equal to 1.');
+        System.assertEquals(3, dummyGiftBatch.gifts().findBy(new GiftId(dummyGift.id())).softCredits().size(), 'This method is used to test if the number of soft credits in the gift batch');
     }
 
     @IsTest
@@ -172,16 +172,16 @@ private class GiftBatch_TEST {
             .withStatus(UTIL_BatchJobService.ApexJobStatus.ABORTED.name())
             .build();
 
-        System.assert(giftBatch.canBeEnqueued());
-        System.assert(giftBatch.hasStandardGiftsToResolve());
+        System.assert(giftBatch.canBeEnqueued(), 'This method asserts that the gift batch can be enqueued.');
+        System.assert(giftBatch.hasStandardGiftsToResolve(), 'This method is called when there are standard Gifts to resolve.');
 
         giftBatch.resolveStandardGiftsRemainingInProcessing();
 
-        System.assertEquals(1, giftBatch.gifts.giftsToUpdate.size());
+        System.assertEquals(1, giftBatch.gifts.giftsToUpdate.size(), 'This method asserts that the number of gifts in the batch has been updated.');
 
         for(DataImport__c gift : giftBatch.gifts.giftsToUpdate.values()) {
-            System.assert(gift.Status__c == BDI_DataImport_API.bdiFailed);
-            System.assertNotEquals(null, gift.FailureInformation__c);
+            System.assert(gift.Status__c == BDI_DataImport_API.bdiFailed, 'asserts that the BDI API is not failed');
+            System.assertNotEquals(null, gift.FailureInformation__c, 'This is a no - op for testing purposes.');
         }
     }
 
@@ -196,16 +196,16 @@ private class GiftBatch_TEST {
             .withStatus(UTIL_BatchJobService.ApexJobStatus.FAILED.name())
             .build();
 
-        System.assert(giftBatch.canBeEnqueued());
-        System.assert(giftBatch.hasStandardGiftsToResolve());
+        System.assert(giftBatch.canBeEnqueued(), 'This method asserts that the gift batch can be enqueued.');
+        System.assert(giftBatch.hasStandardGiftsToResolve(), 'This method is called when there are standard Gifts to resolve.');
 
         giftBatch.resolveStandardGiftsRemainingInProcessing();
 
-        System.assertEquals(1, giftBatch.gifts.giftsToUpdate.size());
+        System.assertEquals(1, giftBatch.gifts.giftsToUpdate.size(), 'This method asserts that the number of gifts in the batch has been updated.');
 
         for(DataImport__c gift : giftBatch.gifts.giftsToUpdate.values()) {
-            System.assert(gift.Status__c == BDI_DataImport_API.bdiFailed);
-            System.assertNotEquals(null, gift.FailureInformation__c);
+            System.assert(gift.Status__c == BDI_DataImport_API.bdiFailed, 'asserts that the BDI API is not failed');
+            System.assertNotEquals(null, gift.FailureInformation__c, 'This is a no - op for testing purposes.');
         }
     }
 
@@ -220,16 +220,16 @@ private class GiftBatch_TEST {
             .withStatus(UTIL_BatchJobService.ApexJobStatus.COMPLETED.name())
             .build();
 
-        System.assert(giftBatch.canBeEnqueued());
-        System.assert(giftBatch.hasStandardGiftsToResolve());
+        System.assert(giftBatch.canBeEnqueued(), 'This method asserts that the gift batch can be enqueued.');
+        System.assert(giftBatch.hasStandardGiftsToResolve(), 'This method is called when there are standard Gifts to resolve.');
 
         giftBatch.resolveStandardGiftsRemainingInProcessing();
 
-        System.assertEquals(1, giftBatch.gifts.giftsToUpdate.size());
+        System.assertEquals(1, giftBatch.gifts.giftsToUpdate.size(), 'This method asserts that the number of gifts in the batch has been updated.');
 
         for(DataImport__c gift : giftBatch.gifts.giftsToUpdate.values()) {
-            System.assert(gift.Status__c == BDI_DataImport_API.bdiFailed);
-            System.assertNotEquals(null, gift.FailureInformation__c);
+            System.assert(gift.Status__c == BDI_DataImport_API.bdiFailed, 'asserts that the BDI API is not failed');
+            System.assertNotEquals(null, gift.FailureInformation__c, 'This is a no - op for testing purposes.');
         }
     }
 
@@ -244,8 +244,8 @@ private class GiftBatch_TEST {
             .withStatus(UTIL_BatchJobService.ApexJobStatus.PROCESSING.name())
             .build();
 
-        System.assert(!giftBatch.canBeEnqueued());
-        System.assert(!giftBatch.hasStandardGiftsToResolve());
+        System.assert(!giftBatch.canBeEnqueued(), 'This method is called by the gift batch manager to ensure that the batch can be en');
+        System.assert(!giftBatch.hasStandardGiftsToResolve(), 'This method is called when there are no standard Gifts to resolve.');
     }
 
 

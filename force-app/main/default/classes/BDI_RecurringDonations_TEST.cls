@@ -236,61 +236,61 @@ private class BDI_RecurringDonations_TEST {
         }
 
         //RD with contact1 as donor and with donation being created at same time.
-        System.assertEquals(null,testDIResultA.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultA.Status__c);
-        System.assertNotEquals(null,testDIResultA.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultA.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDIResultA.RecurringDonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultA.RecurringDonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultA.DonationCampaignImported__c);
-        System.assertNotEquals(null,testDIResultA.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultA.DonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultA.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDIResultA.HomeAddressImported__c);
-        System.assertNotEquals(null,testDIResultA.GAU_Allocation_1_Imported__c);
-        System.assertNotEquals(null,testDIResultA.PaymentImported__c);
+        System.assertEquals(null,testDIResultA.FailureInformation__c, 'Test DI Result A.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultA.Status__c, 'Test if BDI_DataImport_API. bdiImported equals testDIResultA');
+        System.assertNotEquals(null,testDIResultA.Contact1Imported__c, 'Test DI result A.');
+        System.assertEquals(System.label.bdiCreated,testDIResultA.Contact1ImportStatus__c, 'Assert that the label of the Contact1ImportStatus is the same as the label of the');
+        System.assertNotEquals(null,testDIResultA.RecurringDonationImported__c, 'Test DI result A. RecurringDonationImported__c is not equal to null.');
+        System.assertEquals(System.label.bdiCreated,testDIResultA.RecurringDonationImportStatus__c, 'Assert that the label of the BDI created is the same as the RecurringDonation');
+        System.assertNotEquals(null,testDIResultA.DonationCampaignImported__c, 'Test DI result A. DonationCampaignImported__c.');
+        System.assertNotEquals(null,testDIResultA.DonationImported__c, 'Test DI result A does not have a value.');
+        System.assertEquals(System.label.bdiCreated,testDIResultA.DonationImportStatus__c, 'Assert that the label of the BDI created is the same as the label of the B');
+        System.assertNotEquals(null,testDIResultA.HouseholdAccountImported__c, 'Test DI result A does not contain the HouseholdAccountImported constant.');
+        System.assertNotEquals(null,testDIResultA.HomeAddressImported__c, 'Test DI result A does not have the same home address as the imported home address.');
+        System.assertNotEquals(null,testDIResultA.GAU_Allocation_1_Imported__c, 'This test is not a part of the testDI.');
+        System.assertNotEquals(null,testDIResultA.PaymentImported__c, 'Test DI result A.');
 
         //RD with Contact1 as donor, yearly schedule, and creation of new campaign
-        System.assertEquals(null,testDIResultB.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultB.Status__c);
-        System.assertNotEquals(null,testDIResultB.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultB.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDIResultB.RecurringDonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultB.RecurringDonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultB.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultB.DonationCampaignImportStatus__c);
-        System.assertEquals('Contact1',testDIResultB.Donation_Donor__c); //should have been defaulted
-        System.assertEquals(null,testDIResultB.DonationImported__c);
-        System.assertEquals(null,testDIResultB.DonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultB.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDIResultB.HomeAddressImported__c);
+        System.assertEquals(null,testDIResultB.FailureInformation__c, 'Test DI Tests for equality.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultB.Status__c, 'This test is done to assert that the BDI_DataImport_API. bdi');
+        System.assertNotEquals(null,testDIResultB.Contact1Imported__c, 'This test asserts that Contact1Imported__c is not null.');
+        System.assertEquals(System.label.bdiCreated,testDIResultB.Contact1ImportStatus__c, 'Assert that the label of the Contact1ImportStatus is the same as the label of the');
+        System.assertNotEquals(null,testDIResultB.RecurringDonationImported__c, 'This method is called by testDIResultB. RecurringDonationImported__c.');
+        System.assertEquals(System.label.bdiCreated,testDIResultB.RecurringDonationImportStatus__c, 'Assert that the label of the system is the same as the RecurringDonationImportStatus');
+        System.assertNotEquals(null,testDIResultB.DonationCampaignImported__c, 'This test fails if the donation campaign is imported.');
+        System.assertEquals(System.label.bdiCreated,testDIResultB.DonationCampaignImportStatus__c, 'Test DI Test DI Test DI label for the BDI created label');
+        System.assertEquals('Contact1',testDIResultB.Donation_Donor__c, 'Test DI Test for the presence of Contact1'); //should have been defaulted
+        System.assertEquals(null,testDIResultB.DonationImported__c, 'Test DI result b. DonationImported__c.');
+        System.assertEquals(null,testDIResultB.DonationImportStatus__c, 'Test DI result b. DonationImportStatus__c.');
+        System.assertNotEquals(null,testDIResultB.HouseholdAccountImported__c, 'Test DI result for the fact that HouseholdAccountImported is not null.');
+        System.assertNotEquals(null,testDIResultB.HomeAddressImported__c, 'This method asserts that the HomeAddressImported methods are not null.');
 
         //RD with Account 1 as donor 
-        System.assertEquals(null,testDIResultC.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultC.Status__c);
-        System.assertNotEquals(null,testDIResultC.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultC.Account1ImportStatus__c);
-        System.assertEquals(null,testDIResultC.DonationCampaignImported__c);
-        System.assertEquals(null,testDIResultC.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDIResultC.RecurringDonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultC.RecurringDonationImportStatus__c);
-        System.assertEquals(null,testDIResultC.DonationImported__c);
-        System.assertEquals(null,testDIResultC.DonationImportStatus__c);
-        System.assertEquals(null,testDIResultC.HouseholdAccountImported__c);
-        System.assertEquals(null,testDIResultC.HomeAddressImported__c);
+        System.assertEquals(null,testDIResultC.FailureInformation__c, 'Test DI result C failure information.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultC.Status__c, 'This test is done by checking that the BDI_DataImport_API. bdi');
+        System.assertNotEquals(null,testDIResultC.Account1Imported__c, 'Test DI result for Account1Imported.');
+        System.assertEquals(System.label.bdiCreated,testDIResultC.Account1ImportStatus__c, 'Test DI Test DI Test DI result C.');
+        System.assertEquals(null,testDIResultC.DonationCampaignImported__c, 'This test fails if the donation campaign is imported.');
+        System.assertEquals(null,testDIResultC.DonationCampaignImportStatus__c, 'This method asserts that the value of theDonationCampaignImportStatus property is equal to the');
+        System.assertNotEquals(null,testDIResultC.RecurringDonationImported__c, 'This method asserts that the RecurringDonationImported class is not null.');
+        System.assertEquals(System.label.bdiCreated,testDIResultC.RecurringDonationImportStatus__c, 'Assert that the label of the BDI created is the same as the RecurringDonation');
+        System.assertEquals(null,testDIResultC.DonationImported__c, 'Test DI result C. DonationImported is not a real object.');
+        System.assertEquals(null,testDIResultC.DonationImportStatus__c, 'Test DI result.');
+        System.assertEquals(null,testDIResultC.HouseholdAccountImported__c, 'Test DI result for HouseholdAccountImported.');
+        System.assertEquals(null,testDIResultC.HomeAddressImported__c, 'Test DI result C.');
 
         //RD with Account1 as donor, but no donor info
-        System.assertNotEquals(null,testDIResultD.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiFailed,testDIResultD.Status__c);
-        System.assertEquals(null,testDIResultD.Account1Imported__c);
-        System.assertEquals(null,testDIResultD.Account1ImportStatus__c);
-        System.assertEquals(null,testDIResultD.RecurringDonationImported__c);
+        System.assertNotEquals(null,testDIResultD.FailureInformation__c, 'This method asserts that the failure information is not null.');
+        System.assertEquals(BDI_DataImport_API.bdiFailed,testDIResultD.Status__c, 'This test asserts that the BDI_DataImport_API. bdiFailed equals test');
+        System.assertEquals(null,testDIResultD.Account1Imported__c, 'Test DI result for Account1Imported.');
+        System.assertEquals(null,testDIResultD.Account1ImportStatus__c, 'Test DI result for Account1ImportStatus.');
+        System.assertEquals(null,testDIResultD.RecurringDonationImported__c, 'Test DI result D. RecurringDonationImported__c.');
         System.assert(
-            testDIResultD.RecurringDonationImportStatus__c.contains(System.label.bdiErrorInvalidDonor));
-        System.assertEquals(null,testDIResultD.DonationImported__c);
-        System.assertEquals(null,testDIResultD.DonationImportStatus__c);
-        System.assertEquals(null,testDIResultD.HouseholdAccountImported__c);
-        System.assertEquals(null,testDIResultD.HomeAddressImported__c);
+            testDIResultD.RecurringDonationImportStatus__c.contains(System.label.bdiErrorInvalidDonor), 'This function should only be called if there is a RecurringDonationImportStatus_c');
+        System.assertEquals(null,testDIResultD.DonationImported__c, 'Test DI result D. DonationImported is a no - op.');
+        System.assertEquals(null,testDIResultD.DonationImportStatus__c, 'Test DI result D. DonationImportStatus__c.');
+        System.assertEquals(null,testDIResultD.HouseholdAccountImported__c, 'Test DI result for HouseholdAccountImported.');
+        System.assertEquals(null,testDIResultD.HomeAddressImported__c, 'Test for the presence of a home address imported.');
 
         npe03__Recurring_Donation__c rdA;
         npe03__Recurring_Donation__c rdB;
@@ -317,7 +317,7 @@ private class BDI_RecurringDonations_TEST {
                                                         npe03__Installments__c,
                                                         npe03__Total__c
                                                     FROM npe03__Recurring_Donation__c];
-        System.assertEquals(3,rdResults.size());
+        System.assertEquals(3,rdResults.size(), 'Checks that the number of results returned is equal to 3.');
 
         for (npe03__Recurring_Donation__c rd : rdResults){
             if (rd.Id == testDIResultA.RecurringDonationImported__c) {
@@ -329,41 +329,41 @@ private class BDI_RecurringDonations_TEST {
             }
         }
 
-        System.assertNotEquals(null,rdA);
-        System.assertEquals(testDIResultA.Contact1Imported__c, rdA.npe03__Contact__c);
-        System.assertEquals(100, rdA.npe03__Amount__c);
-        System.assertEquals(null,rdA.CommitmentId__c);
-        System.assertEquals(testDIResultA.HouseholdAccountImported__c,rdA.npe03__Organization__c);
-        System.assertEquals('Active',rdA.Status__c);
-        System.assertEquals('Monthly',rdA.npe03__Installment_Period__c);
-        System.assertEquals(testDIResultA.DonationCampaignImported__c,rdA.npe03__Recurring_Donation_Campaign__c);
-        System.assertEquals(testDIResultA.Recurring_Donation_Day_Of_Month__c,rdA.Day_Of_Month__c);
-        System.assertEquals(1,rdA.InstallmentFrequency__c);
-        System.assertEquals('2022',rdA.CardExpirationYear__c);
-        System.assertEquals('10',rdA.CardExpirationMonth__c);
-        System.assertEquals('1234',rdA.ACH_Last_4__c);
-        System.assertEquals('1234',rdA.CardLast4__c);
-        System.assertEquals(5,rdA.LastElevateVersionPlayed__c);
+        System.assertNotEquals(null,rdA, 'Assert that rdA is not null.');
+        System.assertEquals(testDIResultA.Contact1Imported__c, rdA.npe03__Contact__c, 'This test asserts that the imported Contact1 is the same as the imported Contactc.');
+        System.assertEquals(100, rdA.npe03__Amount__c, 'This test asserts that 100 is the same as the NPE03.');
+        System.assertEquals(null,rdA.CommitmentId__c, 'This method is used to assert that the CommitmentId is null.');
+        System.assertEquals(testDIResultA.HouseholdAccountImported__c,rdA.npe03__Organization__c, 'Test DI result A for the same Household Account Imported class as NPE03');
+        System.assertEquals('Active',rdA.Status__c, 'Assert that the status of the RADA is active.');
+        System.assertEquals('Monthly',rdA.npe03__Installment_Period__c, 'System. assertEquals returns true if the string is Monthly.');
+        System.assertEquals(testDIResultA.DonationCampaignImported__c,rdA.npe03__Recurring_Donation_Campaign__c, 'Test DI Result A. Donation Campaign Imported is equal to Recurring Doa Campaign');
+        System.assertEquals(testDIResultA.Recurring_Donation_Day_Of_Month__c,rdA.Day_Of_Month__c, 'Test for equality of Recurring Donation Day of Month and Day of Month');
+        System.assertEquals(1,rdA.InstallmentFrequency__c, 'This is a test function to assert that the installment frequency is equal to 1.');
+        System.assertEquals('2022',rdA.CardExpirationYear__c, 'Checks that the card expiration year is equal to 2022.');
+        System.assertEquals('10',rdA.CardExpirationMonth__c, 'Checks that the card expiration month is equal to 10.');
+        System.assertEquals('1234',rdA.ACH_Last_4__c, 'Test for equality of the string.');
+        System.assertEquals('1234',rdA.CardLast4__c, 'Test for equality of the string value of the RADA card last 4.');
+        System.assertEquals(5,rdA.LastElevateVersionPlayed__c, 'This is a test case for testing.');
 
-        System.assertNotEquals(null,rdB);
-        System.assertEquals(testDIResultB.Contact1Imported__c, rdB.npe03__Contact__c);
-        System.assertEquals(200, rdB.npe03__Amount__c);
-        System.assertEquals(null,rdB.CommitmentId__c);
-        System.assertEquals(testDIResultB.HouseholdAccountImported__c,rdB.npe03__Organization__c);
-        System.assertEquals(testDIResultB.DonationCampaignImported__c,rdB.npe03__Recurring_Donation_Campaign__c);
-        System.assertEquals('Active',rdB.Status__c);
-        System.assertEquals('Yearly',rdB.npe03__Installment_Period__c);
-        System.assertEquals(1,rdB.InstallmentFrequency__c);
+        System.assertNotEquals(null,rdB, 'Assert that rdB is not null.');
+        System.assertEquals(testDIResultB.Contact1Imported__c, rdB.npe03__Contact__c, 'This test asserts that the imported Contact1 and Contact2 are the same.');
+        System.assertEquals(200, rdB.npe03__Amount__c, 'This test asserts that the NPE03 value is 200.');
+        System.assertEquals(null,rdB.CommitmentId__c, 'This method is used to assert that the CommitmentId is null.');
+        System.assertEquals(testDIResultB.HouseholdAccountImported__c,rdB.npe03__Organization__c, 'This test asserts that the HouseholdAccountImported attribute is equal to the org.');
+        System.assertEquals(testDIResultB.DonationCampaignImported__c,rdB.npe03__Recurring_Donation_Campaign__c, 'This test asserts that the import of the Donation Campaign is imported.');
+        System.assertEquals('Active',rdB.Status__c, 'Assert that the status of the device is active.');
+        System.assertEquals('Yearly',rdB.npe03__Installment_Period__c, 'System. assertEquals returns a string representing the yearly installment period.');
+        System.assertEquals(1,rdB.InstallmentFrequency__c, 'This is a test function to assert that the installment frequency is equal to 1.');
 
-        System.assertNotEquals(null,rdC);
-        System.assertEquals(null, rdC.npe03__Contact__c);
-        System.assertEquals(300, rdC.npe03__Amount__c);
-        System.assertEquals(null,rdC.CommitmentId__c);
-        System.assertEquals(testDIResultC.Account1Imported__c,rdC.npe03__Organization__c);
-        System.assertEquals('Active',rdC.Status__c);
-        System.assertEquals('Monthly',rdC.npe03__Installment_Period__c);
-        System.assertEquals(testDIResultC.Recurring_Donation_Day_Of_Month__c,rdC.Day_Of_Month__c);
-        System.assertEquals(1,rdC.InstallmentFrequency__c);
+        System.assertNotEquals(null,rdC, 'Assert that the RDC is not null.');
+        System.assertEquals(null, rdC.npe03__Contact__c, 'This function asserts that the contacts are equal.');
+        System.assertEquals(300, rdC.npe03__Amount__c, 'This function asserts that the NPE03 value is equal to 300.');
+        System.assertEquals(null,rdC.CommitmentId__c, 'This method is used to assert that the CommitmentId is null.');
+        System.assertEquals(testDIResultC.Account1Imported__c,rdC.npe03__Organization__c, 'Test DI Tests for Account1Imported and Account1ImportedOrganization.');
+        System.assertEquals('Active',rdC.Status__c, 'Assert that the status of the device is active.');
+        System.assertEquals('Monthly',rdC.npe03__Installment_Period__c, 'System. assertEquals');
+        System.assertEquals(testDIResultC.Recurring_Donation_Day_Of_Month__c,rdC.Day_Of_Month__c, 'This test asserts that the Recurring Donation Day of Month is equal to the Day of');
+        System.assertEquals(1,rdC.InstallmentFrequency__c, 'This is a test function to assert that the installment frequency is equal to 1.');
 
         Allocation__c rdA1Alloc;
         Allocation__c opptA1Alloc;
@@ -387,12 +387,12 @@ private class BDI_RecurringDonations_TEST {
             }
         }
 
-        System.assertNotEquals(null,rdA1Alloc);
-        System.assertEquals(gau1.Id,rdA1Alloc.General_Accounting_Unit__c);
-        System.assertNotEquals(null,opptA1Alloc);
-        System.assertEquals(gau1.Id,opptA1Alloc.General_Accounting_Unit__c);
-        System.assertNotEquals(null,pymtA1Alloc);
-        System.assertEquals(gau1.Id,pymtA1Alloc.General_Accounting_Unit__c);
+        System.assertNotEquals(null,rdA1Alloc, 'This is a test for the presence of null and undefined.');
+        System.assertEquals(gau1.Id,rdA1Alloc.General_Accounting_Unit__c, 'This is a test to make sure that the gau1 alloc id is the same as');
+        System.assertNotEquals(null,opptA1Alloc, 'Assert that opptA1Alloc is not null.');
+        System.assertEquals(gau1.Id,opptA1Alloc.General_Accounting_Unit__c, 'This is a test to make sure that the gau1 alloc id is the same as');
+        System.assertNotEquals(null,pymtA1Alloc, 'Assert that the memory allocated by pymtA1Alloc is not null.');
+        System.assertEquals(gau1.Id,pymtA1Alloc.General_Accounting_Unit__c, 'This is a test to make sure that the gau1 alloc id is the same as');
 
         //Updating this DI to close RD
         DataImport__c diAUpdate = 
@@ -463,11 +463,11 @@ private class BDI_RecurringDonations_TEST {
             }
         }
         
-        System.assertEquals('Imported', testDIResultA2.Status__c);
-        System.assertEquals(System.Label.bdiUpdated,testDIResultA2.RecurringDonationImportStatus__c);
+        System.assertEquals('Imported', testDIResultA2.Status__c, 'Test DI result A2.');
+        System.assertEquals(System.Label.bdiUpdated,testDIResultA2.RecurringDonationImportStatus__c, 'Assert that the label of the BDI updated is the same as the label of the Re');
 
-        System.assertEquals('Imported', testDIResultB2.Status__c);
-        System.assertEquals(System.Label.bdiUpdated,testDIResultB2.RecurringDonationImportStatus__c);
+        System.assertEquals('Imported', testDIResultB2.Status__c, 'Test DI result b2 import status.');
+        System.assertEquals(System.Label.bdiUpdated,testDIResultB2.RecurringDonationImportStatus__c, 'Assert that the label of the BDI updated is the same as the label of the Re');
 
         npe03__Recurring_Donation__c rdA2;
         npe03__Recurring_Donation__c rdB2;
@@ -490,7 +490,7 @@ private class BDI_RecurringDonations_TEST {
                                                         npe03__Installments__c,
                                                         npe03__Total__c
                                                     FROM npe03__Recurring_Donation__c];
-        System.assertEquals(3,rdResults2.size());
+        System.assertEquals(3,rdResults2.size(), 'This test asserts that the number of results returned is equal to 3.');
 
         for (npe03__Recurring_Donation__c rd : rdResults2){
             if (rd.Id == testDIResultA.RecurringDonationImported__c) {
@@ -501,19 +501,19 @@ private class BDI_RecurringDonations_TEST {
                 rdC2 = rd;
             }
         }
-        System.assertNotEquals(null,rdA2);
-        System.assertEquals(100, rdA2.npe03__Amount__c);
-        System.assertEquals('No Longer Interested',rdA2.ClosedReason__c);
-        System.assertEquals(RD_STATUS_CLOSED, rdA2.Status__c);
-        System.assertEquals(testDIResultA.Contact1Imported__c, rdA2.npe03__Contact__c);
+        System.assertNotEquals(null,rdA2, 'This is a test function to ensure that the RDNs are not equal.');
+        System.assertEquals(100, rdA2.npe03__Amount__c, 'This test asserts that the NPE03 value is 100.');
+        System.assertEquals('No Longer Interested',rdA2.ClosedReason__c, 'This is a no - op for testing purposes.');
+        System.assertEquals(RD_STATUS_CLOSED, rdA2.Status__c, 'This is a test to assert that the read status is closed.');
+        System.assertEquals(testDIResultA.Contact1Imported__c, rdA2.npe03__Contact__c, 'This test asserts that the imported Contact1 and Contact2 are the same.');
 
-        System.assertNotEquals(null,rdB2);
-        System.assertEquals(250, rdB2.npe03__Amount__c);
+        System.assertNotEquals(null,rdB2, 'This is a test for the presence of null and not equals.');
+        System.assertEquals(250, rdB2.npe03__Amount__c, 'This test asserts that the NPE03 value is equal to 250.');
 
-        System.assertNotEquals(null,rdC2);
-        System.assertEquals(300, rdC2.npe03__Amount__c);
-        System.assertEquals('No Longer Interested',rdC2.ClosedReason__c);
-        System.assertEquals(RD_STATUS_CLOSED, rdC2.Status__c);
+        System.assertNotEquals(null,rdC2, 'This is a test case.');
+        System.assertEquals(300, rdC2.npe03__Amount__c, 'This test asserts that the NPE03 value is equal to 300.');
+        System.assertEquals('No Longer Interested',rdC2.ClosedReason__c, 'This is a no - op for testing purposes.');
+        System.assertEquals(RD_STATUS_CLOSED, rdC2.Status__c, 'This is a test to assert that the read - only status is closed.');
     }
 
     /*******************************************************************************************************
@@ -584,10 +584,10 @@ private class BDI_RecurringDonations_TEST {
                     WHERE Id =: testDI1.Id LIMIT 1];
 
 
-        System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, testDI1.Status__c);
-        System.assertEquals(null, testDI1.FailureInformation__c);
-        System.assertEquals(System.Label.bdiDryRunMatched,testDI1.Account1ImportStatus__c);
-        System.assertEquals(System.Label.bdiDryRunMatched,testDI1.RecurringDonationImportStatus__c);
+        System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, testDI1.Status__c, 'Test for the same value of bdiDryRunValidated.');
+        System.assertEquals(null, testDI1.FailureInformation__c, 'Test for equality of null and testDI1. FailureInformation.');
+        System.assertEquals(System.Label.bdiDryRunMatched,testDI1.Account1ImportStatus__c, 'Test for the presence of bdiDryRunMatched label.');
+        System.assertEquals(System.Label.bdiDryRunMatched,testDI1.RecurringDonationImportStatus__c, 'Test for the case where the bdi dry run is matched.');
 
 
         // Now run BDI on the DI record with dry run set to false to validate that the records are imported.
@@ -620,18 +620,18 @@ private class BDI_RecurringDonations_TEST {
                 WHERE Id =: testDI1.Id LIMIT 1];
 
         // Verify that the donation was imported and that the import status on the Recurring Donation is correct.
-        System.assertEquals('Imported', testDI1.Status__c);
-        System.assertNotEquals(null,testDI1.DonationImported__c);
-        System.assertEquals(null, testDI1.FailureInformation__c);
-        System.assertEquals(System.Label.bdiCreated,testDI1.DonationImportStatus__c);
-        System.assertEquals(System.Label.bdiMatched,testDI1.RecurringDonationImportStatus__c);
-        System.assertNotEquals(null,testDI1.RecurringDonationImported__c);
+        System.assertEquals('Imported', testDI1.Status__c, 'Test DI1. Status__c is imported.');
+        System.assertNotEquals(null,testDI1.DonationImported__c, 'TestDI1. DonationImported__c is not equal to testDI2. Don');
+        System.assertEquals(null, testDI1.FailureInformation__c, 'Test for equality of null and testDI1. FailureInformation.');
+        System.assertEquals(System.Label.bdiCreated,testDI1.DonationImportStatus__c, 'Test for the fact that the label of the BDI created is the same as the label');
+        System.assertEquals(System.Label.bdiMatched,testDI1.RecurringDonationImportStatus__c, 'Assert that the testDI1. RecurringDonationImportStatus__c label is matched');
+        System.assertNotEquals(null,testDI1.RecurringDonationImported__c, 'This test is not a realistic test. It is a realistic test. It is');
 
         // Query the opportunity to make sure it was correctly linked to the RD.
         Opportunity rdOppt1 = [SELECT Id, npe03__Recurring_Donation__c
                                 FROM Opportunity
                                 WHERE Id =: testDI1.DonationImported__c LIMIT 1];
 
-        System.assertEquals(testDI1.RecurringDonationImported__c,rdOppt1.npe03__Recurring_Donation__c);
+        System.assertEquals(testDI1.RecurringDonationImported__c,rdOppt1.npe03__Recurring_Donation__c, 'Test for equality of Recurring Donation imported and Recurring Donation imported.');
     }
 }

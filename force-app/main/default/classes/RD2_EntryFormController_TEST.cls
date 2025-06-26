@@ -163,8 +163,8 @@ private with sharing class RD2_EntryFormController_TEST {
         String period = view.record.recurringPeriod;
         Test.stopTest();
 
-        System.assertEquals('Account', donorType);
-        System.assertEquals('Monthly', period);
+        System.assertEquals('Account', donorType, 'Asserts that Account donorType is equal to Account.');
+        System.assertEquals('Monthly', period, 'Checks that the period is Monthly.');
     }
 
     /***
@@ -186,9 +186,9 @@ private with sharing class RD2_EntryFormController_TEST {
         Integer frequency = view.record.recurringFrequency;
         Test.stopTest();
 
-        System.assertEquals('Contact', donorType);
-        System.assertEquals('Weekly', period);
-        System.assertEquals(2, frequency);
+        System.assertEquals('Contact', donorType, 'Checks that the donorType is the same as the donorType');
+        System.assertEquals('Weekly', period, 'Checks that the period is equal to the weekly period.');
+        System.assertEquals(2, frequency, 'Assert that frequency is equal to 2.');
     }
 
     /**
@@ -812,18 +812,18 @@ private with sharing class RD2_EntryFormController_TEST {
 
         npe03__Recurring_Donation__c rd = req.toRecord();
 
-        System.assertEquals('15', rd.Day_of_Month__c);
-        System.assertEquals(fakeDate, rd.StartDate__c);
-        System.assertEquals(fakeDate2, rd.npe03__Date_Established__c);
-        System.assertEquals(1, rd.InstallmentFrequency__c);
-        System.assertEquals('123-456-789', rd.CommitmentId__c);
-        System.assertEquals(fakeCampaignId, rd.npe03__Recurring_Donation_Campaign__c);
-        System.assertEquals('Credit Card', rd.PaymentMethod__c);
-        System.assertEquals(5, rd.npe03__Amount__c);
-        System.assertEquals('2025', rd.CardExpirationYear__c);
-        System.assertEquals('2', rd.CardExpirationMonth__c);
-        System.assertEquals('Active', rd.Status__c);
-        System.assertEquals(fakeRdId, rd.Id);
+        System.assertEquals('15', rd.Day_of_Month__c, 'This file contains a description of the day of the month.');
+        System.assertEquals(fakeDate, rd.StartDate__c, 'This is a test function to assert that the date passed in is equal to the fake date');
+        System.assertEquals(fakeDate2, rd.npe03__Date_Established__c, 'See Date. npe03.');
+        System.assertEquals(1, rd.InstallmentFrequency__c, 'This is a test function to assert that the installment frequency is equal to 1.');
+        System.assertEquals('123-456-789', rd.CommitmentId__c, 'Assert that the commitment id is the same as the commitment id of the commit.');
+        System.assertEquals(fakeCampaignId, rd.npe03__Recurring_Donation_Campaign__c, 'This function will assert that the campaignId is the same as the fakeDonationCampaignId');
+        System.assertEquals('Credit Card', rd.PaymentMethod__c, 'This function asserts that the credit card is the same as the credit card.');
+        System.assertEquals(5, rd.npe03__Amount__c, 'This test asserts that 5 and 5 are equal.');
+        System.assertEquals('2025', rd.CardExpirationYear__c, 'The card expiration year is valid if it is a valid expiration year.');
+        System.assertEquals('2', rd.CardExpirationMonth__c, 'The card expiration month is 2.');
+        System.assertEquals('Active', rd.Status__c, 'Assert that the status of the receiver is active.');
+        System.assertEquals(fakeRdId, rd.Id, 'This is a test to make sure that the fake rd is the same as the one provided');
     }
 
 
@@ -929,9 +929,9 @@ private with sharing class RD2_EntryFormController_TEST {
 
         describeMock.setFieldType(DisplayType.DATE);
         saveRequest.toRecord();
-        System.assert(saveRequestHelperMockInstance.setRecurringDonationFieldCalled);
+        System.assert(saveRequestHelperMockInstance.setRecurringDonationFieldCalled, 'Set the Recurring Donation Field on the mocked request.');
         System.assert(saveRequestHelperMockInstance.paramValues()[2] instanceof Date ||
-                saveRequestHelperMockInstance.paramValues()[2] == null);
+                saveRequestHelperMockInstance.paramValues()[2] == null, 'This method is only used for testing.');
     }
 
     private static void testMapToDateTime(UTIL_DescribeMock describeMock,

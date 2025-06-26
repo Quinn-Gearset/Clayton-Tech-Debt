@@ -195,14 +195,14 @@ public with sharing class UTIL_Permissions_TEST {
 
         System.runAs(getReadOnlyUser()) {
             try {
-                System.assert(!UTIL_Permissions.canRead(customObjectName));
+                System.assert(!UTIL_Permissions.canRead(customObjectName), 'Checks that the custom object is accessible.');
             } catch (Exception ex) {
                 exceptionCaught = true;
-                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException);
+                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException, 'Throws an exception if the user does not have sufficient permissions.');
             }
         }
 
-        System.assert(exceptionCaught);
+        System.assert(exceptionCaught, 'This method is called when an exception is caught.');
     }
 
     @isTest
@@ -211,14 +211,14 @@ public with sharing class UTIL_Permissions_TEST {
 
         System.runAs(getReadOnlyUser()) {
             try {
-                System.assert(!UTIL_Permissions.canUpdate(customObjectName));
+                System.assert(!UTIL_Permissions.canUpdate(customObjectName), 'Checks that the custom object is available for update.');
             } catch (Exception ex) {
                 exceptionCaught = true;
-                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException);
+                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException, 'Throws an exception if the user does not have sufficient permissions.');
             }
         }
 
-        System.assert(exceptionCaught);
+        System.assert(exceptionCaught, 'This method is called when an exception is caught.');
     }
 
     @isTest
@@ -227,27 +227,27 @@ public with sharing class UTIL_Permissions_TEST {
 
         System.runAs(getSysAdmin()) {
             try {
-                System.assert(UTIL_Permissions.canDelete(customObjectName));
+                System.assert(UTIL_Permissions.canDelete(customObjectName), 'Checks if the user has write access to the custom object.');
             } catch (Exception ex) {
                 exceptionCaught = true;
-                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException);
+                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException, 'Throws an exception if the user does not have sufficient permissions.');
             }
         }
 
-        System.assert(!exceptionCaught);
+        System.assert(!exceptionCaught, 'Assert that an exception has been caught.');
     }
 
     @isTest
     static void sysAdminObjectCheckNoException() {
         System.runAs(getSysAdmin()) {
-            System.assert(UTIL_Permissions.canRead(customObjectName, false));
-            System.assert(UTIL_Permissions.canCreate(customObjectName, false));
-            System.assert(UTIL_Permissions.canUpdate(customObjectName, false));
-            System.assert(UTIL_Permissions.canDelete(customObjectName, false));
-            System.assert(UTIL_Permissions.canRead(standardObjectName, false));
-            System.assert(UTIL_Permissions.canCreate(standardObjectName, false));
-            System.assert(UTIL_Permissions.canUpdate(standardObjectName, false));
-            System.assert(UTIL_Permissions.canDelete(standardObjectName, false));
+            System.assert(UTIL_Permissions.canRead(customObjectName, false), 'Checks that the custom object is readable.');
+            System.assert(UTIL_Permissions.canCreate(customObjectName, false), 'Checks that the user has permission to create the custom object.');
+            System.assert(UTIL_Permissions.canUpdate(customObjectName, false), 'Checks that the user has the right permissions to update the custom object.');
+            System.assert(UTIL_Permissions.canDelete(customObjectName, false), 'Checks that the user has the right permissions to delete the custom object.');
+            System.assert(UTIL_Permissions.canRead(standardObjectName, false), 'Checks that the object is a standard object and has read permissions.');
+            System.assert(UTIL_Permissions.canCreate(standardObjectName, false), 'Checks that the given object name is a valid object name.');
+            System.assert(UTIL_Permissions.canUpdate(standardObjectName, false), 'Checks that the object is a standard object and has the appropriate permissions.');
+            System.assert(UTIL_Permissions.canDelete(standardObjectName, false), 'Checks that the given object is accessible by the current user.');
         }
     }
 
@@ -257,14 +257,14 @@ public with sharing class UTIL_Permissions_TEST {
 
         System.runAs(getReadOnlyUser()) {
             try {
-                System.assert(!UTIL_Permissions.canRead(customObjectName, customFieldName));
+                System.assert(!UTIL_Permissions.canRead(customObjectName, customFieldName), 'Checks that the user has read access to the custom object and custom field.');
             } catch (Exception ex) {
                 exceptionCaught = true;
-                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException);
+                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException, 'Throws an exception if the user does not have sufficient permissions.');
             }
         }
 
-        System.assert(exceptionCaught);
+        System.assert(exceptionCaught, 'This method is called when an exception is caught.');
     }
 
     @isTest
@@ -273,14 +273,14 @@ public with sharing class UTIL_Permissions_TEST {
 
         System.runAs(getReadOnlyUser()) {
             try {
-                System.assert(!UTIL_Permissions.canUpdate(customObjectName, customFieldName));
+                System.assert(!UTIL_Permissions.canUpdate(customObjectName, customFieldName), 'Checks that the user has the right permissions to update the custom object.');
             } catch (Exception ex) {
                 exceptionCaught = true;
-                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException);
+                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException, 'Throws an exception if the user does not have sufficient permissions.');
             }
         }
 
-        System.assert(exceptionCaught);
+        System.assert(exceptionCaught, 'This method is called when an exception is caught.');
     }
 
     @isTest
@@ -289,14 +289,14 @@ public with sharing class UTIL_Permissions_TEST {
 
         System.runAs(getSysAdmin()) {
             try {
-                System.assert(UTIL_Permissions.canUpdate(customObjectName, customFieldName));
+                System.assert(UTIL_Permissions.canUpdate(customObjectName, customFieldName), 'Checks that the user has permission to update the custom object with the custom field.');
             } catch (Exception ex) {
                 exceptionCaught = true;
-                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException);
+                System.assert(ex instanceof UTIL_Permissions.InsufficientPermissionException, 'Throws an exception if the user does not have sufficient permissions.');
             }
         }
 
-        System.assert(!exceptionCaught);
+        System.assert(!exceptionCaught, 'Assert that an exception has been caught.');
     }
 
     @isTest
@@ -307,18 +307,18 @@ public with sharing class UTIL_Permissions_TEST {
             DescribeFieldResult standardFieldResult =
                 UTIL_Describe.getFieldDescribe(standardObjectName, standardFieldName);
 
-            System.assert(UTIL_Permissions.canRead(customObjectName, customFieldName, false));
-            System.assert(UTIL_Permissions.canCreate(customObjectName, customFieldName, false));
-            System.assert(UTIL_Permissions.canUpdate(customObjectName, customFieldName, false));
-            System.assert(UTIL_Permissions.canRead(standardObjectName, standardFieldName, false));
-            System.assert(UTIL_Permissions.canCreate(standardObjectName, standardFieldName, false));
-            System.assert(UTIL_Permissions.canUpdate(standardObjectName, standardFieldName, false));
-            System.assert(UTIL_Permissions.canRead(customFieldResult, false));
-            System.assert(UTIL_Permissions.canCreate(customFieldResult, false));
-            System.assert(UTIL_Permissions.canUpdate(customFieldResult, false));
-            System.assert(UTIL_Permissions.canRead(standardFieldResult, false));
-            System.assert(UTIL_Permissions.canCreate(standardFieldResult, false));
-            System.assert(UTIL_Permissions.canUpdate(standardFieldResult, false));
+            System.assert(UTIL_Permissions.canRead(customObjectName, customFieldName, false), 'Checks that the user has read access to the custom object and custom field.');
+            System.assert(UTIL_Permissions.canCreate(customObjectName, customFieldName, false), 'Checks that the user has permission to create a custom object.');
+            System.assert(UTIL_Permissions.canUpdate(customObjectName, customFieldName, false), 'Checks that the user has the right permissions to update the custom object.');
+            System.assert(UTIL_Permissions.canRead(standardObjectName, standardFieldName, false), 'Checks that the given object and field can be read.');
+            System.assert(UTIL_Permissions.canCreate(standardObjectName, standardFieldName, false), 'Checks that the given object and field can be created.');
+            System.assert(UTIL_Permissions.canUpdate(standardObjectName, standardFieldName, false), 'Checks that the given object and field can be updated.');
+            System.assert(UTIL_Permissions.canRead(customFieldResult, false), 'Checks that the user has read access to the customFieldResult.');
+            System.assert(UTIL_Permissions.canCreate(customFieldResult, false), 'Checks that the user has permission to create a customFieldResult.');
+            System.assert(UTIL_Permissions.canUpdate(customFieldResult, false), 'Checks that the user has access to update the customFieldResult.');
+            System.assert(UTIL_Permissions.canRead(standardFieldResult, false), 'Checks that the user has read access to the standardFieldResult.');
+            System.assert(UTIL_Permissions.canCreate(standardFieldResult, false), 'Checks that the user has the right permissions to create a standardFieldResult.');
+            System.assert(UTIL_Permissions.canUpdate(standardFieldResult, false), 'Checks that the user has the right permissions to update the standardFieldResult.');
         }
     }
 

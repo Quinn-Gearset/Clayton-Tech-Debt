@@ -46,7 +46,7 @@ public class fflib_DynamicServiceFactoryTest
         Object instance = Service.newInstance(MY_SERVICE_TYPE);
         System.Test.stopTest();
 
-        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyService);
+        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyService, 'Check if the current instance is a MyService.');
     }
 
     @IsTest
@@ -61,7 +61,7 @@ public class fflib_DynamicServiceFactoryTest
         Object instance = Service.newInstance(MY_SERVICE_TYPE);
         System.Test.stopTest();
 
-        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyAltService);
+        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyAltService, 'Dereference if instance is a MyAltService');
     }
 
     @IsTest
@@ -77,7 +77,7 @@ public class fflib_DynamicServiceFactoryTest
         Object instance = Service.newInstance(MY_SERVICE_TYPE);
         System.Test.stopTest();
 
-        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyAltService);
+        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyAltService, 'Dereference if instance is a MyAltService');
     }
 
     @IsTest
@@ -89,7 +89,7 @@ public class fflib_DynamicServiceFactoryTest
         Object instance = Service.newInstance(MY_SERVICE_INTERFACE_TYPE);
         System.Test.stopTest();
 
-        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyService);
+        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyService, 'Check if the current instance is a MyService.');
     }
 
     @IsTest
@@ -101,7 +101,7 @@ public class fflib_DynamicServiceFactoryTest
         Object instance = Service.newInstance(MY_SERVICE_INTERFACE_TYPE);
         System.Test.stopTest();
 
-        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyAltService);
+        System.assert(instance instanceof fflib_DynamicServiceFactoryTest.MyAltService, 'Dereference if instance is a MyAltService');
     }
 
 

@@ -66,15 +66,15 @@ public with sharing class ERR_AddError_TEST {
         delete new Account[] {acc2, acc4};
         
         List<Database.Saveresult> results = Database.insert(contacts, false);
-        System.assertEquals(4, results.size());
+        System.assertEquals(4, results.size(), 'Assert that the number of results is equal to 4.');
         /* The failure of any of the contacts in the trigger, due to having a
          * null Account lookup, will cause an unhandled exception and the
          * entire trigger will be rolled back.  Every record will be marked as
          * an error with the message corresponding to the unhandled exception.
          */
-        System.assertEquals(false, results[0].isSuccess());
-        System.assertEquals(false, results[1].isSuccess());
-        System.assertEquals(false, results[2].isSuccess());
-        System.assertEquals(false, results[3].isSuccess());
+        System.assertEquals(false, results[0].isSuccess(), 'Assert that the result is false.');
+        System.assertEquals(false, results[1].isSuccess(), 'Assert that the result of the test is false.');
+        System.assertEquals(false, results[2].isSuccess(), 'Assert that the results are equal.');
+        System.assertEquals(false, results[3].isSuccess(), 'Assert that the result of the test is false.');
     }
 }

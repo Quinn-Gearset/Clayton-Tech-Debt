@@ -402,17 +402,17 @@ public class CRLP_RollupAccount_TEST {
 
         // Make sure everything is null first!
         if (tt != TestType.TestTrigger) {
-            System.assertEquals(0, hardCreditAcc.npo02__OppAmountThisYear__c);
-            System.assertEquals(0, hardCreditAcc.npo02__OppAmountLastYear__c);
-            System.assertEquals(0, hardCreditAcc.npo02__TotalOppAmount__c);
-            System.assertEquals(0, hardCreditAcc.npo02__AverageAmount__c);
-            System.assertEquals(0, hardCreditAcc.npo02__OppAmount2YearsAgo__c);
-            System.assertEquals(0, hardCreditAcc.npo02__LargestAmount__c);
-            System.assertEquals(0, hardCreditAcc.npo02__SmallestAmount__c);
-            System.assertEquals(null, hardCreditAcc.npo02__LastCloseDate__c);
-            System.assertEquals(null, hardCreditAcc.npo02__FirstCloseDate__c);
-            System.assertEquals(null, hardCreditAcc.npo02__Best_Gift_Year__c);
-            System.assertEquals(null, hardCreditAcc.Sic);
+            System.assertEquals(0, hardCreditAcc.npo02__OppAmountThisYear__c, 'This function is used to assert that the value of the OPP amount is 0.');
+            System.assertEquals(0, hardCreditAcc.npo02__OppAmountLastYear__c, 'This function is used to assert that the value of the OPP_AMOUNT_');
+            System.assertEquals(0, hardCreditAcc.npo02__TotalOppAmount__c, 'This function is used to assert that the total amount of OPPs is 0.');
+            System.assertEquals(0, hardCreditAcc.npo02__AverageAmount__c, 'This method is used to assert that the average amount of the hard credit is 0.');
+            System.assertEquals(0, hardCreditAcc.npo02__OppAmount2YearsAgo__c, 'This function is used to test if the amount of the opp is 0.');
+            System.assertEquals(0, hardCreditAcc.npo02__LargestAmount__c, 'This method asserts that the value of hardCreditAcc. largestAmount is equal to or greater');
+            System.assertEquals(0, hardCreditAcc.npo02__SmallestAmount__c, 'This function is used to assert that the value of the smallest amount is 0.');
+            System.assertEquals(null, hardCreditAcc.npo02__LastCloseDate__c, 'This method asserts that the last close date of the account is equal to the one provided.');
+            System.assertEquals(null, hardCreditAcc.npo02__FirstCloseDate__c, 'This method asserts that the value of this property is null.');
+            System.assertEquals(null, hardCreditAcc.npo02__Best_Gift_Year__c, 'This method is used to assert that the value of the Hard Credit Accumulator is the');
+            System.assertEquals(null, hardCreditAcc.Sic, 'Test if the hard credit account is equal to the Sic.');
         }
 
         // Now test the rollups to the Account from the Opportunity
@@ -441,14 +441,14 @@ public class CRLP_RollupAccount_TEST {
         hardCreditAcc = Database.query(hardCreditAccQuery);
 
         // Basic rollup asserts using existing NPSP rollup fields.
-        System.assertEquals(totalDonations, hardCreditAcc.npo02__TotalOppAmount__c);
-        System.assertEquals(totalDonations.divide(cnt, 2, System.RoundingMode.HALF_UP), hardCreditAcc.npo02__AverageAmount__c);
-        System.assertEquals(total2YearsAgo, hardCreditAcc.npo02__OppAmount2YearsAgo__c);
-        System.assertEquals(lastCloseDate, hardCreditAcc.npo02__LastCloseDate__c);
-        System.assertEquals(closeDate, hardCreditAcc.npo02__FirstCloseDate__c);
-        System.assertEquals(maxAmt, hardCreditAcc.npo02__LargestAmount__c);
-        System.assertEquals(baseAmt, hardCreditAcc.npo02__SmallestAmount__c);
-        System.assertEquals(bestGiftYear, hardCreditAcc.npo02__Best_Gift_Year__c);
+        System.assertEquals(totalDonations, hardCreditAcc.npo02__TotalOppAmount__c, 'This function is used to assert that the totalDonations of the NPO - 02 are');
+        System.assertEquals(totalDonations.divide(cnt, 2, System.RoundingMode.HALF_UP), hardCreditAcc.npo02__AverageAmount__c, 'Test for equality of totalDonations and hardCreditAcc. npo02.');
+        System.assertEquals(total2YearsAgo, hardCreditAcc.npo02__OppAmount2YearsAgo__c, 'This function is used to test equality of the two amounts of the hard credit accrued');
+        System.assertEquals(lastCloseDate, hardCreditAcc.npo02__LastCloseDate__c, 'This function is used to assert that the last close date is the same as the one provided');
+        System.assertEquals(closeDate, hardCreditAcc.npo02__FirstCloseDate__c, 'This function asserts that the close date is equal to the date of the first hard credit credit');
+        System.assertEquals(maxAmt, hardCreditAcc.npo02__LargestAmount__c, 'This method asserts that the maximum amount allowed for a hard credit is the same as the maximum');
+        System.assertEquals(baseAmt, hardCreditAcc.npo02__SmallestAmount__c, 'This function is used to assert that the base amount is equal to the smallest amount in');
+        System.assertEquals(bestGiftYear, hardCreditAcc.npo02__Best_Gift_Year__c, 'This function asserts that the best Gift Year is the same as the C code in the');
         System.assert(hardCreditAcc.Sic.endsWith('...'),
                 'Target text field that cannnot contain full rollup contents should truncate.');
         // These 4 use other fields on the Account object since there are no NPSP related fields to store the values in
@@ -467,7 +467,7 @@ public class CRLP_RollupAccount_TEST {
             // Query the MultiCurrency Account with all the target fields specified in the rollups
             // Only need to validate one of the currency fields to ensure it has been converted correctly.
             Account mcAccount = Database.query(baseAccountQuery + ' WHERE Id != :hardCreditAccId LIMIT 1');
-            System.assertEquals(2000, mcAccount.npo02__TotalOppAmount__c);
+            System.assertEquals(2000, mcAccount.npo02__TotalOppAmount__c, 'Test for the total OPP amount of the NPO - 02 account.');
         }
     }
 
@@ -515,7 +515,7 @@ public class CRLP_RollupAccount_TEST {
         hardCreditAcc = Database.query(hardCreditAccQuery);
 
         // Basic rollup asserts using existing NPSP rollup fields.
-        System.assertEquals(totalDonations, hardCreditAcc.npo02__TotalOppAmount__c);
+        System.assertEquals(totalDonations, hardCreditAcc.npo02__TotalOppAmount__c, 'This function is used to assert that the totalDonations of the NPO - 02 are');
 
         // Get the "other" household account to reparent all the opportunities to it
         Id otherAcctId = [SELECT Id FROM Account WHERE Id != :hardCreditAccId].Id;

@@ -42,7 +42,7 @@ public class BDI_BatchNumberSettingsController_TEST {
                 utility.setupAutoNumber(false,
                         'abc-{000}', 0, false);
         System.assertEquals(false,
-                utility.getAutoNumberById(autoNumberId).IsActive__c);
+                utility.getAutoNumberById(autoNumberId).IsActive__c, 'Checks if the current auto number is active.');
 
         BDI_BatchNumberSettingsController.activate(autoNumberId);
         System.assertEquals(true,
@@ -56,7 +56,7 @@ public class BDI_BatchNumberSettingsController_TEST {
                 utility.setupAutoNumber(true,
                         'abc-{000}', 0, false);
         System.assertEquals(true,
-                utility.getAutoNumberById(autoNumberId).IsActive__c);
+                utility.getAutoNumberById(autoNumberId).IsActive__c, 'Checks if the current auto number is active.');
 
         BDI_BatchNumberSettingsController.deactivate(autoNumberId);
         System.assertEquals(false,

@@ -430,57 +430,57 @@ public class UTIL_RecordTypeSettingsUpdate_TEST {
 
         System.assertEquals(
             expectedOpportunityIdString,
-            allocationsSettingsActual.Excluded_Opp_RecTypes__c
+            allocationsSettingsActual.Excluded_Opp_RecTypes__c, 'This function is a utility function to assert that two Opportunity allocations have the same ID'
         );
 
         System.assertEquals(
             expectedOpportunityIdString,
-            contactsAndOrgsSettingsActual.Opp_RecTypes_Excluded_for_Payments__c
+            contactsAndOrgsSettingsActual.Opp_RecTypes_Excluded_for_Payments__c, 'This function is called to assert that the expected opportunity id string is equal to the'
         );
 
         System.assertEquals(
             accountRecTypeId1,
-            contactsAndOrgsSettingsActual.npe01__HH_Account_RecordTypeID__c
+            contactsAndOrgsSettingsActual.npe01__HH_Account_RecordTypeID__c, 'This function is a test to assert that all required fields are set.'
         );
 
         System.assertEquals(
             accountRecTypeId2,
-            contactsAndOrgsSettingsActual.npe01__One_to_One_RecordTypeID__c
+            contactsAndOrgsSettingsActual.npe01__One_to_One_RecordTypeID__c, 'This function is a test to see if two record types match.'
         );
 
         System.assertEquals(
             expectedContactIdString,
-            householdsSettingsActual.npo02__Household_Creation_Excluded_Recordtypes__c
+            householdsSettingsActual.npo02__Household_Creation_Excluded_Recordtypes__c, 'Tests that the given contact id string is equal to the given contact id string.'
         );
 
         System.assertEquals(
             expectedContactIdString,
-            householdsSettingsActual.npo02__Household_OCR_Excluded_Recordtypes__c
+            householdsSettingsActual.npo02__Household_OCR_Excluded_Recordtypes__c, 'Tests that the contact id string is equal to the contact id string provided in the household'
         );
 
         System.assertEquals(
             expectedOpportunityIdString,
-            householdsSettingsActual.npo02__Membership_Record_Types__c
+            householdsSettingsActual.npo02__Membership_Record_Types__c, 'Tests that the given HouseholdsSettingsActual object equals the given one.'
         );
 
         System.assertEquals(
             expectedOpportunityIdString,
-            householdsSettingsActual.npo02__Excluded_Account_Opp_Rectypes__c
+            householdsSettingsActual.npo02__Excluded_Account_Opp_Rectypes__c, 'This method is called to assert that the given Opportunity ID string is equal to the'
         );
 
         System.assertEquals(
             expectedOpportunityIdString,
-            householdsSettingsActual.npo02__Excluded_Contact_Opp_Rectypes__c
+            householdsSettingsActual.npo02__Excluded_Contact_Opp_Rectypes__c, 'Tests that the given Opportunity ID string is equal to the Households settings'
         );
 
         System.assertEquals(
             expectedOpportunityIdString,
-            opportunityNamingSettingsActual.Opportunity_Record_Types__c
+            opportunityNamingSettingsActual.Opportunity_Record_Types__c, 'This function is a convenience method for asserting that two OpportunityRecord objects are equal'
         );
 
         System.assertEquals(
             opportunityRecTypeId2,
-            rdSettingsActual.npe03__Record_Type__c
+            rdSettingsActual.npe03__Record_Type__c, 'This method is called to assert that all records in the system have the same type as the'
         );
     }
 
@@ -513,7 +513,7 @@ public class UTIL_RecordTypeSettingsUpdate_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(1, stub.runCount);
+        System.assertEquals(1, stub.runCount, 'This test is used to assert that the stub s runCount is equal to 1.');
     }
 
     @isTest
@@ -530,7 +530,7 @@ public class UTIL_RecordTypeSettingsUpdate_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(1, stub.runCount);
+        System.assertEquals(1, stub.runCount, 'This test is used to assert that the stub s runCount is equal to 1.');
     }
 
     @isTest
@@ -547,7 +547,7 @@ public class UTIL_RecordTypeSettingsUpdate_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(1, stub.runCount);
+        System.assertEquals(1, stub.runCount, 'This test is used to assert that the stub s runCount is equal to 1.');
     }
 
     @isTest
@@ -562,7 +562,7 @@ public class UTIL_RecordTypeSettingsUpdate_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(0, stub.runCount);
+        System.assertEquals(0, stub.runCount, 'Test for the same number of calls as the stub.');
     }
 
     @isTest
@@ -578,7 +578,7 @@ public class UTIL_RecordTypeSettingsUpdate_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(0, stub.runCount);
+        System.assertEquals(0, stub.runCount, 'Test for the same number of calls as the stub.');
     }
 
 

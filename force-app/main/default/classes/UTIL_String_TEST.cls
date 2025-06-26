@@ -44,7 +44,7 @@ private class UTIL_String_TEST {
     @isTest private static void nonNumericCharactersShouldBeRemoved() {
         String expectedValue = '0123456789';
         String actualValue = UTIL_String.removeNonNumericCharacters(mixedCharacterString);
-        System.assertEquals(expectedValue, actualValue); 
+        System.assertEquals(expectedValue, actualValue, 'Assert that two values are equal.'); 
     }
 
     /**
@@ -53,7 +53,7 @@ private class UTIL_String_TEST {
     @isTest private static void nonAsciiAlphabeticCharactersShouldBeRemoved() {
         String expectedValue = 'Abc';
         String actualValue = UTIL_String.removeNonAsciiAlphabeticCharacters(mixedCharacterString);
-        System.assertEquals(expectedValue, actualValue); 
+        System.assertEquals(expectedValue, actualValue, 'Assert that two values are equal.'); 
     }
 
     /**
@@ -62,7 +62,7 @@ private class UTIL_String_TEST {
     @isTest private static void nonAsciiAlphanuericCharactersShouldBeRemoved() {
         String expectedValue = 'Abc0123456789';
         String actualValue = UTIL_String.removeNonAsciiAlphanumericCharacters(mixedCharacterString);
-        System.assertEquals(expectedValue, actualValue); 
+        System.assertEquals(expectedValue, actualValue, 'Assert that two values are equal.'); 
     }
 
     /**
@@ -70,9 +70,9 @@ private class UTIL_String_TEST {
     */
     @isTest private static void nullStringsShouldReturnNull() {
         String nullTarget = null;
-        System.assertEquals(null, UTIL_String.removeNonAsciiAlphabeticCharacters(nullTarget)); 
-        System.assertEquals(null, UTIL_String.removeNonNumericCharacters(nullTarget)); 
-        System.assertEquals(null, UTIL_String.removeNonAsciiAlphanumericCharacters(nullTarget));
+        System.assertEquals(null, UTIL_String.removeNonAsciiAlphabeticCharacters(nullTarget), 'Checks that null is not null.'); 
+        System.assertEquals(null, UTIL_String.removeNonNumericCharacters(nullTarget), 'Checks that null is not null.'); 
+        System.assertEquals(null, UTIL_String.removeNonAsciiAlphanumericCharacters(nullTarget), 'Checks that null is not null.');
     }
 
     /**
@@ -83,7 +83,7 @@ private class UTIL_String_TEST {
     private static void urlShouldBeInternalOnly() {
         String testUrl = 'https://salesforce.com/testPath';
 
-        System.assertEquals('/testPath', UTIL_String.getInternalUrlPath(testUrl));
+        System.assertEquals('/testPath', UTIL_String.getInternalUrlPath(testUrl), 'Test path is the same as the internal path of the test url.');
     }
 
     /**
@@ -94,7 +94,7 @@ private class UTIL_String_TEST {
     private static void internalUrlIsSanitized() {
         String testUrl = '//testPath';
 
-        System.assertEquals('/testPath', UTIL_String.getInternalUrlPath(testUrl));
+        System.assertEquals('/testPath', UTIL_String.getInternalUrlPath(testUrl), 'Test path is the same as the internal path of the test url.');
     }
 
     /**
@@ -105,7 +105,7 @@ private class UTIL_String_TEST {
     private static void urlShouldBeNull() {
         String invalidUrl = 'www.salesforce.com';
 
-        System.assertEquals(null, UTIL_String.getInternalUrlPath(invalidUrl));
+        System.assertEquals(null, UTIL_String.getInternalUrlPath(invalidUrl), 'assertEquals - Asserts that invalidUrl is null.');
     }
 
     /**

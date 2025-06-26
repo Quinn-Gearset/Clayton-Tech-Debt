@@ -62,7 +62,7 @@ private with sharing class RD2_ValidationService_TEST {
         } catch (Exception e) {
             errMessage = e.getMessage();
         }
-        System.assert(errMessage.contains(System.Label.RD_DonorIsRequired));
+        System.assert(errMessage.contains(System.Label.RD_DonorIsRequired), 'Checks that the error message is not empty.');
 
     }
 
@@ -86,7 +86,7 @@ private with sharing class RD2_ValidationService_TEST {
             errMessage = e.getMessage();
         }
 
-        System.assert(errMessage.contains(System.Label.RD_ContactMustBelongToAccount));
+        System.assert(errMessage.contains(System.Label.RD_ContactMustBelongToAccount), 'This is a test function to assert that the contact must be belong to an account.');
 
     }
 
@@ -110,7 +110,7 @@ private with sharing class RD2_ValidationService_TEST {
         } catch (Exception e) {
             errMessage = e.getMessage();
         }
-        System.assert(errMessage.contains(System.Label.RD_ContactMustBelongToAccount));
+        System.assert(errMessage.contains(System.Label.RD_ContactMustBelongToAccount), 'This is a test function to assert that the contact must be belong to an account.');
     }
 
     /***
@@ -134,7 +134,7 @@ private with sharing class RD2_ValidationService_TEST {
             errMessage = e.getMessage();
         }
 
-        System.assert(errMessage.contains(System.Label.RD2_EnablementIncomplete));
+        System.assert(errMessage.contains(System.Label.RD2_EnablementIncomplete), 'Checks that the error message is not empty.');
     }
 
     /***
@@ -161,7 +161,7 @@ private with sharing class RD2_ValidationService_TEST {
             errMessage = e.getMessage();
         }
 
-        System.assert(errMessage.contains(System.Label.RD2_EnablementIncomplete));
+        System.assert(errMessage.contains(System.Label.RD2_EnablementIncomplete), 'Checks that the error message is not empty.');
     }
 
     /**
@@ -191,7 +191,7 @@ private with sharing class RD2_ValidationService_TEST {
             if (result.isSuccess()) {
                 System.assertEquals(contacts[0].Id, rd.npe03__Contact__c, 'Insert should succeed when Contact belongs to the Household.');
             } else {
-                System.assert(result.getErrors()[0].getMessage().contains(System.Label.RD_ContactMustBelongToAccount));
+                System.assert(result.getErrors()[0].getMessage().contains(System.Label.RD_ContactMustBelongToAccount), 'Assert that contact must be belong to account');
             }
         }
     }
@@ -1031,7 +1031,7 @@ private with sharing class RD2_ValidationService_TEST {
 
         String expectedLabel = String.format(System.Label.RD2_ElevateInstallmentPeriodMustBeValid, new List<String>{RD2_Constants.INSTALLMENT_PERIOD_FIRST_AND_FIFTEENTH});
 
-        System.assertEquals(expectedLabel, errorRecords[0].getFirstError());
+        System.assertEquals(expectedLabel, errorRecords[0].getFirstError(), 'Assert that the label of the first error is the same as the label of the first error');
     }
 
     /**

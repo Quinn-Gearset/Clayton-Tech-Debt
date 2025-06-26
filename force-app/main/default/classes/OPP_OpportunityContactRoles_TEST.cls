@@ -77,14 +77,14 @@ private class OPP_OpportunityContactRoles_TEST {
         
         //Make sure that we haven't created a contact role yet.
         OpportunityContactRole[] result = [SELECT OpportunityId, ContactId, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
-        System.assertEquals(0, result.size());
+        System.assertEquals(0, result.size(), 'Assert that the result set is empty.');
         
         //Insert the contact role with a blank Role field.
         OpportunityContactRole cr = new OpportunityContactRole (OpportunityId = opp1.Id, ContactId = con.Id, IsPrimary = true);
         insert cr;
         
         result = [SELECT OpportunityId, ContactId, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
-        System.assertEquals(con.Id, result[0].ContactId);
+        System.assertEquals(con.Id, result[0].ContactId, 'Assert that con. ContactId equals result. ContactId');
         
         //Now simulate import of an opp record with a contact ID.
         Opportunity opp2 = new Opportunity(
@@ -96,8 +96,8 @@ private class OPP_OpportunityContactRoles_TEST {
         insert opp2;
 
         result = [SELECT OpportunityId, ContactId, Role FROM OpportunityContactRole WHERE OpportunityId = :opp2.Id];
-        System.assertEquals(con.Id, result[0].ContactId);
-        System.assertEquals(OCR_ROLE_SOFT_CREDIT, result[0].Role);
+        System.assertEquals(con.Id, result[0].ContactId, 'Assert that con. ContactId equals result. ContactId');
+        System.assertEquals(OCR_ROLE_SOFT_CREDIT, result[0].Role, 'Checks that the OCR role is the same as the OCR role SOFT_');
     }
 
     /*******************************************************************************************************
@@ -124,14 +124,14 @@ private class OPP_OpportunityContactRoles_TEST {
 
         //Make sure that we haven't created a contact role yet.
         OpportunityContactRole[] result = [SELECT OpportunityId, ContactId, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
-        System.assertEquals(0, result.size());
+        System.assertEquals(0, result.size(), 'Assert that the result set is empty.');
 
         //Insert the contact role with a blank Role field.
         OpportunityContactRole cr = new OpportunityContactRole (OpportunityId = opp1.Id, ContactId = con.Id, IsPrimary = true);
         insert cr;
 
         result = [SELECT OpportunityId, ContactId, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
-        System.assertEquals(con.Id, result[0].ContactId);
+        System.assertEquals(con.Id, result[0].ContactId, 'Assert that con. ContactId equals result. ContactId');
 
         //Now simulate import of an opp record with a contact ID.
         Opportunity opp2 = new Opportunity(
@@ -143,8 +143,8 @@ private class OPP_OpportunityContactRoles_TEST {
         insert opp2;
 
         result = [SELECT OpportunityId, ContactId, Role FROM OpportunityContactRole WHERE OpportunityId = :opp2.Id];
-        System.assertEquals(con.Id, result[0].ContactId);
-        System.assertEquals(OCR_ROLE_DONOR, result[0].Role);
+        System.assertEquals(con.Id, result[0].ContactId, 'Assert that con. ContactId equals result. ContactId');
+        System.assertEquals(OCR_ROLE_DONOR, result[0].Role, 'Checks that the OCR role is the same as the OCR role.');
     }
 
     /*******************************************************************************************************
@@ -177,11 +177,11 @@ private class OPP_OpportunityContactRoles_TEST {
         Test.stopTest();
         OpportunityContactRole[] result = [SELECT OpportunityId, ContactId, isPrimary, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
         //should be a contact role
-        System.assertEquals(0, result.size());
+        System.assertEquals(0, result.size(), 'Assert that the result set is empty.');
         
         Opportunity[] oppResult = [SELECT AccountId FROM Opportunity WHERE Id = :opp1.Id];
         //should have the contact's one to one account
-        System.assertEquals(null, oppResult[0].AccountId);
+        System.assertEquals(null, oppResult[0].AccountId, 'Assert that the account id is equal to the first opp result.');
     }
 
     /*******************************************************************************************************
@@ -215,13 +215,13 @@ private class OPP_OpportunityContactRoles_TEST {
         Test.stopTest();
         OpportunityContactRole[] result = [SELECT OpportunityId, ContactId, isPrimary, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
         //should be a contact role
-        System.assertEquals(1, result.size());
-        System.assertEquals(OCR_ROLE_DONOR, result[0].Role);
-        System.assertEquals(true, result[0].isPrimary);
+        System.assertEquals(1, result.size(), 'Asserts that the result set has a size of 1.');
+        System.assertEquals(OCR_ROLE_DONOR, result[0].Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals(true, result[0].isPrimary, 'Checks that the result set is the primary node.');
         
        Opportunity[] oppResult = [SELECT AccountId FROM Opportunity WHERE Id = :opp1.Id];
        //should have the contact's one to one account
-       System.assertEquals(createdContacts[0].AccountId, oppResult[0].AccountId);
+       System.assertEquals(createdContacts[0].AccountId, oppResult[0].AccountId, 'This method is used to assert that the account ID of the created Contact is the same as');
     }
     
     /*******************************************************************************************************
@@ -256,13 +256,13 @@ private class OPP_OpportunityContactRoles_TEST {
 
         OpportunityContactRole[] result = [SELECT OpportunityId, ContactId, isPrimary, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
         //should be one role
-        System.assertEquals(1, result.size());
-        System.assertEquals(OCR_ROLE_DONOR, result[0].Role);
-        System.assertEquals(true, result[0].isPrimary);
+        System.assertEquals(1, result.size(), 'Asserts that the result set has a size of 1.');
+        System.assertEquals(OCR_ROLE_DONOR, result[0].Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals(true, result[0].isPrimary, 'Checks that the result set is the primary node.');
         
        Opportunity[] oppResult = [SELECT AccountId FROM Opportunity WHERE Id = :opp1.Id];
        //should be null account
-       System.assertEquals(null, oppResult[0].AccountId);
+       System.assertEquals(null, oppResult[0].AccountId, 'Assert that the account id is equal to the first opp result.');
     }
     
     /*******************************************************************************************************
@@ -296,9 +296,9 @@ private class OPP_OpportunityContactRoles_TEST {
         Test.stopTest();
         OpportunityContactRole[] result = [SELECT OpportunityId, ContactId, isPrimary, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
         //should be a contact role
-        System.assertEquals(1, result.size());
-        System.assertEquals(OCR_ROLE_DONOR, result[0].Role);
-        System.assertEquals(true, result[0].isPrimary);
+        System.assertEquals(1, result.size(), 'Asserts that the result set has a size of 1.');
+        System.assertEquals(OCR_ROLE_DONOR, result[0].Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals(true, result[0].isPrimary, 'Checks that the result set is the primary node.');
     }
 
     /*******************************************************************************************************
@@ -333,13 +333,13 @@ private class OPP_OpportunityContactRoles_TEST {
 
         OpportunityContactRole[] result = [SELECT OpportunityId, ContactId, isPrimary, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
         //should be one role
-        System.assertEquals(1, result.size());
-        System.assertEquals(OCR_ROLE_DONOR, result[0].Role);
-        System.assertEquals(true, result[0].isPrimary);
+        System.assertEquals(1, result.size(), 'Asserts that the result set has a size of 1.');
+        System.assertEquals(OCR_ROLE_DONOR, result[0].Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals(true, result[0].isPrimary, 'Checks that the result set is the primary node.');
         
         Opportunity[] oppResult = [SELECT AccountId FROM Opportunity WHERE Id = :opp1.Id];
         //should be null account
-        System.assertEquals(null, oppResult[0].AccountId);
+        System.assertEquals(null, oppResult[0].AccountId, 'Assert that the account id is equal to the first opp result.');
     }
     
     /*******************************************************************************************************
@@ -360,13 +360,13 @@ private class OPP_OpportunityContactRoles_TEST {
             
             OpportunityContactRole[] result = [SELECT OpportunityId, ContactId, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
             //shouldn't be a contact role
-            System.assertEquals(0, result.size());
+            System.assertEquals(0, result.size(), 'Assert that the result set is empty.');
             
             Opportunity[] oppResult = [SELECT AccountId FROM Opportunity WHERE Id = :opp1.Id];
             //shouldn't be an account
-            System.assertEquals(null, oppResult[0].AccountId);
+            System.assertEquals(null, oppResult[0].AccountId, 'Assert that the account id is equal to the first opp result.');
         } catch (exception e) {
-            System.assert(e.getMessage().contains(Label.npe01.Opportunity_Contact_Role_Error_Bad_Contact_Id));
+            System.assert(e.getMessage().contains(Label.npe01.Opportunity_Contact_Role_Error_Bad_Contact_Id), 'Check that the message contains the expected Contact ID');
         }
         Test.stopTest();
     }
@@ -608,9 +608,9 @@ private class OPP_OpportunityContactRoles_TEST {
         insert oppty;
 
         List<OpportunityContactRole> ocrs = [SELECT Id, ContactId, Role, IsPrimary FROM OpportunityContactRole WHERE OpportunityId = :oppty.Id];
-        System.assertEquals(1, ocrs.size());
-        System.assertEquals(OCR_ROLE_DONOR, ocrs[0].Role);
-        System.assertEquals(true, ocrs[0].IsPrimary);
+        System.assertEquals(1, ocrs.size(), 'Assert that the size of the OCR table is equal to 1.');
+        System.assertEquals(OCR_ROLE_DONOR, ocrs[0].Role, 'Checks that the OCR role is DONOR.');
+        System.assertEquals(true, ocrs[0].IsPrimary, 'Checks that the OCR is primary.');
 
         OpportunityContactRole ocr = new OpportunityContactRole();
         ocr.OpportunityId = oppty.id;
@@ -619,15 +619,15 @@ private class OPP_OpportunityContactRoles_TEST {
         insert ocr;
 
         ocrs = [SELECT Id, ContactId, Role, IsPrimary FROM OpportunityContactRole WHERE OpportunityId = :oppty.Id];
-        System.assertEquals(2, ocrs.size());
+        System.assertEquals(2, ocrs.size(), 'Assert that the size of the OCR table is equal to 2.');
 
         for (OpportunityContactRole eachOCR : ocrs) {
             if (eachOCR.IsPrimary) {
-                System.assertEquals(testContacts[0].Id, eachOCR.ContactId);
-                System.assertEquals(OCR_ROLE_DONOR, eachOCR.Role);
+                System.assertEquals(testContacts[0].Id, eachOCR.ContactId, 'This test is done by checking that the contacts are the same.');
+                System.assertEquals(OCR_ROLE_DONOR, eachOCR.Role, 'Checks that all OCR roles are equal.');
             } else {
-                System.assertEquals(testContacts[1].Id, eachOCR.ContactId);
-                System.assertEquals(OCR_ROLE_INFLUENCER, eachOCR.Role);
+                System.assertEquals(testContacts[1].Id, eachOCR.ContactId, 'This test is done by checking that the contacts are the same.');
+                System.assertEquals(OCR_ROLE_INFLUENCER, eachOCR.Role, 'Checks that the OCR Role is the same as the one in the OCR system.');
             }
         }
 
@@ -636,11 +636,11 @@ private class OPP_OpportunityContactRoles_TEST {
         Test.stopTest();
 
         List<OpportunityContactRole> ocrsUpdated = [SELECT Id, ContactId, Role, IsPrimary FROM OpportunityContactRole WHERE OpportunityId = :oppty.Id];
-        System.assertEquals(1, ocrsUpdated.size());
+        System.assertEquals(1, ocrsUpdated.size(), 'Checks that the number of OCRs has been updated.');
 
-        System.assertEquals(OCR_ROLE_DONOR, ocrsUpdated[0].Role);
-        System.assertEquals(oppty.Primary_Contact__c, testContacts[1].Id);
-        System.assertEquals(oppty.Primary_Contact__c, ocrsUpdated[0].ContactId);
+        System.assertEquals(OCR_ROLE_DONOR, ocrsUpdated[0].Role, 'Checks that OCR role is DONOR.');
+        System.assertEquals(oppty.Primary_Contact__c, testContacts[1].Id, 'Test for equality of primary contact.');
+        System.assertEquals(oppty.Primary_Contact__c, ocrsUpdated[0].ContactId, 'Checks that the primary contact is the same as the one in the OCR.');
     }
 
 
@@ -668,9 +668,9 @@ private class OPP_OpportunityContactRoles_TEST {
         accountDetails = oppOCRInstance.populateAccountDetails(testOpptys);
         Test.stopTest();
 
-        System.assertEquals(5, accountDetails.size());
-        System.assertEquals(testContacts[0].AccountId, accountDetails.get(testContacts[0].AccountId).Id);
-        System.assertEquals(testContacts[3].AccountId, accountDetails.get(testContacts[3].AccountId).Id);
+        System.assertEquals(5, accountDetails.size(), 'Checks that the number of accounts in the accountDetails array equals 5.');
+        System.assertEquals(testContacts[0].AccountId, accountDetails.get(testContacts[0].AccountId).Id, 'This test will assert that the account id of the first contact is the same as the account');
+        System.assertEquals(testContacts[3].AccountId, accountDetails.get(testContacts[3].AccountId).Id, 'This test asserts that the account id is the same as the one in the accountDetails.');
     }
 
 
@@ -701,9 +701,9 @@ private class OPP_OpportunityContactRoles_TEST {
         primaryContactToOpportunities = oppOCRInstance.populatePrimaryContactToOpportunities(testOpptys, accountDetails);
         Test.stopTest();
 
-        System.assertEquals(5, primaryContactToOpportunities.size());
-        System.assertEquals(testOpptys[0].Id, primaryContactToOpportunities.get(testContacts[0].Id)[0]);
-        System.assertEquals(testOpptys[3].Id, primaryContactToOpportunities.get(testContacts[3].Id)[0]);
+        System.assertEquals(5, primaryContactToOpportunities.size(), 'Checks that the number of primary contact to opportunities is equal to 5.');
+        System.assertEquals(testOpptys[0].Id, primaryContactToOpportunities.get(testContacts[0].Id)[0], 'This test is done by checking that the primary contact is the same as the primary contact.');
+        System.assertEquals(testOpptys[3].Id, primaryContactToOpportunities.get(testContacts[3].Id)[0], 'This test is done by checking that the primary contact is the same as the primary contact.');
     }
 
 
@@ -740,9 +740,9 @@ private class OPP_OpportunityContactRoles_TEST {
         accountToOpportunities = oppOCRInstance.populateAccountToOpportunities(testOpptys, accountDetails);
         Test.stopTest();
 
-        System.assertEquals(5, accountToOpportunities.size());
-        System.assertEquals(testOpptys[0].Id, accountToOpportunities.get(testContacts[0].AccountId)[0]);
-        System.assertEquals(testOpptys[3].Id, accountToOpportunities.get(testContacts[3].AccountId)[0]);
+        System.assertEquals(5, accountToOpportunities.size(), 'Test that the number of account - to - opportunities is equal to 5.');
+        System.assertEquals(testOpptys[0].Id, accountToOpportunities.get(testContacts[0].AccountId)[0], 'This test is done by checking that the id of the opportunity is the same as');
+        System.assertEquals(testOpptys[3].Id, accountToOpportunities.get(testContacts[3].AccountId)[0], 'This test asserts that the opptys are equal to the opportunities of the');
     }
 
 
@@ -796,11 +796,11 @@ private class OPP_OpportunityContactRoles_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(2, transactionOCRs.size());
-        System.assertEquals(2, transactionOCRs.get(testOpptys[0].Id).size());
-        System.assertEquals(1, transactionOCRs.get(testOpptys[1].Id).size());
-        System.assertEquals(OCR_ROLE_DONOR, transactionOCRs.get(testOpptys[0].Id)[0].Role);
-        System.assertEquals(OCR_ROLE_SOFT_CREDIT, transactionOCRs.get(testOpptys[1].Id)[0].Role);
+        System.assertEquals(2, transactionOCRs.size(), 'Checks that the number of OCRs in the transaction is equal to the number of O');
+        System.assertEquals(2, transactionOCRs.get(testOpptys[0].Id).size(), 'Test OCRs for the same transaction.');
+        System.assertEquals(1, transactionOCRs.get(testOpptys[1].Id).size(), 'Test OCRs for equality.');
+        System.assertEquals(OCR_ROLE_DONOR, transactionOCRs.get(testOpptys[0].Id)[0].Role, 'Checks that the OCR role of the first OPP is DONOR.');
+        System.assertEquals(OCR_ROLE_SOFT_CREDIT, transactionOCRs.get(testOpptys[1].Id)[0].Role, 'Checks that the OCR role of the transaction is the same as the OCR role of');
     }
 
 
@@ -865,12 +865,12 @@ private class OPP_OpportunityContactRoles_TEST {
         Test.startTest();
 
         testOCRs = [SELECT Id, OpportunityId, ContactId, Role, isPrimary FROM OpportunityContactRole];
-        System.assertEquals(3, testOCRs.size());
+        System.assertEquals(3, testOCRs.size(), 'Checks that the number of OCRs is equal to 3.');
 
         OPP_OpportunityContactRoles_TDTM oppOCRInstance = new OPP_OpportunityContactRoles_TDTM();
         oppOCRInstance.clearOCRs(opportunityToContactToOCR, changedOpptys, ocrsToDeleteImmediately);
         testOCRs = [SELECT Id, OpportunityId, ContactId, Role, isPrimary FROM OpportunityContactRole];
-        System.assertEquals(1, testOCRs.size());
+        System.assertEquals(1, testOCRs.size(), 'Checks that the number of OCRs is equal to 1.');
 
         Test.stopTest();
     }
@@ -911,25 +911,25 @@ private class OPP_OpportunityContactRoles_TEST {
         insert opp1;
 
         opp1 = [SELECT Id, AccountId FROM Opportunity WHERE Id = :opp1.Id LIMIT 1];
-        System.assertNotEquals(null, opp1.AccountId);
+        System.assertNotEquals(null, opp1.AccountId, 'This method asserts that opp1. AccountId is not null.');
 
         Test.startTest();
         opp1.AccountId = null;
         update opp1;
         OpportunityContactRole[] result = [SELECT OpportunityId, Opportunity.AccountId, ContactId, isPrimary, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
         //should be a contact role
-        System.assertEquals(1, result.size());
-        System.assertEquals(OCR_ROLE_DONOR, result[0].Role);
-        System.assertEquals(true, result[0].isPrimary);
+        System.assertEquals(1, result.size(), 'Asserts that the result set has a size of 1.');
+        System.assertEquals(OCR_ROLE_DONOR, result[0].Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals(true, result[0].isPrimary, 'Checks that the result set is the primary node.');
 
         opp1.AccountId = orgAcct.Id;
         update opp1;
         result = [SELECT OpportunityId, Opportunity.AccountId, ContactId, isPrimary, Role FROM OpportunityContactRole WHERE OpportunityId = :opp1.Id];
         //should be a contact role
-        System.assertEquals(1, result.size());
-        System.assertEquals(OCR_ROLE_DONOR, result[0].Role);
-        System.assertEquals(true, result[0].isPrimary);
-        System.assertNotEquals(null, result[0].Opportunity.AccountId);
+        System.assertEquals(1, result.size(), 'Asserts that the result set has a size of 1.');
+        System.assertEquals(OCR_ROLE_DONOR, result[0].Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals(true, result[0].isPrimary, 'Checks that the result set is the primary node.');
+        System.assertNotEquals(null, result[0].Opportunity.AccountId, 'Assert that the AccountID is not null.');
     }
 
     /*******************************************************************************************************

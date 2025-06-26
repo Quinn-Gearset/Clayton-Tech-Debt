@@ -53,22 +53,22 @@ private class UTIL_JobProgress_CTRL_TEST {
         Test.stopTest();
 
         UTIL_JobProgress_CTRL controller = new UTIL_JobProgress_CTRL();
-        System.assertEquals(1, controller.getBatchJobs().size());
-        System.assertNotEquals(null, controller.bj);
-        System.assertEquals(20, controller.numberOfJobs);
-        System.assertEquals('Batch Apex Jobs', controller.batchComponentLabel);
-        System.assertEquals(false, controller.rerenderoncomplete);
-        System.assertEquals(false, controller.hasExtendedStatus);
-        System.assertEquals(false, controller.allCompleted);
+        System.assertEquals(1, controller.getBatchJobs().size(), 'This method asserts that the number of jobs in the batch is equal to 1.');
+        System.assertNotEquals(null, controller.bj, 'Assert that the controller object is not null.');
+        System.assertEquals(20, controller.numberOfJobs, 'Test for the number of jobs in the controller.');
+        System.assertEquals('Batch Apex Jobs', controller.batchComponentLabel, 'Test that the batch component label is the same as the label of the controller.');
+        System.assertEquals(false, controller.rerenderoncomplete, 'Checks that the controller is rerenderoncomplete.');
+        System.assertEquals(false, controller.hasExtendedStatus, 'Checks if the controller has extended status.');
+        System.assertEquals(false, controller.allCompleted, 'Checks that all completed controllers are completed.');
 
         List<UTIL_JobProgress_CTRL.BatchJobStatus> bjs = UTIL_JobProgress_CTRL.getBatchJobsStatus(controller.numberOfJobs, controller.batchJobStartTimeString);
-        System.assertEquals(1, bjs.size());
+        System.assertEquals(1, bjs.size(), 'Checks that the size of the BJS library is equal to 1.');
     }
 
     //test behavior when no batch job is present for whatever reason
     static testMethod void checkNullBatchJobProgressBehavior(){
         UTIL_JobProgress_CTRL controller = new UTIL_JobProgress_CTRL();
-        System.assertEquals(true, controller.getBatchJobs().isEmpty());
-        System.assertEquals(null, controller.bj);
+        System.assertEquals(true, controller.getBatchJobs().isEmpty(), 'Tests if the batch jobs are empty.');
+        System.assertEquals(null, controller.bj, 'Test if the controller object is null.');
     }
 }

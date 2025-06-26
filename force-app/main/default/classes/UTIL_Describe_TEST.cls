@@ -45,22 +45,22 @@ private with sharing class UTIL_Describe_TEST {
         String s;
 
         Schema.DescribeSObjectResult res = UTIL_Describe.getObjectDescribe('Contact');
-        System.assertEquals(res.getName(), 'Contact');
+        System.assertEquals(res.getName(), 'Contact', 'Checks that the Contact object is the same as the Contact object.');
         s = UTIL_Describe.getObjectLabel('Contact');
-        System.assertEquals (s, res.getLabel());
+        System.assertEquals (s, res.getLabel(), 'Assert that the label of the result is the same as the label of the result.');
 
         Account a = UTIL_UnitTestData_TEST.buildHouseholdAccount();
         a.Id = UTIL_UnitTestData_TEST.MOCK_ACCOUNT_ID;
-        System.assert(UTIL_Describe.isObjectIdThisType(a.Id, 'Account'));
+        System.assert(UTIL_Describe.isObjectIdThisType(a.Id, 'Account'), 'asserts that a is an Account');
 
         s = UTIL_Describe.getFieldLabel('Account', 'LastModifiedDate');
 
         Schema.DescribeFieldResult fr = UTIL_Describe.getFieldDescribe('Account', 'CreatedDate');
         s = UTIL_Describe.getFieldLabel('Account', 'CreatedDate');
-        System.assertEquals (s, fr.getLabel());
+        System.assertEquals (s, fr.getLabel(), 'Assert that the label of the Frame is the same as the label of the Frame.');
 
         Map<String, Schema.DescribeFieldResult> afd = UTIL_Describe.getAllFieldsDescribe('Account');
-        System.assertEquals ('BillingCity', afd.get('billingcity').getName());
+        System.assertEquals ('BillingCity', afd.get('billingcity').getName(), 'Checks that billing city is the same as the one in AFD');
         afd = UTIL_Describe.getAllFieldsDescribe('Account');
 
         SObject acctObj = UTIL_Describe.getPrototypeObject('Account');
@@ -68,20 +68,20 @@ private with sharing class UTIL_Describe_TEST {
         Account acct = (Account)(acctObj);
 
         s = UTIL_Describe.getFieldType('Account', 'CreatedDate');
-        System.assertEquals('DATETIME', s);
+        System.assertEquals('DATETIME', s, 'Checks that the string s is equal to the string s');
 
         s = UTIL_Describe.getNameField('Account');
-        System.assertEquals('name', s);
+        System.assertEquals('name', s, 'Assert that name is the same as the string s.');
 
         try {
             s = UTIL_Describe.getObjectLabel('sdlkfjsdlkfjsldkfjlsdkfj');
         } catch (Exception e) {
-            System.assertEquals('Invalid object name \'sdlkfjsdlkfjsldkfjlsdkfj\'', e.getMessage());
+            System.assertEquals('Invalid object name \'sdlkfjsdlkfjsldkfjlsdkfj\'', e.getMessage(), 'Assert that the message is valid');
         }
         try {
             s = UTIL_Describe.getFieldLabel('Opportunity', 'sdlkfjsdlkfjsldkfjlsdkfj');
         } catch (Exception e) {
-            System.assertEquals('Invalid field name \'sdlkfjsdlkfjsldkfjlsdkfj\'', e.getMessage());
+            System.assertEquals('Invalid field name \'sdlkfjsdlkfjsldkfjlsdkfj\'', e.getMessage(), 'Assert that the message of the field name is valid.');
         }
     }
 
@@ -95,7 +95,7 @@ private with sharing class UTIL_Describe_TEST {
             .withOpenEndedStatusOpen()
             .build();
 
-        System.assertEquals(RD_Constants.OPEN_ENDED_STATUS_OPEN, rd.npe03__Open_Ended_Status__c);
+        System.assertEquals(RD_Constants.OPEN_ENDED_STATUS_OPEN, rd.npe03__Open_Ended_Status__c, 'Asserts that the open ended status of the resource is equal to the open ended status of the');
         User englishUser = buildEnglishUser();
         System.runAs(englishUser) {
             System.assertEquals(RD_Constants.OPEN_ENDED_STATUS_OPEN,
@@ -155,7 +155,7 @@ private with sharing class UTIL_Describe_TEST {
             .withOpenEndedStatusOpen()
             .build();
 
-        System.assertEquals(RD_Constants.OPEN_ENDED_STATUS_OPEN, rd.npe03__Open_Ended_Status__c);
+        System.assertEquals(RD_Constants.OPEN_ENDED_STATUS_OPEN, rd.npe03__Open_Ended_Status__c, 'Asserts that the open ended status of the resource is equal to the open ended status of the');
 
         System.assertEquals('Abierto',
             UTIL_Describe.getTranslatedPicklistLabel(npe03__Recurring_Donation__c.SObjectType,

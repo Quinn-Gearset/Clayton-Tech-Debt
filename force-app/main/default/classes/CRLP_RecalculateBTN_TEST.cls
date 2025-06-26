@@ -108,7 +108,7 @@ private class CRLP_RecalculateBTN_TEST {
 
         // Confirm that the initial value of the next payment is null.
         rd = rdGateway.getRecord(rd.Id);
-        System.assert(rd.npe03__Paid_Amount__c == null);
+        System.assert(rd.npe03__Paid_Amount__c == null, 'Test for null value.');
 
         Test.startTest();
 
@@ -123,13 +123,13 @@ private class CRLP_RecalculateBTN_TEST {
         // Confirm that the legacy rollup logic updates the value of the Total Gift and
         // Soft Credit to a value different than the original value (100);
         c = getContact();
-        System.assert(c.npo02__TotalOppAmount__c != 100);
-        System.assert(c.npo02__Soft_Credit_Total__c != 100);
+        System.assert(c.npo02__TotalOppAmount__c != 100, 'Check that the total OPP amount is not 100.');
+        System.assert(c.npo02__Soft_Credit_Total__c != 100, 'Check if the total number of soft credit is not 100.');
 
         // Confirm that the legacy rollup logic updates the value of the RD rollup field Paid Amount.
         // to a value different than the original value (null).
         rd = rdGateway.getRecord(rd.Id);
-        System.assert(rd.npe03__Paid_Amount__c != null);
+        System.assert(rd.npe03__Paid_Amount__c != null, 'Checks that npe03 is available.');
     }
 
     /**

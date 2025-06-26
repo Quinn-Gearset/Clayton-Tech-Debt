@@ -92,8 +92,8 @@ public class GE_PaymentServices_TEST {
 
         String actualValue = response.body;
         String expectedValue = SUCCESS_RESPONSE_BODY;
-        System.assertEquals(UTIL_Http.STATUS_CODE_CREATED, response.statusCode);
-        System.assertEquals(actualValue, expectedValue);
+        System.assertEquals(UTIL_Http.STATUS_CODE_CREATED, response.statusCode, 'Checks that the status code of the response is the same as the status code created.');
+        System.assertEquals(actualValue, expectedValue, 'Assert that actualValue equals expectedValue');
     }
 
     @isTest static void shouldReturnPaymentTransactionStatusValues() {
@@ -130,8 +130,8 @@ public class GE_PaymentServices_TEST {
 
         String actualValue = response.body;
         String expectedValue = FAILED_RESPONSE_BODY;
-        System.assertEquals(UTIL_Http.STATUS_CODE_FORBIDDEN, response.statusCode);
-        System.assertEquals(actualValue, expectedValue);
+        System.assertEquals(UTIL_Http.STATUS_CODE_FORBIDDEN, response.statusCode, 'Checks that the status code of the response is forbidden.');
+        System.assertEquals(actualValue, expectedValue, 'Assert that actualValue equals expectedValue');
     }
 
     @IsTest

@@ -280,7 +280,7 @@ private class fflib_ArgumentCaptorTest
 			(String)argument.capture(),
 			fflib_Match.eqString('First call'));
 
-		System.assertEquals('First call', (String)argument.getValue());
+		System.assertEquals('First call', (String)argument.getValue(), 'First call to the method is the same as the first call to the method.');
 	}
 
 	@isTest
@@ -617,7 +617,7 @@ private class fflib_ArgumentCaptorTest
 			(String)argument.capture(),
 			fflib_Match.eqString('First call'));
 
-		System.assertEquals('First call', (String)argument.getValue());
+		System.assertEquals('First call', (String)argument.getValue(), 'First call to the method is the same as the first call to the method.');
 	}
 
 	@isTest

@@ -47,7 +47,7 @@ private class USNonElevateCustomers_TEST {
        customers.organizationSelector = stubFor(organizationSelectorMock);
        customers.serviceConfig = stubFor(integrationServiceConfigMock);
        UserIds userIds = customers.audience();
-       System.assert(!userIds.values().isEmpty());
+       System.assert(!userIds.values().isEmpty(), 'Checks that there are no user ids in the userIds map.');
    }
 
     @IsTest
@@ -62,7 +62,7 @@ private class USNonElevateCustomers_TEST {
         customers.organizationSelector = stubFor(organizationSelectorMock);
         customers.serviceConfig = stubFor(integrationServiceConfigMock);
         UserIds userIds = customers.audience();
-        System.assert(userIds == null);
+        System.assert(userIds == null, 'This method is not thread - safe.');
     }
 
     @IsTest
@@ -77,7 +77,7 @@ private class USNonElevateCustomers_TEST {
         customers.organizationSelector = stubFor(organizationSelectorMock);
         customers.serviceConfig = stubFor(integrationServiceConfigMock);
         UserIds userIds = customers.audience();
-        System.assert(userIds == null);
+        System.assert(userIds == null, 'This method is not thread - safe.');
     }
 
     /**

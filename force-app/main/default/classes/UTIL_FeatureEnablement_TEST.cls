@@ -47,7 +47,7 @@ public class UTIL_FeatureEnablement_TEST {
     private static void shouldReturnTrueWhenPilotIsEnabled() {
         setPilotEnabledParameter(true);
 
-        System.assertEquals(true, UTIL_FeatureEnablement.isPilotEnabled());
+        System.assertEquals(true, UTIL_FeatureEnablement.isPilotEnabled(), 'Checks that the system is in a pilot - enabled state.');
     }
 
     /**
@@ -91,7 +91,7 @@ public class UTIL_FeatureEnablement_TEST {
      */
     @isTest
     private static void shouldReturnFalseWhenPilotNotEnabled() {
-        System.assertEquals(false, UTIL_FeatureEnablement.isPilotEnabled());
+        System.assertEquals(false, UTIL_FeatureEnablement.isPilotEnabled(), 'Checks that the system is in a pilot - enabled state.');
     }
 
 

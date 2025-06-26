@@ -42,8 +42,8 @@ private with sharing class GiftBatchStatusGroup_TEST {
             .withAliasAndValue('recordCount', 10);
 
         GiftBatchStatusGroup statusGroup = new GiftBatchStatusGroup(resultProxy);
-        System.assert(statusGroup.isImported());
-        System.assertEquals(10, statusGroup.recordCount());
+        System.assert(statusGroup.isImported(), 'Checks that the statusGroup is imported.');
+        System.assertEquals(10, statusGroup.recordCount(), 'Test for equality of the status group count.');
     }
 
     @isTest
@@ -52,7 +52,7 @@ private with sharing class GiftBatchStatusGroup_TEST {
             .withAliasAndValue(String.valueOf(DataImport__c.fields.Status__c), 'Dummy Status');
 
         GiftBatchStatusGroup statusGroup = new GiftBatchStatusGroup(resultProxy);
-        System.assert(!statusGroup.isImported());
+        System.assert(!statusGroup.isImported(), 'Checks that the status group is not imported.');
     }
 
     @isTest
@@ -62,8 +62,8 @@ private with sharing class GiftBatchStatusGroup_TEST {
             .withAliasAndValue('recordCount', 5);
 
         GiftBatchStatusGroup statusGroup = new GiftBatchStatusGroup(resultProxy);
-        System.assert(statusGroup.isProcessingFailed());
-        System.assertEquals(5, statusGroup.recordCount());
+        System.assert(statusGroup.isProcessingFailed(), 'Checks that processing failed.');
+        System.assertEquals(5, statusGroup.recordCount(), 'Checks that the statusGroup count is equal to 5.');
     }
 
     @isTest
@@ -72,7 +72,7 @@ private with sharing class GiftBatchStatusGroup_TEST {
             .withAliasAndValue(String.valueOf(DataImport__c.fields.Status__c), BDI_DataImport_API.bdiImported);
 
         GiftBatchStatusGroup statusGroup = new GiftBatchStatusGroup(resultProxy);
-        System.assert(!statusGroup.isProcessingFailed());
+        System.assert(!statusGroup.isProcessingFailed(), 'Checks that processing failed.');
     }
 
 
@@ -85,9 +85,9 @@ private with sharing class GiftBatchStatusGroup_TEST {
             .withAliasAndValue('recordCount', 7);
 
         GiftBatchStatusGroup statusGroup = new GiftBatchStatusGroup(resultProxy);
-        System.assert(statusGroup.isPaymentFailed());
-        System.assert(!statusGroup.isPaymentAuthorized());
-        System.assertEquals(7, statusGroup.recordCount());
+        System.assert(statusGroup.isPaymentFailed(), 'Checks if the status group is not payment failed.');
+        System.assert(!statusGroup.isPaymentAuthorized(), 'Checks that the current user is not authorized to perform a payment.');
+        System.assertEquals(7, statusGroup.recordCount(), 'Checks that the statusGroup count is equal to 7.');
     }
 
     @isTest
@@ -98,7 +98,7 @@ private with sharing class GiftBatchStatusGroup_TEST {
                 ElevateTransactionStatus.AUTHORIZED.name());
 
         GiftBatchStatusGroup statusGroup = new GiftBatchStatusGroup(resultProxy);
-        System.assert(!statusGroup.isPaymentFailed());
+        System.assert(!statusGroup.isPaymentFailed(), 'Checks that the status group is not payment failed.');
     }
 
     @isTest
@@ -110,8 +110,8 @@ private with sharing class GiftBatchStatusGroup_TEST {
             .withAliasAndValue('recordCount', 3);
 
         GiftBatchStatusGroup statusGroup = new GiftBatchStatusGroup(resultProxy);
-        System.assert(statusGroup.isPaymentAuthorized());
-        System.assertEquals(3, statusGroup.recordCount());
+        System.assert(statusGroup.isPaymentAuthorized(), 'Checks if the current user is authorized to perform a payment.');
+        System.assertEquals(3, statusGroup.recordCount(), 'Checks that the number of records in the status group is equal to 3.');
     }
 
     @IsTest
@@ -122,7 +122,7 @@ private with sharing class GiftBatchStatusGroup_TEST {
                         BDI_DataImport_API.bdiProcessing)
                 .withAliasAndValue('recordCount', 5);
         GiftBatchStatusGroup statusGroup = new GiftBatchStatusGroup(resultProxy);
-        System.assert(statusGroup.isProcessing());
+        System.assert(statusGroup.isProcessing(), 'Checks that the status group is processing.');
     }
 
 }

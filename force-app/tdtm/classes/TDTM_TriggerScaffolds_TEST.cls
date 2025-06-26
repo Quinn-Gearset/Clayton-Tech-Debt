@@ -46,7 +46,7 @@ private with sharing class TDTM_TriggerScaffolds_TEST {
     private static void tdtmLead() {
         insert new Lead(Company = 'tdtmLead', LastName = 'Smith');
 
-        System.assert(true); //Just checking that we get to this point = no exception thrown
+        System.assert(true, 'Assert that this is a no - op.'); //Just checking that we get to this point = no exception thrown
     }
     
     /*************************************************************************** 
@@ -57,7 +57,7 @@ private with sharing class TDTM_TriggerScaffolds_TEST {
     private static void tdtmCampaign() {
         insert new Campaign(Name = 'tdtmCampaign');
         
-        System.assert(true); //Just checking that we get to this point = no exception thrown 
+        System.assert(true, 'Assert that this is a no - op.'); //Just checking that we get to this point = no exception thrown 
     }
 
     /***************************************************************************
@@ -79,6 +79,6 @@ private with sharing class TDTM_TriggerScaffolds_TEST {
         );
         Test.stopTest();
 
-        System.assert(true); //Just checking that we get to this point = no exception thrown
+        System.assert(true, 'Assert that this is a no - op.'); //Just checking that we get to this point = no exception thrown
     }
 }

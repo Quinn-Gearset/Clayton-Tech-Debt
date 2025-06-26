@@ -47,7 +47,7 @@ private class SoftCreditsView_TEST {
         SoftCreditsDTO softCreditsDTO = new SoftCreditsDTO(softCredits);
         SoftCreditsView softCreditsView = new SoftCreditsView(softCreditsDTO);
 
-        System.assertEquals(2, softCreditsView.all.size());
+        System.assertEquals(2, softCreditsView.all.size(), 'Checks that the size of all soft credits is equal to 2.');
     }
 
     @isTest
@@ -63,7 +63,7 @@ private class SoftCreditsView_TEST {
         SoftCreditsDTO softCreditsDTO = new SoftCreditsDTO(softCredits);
         SoftCreditsView softCreditsView = new SoftCreditsView(softCreditsDTO);
 
-        System.assertEquals(0, softCreditsView.all.size());
+        System.assertEquals(0, softCreditsView.all.size(), 'Assert that all soft credits are visible.');
     }
 }
 

@@ -56,7 +56,7 @@ public with sharing class UTIL_IntegrationConfig_TEST {
         pkg.namespace = namespace;
 
         String entity = 'TestSObject__c';
-        System.assertEquals(namespace + '__' + entity, pkg.prefixNamespace(entity));
+        System.assertEquals(namespace + '__' + entity, pkg.prefixNamespace(entity), 'Checks that the entity is in the same namespace as the entity in the package.');
     }
 
     /**********************************************************************************************************

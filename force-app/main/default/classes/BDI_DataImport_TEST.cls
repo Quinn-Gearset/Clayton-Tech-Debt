@@ -248,16 +248,16 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(1, listCon.size());
-        System.assertEquals('c1 C1', listCon[0].Name);
+        System.assertEquals(1, listCon.size(), 'Test that the list is exactly 1.');
+        System.assertEquals('c1 C1', listCon[0].Name, 'Checks that the first list con is the same as the first one.');
 
         dataImports = getDataImports();
-        System.assertEquals(1, dataImports.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id);
-        System.assertEquals(dataImports[0].Contact2Imported__c, listCon[0].Id);
-        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[0].Contact2ImportStatus__c);
+        System.assertEquals(1, dataImports.size(), 'Checks that the number of data imports is equal to 1.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertEquals(dataImports[0].Contact2Imported__c, listCon[0].Id, 'Assert that the Contact2Imported class is the same as the Contact1.');
+        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class. It is');
+        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
+        System.assertEquals(label.bdiMatched, dataImports[0].Contact2ImportStatus__c, 'Assert that the bdi matched is the same as the label.');
     }
 
     /*********************************************************************************************************
@@ -279,16 +279,16 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
-        System.assertNotEquals(listCon[1].Name, listCon[0].Name);
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
+        System.assertNotEquals(listCon[1].Name, listCon[0].Name, 'Assert that the names of the two lists are not the same.');
 
         dataImports = getDataImports();
-        System.assertEquals(1, dataImports.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id);
-        System.assertEquals(dataImports[0].Contact2Imported__c, listCon[1].Id);
-        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiCreated, dataImports[0].Contact2ImportStatus__c);
+        System.assertEquals(1, dataImports.size(), 'Checks that the number of data imports is equal to 1.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertEquals(dataImports[0].Contact2Imported__c, listCon[1].Id, 'Assert that the Contact2Imported class is the same as the Contact1Imported class.');
+        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class. It is');
+        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
+        System.assertEquals(label.bdiCreated, dataImports[0].Contact2ImportStatus__c, 'Assert that the Contact2ImportStatus is the same as the Contact2ImportStatus.');
     }
 
     /*********************************************************************************************************
@@ -324,14 +324,14 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> contacts = getContacts();
-        System.assertEquals(1, contacts.size());
-        System.assertEquals(null, contacts[0].FirstName);
+        System.assertEquals(1, contacts.size(), 'Checks that the number of contacts is equal to 1.');
+        System.assertEquals(null, contacts[0].FirstName, 'Assert that the first contact is the same as the first contact.');
 
         List<DataImport__c> imports = getDataImports();
-        System.assertEquals(1, imports.size());
-        System.assertEquals(imports[0].Contact1Imported__c, contacts[0].Id);
-        System.assertNotEquals(null, imports[0].HouseholdAccountImported__c);
-        System.assertEquals(System.Label.bdiMatched, imports[0].Contact1ImportStatus__c);
+        System.assertEquals(1, imports.size(), 'Checks that the number of imports is equal to 1.');
+        System.assertEquals(imports[0].Contact1Imported__c, contacts[0].Id, 'Checks that Contact1 is the same as Contact2.');
+        System.assertNotEquals(null, imports[0].HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported class is not null.');
+        System.assertEquals(System.Label.bdiMatched, imports[0].Contact1ImportStatus__c, 'Assert that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
     }
 
     /*********************************************************************************************************
@@ -354,17 +354,17 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(1, listCon.size());
-        System.assertEquals('c1 C1', listCon[0].Name);
+        System.assertEquals(1, listCon.size(), 'Test that the list is exactly 1.');
+        System.assertEquals('c1 C1', listCon[0].Name, 'Checks that the first list con is the same as the first one.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id);
-        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[0].Id);
-        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c);
-        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[1].Contact1ImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class. It is');
+        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c, 'This method is called from the HouseholdAccount class. It asserts that the dataImports');
+        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
+        System.assertEquals(label.bdiMatched, dataImports[1].Contact1ImportStatus__c, 'Checks if the BDI matched by the label is the same as the BDI matched by');
     }
 
     /*********************************************************************************************************
@@ -387,17 +387,17 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
-        System.assertNotEquals(listCon[1].Name, listCon[0].Name);
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
+        System.assertNotEquals(listCon[1].Name, listCon[0].Name, 'Assert that the names of the two lists are not the same.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id);
-        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[1].Id);
-        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c);
-        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiCreated, dataImports[1].Contact1ImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[1].Id, 'Assert that Contact1 is the same as Contact2.');
+        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class. It is');
+        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c, 'This method is called from the HouseholdAccount class. It asserts that the dataImports');
+        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
+        System.assertEquals(label.bdiCreated, dataImports[1].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
     }
 
     /*********************************************************************************************************
@@ -421,27 +421,27 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
-        System.assertEquals('c1 C1', listCon[0].Name);
-        System.assertEquals('c2 C2', listCon[1].Name);
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
+        System.assertEquals('c1 C1', listCon[0].Name, 'Checks that the first list con is the same as the first one.');
+        System.assertEquals('c2 C2', listCon[1].Name, 'Checks that the name of the con column is equal to the name of the con column.');
 
         // verify only one household account
         List<Account> listAcc = getAccounts();
         // because c2 is first created as a contact1, it will get a hh account, that will
         // later get orphaned when we move c2 to c1's hh account.
-        System.assertEquals(2, listAcc.size());
-        System.assertEquals(listAcc[0].Id, listCon[0].AccountId);
-        System.assertEquals(listAcc[0].Id, listCon[1].AccountId);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertEquals(listAcc[0].Id, listCon[0].AccountId, 'Assert that the account ID and account ID are equal.');
+        System.assertEquals(listAcc[0].Id, listCon[1].AccountId, 'Assert that the list accounts are equal');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id);
-        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[1].Id);
-        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c);
-        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiCreated, dataImports[1].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[0].Contact2ImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[1].Id, 'Assert that Contact1 is the same as Contact2.');
+        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class. It is');
+        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c, 'This method is called from the HouseholdAccount class. It asserts that the dataImports');
+        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
+        System.assertEquals(label.bdiCreated, dataImports[1].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
+        System.assertEquals(label.bdiMatched, dataImports[0].Contact2ImportStatus__c, 'Assert that the bdi matched is the same as the label.');
     }
 
     /*********************************************************************************************************
@@ -474,16 +474,16 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
-        System.assertNotEquals(listCon[1].Name, listCon[0].Name);
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
+        System.assertNotEquals(listCon[1].Name, listCon[0].Name, 'Assert that the names of the two lists are not the same.');
 
         dataImports = getDataImports();
-        System.assertEquals(1, dataImports.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id);
-        System.assertEquals(dataImports[0].Contact2Imported__c, listCon[1].Id);
-        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiMatched, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[0].Contact2ImportStatus__c);
+        System.assertEquals(1, dataImports.size(), 'Checks that the number of data imports is equal to 1.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertEquals(dataImports[0].Contact2Imported__c, listCon[1].Id, 'Assert that the Contact2Imported class is the same as the Contact1Imported class.');
+        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class. It is');
+        System.assertEquals(label.bdiMatched, dataImports[0].Contact1ImportStatus__c, 'Checks if the BDI matched by the label is the same as the BDI matched by');
+        System.assertEquals(label.bdiMatched, dataImports[0].Contact2ImportStatus__c, 'Assert that the bdi matched is the same as the label.');
     }
 
     /*********************************************************************************************************
@@ -499,8 +499,8 @@ public with sharing class BDI_DataImport_TEST {
 
         Contact matched00Contact = listConExisting[0];
 
-        System.assertEquals(1, listConExisting.size());
-        System.assertEquals(CAO_Constants.ONE_TO_ONE_ORGANIZATION_TYPE, listConExisting[0].Account.npe01__System_AccountType__c);
+        System.assertEquals(1, listConExisting.size(), 'Checks that the list is equal to one.');
+        System.assertEquals(CAO_Constants.ONE_TO_ONE_ORGANIZATION_TYPE, listConExisting[0].Account.npe01__System_AccountType__c, 'This function checks that the listConExisting parameter is the one to one organization type.');
         System.assert(matched00Contact.Name.startsWith('TestFirstName00'),
             'The name of the First Contact retrieved does not start with "TestFirstName00"');
         listConExisting[0].Email = 'foo@bar.com';
@@ -522,20 +522,20 @@ public with sharing class BDI_DataImport_TEST {
         Boolean usingAdv = ADV_PackageInfo_SVC.useAdv();
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(1, listCon.size());
-        System.assertEquals(matched00Contact.Name, listCon[0].Name);
+        System.assertEquals(1, listCon.size(), 'Test that the list is exactly 1.');
+        System.assertEquals(matched00Contact.Name, listCon[0].Name, 'This test asserts that the names of the contacts are the same.');
 
         dataImports = getDataImports();
-        System.assertEquals(1, dataImports.size());
-        System.assertEquals(null, dataImports[0].Contact1Imported__c);
-        System.assertEquals(null, dataImports[0].Contact2Imported__c);
-        System.assertEquals(null, dataImports[0].HouseholdAccountImported__c);
+        System.assertEquals(1, dataImports.size(), 'Checks that the number of data imports is equal to 1.');
+        System.assertEquals(null, dataImports[0].Contact1Imported__c, 'This method is called when the first contact is imported.');
+        System.assertEquals(null, dataImports[0].Contact2Imported__c, 'This method is called when the contact2Imported property is null.');
+        System.assertEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class.');
         // With ADV installed, 1x1 Contacts can make Donations, but there cannot be a second Contact on the DI record
         String importError = usingAdv ? label.bdiErrorOneToOneMultiContact : label.bdiErrorNonHHAccountContact;
-        System.assertEquals(importError, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(null, dataImports[0].Contact2ImportStatus__c);
+        System.assertEquals(importError, dataImports[0].Contact1ImportStatus__c, 'Checks if the importError is the same as the importError of the first data import.');
+        System.assertEquals(null, dataImports[0].Contact2ImportStatus__c, 'Checks that the Contact2ImportStatus object is null.');
         List<Address__c> listAddr = getAddresses();
-        System.assertEquals(0, listAddr.size());
+        System.assertEquals(0, listAddr.size(), 'Assert that the list is empty.');
     }
 
     /*********************************************************************************************************
@@ -558,15 +558,15 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
-        System.assertNotEquals(listAcc[1].Name, listAcc[0].Name);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertNotEquals(listAcc[1].Name, listAcc[0].Name, 'Assert that the names of the lists are not the same.');
 
         dataImports = getDataImports();
-        System.assertEquals(1, dataImports.size());
-        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id);
-        System.assertEquals(dataImports[0].Account2Imported__c, listAcc[1].Id);
-        System.assertEquals(label.bdiCreated, dataImports[0].Account1ImportStatus__c);
-        System.assertEquals(label.bdiCreated, dataImports[0].Account2ImportStatus__c);
+        System.assertEquals(1, dataImports.size(), 'Checks that the number of data imports is equal to 1.');
+        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id, 'This function is called when the first import of the account is the same as the first one');
+        System.assertEquals(dataImports[0].Account2Imported__c, listAcc[1].Id, 'This function is called when the account2 imported class is the same as the one in the');
+        System.assertEquals(label.bdiCreated, dataImports[0].Account1ImportStatus__c, 'Checks that label. bdiCreated is the same as label. bdiCreated.');
+        System.assertEquals(label.bdiCreated, dataImports[0].Account2ImportStatus__c, 'Check that label. bdiCreated is the same as label. bdiCreated');
     }
 
     /*********************************************************************************************************
@@ -588,14 +588,14 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Account> listAcc = getAccounts();
-        System.assertEquals(1, listAcc.size());
+        System.assertEquals(1, listAcc.size(), 'Checks that the size of the list is equal to 1.');
 
         dataImports = getDataImports();
-        System.assertEquals(1, dataImports.size());
-        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id);
-        System.assertEquals(dataImports[0].Account2Imported__c, listAcc[0].Id);
-        System.assertEquals(label.bdiCreated, dataImports[0].Account1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[0].Account2ImportStatus__c);
+        System.assertEquals(1, dataImports.size(), 'Checks that the number of data imports is equal to 1.');
+        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id, 'This function is called when the first import of the account is the same as the first one');
+        System.assertEquals(dataImports[0].Account2Imported__c, listAcc[0].Id, 'This function is called when the account2Imported property of the first dataImport is the same');
+        System.assertEquals(label.bdiCreated, dataImports[0].Account1ImportStatus__c, 'Checks that label. bdiCreated is the same as label. bdiCreated.');
+        System.assertEquals(label.bdiMatched, dataImports[0].Account2ImportStatus__c, 'Test if the BDI matched by the label is the same as the BDI matched by');
     }
 
     /*********************************************************************************************************
@@ -618,14 +618,14 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Account> listAcc = getAccounts();
-        System.assertEquals(1, listAcc.size());
+        System.assertEquals(1, listAcc.size(), 'Checks that the size of the list is equal to 1.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id);
-        System.assertEquals(dataImports[1].Account1Imported__c, listAcc[0].Id);
-        System.assertEquals(label.bdiCreated, dataImports[0].Account1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[1].Account1ImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id, 'This function is called when the first import of the account is the same as the first one');
+        System.assertEquals(dataImports[1].Account1Imported__c, listAcc[0].Id, 'This function is called when the first import of the account is the same as the second import');
+        System.assertEquals(label.bdiCreated, dataImports[0].Account1ImportStatus__c, 'Checks that label. bdiCreated is the same as label. bdiCreated.');
+        System.assertEquals(label.bdiMatched, dataImports[1].Account1ImportStatus__c, 'Test if label matches the BDI matched by the dataImports member.');
     }
 
     /*********************************************************************************************************
@@ -655,14 +655,14 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id);
-        System.assertEquals(dataImports[1].Account1Imported__c, listAcc[1].Id);
-        System.assertEquals(label.bdiMatched, dataImports[0].Account1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[1].Account1ImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id, 'This function is called when the first import of the account is the same as the first one');
+        System.assertEquals(dataImports[1].Account1Imported__c, listAcc[1].Id, 'This function is called when the first import of the account1 is the same as the second');
+        System.assertEquals(label.bdiMatched, dataImports[0].Account1ImportStatus__c, 'Test if label matches the BDI matched by the dataImports member.');
+        System.assertEquals(label.bdiMatched, dataImports[1].Account1ImportStatus__c, 'Test if label matches the BDI matched by the dataImports member.');
     }
 
     /*********************************************************************************************************
@@ -697,16 +697,16 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         listAcc = getOrganizations();
-        System.assertEquals(2, listAcc.size());
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id);
-        System.assertEquals(dataImports[1].Account1Imported__c, listAcc[0].Id);
-        System.assertEquals(dataImports[1].Account2Imported__c, listAcc[1].Id);
-        System.assertEquals(label.bdiMatched, dataImports[0].Account1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[1].Account1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[1].Account2ImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].Account1Imported__c, listAcc[0].Id, 'This function is called when the first import of the account is the same as the first one');
+        System.assertEquals(dataImports[1].Account1Imported__c, listAcc[0].Id, 'This function is called when the first import of the account is the same as the second import');
+        System.assertEquals(dataImports[1].Account2Imported__c, listAcc[1].Id, 'This function is called when the first import of the second account is the same as the first');
+        System.assertEquals(label.bdiMatched, dataImports[0].Account1ImportStatus__c, 'Test if label matches the BDI matched by the dataImports member.');
+        System.assertEquals(label.bdiMatched, dataImports[1].Account1ImportStatus__c, 'Test if label matches the BDI matched by the dataImports member.');
+        System.assertEquals(label.bdiMatched, dataImports[1].Account2ImportStatus__c, 'Test if label matches the BDI matched by the dataImports member.');
     }
 
     /*********************************************************************************************************
@@ -774,30 +774,30 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         Map<Id, Contact> contactById = new Map<Id, Contact>(getContacts());
-        System.assertEquals(4, contactById.size());
+        System.assertEquals(4, contactById.size(), 'Checks that the number of contacts is equal to 4.');
 
         dataImports = getDataImports();
 
         for (DataImport__c di : dataImports) {
-            System.assert(contactById.containsKey(di.Contact1Imported__c));
-            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name);
-            System.assert(contactById.containsKey(di.Contact2Imported__c));
-            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name);
-            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId);
-            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId);
+            System.assert(contactById.containsKey(di.Contact1Imported__c), 'This is a no - op if the contact is imported.');
+            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name, 'This is a hack to avoid the import of the Contact1. Name property.');
+            System.assert(contactById.containsKey(di.Contact2Imported__c), 'Checks that Contact2Imported__c is imported.');
+            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name, 'This is a hack to avoid the import of the same name twice.');
+            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId, 'Checks that Contact1Importedc has an AccountId that is not null.');
+            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId, 'Checks that the Account ID is not null.');
         }
 
         List<Account> listAcc = getOrganizations();
-        System.assertEquals(2, listAcc.size());
-        System.assertEquals(contactById.get(dataImports[0].Contact1Imported__c).Primary_Affiliation__c, listAcc[0].Id);
-        System.assertEquals(contactById.get(dataImports[0].Contact2Imported__c).Primary_Affiliation__c, null);
-        System.assertEquals(contactById.get(dataImports[1].Contact1Imported__c).Primary_Affiliation__c, null);
-        System.assertEquals(contactById.get(dataImports[1].Contact2Imported__c).Primary_Affiliation__c, listAcc[1].Id);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertEquals(contactById.get(dataImports[0].Contact1Imported__c).Primary_Affiliation__c, listAcc[0].Id, 'This method is called when the primary affiliation of the contact is the same as the primary');
+        System.assertEquals(contactById.get(dataImports[0].Contact2Imported__c).Primary_Affiliation__c, null, 'This method is called when the contact is imported and the primary affiliation is null.');
+        System.assertEquals(contactById.get(dataImports[1].Contact1Imported__c).Primary_Affiliation__c, null, 'This method is called when the contact is imported and the primary affiliation is null.');
+        System.assertEquals(contactById.get(dataImports[1].Contact2Imported__c).Primary_Affiliation__c, listAcc[1].Id, 'This function is called when the primary affiliation of the contact is the same as the primary');
 
         list<npe5__Affiliation__c> listAffl = getAffiliations();
-        System.assertEquals(2, listAffl.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listAffl[0].npe5__Contact__c);
-        System.assertEquals(dataImports[1].Contact2Imported__c, listAffl[1].npe5__Contact__c);
+        System.assertEquals(2, listAffl.size(), 'Test that the size of the affl list is equal to 2.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listAffl[0].npe5__Contact__c, 'Checks that the values of the dataImports and listAffl are the same.');
+        System.assertEquals(dataImports[1].Contact2Imported__c, listAffl[1].npe5__Contact__c, 'Checks that the two Contact objects are the same.');
 
     }
 
@@ -826,34 +826,34 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         Map<Id, Contact> contactById = new Map<Id, Contact>(getContacts());
-        System.assertEquals(4, contactById.size());
+        System.assertEquals(4, contactById.size(), 'Checks that the number of contacts is equal to 4.');
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
         for (DataImport__c di : dataImports) {
-            System.assert(contactById.containsKey(di.Contact1Imported__c));
-            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name);
-            System.assertEquals(di.Home_City__c, contactById.get(di.Contact1Imported__c).MailingCity);
-            System.assert(contactById.containsKey(di.Contact2Imported__c));
-            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name);
-            System.assertEquals(di.Home_City__c, contactById.get(di.Contact2Imported__c).MailingCity);
-            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId);
-            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId);
+            System.assert(contactById.containsKey(di.Contact1Imported__c), 'This is a no - op if the contact is imported.');
+            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name, 'This is a hack to avoid the import of the Contact1. Name property.');
+            System.assertEquals(di.Home_City__c, contactById.get(di.Contact1Imported__c).MailingCity, 'This is a test function to assert that homeCity and mailingCity are the same.');
+            System.assert(contactById.containsKey(di.Contact2Imported__c), 'Checks that Contact2Imported__c is imported.');
+            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name, 'This is a hack to avoid the import of the same name twice.');
+            System.assertEquals(di.Home_City__c, contactById.get(di.Contact2Imported__c).MailingCity, 'This is a test function to assert that homeCity and mailingCity are the same.');
+            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId, 'Checks that Contact1Importedc has an AccountId that is not null.');
+            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId, 'Checks that the Account ID is not null.');
         }
 
         List<Address__c> listAddr = getAddresses();
-        System.assertEquals(2, listAddr.size());
-        System.assertEquals(dataImports[0].Home_City__c, listAddr[0].MailingCity__c);
-        System.assertEquals(dataImports[0].HomeAddressImported__c, listAddr[0].Id);
-        System.assertEquals(label.bdiCreated, dataImports[0].HomeAddressImportStatus__c);
-        System.assertEquals(dataImports[1].Home_City__c, listAddr[1].MailingCity__c);
-        System.assertEquals(dataImports[1].HomeAddressImported__c, listAddr[1].Id);
-        System.assertEquals(label.bdiCreated, dataImports[1].HomeAddressImportStatus__c);
+        System.assertEquals(2, listAddr.size(), 'Assert that the size of the list is 2.');
+        System.assertEquals(dataImports[0].Home_City__c, listAddr[0].MailingCity__c, 'Test if the data imports are the same.');
+        System.assertEquals(dataImports[0].HomeAddressImported__c, listAddr[0].Id, 'Assert that home address imported is the same as the list address.');
+        System.assertEquals(label.bdiCreated, dataImports[0].HomeAddressImportStatus__c, 'Checks that the home address import status is the same as the one created by the first data');
+        System.assertEquals(dataImports[1].Home_City__c, listAddr[1].MailingCity__c, 'Test if the dataimports are the same.');
+        System.assertEquals(dataImports[1].HomeAddressImported__c, listAddr[1].Id, 'This function is called when the user is asserting that the home address is imported from the');
+        System.assertEquals(label.bdiCreated, dataImports[1].HomeAddressImportStatus__c, 'Checks that the home address import status is the same as the one in the data imports.');
 
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
-        System.assertEquals(dataImports[0].Home_City__c, listAcc[0].BillingCity);
-        System.assertEquals(dataImports[1].Home_City__c, listAcc[1].BillingCity);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertEquals(dataImports[0].Home_City__c, listAcc[0].BillingCity, 'Checks that home city and billing city are the same.');
+        System.assertEquals(dataImports[1].Home_City__c, listAcc[1].BillingCity, 'This function is used to assert that the home city and billing city are the same.');
     }
 
     /*********************************************************************************************************
@@ -889,34 +889,34 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         Map<Id, Contact> contactById = new Map<Id, Contact>(getContacts());
-        System.assertEquals(4, contactById.size());
+        System.assertEquals(4, contactById.size(), 'Checks that the number of contacts is equal to 4.');
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
         for (DataImport__c di : dataImports) {
-            System.assert(contactById.containsKey(di.Contact1Imported__c));
-            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name);
-            System.assertEquals(di.Home_City__c, contactById.get(di.Contact1Imported__c).MailingCity);
-            System.assert(contactById.containsKey(di.Contact2Imported__c));
-            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name);
-            System.assertEquals(di.Home_City__c, contactById.get(di.Contact2Imported__c).MailingCity);
-            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId);
-            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId);
+            System.assert(contactById.containsKey(di.Contact1Imported__c), 'This is a no - op if the contact is imported.');
+            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name, 'This is a hack to avoid the import of the Contact1. Name property.');
+            System.assertEquals(di.Home_City__c, contactById.get(di.Contact1Imported__c).MailingCity, 'This is a test function to assert that homeCity and mailingCity are the same.');
+            System.assert(contactById.containsKey(di.Contact2Imported__c), 'Checks that Contact2Imported__c is imported.');
+            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name, 'This is a hack to avoid the import of the same name twice.');
+            System.assertEquals(di.Home_City__c, contactById.get(di.Contact2Imported__c).MailingCity, 'This is a test function to assert that homeCity and mailingCity are the same.');
+            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId, 'Checks that Contact1Importedc has an AccountId that is not null.');
+            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId, 'Checks that the Account ID is not null.');
         }
 
         List<Address__c> listAddr = getAddresses();
-        System.assertEquals(4, listAddr.size());
-        System.assertEquals(dataImports[0].Home_City__c, listAddr[2].MailingCity__c);
-        System.assertEquals(dataImports[0].HomeAddressImported__c, listAddr[2].Id);
-        System.assertEquals(label.bdiCreated, dataImports[0].HomeAddressImportStatus__c);
-        System.assertEquals(dataImports[1].Home_City__c, listAddr[3].MailingCity__c);
-        System.assertEquals(dataImports[1].HomeAddressImported__c, listAddr[3].Id);
-        System.assertEquals(label.bdiCreated, dataImports[1].HomeAddressImportStatus__c);
+        System.assertEquals(4, listAddr.size(), 'Test that the size of the list is equal to 4.');
+        System.assertEquals(dataImports[0].Home_City__c, listAddr[2].MailingCity__c, 'Test if the dataimports are the same.');
+        System.assertEquals(dataImports[0].HomeAddressImported__c, listAddr[2].Id, 'Assert that the home address imported is the same as the list address.');
+        System.assertEquals(label.bdiCreated, dataImports[0].HomeAddressImportStatus__c, 'Checks that the home address import status is the same as the one created by the first data');
+        System.assertEquals(dataImports[1].Home_City__c, listAddr[3].MailingCity__c, 'Test if the dataimports are the same.');
+        System.assertEquals(dataImports[1].HomeAddressImported__c, listAddr[3].Id, 'Assert that the home address imported from the list is the same as the list address.');
+        System.assertEquals(label.bdiCreated, dataImports[1].HomeAddressImportStatus__c, 'Checks that the home address import status is the same as the one in the data imports.');
 
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
-        System.assertEquals(dataImports[0].Home_City__c, listAcc[0].BillingCity);
-        System.assertEquals(dataImports[1].Home_City__c, listAcc[1].BillingCity);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertEquals(dataImports[0].Home_City__c, listAcc[0].BillingCity, 'Checks that home city and billing city are the same.');
+        System.assertEquals(dataImports[1].Home_City__c, listAcc[1].BillingCity, 'This function is used to assert that the home city and billing city are the same.');
 
     }
 
@@ -957,40 +957,40 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
         dataImports = getDataImports();
-        System.assertEquals(5, dataImports.size());
+        System.assertEquals(5, dataImports.size(), 'Checks that the number of data imports is equal to 5.');
 
         for (Contact con : listCon) {
-            System.assertEquals(dataImports[0].Home_Street__c, con.MailingStreet);
-            System.assertEquals(dataImports[0].Home_City__c, con.MailingCity);
-            System.assertEquals(dataImports[0].Home_State_Province__c, con.MailingState);
-            System.assertEquals(dataImports[0].Home_Zip_Postal_Code__c, con.MailingPostalCode);
-            System.assertEquals(dataImports[0].Home_Country__c, con.MailingCountry);
+            System.assertEquals(dataImports[0].Home_Street__c, con.MailingStreet, 'Assert that the home street is the same as the mailing street.');
+            System.assertEquals(dataImports[0].Home_City__c, con.MailingCity, 'Test if the home city is the same as the mailing city.');
+            System.assertEquals(dataImports[0].Home_State_Province__c, con.MailingState, 'Test if the home state is the same as the mailing state.');
+            System.assertEquals(dataImports[0].Home_Zip_Postal_Code__c, con.MailingPostalCode, 'This function is used to test if the home postal code is the same as the postal code');
+            System.assertEquals(dataImports[0].Home_Country__c, con.MailingCountry, 'Checks that the home country is the same as the mailing country.');
         }
 
         List<Address__c> listAddr = getAddresses();
-        System.assertEquals(1, listAddr.size());
-        System.assertEquals(dataImports[0].Home_Street__c, listAddr[0].MailingStreet__c);
-        System.assertEquals(dataImports[0].Home_City__c, listAddr[0].MailingCity__c);
-        System.assertEquals(dataImports[0].Home_State_Province__c, listAddr[0].MailingState__c);
-        System.assertEquals(dataImports[0].Home_Zip_Postal_Code__c, listAddr[0].MailingPostalCode__c);
-        System.assertEquals(dataImports[0].Home_Country__c, listAddr[0].MailingCountry__c);
+        System.assertEquals(1, listAddr.size(), 'Assert that the size of the list is equal to 1.');
+        System.assertEquals(dataImports[0].Home_Street__c, listAddr[0].MailingStreet__c, 'Assert that home and mailing addresses are the same.');
+        System.assertEquals(dataImports[0].Home_City__c, listAddr[0].MailingCity__c, 'Test if the data imports are the same.');
+        System.assertEquals(dataImports[0].Home_State_Province__c, listAddr[0].MailingState__c, 'Test if the data imports are the same.');
+        System.assertEquals(dataImports[0].Home_Zip_Postal_Code__c, listAddr[0].MailingPostalCode__c, 'This function is used to assert that the dataImports are the same.');
+        System.assertEquals(dataImports[0].Home_Country__c, listAddr[0].MailingCountry__c, 'Checks that the country of the data imported is the same as the country of the mailing');
 
         List<Account> listAcc = getAccounts();
         // because c2 is first created as a contact1, it will get a hh account, that will
         // later get orphaned when we move c2 to c1's hh account.
-        System.assertEquals(2, listAcc.size());
-        System.assertEquals(dataImports[0].Home_Street__c, listAcc[0].BillingStreet);
-        System.assertEquals(dataImports[0].Home_City__c, listAcc[0].BillingCity);
-        System.assertEquals(dataImports[0].Home_State_Province__c, listAcc[0].BillingState);
-        System.assertEquals(dataImports[0].Home_Zip_Postal_Code__c, listAcc[0].BillingPostalCode);
-        System.assertEquals(dataImports[0].Home_Country__c, listAcc[0].BillingCountry);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertEquals(dataImports[0].Home_Street__c, listAcc[0].BillingStreet, 'This function is used to assert that the home street is the same as the billing street.');
+        System.assertEquals(dataImports[0].Home_City__c, listAcc[0].BillingCity, 'Checks that home city and billing city are the same.');
+        System.assertEquals(dataImports[0].Home_State_Province__c, listAcc[0].BillingState, 'Checks that home state is the same as billing state');
+        System.assertEquals(dataImports[0].Home_Zip_Postal_Code__c, listAcc[0].BillingPostalCode, 'This function is used to test if the home zip postal code and billing postal code are the');
+        System.assertEquals(dataImports[0].Home_Country__c, listAcc[0].BillingCountry, 'This function is used to assert that the country of the home account is the same as the');
 
         integer cCreated = 0;
         integer cMatched = 0;
         for (DataImport__c di : dataImports) {
-            System.assertEquals(di.HomeAddressImported__c, listAddr[0].Id);
+            System.assertEquals(di.HomeAddressImported__c, listAddr[0].Id, 'asserts that home address imported is the same as the first address imported');
             if (di.HomeAddressImportStatus__c == label.bdiCreated)
                 cCreated++;
             else if (di.HomeAddressImportStatus__c == label.bdiMatched)
@@ -998,8 +998,8 @@ public with sharing class BDI_DataImport_TEST {
         }
         // we didn't have an easy way to track the specific DI record that caused the addr to be created vs matched
         // in these duplicate (but new) scenarios, so we will live with marking them all as created.
-        System.assertEquals(5, cCreated);
-        System.assertEquals(0, cMatched);
+        System.assertEquals(5, cCreated, 'Test for the case where cCreated is equal to 5.');
+        System.assertEquals(0, cMatched, 'Assert that cMatched is the same as cMatched.');
     }
 
     /*********************************************************************************************************
@@ -1033,28 +1033,28 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         Map<Id, Contact> contactById = new Map<Id, Contact>(getContacts());
-        System.assertEquals(4, contactById.size());
+        System.assertEquals(4, contactById.size(), 'Checks that the number of contacts is equal to 4.');
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
         for (DataImport__c di : dataImports) {
-            System.assert(contactById.containsKey(di.Contact1Imported__c));
-            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name);
-            System.assertEquals(di.Home_City__c, contactById.get(di.Contact1Imported__c).MailingCity);
-            System.assert(contactById.containsKey(di.Contact2Imported__c));
-            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name);
-            System.assertEquals(di.Home_City__c, contactById.get(di.Contact2Imported__c).MailingCity);
-            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId);
-            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId);
+            System.assert(contactById.containsKey(di.Contact1Imported__c), 'This is a no - op if the contact is imported.');
+            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name, 'This is a hack to avoid the import of the Contact1. Name property.');
+            System.assertEquals(di.Home_City__c, contactById.get(di.Contact1Imported__c).MailingCity, 'This is a test function to assert that homeCity and mailingCity are the same.');
+            System.assert(contactById.containsKey(di.Contact2Imported__c), 'Checks that Contact2Imported__c is imported.');
+            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name, 'This is a hack to avoid the import of the same name twice.');
+            System.assertEquals(di.Home_City__c, contactById.get(di.Contact2Imported__c).MailingCity, 'This is a test function to assert that homeCity and mailingCity are the same.');
+            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId, 'Checks that Contact1Importedc has an AccountId that is not null.');
+            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId, 'Checks that the Account ID is not null.');
         }
 
         List<Address__c> listAddr = getAddresses();
-        System.assertEquals(0, listAddr.size());
+        System.assertEquals(0, listAddr.size(), 'Assert that the list is empty.');
 
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
-        System.assertEquals('Seattle', listAcc[0].BillingCity);
-        System.assertEquals('Portland', listAcc[1].BillingCity);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertEquals('Seattle', listAcc[0].BillingCity, 'Checks that the billing city of the account is the same as the first billing city.');
+        System.assertEquals('Portland', listAcc[1].BillingCity, 'Checks that the billing city of the first account is the same as the billing city of the');
     }
 
     /*********************************************************************************************************
@@ -1091,26 +1091,26 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
 
         List<Address__c> listAddr = getAddresses();
-        System.assertEquals(3, listAddr.size());
-        System.assertEquals('Seattle', listAddr[0].MailingCity__c);
-        System.assertEquals('Portland', listAddr[1].MailingCity__c);
-        System.assertEquals('Bellevue', listAddr[2].MailingCity__c);
+        System.assertEquals(3, listAddr.size(), 'Assert that the size of the list is equal to 3.');
+        System.assertEquals('Seattle', listAddr[0].MailingCity__c, 'Assert that the first mailing city is Seattle.');
+        System.assertEquals('Portland', listAddr[1].MailingCity__c, 'Assert that the first address is the Portland.');
+        System.assertEquals('Bellevue', listAddr[2].MailingCity__c, 'assert that listAddr is of the form Bellevue');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id);
-        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[1].Id);
-        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c);
-        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiMatched, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiMatched, dataImports[1].Contact1ImportStatus__c);
-        System.assertEquals(listAddr[0].Id, dataImports[0].HomeAddressImported__c);
-        System.assertEquals(listAddr[2].Id, dataImports[1].HomeAddressImported__c);
-        System.assertEquals(label.bdiMatched, dataImports[0].HomeAddressImportStatus__c);
-        System.assertEquals(label.bdiCreated, dataImports[1].HomeAddressImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[1].Id, 'Assert that Contact1 is the same as Contact2.');
+        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class. It is');
+        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c, 'This method is called from the HouseholdAccount class. It asserts that the dataImports');
+        System.assertEquals(label.bdiMatched, dataImports[0].Contact1ImportStatus__c, 'Checks if the BDI matched by the label is the same as the BDI matched by');
+        System.assertEquals(label.bdiMatched, dataImports[1].Contact1ImportStatus__c, 'Checks if the BDI matched by the label is the same as the BDI matched by');
+        System.assertEquals(listAddr[0].Id, dataImports[0].HomeAddressImported__c, 'This function is called when the listAddr is equal to the homeAddressImported attribute of the');
+        System.assertEquals(listAddr[2].Id, dataImports[1].HomeAddressImported__c, 'This function is called when the listAddr is the same as the dataImports.');
+        System.assertEquals(label.bdiMatched, dataImports[0].HomeAddressImportStatus__c, 'Assert that the BDI matched by the label is the same as the home address import status');
+        System.assertEquals(label.bdiCreated, dataImports[1].HomeAddressImportStatus__c, 'Checks that the home address import status is the same as the one in the data imports.');
     }
 
     /*********************************************************************************************************
@@ -1155,17 +1155,17 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
-        System.assertEquals('Bellevue', listCon[0].MailingCity);
-        System.assertEquals('Bellevue', listCon[1].MailingCity);
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
+        System.assertEquals('Bellevue', listCon[0].MailingCity, 'Assert that the first mailing city is Bellevue');
+        System.assertEquals('Bellevue', listCon[1].MailingCity, 'Assert that the first mailing city is Bellevue.');
 
         List<Address__c> listAddr = getAddresses();
-        System.assertEquals(0, listAddr.size());
+        System.assertEquals(0, listAddr.size(), 'Assert that the list is empty.');
 
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
-        System.assertEquals('Bellevue', listAcc[0].BillingCity);
-        System.assertEquals('Bellevue', listAcc[1].BillingCity);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertEquals('Bellevue', listAcc[0].BillingCity, 'Checks that the billing city of the first account is Bellevue.');
+        System.assertEquals('Bellevue', listAcc[1].BillingCity, 'Checks that the billing city of the first account is Bellevue.');
     }
 
     /*********************************************************************************************************
@@ -1201,56 +1201,56 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         Map<Id, Contact> contactById = new Map<Id, Contact>(getContacts());
-        System.assertEquals(4, contactById.size());
+        System.assertEquals(4, contactById.size(), 'Checks that the number of contacts is equal to 4.');
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
         for (DataImport__c di : dataImports) {
-            System.assert(contactById.containsKey(di.Contact1Imported__c));
-            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name);
-            System.assertEquals(0, contactById.get(di.Contact1Imported__c).npo02__TotalOppAmount__c);
-            System.assert(contactById.containsKey(di.Contact2Imported__c));
-            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name);
-            System.assertEquals(0, contactById.get(di.Contact2Imported__c).npo02__TotalOppAmount__c);
-            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId);
-            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId);
+            System.assert(contactById.containsKey(di.Contact1Imported__c), 'This is a no - op if the contact is imported.');
+            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name, 'This is a hack to avoid the import of the Contact1. Name property.');
+            System.assertEquals(0, contactById.get(di.Contact1Imported__c).npo02__TotalOppAmount__c, 'This test asserts that the total OPP amount of imported Contact1 is equal to the total');
+            System.assert(contactById.containsKey(di.Contact2Imported__c), 'Checks that Contact2Imported__c is imported.');
+            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name, 'This is a hack to avoid the import of the same name twice.');
+            System.assertEquals(0, contactById.get(di.Contact2Imported__c).npo02__TotalOppAmount__c, 'This test asserts that the total OPP amount of the imported Contact2 is equal to the');
+            System.assertNotEquals(null, contactById.get(di.Contact1Imported__c).AccountId, 'Checks that Contact1Importedc has an AccountId that is not null.');
+            System.assertNotEquals(null, contactById.get(di.Contact2Imported__c).AccountId, 'Checks that the Account ID is not null.');
         }
 
         // we no longer run rollups, unless the setting is specified
 
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
-        System.assertEquals(0, listAcc[0].npo02__TotalOppAmount__c);
-        System.assertEquals(0, listAcc[1].npo02__TotalOppAmount__c);
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
+        System.assertEquals(0, listAcc[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the NPO - 2. 0 list');
+        System.assertEquals(0, listAcc[1].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the NPO - 2.');
 
         List<Opportunity> listOpp = getOpps();
-        System.assertEquals(2, listOpp.size());
-        System.assertEquals(100, listOpp[0].Amount);
-        System.assertEquals(200, listOpp[1].Amount);
-        System.assertEquals(listAcc[0].Id, listOpp[0].AccountId);
-        System.assertEquals(listAcc[1].Id, listOpp[1].AccountId);
+        System.assertEquals(2, listOpp.size(), 'Assert that 2 opp lists are equal.');
+        System.assertEquals(100, listOpp[0].Amount, 'Test if the sum of the opps is equal to 100.');
+        System.assertEquals(200, listOpp[1].Amount, 'Test that the sum of the operations in the listOpp is 200.');
+        System.assertEquals(listAcc[0].Id, listOpp[0].AccountId, 'Assert that the list account ID and account ID are the same.');
+        System.assertEquals(listAcc[1].Id, listOpp[1].AccountId, 'This function is used to assert that the two lists are identical.');
 
         List<npe01__OppPayment__c> listPmt = getPayments();
-        System.assertEquals(2, listPmt.size());
-        System.assertEquals(100, listPmt[0].npe01__Payment_Amount__c);
-        System.assertEquals(200, listPmt[1].npe01__Payment_Amount__c);
-        System.assertEquals('Check', listPmt[0].npe01__Payment_Method__c);
-        System.assertEquals('Visa', listPmt[1].npe01__Payment_Method__c);
-        System.assertEquals('abc', listPmt[0].npe01__Check_Reference_Number__c);
-        System.assertEquals('1234', listPmt[1].npe01__Check_Reference_Number__c);
+        System.assertEquals(2, listPmt.size(), 'Test that the size of the list is equal to 2.');
+        System.assertEquals(100, listPmt[0].npe01__Payment_Amount__c, 'This function is used to check if the payment amount of the first NPE01 payment is');
+        System.assertEquals(200, listPmt[1].npe01__Payment_Amount__c, 'This function is used to check the payment amount of the NPE01 payment.');
+        System.assertEquals('Check', listPmt[0].npe01__Payment_Method__c, 'This method is called to assert that the payment method is checked.');
+        System.assertEquals('Visa', listPmt[1].npe01__Payment_Method__c, 'This method is called in the NPE01 class. It asserts that the payment method is');
+        System.assertEquals('abc', listPmt[0].npe01__Check_Reference_Number__c, 'Checks that the reference number of the PMT is equal to abc.');
+        System.assertEquals('1234', listPmt[1].npe01__Check_Reference_Number__c, 'Checks that the reference number of the PMT is equal to the reference number of the P');
 
         List<OpportunityContactRole> listOCR = getOCRs();
-        System.assertEquals(4, listOCR.size());
+        System.assertEquals(4, listOCR.size(), 'Checks that the OCR list is exactly 4.');
         for (OpportunityContactRole ocr : listOCR) {
-            System.assert(contactById.containsKey(ocr.ContactId));
+            System.assert(contactById.containsKey(ocr.ContactId), 'This method is called by OCR to assert that the contact is in the contactById map');
         }
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].DonationImported__c, listOpp[0].Id);
-        System.assertEquals(dataImports[1].DonationImported__c, listOpp[1].Id);
-        System.assertEquals(label.bdiCreated, dataImports[0].DonationImportStatus__c);
-        System.assertEquals(label.bdiCreated, dataImports[1].DonationImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].DonationImported__c, listOpp[0].Id, 'Assert that the dataImports and listOpp are the same.');
+        System.assertEquals(dataImports[1].DonationImported__c, listOpp[1].Id, 'Assert that the dataImports and listOpp are identical.');
+        System.assertEquals(label.bdiCreated, dataImports[0].DonationImportStatus__c, 'Checks that the label of the data imports is the same as the label of the data import');
+        System.assertEquals(label.bdiCreated, dataImports[1].DonationImportStatus__c, 'Checks that the label of the data imports is the same as the label of the data import');
     }
 
     /*********************************************************************************************************
@@ -1284,36 +1284,36 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
         // we no longer run rollups, unless the setting is specified
-        System.assertEquals(0, listAcc[0].npo02__TotalOppAmount__c);
-        System.assertEquals(0, listAcc[1].npo02__TotalOppAmount__c);
+        System.assertEquals(0, listAcc[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the NPO - 2. 0 list');
+        System.assertEquals(0, listAcc[1].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the NPO - 2.');
 
         List<Opportunity> listOpp = getOpps();
-        System.assertEquals(2, listOpp.size());
-        System.assertEquals(100, listOpp[0].Amount);
-        System.assertEquals(200, listOpp[1].Amount);
-        System.assertEquals(listAcc[0].Id, listOpp[0].AccountId);
-        System.assertEquals(listAcc[1].Id, listOpp[1].AccountId);
+        System.assertEquals(2, listOpp.size(), 'Assert that 2 opp lists are equal.');
+        System.assertEquals(100, listOpp[0].Amount, 'Test if the sum of the opps is equal to 100.');
+        System.assertEquals(200, listOpp[1].Amount, 'Test that the sum of the operations in the listOpp is 200.');
+        System.assertEquals(listAcc[0].Id, listOpp[0].AccountId, 'Assert that the list account ID and account ID are the same.');
+        System.assertEquals(listAcc[1].Id, listOpp[1].AccountId, 'This function is used to assert that the two lists are identical.');
 
         list<npe01__OppPayment__c> listPmt = getPayments();
-        System.assertEquals(2, listPmt.size());
-        System.assertEquals(100, listPmt[0].npe01__Payment_Amount__c);
-        System.assertEquals(200, listPmt[1].npe01__Payment_Amount__c);
-        System.assertEquals('Check', listPmt[0].npe01__Payment_Method__c);
-        System.assertEquals('Visa', listPmt[1].npe01__Payment_Method__c);
-        System.assertEquals('abc', listPmt[0].npe01__Check_Reference_Number__c);
-        System.assertEquals('1234', listPmt[1].npe01__Check_Reference_Number__c);
+        System.assertEquals(2, listPmt.size(), 'Test that the size of the list is equal to 2.');
+        System.assertEquals(100, listPmt[0].npe01__Payment_Amount__c, 'This function is used to check if the payment amount of the first NPE01 payment is');
+        System.assertEquals(200, listPmt[1].npe01__Payment_Amount__c, 'This function is used to check the payment amount of the NPE01 payment.');
+        System.assertEquals('Check', listPmt[0].npe01__Payment_Method__c, 'This method is called to assert that the payment method is checked.');
+        System.assertEquals('Visa', listPmt[1].npe01__Payment_Method__c, 'This method is called in the NPE01 class. It asserts that the payment method is');
+        System.assertEquals('abc', listPmt[0].npe01__Check_Reference_Number__c, 'Checks that the reference number of the PMT is equal to abc.');
+        System.assertEquals('1234', listPmt[1].npe01__Check_Reference_Number__c, 'Checks that the reference number of the PMT is equal to the reference number of the P');
 
         list<OpportunityContactRole> listOCR = getOCRs();
-        System.assertEquals(0, listOCR.size());
+        System.assertEquals(0, listOCR.size(), 'Checks that the OCR list is empty.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].DonationImported__c, listOpp[0].Id);
-        System.assertEquals(dataImports[1].DonationImported__c, listOpp[1].Id);
-        System.assertEquals(label.bdiCreated, dataImports[0].DonationImportStatus__c);
-        System.assertEquals(label.bdiCreated, dataImports[1].DonationImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].DonationImported__c, listOpp[0].Id, 'Assert that the dataImports and listOpp are the same.');
+        System.assertEquals(dataImports[1].DonationImported__c, listOpp[1].Id, 'Assert that the dataImports and listOpp are identical.');
+        System.assertEquals(label.bdiCreated, dataImports[0].DonationImportStatus__c, 'Checks that the label of the data imports is the same as the label of the data import');
+        System.assertEquals(label.bdiCreated, dataImports[1].DonationImportStatus__c, 'Checks that the label of the data imports is the same as the label of the data import');
     }
 
     /*********************************************************************************************************
@@ -1346,38 +1346,38 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> contacts = getContacts();
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
 
         List<Account> accounts = getAccounts();
-        System.assertEquals(2, accounts.size());
+        System.assertEquals(2, accounts.size(), 'Checks that 2 accounts are in the account list.');
         // we no longer run rollups, unless the setting is specified
-        System.assertEquals(0, accounts[0].npo02__TotalOppAmount__c);
-        System.assertEquals(0, accounts[1].npo02__TotalOppAmount__c);
+        System.assertEquals(0, accounts[0].npo02__TotalOppAmount__c, 'This function is used to assert that the total OPP amount of the NPO02 account');
+        System.assertEquals(0, accounts[1].npo02__TotalOppAmount__c, 'This function is used to assert that the total OPP amount of the NPO 2.');
 
         List<Opportunity> opps = getOpps();
-        System.assertEquals(2, opps.size());
-        System.assertEquals(100, opps[0].Amount);
-        System.assertEquals(200, opps[1].Amount);
-        System.assertEquals(accounts[0].Id, opps[0].AccountId);
-        System.assertEquals(accounts[1].Id, opps[1].AccountId);
+        System.assertEquals(2, opps.size(), 'Assert that 2 opps are in the opps list.');
+        System.assertEquals(100, opps[0].Amount, 'Assert that the current opps are equal to 100.');
+        System.assertEquals(200, opps[1].Amount, 'Test that the current opps are equal to 200.');
+        System.assertEquals(accounts[0].Id, opps[0].AccountId, 'Assert that the account IDs are the same.');
+        System.assertEquals(accounts[1].Id, opps[1].AccountId, 'Checks that the two opps are equal.');
 
         campaigns = getCampaigns();
-        System.assertEquals(2, campaigns.size());
-        System.assertEquals(opps[0].CampaignId, campaigns[0].Id);
-        System.assertEquals(opps[1].CampaignId, campaigns[1].Id);
+        System.assertEquals(2, campaigns.size(), 'Asserts that 2 campaigns are in the list.');
+        System.assertEquals(opps[0].CampaignId, campaigns[0].Id, 'Checks that the opps and campaigns are equal.');
+        System.assertEquals(opps[1].CampaignId, campaigns[1].Id, 'Checks that the opps are equal.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
-        System.assertEquals(dataImports[0].DonationImported__c, opps[0].Id);
-        System.assertEquals(System.Label.bdiCreated, dataImports[0].DonationImportStatus__c);
-        System.assertEquals(System.Label.bdiMatched, dataImports[0].DonationCampaignImportStatus__c);
-        System.assertEquals(campaigns[0].Id, dataImports[0].DonationCampaignImported__c);
+        System.assertEquals(dataImports[0].DonationImported__c, opps[0].Id, 'Assert that the dataImports and opps are the same.');
+        System.assertEquals(System.Label.bdiCreated, dataImports[0].DonationImportStatus__c, 'Assert that the label of the first data import is the same as the label of the first');
+        System.assertEquals(System.Label.bdiMatched, dataImports[0].DonationCampaignImportStatus__c, 'Assert that the BDI label of the first data import is the same as the BDI');
+        System.assertEquals(campaigns[0].Id, dataImports[0].DonationCampaignImported__c, 'This method is called to assert that the campaigns are the same.');
 
-        System.assertEquals(dataImports[1].DonationImported__c, opps[1].Id);
-        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationImportStatus__c);
-        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationCampaignImportStatus__c);
-        System.assertEquals(campaigns[1].Id, dataImports[1].DonationCampaignImported__c);
+        System.assertEquals(dataImports[1].DonationImported__c, opps[1].Id, 'Assert that the dataImports and opps are identical.');
+        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationImportStatus__c, 'Assert that the label of the first data import is the same as the label of the second');
+        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationCampaignImportStatus__c, 'Checks that the BDI created label is the same as the BDI created label.');
+        System.assertEquals(campaigns[1].Id, dataImports[1].DonationCampaignImported__c, 'This method is called when the campaigns are imported from the data - imports file.');
     }
 
     /*********************************************************************************************************
@@ -1418,27 +1418,27 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Opportunity> opps = getOpps();
-        System.assertEquals(2, opps.size());
-        System.assertEquals(100, opps[0].Amount);
-        System.assertEquals(200, opps[1].Amount);
+        System.assertEquals(2, opps.size(), 'Assert that 2 opps are in the opps list.');
+        System.assertEquals(100, opps[0].Amount, 'Assert that the current opps are equal to 100.');
+        System.assertEquals(200, opps[1].Amount, 'Test that the current opps are equal to 200.');
 
         campaigns = getCampaigns();
-        System.assertEquals(2, campaigns.size());
-        System.assertEquals(campaigns[0].Id, opps[0].CampaignId);
-        System.assertEquals(campaigns[1].Id, opps[1].CampaignId);
+        System.assertEquals(2, campaigns.size(), 'Asserts that 2 campaigns are in the list.');
+        System.assertEquals(campaigns[0].Id, opps[0].CampaignId, 'Checks that the campaigns are equal.');
+        System.assertEquals(campaigns[1].Id, opps[1].CampaignId, 'Checks that the campaigns are equal.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
-        System.assertEquals(opps[0].Id, dataImports[0].DonationImported__c);
-        System.assertEquals(System.Label.bdiCreated, dataImports[0].DonationImportStatus__c);
-        System.assertEquals(campaigns[0].Id, dataImports[0].DonationCampaignImported__c);
-        System.assertEquals(System.Label.bdiMatchedId, dataImports[0].DonationCampaignImportStatus__c);
+        System.assertEquals(opps[0].Id, dataImports[0].DonationImported__c, 'Assert that the opps are the same and the dataImports are the same.');
+        System.assertEquals(System.Label.bdiCreated, dataImports[0].DonationImportStatus__c, 'Assert that the label of the first data import is the same as the label of the first');
+        System.assertEquals(campaigns[0].Id, dataImports[0].DonationCampaignImported__c, 'This method is called to assert that the campaigns are the same.');
+        System.assertEquals(System.Label.bdiMatchedId, dataImports[0].DonationCampaignImportStatus__c, 'This method is called when the BDI label of the first DonationCampaignImport is matched');
 
-        System.assertEquals(opps[1].Id, dataImports[1].DonationImported__c);
-        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationImportStatus__c);
-        System.assertEquals(campaigns[1].Id, dataImports[1].DonationCampaignImported__c);
-        System.assertEquals(System.Label.bdiMatched, dataImports[1].DonationCampaignImportStatus__c);
+        System.assertEquals(opps[1].Id, dataImports[1].DonationImported__c, 'Assert that the dataImports of the first opps object is the same as the donation');
+        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationImportStatus__c, 'Assert that the label of the first data import is the same as the label of the second');
+        System.assertEquals(campaigns[1].Id, dataImports[1].DonationCampaignImported__c, 'This method is called when the campaigns are imported from the data - imports file.');
+        System.assertEquals(System.Label.bdiMatched, dataImports[1].DonationCampaignImportStatus__c, 'Checks that the BDI label of the first data import is the same as the BDI');
 
     }
 
@@ -1476,18 +1476,18 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Opportunity> opps = getOpps();
-        System.assertEquals(0, opps.size());
+        System.assertEquals(0, opps.size(), 'Assert that all opps are empty.');
 
         List<Campaign> campaigns = getCampaigns();
-        System.assertEquals(0, campaigns.size());
+        System.assertEquals(0, campaigns.size(), 'Asserts that the campaigns are empty.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
-        System.assertEquals(null, dataImports[0].DonationCampaignImported__c);
-        System.assertEquals(System.Label.bdiDryRunNoMatch, dataImports[0].DonationCampaignImportStatus__c);
-        System.assertEquals(null, dataImports[1].DonationCampaignImported__c);
-        System.assertEquals(System.Label.bdiDryRunNoMatch, dataImports[1].DonationCampaignImportStatus__c);
+        System.assertEquals(null, dataImports[0].DonationCampaignImported__c, 'This method is called when the first DonationCampaign is imported.');
+        System.assertEquals(System.Label.bdiDryRunNoMatch, dataImports[0].DonationCampaignImportStatus__c, 'This test asserts that the bdi dry - run command is not matching the dataImports label');
+        System.assertEquals(null, dataImports[1].DonationCampaignImported__c, 'This method is called from the testing framework to assert that the dataImports attribute is set to');
+        System.assertEquals(System.Label.bdiDryRunNoMatch, dataImports[1].DonationCampaignImportStatus__c, 'This test asserts that the bdi dry - run command is not matching the bdi dry');
     }
 
     /*********************************************************************************************************
@@ -1521,27 +1521,27 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Opportunity> opps = getOpps();
-        System.assertEquals(2, opps.size());
-        System.assertEquals(100, opps[0].Amount);
-        System.assertEquals(200, opps[1].Amount);
+        System.assertEquals(2, opps.size(), 'Assert that 2 opps are in the opps list.');
+        System.assertEquals(100, opps[0].Amount, 'Assert that the current opps are equal to 100.');
+        System.assertEquals(200, opps[1].Amount, 'Test that the current opps are equal to 200.');
 
         List<Campaign> campaigns = getCampaigns();
-        System.assertEquals(1, campaigns.size());
-        System.assertEquals(campaigns[0].Id, opps[0].CampaignId);
-        System.assertEquals(campaigns[0].Id, opps[1].CampaignId);
+        System.assertEquals(1, campaigns.size(), 'Asserts that the number of campaigns is equal to 1.');
+        System.assertEquals(campaigns[0].Id, opps[0].CampaignId, 'Checks that the campaigns are equal.');
+        System.assertEquals(campaigns[0].Id, opps[1].CampaignId, 'Checks that the campaigns are equal.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
-        System.assertEquals(opps[0].Id, dataImports[0].DonationImported__c);
-        System.assertEquals(System.Label.bdiCreated, dataImports[0].DonationImportStatus__c);
-        System.assertEquals(campaigns[0].Id, dataImports[0].DonationCampaignImported__c);
-        System.assertEquals(System.Label.bdiCreated, dataImports[0].DonationCampaignImportStatus__c);
+        System.assertEquals(opps[0].Id, dataImports[0].DonationImported__c, 'Assert that the opps are the same and the dataImports are the same.');
+        System.assertEquals(System.Label.bdiCreated, dataImports[0].DonationImportStatus__c, 'Assert that the label of the first data import is the same as the label of the first');
+        System.assertEquals(campaigns[0].Id, dataImports[0].DonationCampaignImported__c, 'This method is called to assert that the campaigns are the same.');
+        System.assertEquals(System.Label.bdiCreated, dataImports[0].DonationCampaignImportStatus__c, 'Assert that the BDI created label is the same as the ImportStatus label.');
 
-        System.assertEquals(opps[1].Id, dataImports[1].DonationImported__c);
-        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationImportStatus__c);
-        System.assertEquals(campaigns[0].Id, dataImports[1].DonationCampaignImported__c);
-        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationCampaignImportStatus__c);
+        System.assertEquals(opps[1].Id, dataImports[1].DonationImported__c, 'Assert that the dataImports of the first opps object is the same as the donation');
+        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationImportStatus__c, 'Assert that the label of the first data import is the same as the label of the second');
+        System.assertEquals(campaigns[0].Id, dataImports[1].DonationCampaignImported__c, 'This method is called when the campaigns are imported from the data import.');
+        System.assertEquals(System.Label.bdiCreated, dataImports[1].DonationCampaignImportStatus__c, 'Checks that the BDI created label is the same as the BDI created label.');
 
     }
 
@@ -1585,10 +1585,10 @@ public with sharing class BDI_DataImport_TEST {
 
         //verify dry run statuses and import fields
         dataImports = getDataImports();
-        System.assertEquals(System.Label.bdiDryRunMatchedId, dataImports[0].DonationCampaignImportStatus__c);
-        System.assertEquals(campaigns[0].Id, dataImports[0].DonationCampaignImported__c);
-        System.assertEquals(System.Label.bdiDryRunMatched, dataImports[1].DonationCampaignImportStatus__c);
-        System.assertEquals(campaigns[1].Id, dataImports[1].DonationCampaignImported__c);
+        System.assertEquals(System.Label.bdiDryRunMatchedId, dataImports[0].DonationCampaignImportStatus__c, 'This test asserts that the bdi dry run is matched by the import status of the first');
+        System.assertEquals(campaigns[0].Id, dataImports[0].DonationCampaignImported__c, 'This method is called to assert that the campaigns are the same.');
+        System.assertEquals(System.Label.bdiDryRunMatched, dataImports[1].DonationCampaignImportStatus__c, 'Checks that the bdi dry run flag is matched.');
+        System.assertEquals(campaigns[1].Id, dataImports[1].DonationCampaignImported__c, 'This method is called when the campaigns are imported from the data - imports file.');
     }
 
     /*********************************************************************************************************
@@ -1649,9 +1649,9 @@ public with sharing class BDI_DataImport_TEST {
             'A data import should have matched '+campaigns[1].Name);
 
         System.assertEquals(System.Label.bdiMatchedId,
-            dataImportsByCampaignId.get(campaigns[0].Id).DonationCampaignImportStatus__c);
+            dataImportsByCampaignId.get(campaigns[0].Id).DonationCampaignImportStatus__c, 'This method is called when the campaign import status is matched.');
         System.assertEquals(System.Label.bdiMatched,
-            dataImportsByCampaignId.get(campaigns[1].Id).DonationCampaignImportStatus__c);
+            dataImportsByCampaignId.get(campaigns[1].Id).DonationCampaignImportStatus__c, 'This method is called when the campaign import status is matched.');
     }
 
     /*********************************************************************************************************
@@ -1683,20 +1683,20 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
 
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
 
         List<Campaign> listCmp = getCampaigns();
-        System.assertEquals(2, listCmp.size());
+        System.assertEquals(2, listCmp.size(), 'Assert that 2 lists are equal.');
 
         list<CampaignMember> listCM = getCampaignMembers();
-        System.assertEquals(2, listCM.size());
-        System.assertEquals(listCon[0].Id, listCM[0].ContactId);
-        System.assertNotEquals('zMyStatus', listCM[0].Status);
-        System.assertEquals(listCon[1].Id, listCM[1].ContactId);
-        System.assertEquals('zMyStatus', listCM[1].Status);
+        System.assertEquals(2, listCM.size(), 'Assert that the size of the list is equal to 2.');
+        System.assertEquals(listCon[0].Id, listCM[0].ContactId, 'Assert that the Contacts are the same');
+        System.assertNotEquals('zMyStatus', listCM[0].Status, 'Assert that zMyStatus is not the same as zMyStatus');
+        System.assertEquals(listCon[1].Id, listCM[1].ContactId, 'Assert that listCon and listCM are equal');
+        System.assertEquals('zMyStatus', listCM[1].Status, 'Checks that zMyStatus is the same as zMyStatus in the listCM.');
 
     }
 
@@ -1724,24 +1724,24 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
         // we no longer run rollups, unless the setting is specified
-        System.assertEquals(0, listAcc[0].npo02__TotalOppAmount__c);
-        System.assertEquals(0, listAcc[1].npo02__TotalOppAmount__c);
+        System.assertEquals(0, listAcc[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the NPO - 2. 0 list');
+        System.assertEquals(0, listAcc[1].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the NPO - 2.');
 
         List<Opportunity> listOpp = getOpps();
-        System.assertEquals(1, listOpp.size());
-        System.assertEquals(100, listOpp[0].Amount);
-        System.assertEquals(listAcc[0].Id, listOpp[0].AccountId);
+        System.assertEquals(1, listOpp.size(), 'Assert that the size of the listOpp is equal to 1.');
+        System.assertEquals(100, listOpp[0].Amount, 'Test if the sum of the opps is equal to 100.');
+        System.assertEquals(listAcc[0].Id, listOpp[0].AccountId, 'Assert that the list account ID and account ID are the same.');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].DonationImported__c, listOpp[0].Id);
-        System.assertEquals(dataImports[1].DonationImported__c, null);
-        System.assertEquals(label.bdiCreated, dataImports[0].DonationImportStatus__c);
-        System.assertEquals(label.bdiErrorInvalidDonor, dataImports[1].DonationImportStatus__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported, dataImports[0].Status__c);
-        System.assertEquals(BDI_DataImport_API.bdiFailed, dataImports[1].Status__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].DonationImported__c, listOpp[0].Id, 'Assert that the dataImports and listOpp are the same.');
+        System.assertEquals(dataImports[1].DonationImported__c, null, 'Assert that the first data import is the donation imported.');
+        System.assertEquals(label.bdiCreated, dataImports[0].DonationImportStatus__c, 'Checks that the label of the data imports is the same as the label of the data import');
+        System.assertEquals(label.bdiErrorInvalidDonor, dataImports[1].DonationImportStatus__c, 'Checks that the label of the donor is the same as the label of the donor');
+        System.assertEquals(BDI_DataImport_API.bdiImported, dataImports[0].Status__c, 'This is a test function to assert that the BDI_DataImport_API. b');
+        System.assertEquals(BDI_DataImport_API.bdiFailed, dataImports[1].Status__c, 'Checks that BDI_DataImport_API. bdiFailed equals to dataImports [');
     }
 
     /*********************************************************************************************************
@@ -1764,19 +1764,19 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
-        System.assertNotEquals(listCon[1].Name, listCon[0].Name);
-        System.assertEquals(dataImports[0].Household_Phone__c, listCon[0].Account.Phone);
-        System.assertEquals(dataImports[1].Household_Phone__c, listCon[1].Account.Phone);
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
+        System.assertNotEquals(listCon[1].Name, listCon[0].Name, 'Assert that the names of the two lists are not the same.');
+        System.assertEquals(dataImports[0].Household_Phone__c, listCon[0].Account.Phone, 'Checks that the Household_Phone class is the same as the Account class.');
+        System.assertEquals(dataImports[1].Household_Phone__c, listCon[1].Account.Phone, 'Checks that the phone number of the Household is the same as the account on the');
 
         dataImports = getDataImports();
-        System.assertEquals(2, dataImports.size());
-        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id);
-        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[1].Id);
-        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c);
-        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiCreated, dataImports[1].Contact1ImportStatus__c);
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
+        System.assertEquals(dataImports[0].Contact1Imported__c, listCon[0].Id, 'Assert that the Contact1 is the same as the Contact2');
+        System.assertEquals(dataImports[1].Contact1Imported__c, listCon[1].Id, 'Assert that Contact1 is the same as Contact2.');
+        System.assertNotEquals(null, dataImports[0].HouseholdAccountImported__c, 'This method is called from the TestCase in the HouseholdAccount class. It is');
+        System.assertNotEquals(null, dataImports[1].HouseholdAccountImported__c, 'This method is called from the HouseholdAccount class. It asserts that the dataImports');
+        System.assertEquals(label.bdiCreated, dataImports[0].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
+        System.assertEquals(label.bdiCreated, dataImports[1].Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
     }
 
     /*********************************************************************************************************
@@ -1796,7 +1796,7 @@ public with sharing class BDI_DataImport_TEST {
 
         // get their households
         listConExisting = getContacts();
-        System.assertEquals(2, listConExisting.size());
+        System.assertEquals(2, listConExisting.size(), 'Test that the size of the list is equal to 2.');
 
         List<DataImport__c> dataImports = new List<DataImport__c>();
         dataImports.add(new DataImport__c(Contact1_Firstname__c='a1', Contact1_Lastname__c='C1',
@@ -1813,15 +1813,15 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(5, listCon.size());
-        System.assertEquals(listConExisting[0].AccountId, listCon[0].AccountId);
-        System.assertEquals(listConExisting[1].AccountId, listCon[1].AccountId);
-        System.assertEquals(listConExisting[0].AccountId, listCon[2].AccountId);
-        System.assertEquals(listConExisting[1].AccountId, listCon[3].AccountId);
-        System.assertEquals(listConExisting[1].AccountId, listCon[4].AccountId);
+        System.assertEquals(5, listCon.size(), 'Test for equality of the size of the list.');
+        System.assertEquals(listConExisting[0].AccountId, listCon[0].AccountId, 'Assert that the account id of the list con is the same as the account id of the');
+        System.assertEquals(listConExisting[1].AccountId, listCon[1].AccountId, 'This method is called to assert that the account id of the list con is the same as');
+        System.assertEquals(listConExisting[0].AccountId, listCon[2].AccountId, 'This method is called to assert that the account IDs of the two lists are the same.');
+        System.assertEquals(listConExisting[1].AccountId, listCon[3].AccountId, 'This method is called to assert that the account IDs of the two lists are the same.');
+        System.assertEquals(listConExisting[1].AccountId, listCon[4].AccountId, 'This method is called to assert that the account IDs of the two lists are the same.');
 
         List<Account> listAcc = getAccounts();
-        System.assertEquals(2, listAcc.size());
+        System.assertEquals(2, listAcc.size(), 'Assert that 2 lists are equal.');
     }
 
     /*********************************************************************************************************
@@ -1855,11 +1855,11 @@ public with sharing class BDI_DataImport_TEST {
 
         // verify expected results
         List<Contact> listCon = getContacts();
-        System.assertEquals(2, listCon.size());
-        System.assertEquals(hhId, listCon[0].AccountId);
-        System.assertEquals(hhId, listCon[1].AccountId);
-        System.assertEquals('Dr', listCon[0].Salutation);
-        System.assertEquals('Prof', listCon[1].Salutation);
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
+        System.assertEquals(hhId, listCon[0].AccountId, 'This method is called when the HREF of the first list con is equal to the ACCOUNT');
+        System.assertEquals(hhId, listCon[1].AccountId, 'assertEquals - This function is used to assert that the HREF of the listCon is');
+        System.assertEquals('Dr', listCon[0].Salutation, 'Assert that the salutation of the list con is equal to the salutation of the first');
+        System.assertEquals('Prof', listCon[1].Salutation, 'Test if the prof is the same as the last profile.');
     }
 
     /*********************************************************************************************************

@@ -231,63 +231,63 @@ public with sharing class STG_InstallScript_TEST {
         Package_Settings__c pkgSettings = Package_Settings__c.getOrgDefaults();
 
         //If it's a new install we want to set the Household model by default
-        System.assertEquals(CAO_Constants.HH_ACCOUNT_PROCESSOR, npe01Settings.npe01__Account_Processor__c);
-        System.assertEquals(false, npe01Settings.npe01__Enable_Opportunity_Contact_Role_Trigger__c);
-        System.assertEquals(true, npe01Settings.npe01__Payments_Enabled__c);
+        System.assertEquals(CAO_Constants.HH_ACCOUNT_PROCESSOR, npe01Settings.npe01__Account_Processor__c, 'Assert that the Account Processor is the same as the default value.');
+        System.assertEquals(false, npe01Settings.npe01__Enable_Opportunity_Contact_Role_Trigger__c, 'This function asserts that the opportunity contact role trigger is enabled.');
+        System.assertEquals(true, npe01Settings.npe01__Payments_Enabled__c, 'Checks if Payments are enabled.');
         Recordtypeinfo householdAccount = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get(CAO_Constants.HH_ACCOUNT_RT_DEVELOPER_NAME);
         Id householdAccountId = (householdAccount == null ? null : householdAccount.getRecordTypeId());
-        System.assertEquals(householdAccountId, npe01Settings.npe01__HH_Account_RecordTypeID__c);
+        System.assertEquals(householdAccountId, npe01Settings.npe01__HH_Account_RecordTypeID__c, 'This function asserts that the given Household account ID is equal to the one specified in');
 
-        System.assertEquals(HH_Households.NO_HOUSEHOLDS_PROCESSOR, npo02Settings.npo02__Household_Rules__c);
-        System.assertEquals(CAO_Constants.HH_MEMBER_CONTACT_ROLE, npo02Settings.npo02__Household_Member_Contact_Role__c);
-        System.assertEquals(false, npo02Settings.npo02__Always_Rollup_to_Primary_Contact__c);
-        System.assertEquals(true, npo02Settings.npo02__Enable_Opp_Rollup_Triggers__c);
-        System.assertEquals(null, npo02Settings.npo02__Excluded_Account_Opp_Rectypes__c);
-        System.assertEquals(null, npo02Settings.npo02__Excluded_Account_Opp_Types__c);
-        System.assertEquals(null, npo02Settings.npo02__Excluded_Contact_Opp_Rectypes__c);
-        System.assertEquals(null, npo02Settings.npo02__Excluded_Contact_Opp_Types__c);
-        System.assertEquals(null, npo02Settings.npo02__Membership_Record_Types__c);
-        System.assertEquals(365, npo02Settings.npo02__Rollup_N_Day_Value__c);
-        System.assertEquals(30, npo02Settings.npo02__Membership_Grace_Period__c);
-        System.assertEquals(true, npo02Settings.npo02__Advanced_Household_Naming__c);
-        System.assertEquals(false, npo02Settings.npo02__Async_Household_Naming__c);
-        System.assertEquals(UserInfo.getOrganizationId(), npo02Settings.Setupownerid);
-        System.assertEquals(25, npo02Settings.npo02__Schedule_Job_Limit__c);
-        System.assertEquals(null, npo02Settings.npo02__Household_OCR_Excluded_Recordtypes__c);
-        System.assertEquals(null, npo02Settings.npo02__Household_Creation_Excluded_Recordtypes__c);
-        System.assertEquals(HH_Households.NO_HOUSEHOLDS_PROCESSOR, npo02Settings.npo02__Household_Rules__c);
-        System.assertEquals(true, npo02Settings.npo02__Enable_Soft_Credit_Rollups__c);
-        System.assertEquals('Matched Donor;Soft Credit;Household Member', npo02Settings.npo02__Soft_Credit_Roles__c);
-        System.assertEquals(true, npo02Settings.npo02__Household_Contact_Roles_On__c);
+        System.assertEquals(HH_Households.NO_HOUSEHOLDS_PROCESSOR, npo02Settings.npo02__Household_Rules__c, 'Checks that the default Household rules are the same as the default.');
+        System.assertEquals(CAO_Constants.HH_MEMBER_CONTACT_ROLE, npo02Settings.npo02__Household_Member_Contact_Role__c, 'This function checks the value of the Household Member Contact Role attribute.');
+        System.assertEquals(false, npo02Settings.npo02__Always_Rollup_to_Primary_Contact__c, 'Always rollup to primary contact');
+        System.assertEquals(true, npo02Settings.npo02__Enable_Opp_Rollup_Triggers__c, 'This function asserts that the NPO - 02 settings are set to enable opp rollup');
+        System.assertEquals(null, npo02Settings.npo02__Excluded_Account_Opp_Rectypes__c, 'This function asserts that the excluded account opp rectypes are not set.');
+        System.assertEquals(null, npo02Settings.npo02__Excluded_Account_Opp_Types__c, 'This method is used to assert that the excluded account opp types are not set.');
+        System.assertEquals(null, npo02Settings.npo02__Excluded_Contact_Opp_Rectypes__c, 'This function asserts that the excluded Contact Opp Rectypes are not set.');
+        System.assertEquals(null, npo02Settings.npo02__Excluded_Contact_Opp_Types__c, 'This function asserts that the excluded Contact Opp types are not set.');
+        System.assertEquals(null, npo02Settings.npo02__Membership_Record_Types__c, 'This function asserts that the values of the enum npo02_Membership_Record_Types');
+        System.assertEquals(365, npo02Settings.npo02__Rollup_N_Day_Value__c, 'Rollup N day value should be equal to the value specified in npo02Settings.');
+        System.assertEquals(30, npo02Settings.npo02__Membership_Grace_Period__c, 'Checks that the NPO - 02 membership grace period is equal to 30.');
+        System.assertEquals(true, npo02Settings.npo02__Advanced_Household_Naming__c, 'Checks that the NPO - 02 naming system property is set to advanced.');
+        System.assertEquals(false, npo02Settings.npo02__Async_Household_Naming__c, 'This module asserts that the NPO - 02 naming module is available.');
+        System.assertEquals(UserInfo.getOrganizationId(), npo02Settings.Setupownerid, 'Checks that the current user is the setup owner of the NPO - 02 system.');
+        System.assertEquals(25, npo02Settings.npo02__Schedule_Job_Limit__c, 'This function is intentionally not available in the future.');
+        System.assertEquals(null, npo02Settings.npo02__Household_OCR_Excluded_Recordtypes__c, 'This function asserts that the npo02Settings object contains the values of the npo02');
+        System.assertEquals(null, npo02Settings.npo02__Household_Creation_Excluded_Recordtypes__c, 'This function asserts that the npo02Settings object is null.');
+        System.assertEquals(HH_Households.NO_HOUSEHOLDS_PROCESSOR, npo02Settings.npo02__Household_Rules__c, 'Checks that the default Household rules are the same as the default.');
+        System.assertEquals(true, npo02Settings.npo02__Enable_Soft_Credit_Rollups__c, 'This function asserts that the settings of the NPO - 02 are equal to the value of');
+        System.assertEquals('Matched Donor;Soft Credit;Household Member', npo02Settings.npo02__Soft_Credit_Roles__c, 'This function asserts that the user has matched Donor ; Soft Credit ; Household Member');
+        System.assertEquals(true, npo02Settings.npo02__Household_Contact_Roles_On__c, 'Checks if the settings of the Household Contact Role On have been set.');
 
-        System.assertEquals(RD_RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(), npe03Settings.npe03__Open_Opportunity_Behavior__c);
-        System.assertEquals(true, npe03Settings.npe03__Add_Campaign_to_All_Opportunites__c);
-        System.assertEquals(true, npe03Settings.npe03__Enable_Update_Check__c);
-        System.assertEquals(50, npe03Settings.npe03__Maximum_Donations__c);
-        System.assertEquals(12, npe03Settings.npe03__Opportunity_Forecast_Months__c);
-        System.assertEquals(90, npe03Settings.npe03__Update_Check_Interval__c);
-        System.assertEquals([select id from RecordType where sobjecttype = 'Opportunity' limit 1].id, npe03Settings.npe03__Record_Type__c);
+        System.assertEquals(RD_RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(), npe03Settings.npe03__Open_Opportunity_Behavior__c, 'This module asserts that the npe03Settings. npe03_Open_Opport');
+        System.assertEquals(true, npe03Settings.npe03__Add_Campaign_to_All_Opportunites__c, 'This function asserts that the NPE03 settings are equal to the values of the Add Campaign');
+        System.assertEquals(true, npe03Settings.npe03__Enable_Update_Check__c, 'Checks if the enable update check is enabled.');
+        System.assertEquals(50, npe03Settings.npe03__Maximum_Donations__c, 'Checks that the maximum number of donations is reached.');
+        System.assertEquals(12, npe03Settings.npe03__Opportunity_Forecast_Months__c, 'Checks that the NPE - 03 Months are valid forecast months.');
+        System.assertEquals(90, npe03Settings.npe03__Update_Check_Interval__c, 'This function asserts that the current value of the NPE03 settings is 90 degrees.');
+        System.assertEquals([select id from RecordType where sobjecttype = 'Opportunity' limit 1].id, npe03Settings.npe03__Record_Type__c, 'Checks that all the records in the NPE03 are of the same type.');
 
-        System.assertEquals('List Setting', npe04Settings.npe4__Reciprocal_Method__c);
+        System.assertEquals('List Setting', npe04Settings.npe4__Reciprocal_Method__c, 'Checks that the List Setting is the same as the Reciprocal Method.');
 
-        System.assertEquals(true, npe05Settings.npe5__Automatic_Affiliation_Creation_Turned_On__c);
+        System.assertEquals(true, npe05Settings.npe5__Automatic_Affiliation_Creation_Turned_On__c, 'Checks if the automatic affiliation creation is turned on.');
 
-        System.assertEquals(true, errorSettings.Store_Errors_On__c);
-        System.assertEquals(true, errorSettings.Error_Notifications_On__c);
-        System.assertEquals(ERR_Notifier.ERROR_NOTIFICATION_RECIPIENT_ALL_SYS_ADMINS, errorSettings.Error_Notifications_To__c);
+        System.assertEquals(true, errorSettings.Store_Errors_On__c, 'Checks if the error settings are set to store errors on or off.');
+        System.assertEquals(true, errorSettings.Error_Notifications_On__c, 'Checks if the error settings are set to Error Notifications On.');
+        System.assertEquals(ERR_Notifier.ERROR_NOTIFICATION_RECIPIENT_ALL_SYS_ADMINS, errorSettings.Error_Notifications_To__c, 'Checks that the system - wide error notifications are enabled.');
 
-        System.assertEquals(false, addrVerificationSetgs.Enable_Automatic_Verification__c);
-        System.assertEquals(false, addrVerificationSetgs.Reject_Ambiguous_Addresses__c);
+        System.assertEquals(false, addrVerificationSetgs.Enable_Automatic_Verification__c, 'This function is used to assert that addrVerificationSetgs. Enable_Automatic_Verification');
+        System.assertEquals(false, addrVerificationSetgs.Reject_Ambiguous_Addresses__c, 'This function is used to assert that the address verification setgs reject ambiguous addresses.');
 
-        System.assertEquals(true, batchDataEntrySetgs.Allow_Blank_Opportunity_Names__c);
-        System.assertEquals(true, batchDataEntrySetgs.Opportunity_Naming__c);
+        System.assertEquals(true, batchDataEntrySetgs.Allow_Blank_Opportunity_Names__c, 'This is a test to make sure that the values of the batchDataEntrySetgs enum');
+        System.assertEquals(true, batchDataEntrySetgs.Opportunity_Naming__c, 'This method is used to assert that the opportunity naming is the same as the op');
 
-        System.assertEquals('HH_NameSpec',householdNamingSettings.Implementing_Class__c);
-        System.assertEquals(365,allocationsSettings.Rollup_N_Day_Value__c);
+        System.assertEquals('HH_NameSpec',householdNamingSettings.Implementing_Class__c, 'Checks that the name of the Household naming system is the same as the name of');
+        System.assertEquals(365,allocationsSettings.Rollup_N_Day_Value__c, 'Rollup N day is a good idea to roll up on the next day.');
 
-        System.assertEquals(50,dataImportSettings.Batch_Size__c);
+        System.assertEquals(50,dataImportSettings.Batch_Size__c, 'This is a test to ensure that the default batch size is 50.');
 
-        System.assertEquals(UserInfo.getOrganizationId(), geSettings.SetupOwnerId);
+        System.assertEquals(UserInfo.getOrganizationId(), geSettings.SetupOwnerId, 'Checks that the current user is the setup owner of the geSettings. SetupOwnerId');
 
         System.assertNotEquals(pkgSettings.Id, null, 'A default PackageSettings record should have been created');
 
@@ -521,17 +521,17 @@ public with sharing class STG_InstallScript_TEST {
 
         System.assertEquals(defaultConfig.size(), afterScriptConfig.size(), 'Number of created trigger handlers should match the number of handlers in TDTM_DefaultConfig.');
         for(Integer i = 0; i < defaultConfig.size(); i++) {
-            System.assertEquals(afterScriptConfig[i].Class__c, defaultConfig[i].Class__c);
-            System.assertEquals(afterScriptConfig[i].Load_Order__c, defaultConfig[i].Load_Order__c);
-            System.assertEquals(afterScriptConfig[i].Object__c, defaultConfig[i].Object__c);
-            System.assertEquals(afterScriptConfig[i].Active__c, defaultConfig[i].Active__c);
-            System.assertEquals(afterScriptConfig[i].Asynchronous__c, defaultConfig[i].Asynchronous__c);
+            System.assertEquals(afterScriptConfig[i].Class__c, defaultConfig[i].Class__c, 'Assert that afterScriptConfig and defaultConfig are the same.');
+            System.assertEquals(afterScriptConfig[i].Load_Order__c, defaultConfig[i].Load_Order__c, 'This function is called after the script configuration has been loaded. It is called after the script');
+            System.assertEquals(afterScriptConfig[i].Object__c, defaultConfig[i].Object__c, 'Assert that afterScriptConfig and defaultConfig are equal.');
+            System.assertEquals(afterScriptConfig[i].Active__c, defaultConfig[i].Active__c, 'Checks whether the active flag of the i - th after - script - config is the same');
+            System.assertEquals(afterScriptConfig[i].Asynchronous__c, defaultConfig[i].Asynchronous__c, 'Assert that afterScriptConfig and defaultConfig are the same.');
             //split and sort trigger actions so the test doesn't fail for different orders
             List<String> afterTriggerAction = afterScriptConfig[i].Trigger_Action__c.split(';');
             List<String> defaultTriggerAction = defaultConfig[i].Trigger_Action__c.split(';');
             afterTriggerAction.sort();
             defaultTriggerAction.sort();
-            System.assertEquals(afterTriggerAction, defaultTriggerAction);
+            System.assertEquals(afterTriggerAction, defaultTriggerAction, 'Assert that afterTriggerAction and defaultTriggerAction are equal.');
         }
     }
 
@@ -591,26 +591,26 @@ public with sharing class STG_InstallScript_TEST {
 
     private static void assertNpspFlagsDeactivated() {
         npe01__Contacts_And_Orgs_Settings__c npe01Settings = UTIL_CustomSettingsFacade.getOrgContactsSettings();
-        System.assertEquals(false, npe01Settings.npe01__DISABLE_IndividualAccounts_trigger__c);
-        System.assertEquals(false, npe01Settings.npe01__DISABLE_OpportunityAccount_trigger__c);
-        System.assertEquals(false, npe01Settings.npe01__DISABLE_OpportunityContactRoles_trigger__c);
-        System.assertEquals(false, npe01Settings.npe01__DISABLE_OpportunityPayments_trigger__c);
+        System.assertEquals(false, npe01Settings.npe01__DISABLE_IndividualAccounts_trigger__c, 'This method asserts that the individual accounts trigger is disabled.');
+        System.assertEquals(false, npe01Settings.npe01__DISABLE_OpportunityAccount_trigger__c, 'This function asserts that the opportunity account trigger is disabled.');
+        System.assertEquals(false, npe01Settings.npe01__DISABLE_OpportunityContactRoles_trigger__c, 'This function asserts that the opportunity contact roles trigger is disabled.');
+        System.assertEquals(false, npe01Settings.npe01__DISABLE_OpportunityPayments_trigger__c, 'This module asserts that the Opportunity Payments Trigger is disabled.');
 
         npo02__Households_Settings__c npo02Settings = UTIL_CustomSettingsFacade.getOrgHouseholdsSettings();
-        System.assertEquals(false, npo02Settings.npo02__DISABLE_Household_Opportunity_trigger__c);
-        System.assertEquals(false, npo02Settings.npo02__DISABLE_HouseholdAfter_trigger__c);
-        System.assertEquals(false, npo02Settings.npo02__DISABLE_HouseholdBefore_trigger__c);
-        System.assertEquals(false, npo02Settings.npo02__DISABLE_Households_trigger__c);
-        System.assertEquals(false, npo02Settings.npo02__DISABLE_OpportunityRollup_trigger__c);
+        System.assertEquals(false, npo02Settings.npo02__DISABLE_Household_Opportunity_trigger__c, 'This module asserts that the NPO - 02 settings have been set to be disabled.');
+        System.assertEquals(false, npo02Settings.npo02__DISABLE_HouseholdAfter_trigger__c, 'This module asserts that the NPO - 02 settings have been set to be disabled after the');
+        System.assertEquals(false, npo02Settings.npo02__DISABLE_HouseholdBefore_trigger__c, 'This module asserts that the settings of the NPO - 02 module are set to be disabled');
+        System.assertEquals(false, npo02Settings.npo02__DISABLE_Households_trigger__c, 'This module asserts that the settings of the NPO - 02 have been set to be disabled');
+        System.assertEquals(false, npo02Settings.npo02__DISABLE_OpportunityRollup_trigger__c, 'This module asserts that the NPO - 02 settings are set to the disable opportunity');
 
         npe03__Recurring_Donations_Settings__c npe03Settings = UTIL_CustomSettingsFacade.getOrgRecurringDonationsSettings();
-        System.assertEquals(false, npe03Settings.npe03__DISABLE_Donations_trigger__c);
-        System.assertEquals(false, npe03Settings.npe03__DISABLE_RecurringDonations_trigger__c);
+        System.assertEquals(false, npe03Settings.npe03__DISABLE_Donations_trigger__c, 'Checks if the disable donations trigger is turned off.');
+        System.assertEquals(false, npe03Settings.npe03__DISABLE_RecurringDonations_trigger__c, 'This function asserts that the Recurring Donations Trigger is disabled.');
 
         npe4__Relationship_Settings__c npe04Settings = UTIL_CustomSettingsFacade.getOrgRelationshipSettings();
-        System.assertEquals(false, npe04Settings.npe4__DISABLE_RelationshipCM_trigger__c);
-        System.assertEquals(false, npe04Settings.npe4__DISABLE_RelationshipContacts_trigger__c);
-        System.assertEquals(false, npe04Settings.npe4__DISABLE_Relationships_trigger__c);
+        System.assertEquals(false, npe04Settings.npe4__DISABLE_RelationshipCM_trigger__c, 'Checks if the disable Relationship CM trigger is set to false.');
+        System.assertEquals(false, npe04Settings.npe4__DISABLE_RelationshipContacts_trigger__c, 'Checks if the disable Relationship Contact Contacts trigger is turned off.');
+        System.assertEquals(false, npe04Settings.npe4__DISABLE_Relationships_trigger__c, 'Checks if the disable Relationship Trigger is turned on.');
     }
 
     public static void deleteAllCustomSettings() {

@@ -50,7 +50,7 @@ private class CallableApiParameters_TEST {
         };
 
         CallableApiParameters service = new CallableApiParameters(params);
-        System.assertEquals(1, service.getRollupDefinitions(CallableApiParameters.PARAM_ROLLUP_DEFS).size());
+        System.assertEquals(1, service.getRollupDefinitions(CallableApiParameters.PARAM_ROLLUP_DEFS).size(), 'Checks that the number of rollup definitions is equal to 1.');
     }
 
     /**
@@ -163,34 +163,34 @@ private class CallableApiParameters_TEST {
 
         CallableApiParameters service = new CallableApiParameters(params);
         String rtnString = service.getString('String');
-        System.assertEquals('String', rtnString);
+        System.assertEquals('String', rtnString, 'assertEquals - Tests that rtnString is equal to rtnString');
 
         Boolean rtnBoolean = service.getBoolean('NonExistantParm', true);
-        System.assertEquals(true, rtnBoolean);
+        System.assertEquals(true, rtnBoolean, 'Test for equality of true and rtnBoolean.');
 
         rtnBoolean = service.getBoolean('BooleanTrue');
-        System.assertEquals(true, rtnBoolean);
+        System.assertEquals(true, rtnBoolean, 'Test for equality of true and rtnBoolean.');
 
         rtnBoolean = service.getBoolean('BooleanFalse');
-        System.assertEquals(false, rtnBoolean);
+        System.assertEquals(false, rtnBoolean, 'Test for equality of false and rtnBoolean.');
 
         List<String> rtnListString = service.getListString('ListString');
-        System.assertEquals(1, rtnListString.size());
-        System.assertEquals('Value1', rtnListString[0]);
+        System.assertEquals(1, rtnListString.size(), 'Test that the size of the rtnListString is equal to 1.');
+        System.assertEquals('Value1', rtnListString[0], 'assertEquals - Tests that the rtnListString is equal to the value 1');
 
         Set<String> rtnSetString = service.getSetString('SetString');
-        System.assertEquals(1, rtnSetString.size());
-        System.assertEquals(true, rtnSetString.contains('Value1'));
+        System.assertEquals(1, rtnSetString.size(), 'Assert that the size of the rtnSetString is equal to 1.');
+        System.assertEquals(true, rtnSetString.contains('Value1'), 'Checks that the rtnSetString contains the value 1.');
 
         List<SObject> rtnListSObject = service.getSObjects('ListSObject');
-        System.assertEquals(1, rtnListSObject.size());
-        System.assertEquals(Opportunity.SObjectType, rtnListSObject[0].getSObjectType());
-        System.assertEquals('Opportunity', rtnListSObject[0].get('Name'));
+        System.assertEquals(1, rtnListSObject.size(), 'Test that the size of the rtnListSObject is equal to 1.');
+        System.assertEquals(Opportunity.SObjectType, rtnListSObject[0].getSObjectType(), 'Assert that the operation portunity is the same as the first SObject in the list.');
+        System.assertEquals('Opportunity', rtnListSObject[0].get('Name'), 'assert that the Opportunity is the same as the Name of the RTN');
 
         List<Object> rtnListObject = service.getObjects('ListObject');
-        System.assertEquals(2, rtnListObject.size());
-        System.assertEquals('Value', (String)rtnListObject.get(0));
-        System.assertEquals(true, (Boolean)rtnListObject.get(1));
+        System.assertEquals(2, rtnListObject.size(), 'Test that the size of the rtnListObject is equal to 2.');
+        System.assertEquals('Value', (String)rtnListObject.get(0), 'This method is called when the value of rtnListObject is the same as the value');
+        System.assertEquals(true, (Boolean)rtnListObject.get(1), 'This test is used to assert that the RTNListObject is equal to true.');
     }
 
     /**

@@ -77,8 +77,8 @@ private with sharing class OPP_OpportunityNaming_BATCH_TEST {
         String CRON_EXP = '0 0 23 * * ?';
         String jobId = System.schedule('Test Sched', CRON_EXP, batch);
         CronTrigger ct = [SELECT Id, CronExpression, TimesTriggered, NextFireTime FROM CronTrigger WHERE id = :jobId];
-        System.assertEquals(CRON_EXP, ct.CronExpression);
-        System.assertEquals(0, ct.TimesTriggered);
+        System.assertEquals(CRON_EXP, ct.CronExpression, 'Checks that the current CronExpression is equal to the cron expression.');
+        System.assertEquals(0, ct.TimesTriggered, 'This test asserts that the times triggered is equal to 0.');
 
         Test.stopTest();
     }

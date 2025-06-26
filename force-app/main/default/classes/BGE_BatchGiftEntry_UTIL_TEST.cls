@@ -44,11 +44,11 @@ private with sharing class BGE_BatchGiftEntry_UTIL_TEST {
     @isTest
     static void testTruncateList() {
         List<String> fruits = new List<String> { 'apple', 'banana', 'pear', 'orange' };
-        System.assertEquals('apple, banana, pear, orange', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 5));
-        System.assertEquals('apple, banana, pear, orange', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 4));
-        System.assertEquals('apple, banana, pear ...', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 3));
-        System.assertEquals('apple, banana ...', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 2));
-        System.assertEquals('apple ...', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 1));
+        System.assertEquals('apple, banana, pear, orange', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 5), 'This function asserts that the fruits are all the same.');
+        System.assertEquals('apple, banana, pear, orange', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 4), 'This function asserts that the fruits are all the same.');
+        System.assertEquals('apple, banana, pear ...', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 3), 'This function asserts that the fruits are equal to the ones in the list.');
+        System.assertEquals('apple, banana ...', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 2), 'Test if fruits are equal.');
+        System.assertEquals('apple ...', BGE_BatchGiftEntry_UTIL.truncateList(fruits, 1), 'Test that the fruits are equal.');
     }
 
     /*********************************************************************************************************
@@ -67,7 +67,7 @@ private with sharing class BGE_BatchGiftEntry_UTIL_TEST {
         try {
             BGE_BatchGiftEntry_UTIL.handleMissingPermissions(dfrs);
         } catch (AuraHandledException ex) {
-            System.assertEquals(expectedErrorMsg, ex.getMessage());
+            System.assertEquals(expectedErrorMsg, ex.getMessage(), 'Assert that the expected error message is equal to the error message of the exception.');
         }
     }
 
@@ -132,10 +132,10 @@ private with sharing class BGE_BatchGiftEntry_UTIL_TEST {
 
         System.assert(
                 queryFields.contains(
-                        String.valueOf(DataImport__c.Account2_Country__c).toLowerCase()));
+                        String.valueOf(DataImport__c.Account2_Country__c).toLowerCase()), 'This method is called when the user has requested a permission to access the account2 country.');
         System.assert(
                 queryFields.contains(
-                        String.valueOf(DataImport__c.Account2_City__c).toLowerCase()));
+                        String.valueOf(DataImport__c.Account2_City__c).toLowerCase()), 'This method is called when the user has requested a permission to access the account2 city.');
     }
 
     @isTest

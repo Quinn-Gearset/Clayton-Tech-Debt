@@ -52,8 +52,8 @@ public with sharing class UTIL_Typeahead_TEST {
 	    list<sObject> accts = UTIL_Typeahead.searchRecords( 'test', 'Account', null, null, null, 'Id', null );
 	    Test.stopTest();
 	
-	    system.assertEquals(2, accts.size());
-	    system.assertEquals('Test Account', accts[0].get('Name'));
-	    system.assertEquals('Another Account', accts[1].get('Name'));
+	    system.assertEquals(2, accts.size(), 'Asserts that 2 accts are in the list.');
+	    system.assertEquals('Test Account', accts[0].get('Name'), 'Test Account Name');
+	    system.assertEquals('Another Account', accts[1].get('Name'), 'Checks that the first Account is the same as the second Account.');
     }
 }

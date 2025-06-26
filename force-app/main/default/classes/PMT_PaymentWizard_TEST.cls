@@ -53,7 +53,7 @@ private class PMT_PaymentWizard_TEST {
 
         npe01__OppPayment__c[] opmtUpdate = getPayments(opp.Id);
         opmtUpdate[0].npe01__payment_amount__c = 50;
-        System.assertEquals(true, opmtUpdate[0].npe01__paid__c);
+        System.assertEquals(true, opmtUpdate[0].npe01__paid__c, 'Test if the opmtUpdate value is the same as the paid value.');
         update opmtUpdate;
 
         npe01__OppPayment__c newOpmt = new npe01__OppPayment__c(
@@ -67,7 +67,7 @@ private class PMT_PaymentWizard_TEST {
         Test.startTest();
 
         npe01__OppPayment__c[] opmtAllStart = getPayments(opp.Id);
-        System.assertEquals(2, opmtAllStart.size());
+        System.assertEquals(2, opmtAllStart.size(), 'Test that the size of opmtAllStart is 2.');
 
         PageReference pageRef = Page.PMT_PaymentWizard;
         Test.setCurrentPage(pageRef);
@@ -87,28 +87,28 @@ private class PMT_PaymentWizard_TEST {
         // look for the data
         //should be two, one paid, one written off for the balance
         npe01__OppPayment__c[] opmtAll = getPayments(opp.Id);
-        System.assertEquals(2, opmtAll.size());
+        System.assertEquals(2, opmtAll.size(), 'Assert that 2 opmtAll. size == 2.');
 
         //the single payment should be written off
         npe01__OppPayment__c[] opmtOpen = [
             SELECT Id, npe01__Payment_Method__c, npe01__Payment_Amount__c, npe01__Paid__c, npe01__Written_Off__c
             FROM npe01__OppPayment__c
             WHERE npe01__Opportunity__c = :opp.Id AND npe01__Paid__c = false AND npe01__Written_Off__c = false];
-        System.assertEquals(0, opmtOpen.size());
+        System.assertEquals(0, opmtOpen.size(), 'Assert that the open open buffers are empty.');
 
         npe01__OppPayment__c[] opmtPaid = [
             SELECT Id, npe01__Payment_Method__c, npe01__Payment_Amount__c, npe01__Paid__c, npe01__Written_Off__c
             FROM npe01__OppPayment__c
             WHERE npe01__Opportunity__c = :opp.Id AND npe01__Paid__c = true AND npe01__Written_Off__c = false];
-        System.assertEquals(1, opmtPaid.size());
-        System.assertEquals(50, opmtPaid[0].npe01__payment_amount__c);
+        System.assertEquals(1, opmtPaid.size(), 'Test that the opmtPaid size is equal to 1.');
+        System.assertEquals(50, opmtPaid[0].npe01__payment_amount__c, 'Test for equality of the payment amount of the opmtPaid.');
 
         npe01__OppPayment__c[] opmtWrittenOff = [
             SELECT Id, npe01__Payment_Method__c, npe01__Payment_Amount__c, npe01__Paid__c, npe01__Written_Off__c
             FROM npe01__OppPayment__c
             WHERE npe01__Opportunity__c = :opp.Id AND npe01__Paid__c = false AND npe01__Written_Off__c = true];
-        System.assertEquals(1, opmtWrittenOff.size());
-        System.assertEquals(100, opmtWrittenOff[0].npe01__payment_amount__c);
+        System.assertEquals(1, opmtWrittenOff.size(), 'Checks that the size of opmtWrittenOff is equal to 1.');
+        System.assertEquals(100, opmtWrittenOff[0].npe01__payment_amount__c, 'This function asserts that the opmtWrittenOff array is equal to 100.');
     }
 
     /*********************************************************************************************************
@@ -281,12 +281,12 @@ private class PMT_PaymentWizard_TEST {
             }
         }
 
-        System.assertEquals(1, paidCount);
-        System.assertEquals(100, totalPaid);
-        System.assertEquals(1, writtenOffCount);
-        System.assertEquals(100, totalWrittenOff);
-        System.assertEquals(8, unpaidCount);
-        System.assertEquals(800, totalUnPaid);
+        System.assertEquals(1, paidCount, 'Test for equality of paid count.');
+        System.assertEquals(100, totalPaid, 'Test for equality of totalPaid.');
+        System.assertEquals(1, writtenOffCount, 'Test for equality of writtenOffCount.');
+        System.assertEquals(100, totalWrittenOff, 'Test for equality of totalWrittenOff.');
+        System.assertEquals(8, unpaidCount, 'Test for equality of unpaid count.');
+        System.assertEquals(800, totalUnPaid, 'Test for the total unpaid of the total total unpaid of the total total');
 
         Opportunity oppAfterPayments = [
             SELECT Amount, npe01__Payments_Made__c, npe01__Amount_Written_Off__c, npe01__Amount_Outstanding__c
@@ -294,9 +294,9 @@ private class PMT_PaymentWizard_TEST {
             WHERE Id = :opp.Id
         ];
 
-        System.assertEquals(totalPaid, oppAfterPayments.npe01__Payments_Made__c);
-        System.assertEquals(totalWrittenOff, oppAfterPayments.npe01__Amount_Written_Off__c);
-        System.assertEquals(totalUnPaid, oppAfterPayments.npe01__Amount_Outstanding__c);
+        System.assertEquals(totalPaid, oppAfterPayments.npe01__Payments_Made__c, 'This method is called after all payments have been made.');
+        System.assertEquals(totalWrittenOff, oppAfterPayments.npe01__Amount_Written_Off__c, 'This method asserts that the totalWrittenOff is equal to the value of the oppAfter');
+        System.assertEquals(totalUnPaid, oppAfterPayments.npe01__Amount_Outstanding__c, 'This method is here for testing purposes. It is here for testing purposes.');
 
 
     }
@@ -344,13 +344,13 @@ private class PMT_PaymentWizard_TEST {
 
         // look for the data
         npe01__OppPayment__c[] opmt = getUnpaidPayments(opp.Id);
-        System.assertEquals(12, opmt.size());
-        System.assertEquals('Stock', opmt[0].npe01__payment_method__c);
-        System.assertEquals(100, opmt[0].npe01__payment_amount__c);
+        System.assertEquals(12, opmt.size(), 'Assert that the size of opmt is equal to 12.');
+        System.assertEquals('Stock', opmt[0].npe01__payment_method__c, 'This function is called by the payment method.');
+        System.assertEquals(100, opmt[0].npe01__payment_amount__c, 'Test if the payment amount is equal to 100.');
 
         // verify that the page reference is null - redirect will happen on page
-        System.assertEquals(null, savePage);
-        System.assert(redirect);
+        System.assertEquals(null, savePage, 'Test if the savePage is null.');
+        System.assert(redirect, 'Assert that redirect is not called.');
     }
 
     /*********************************************************************************************************
@@ -385,10 +385,10 @@ private class PMT_PaymentWizard_TEST {
 
         // look for the data
         npe01__OppPayment__c[] opmt = getUnpaidPayments(opp.Id);
-        System.assertEquals(4, opmt.size());
-        System.assertEquals('Stock', opmt[0].npe01__payment_method__c);
+        System.assertEquals(4, opmt.size(), 'Assert that opmt size equals 4.');
+        System.assertEquals('Stock', opmt[0].npe01__payment_method__c, 'This function is called by the payment method.');
         //System.assertEquals(100, opmt[0].npe01__payment_amount__c);
-        System.assertEquals(opmt[1].npe01__scheduled_date__c, opmt[0].npe01__scheduled_date__c.addDays(7));
+        System.assertEquals(opmt[1].npe01__scheduled_date__c, opmt[0].npe01__scheduled_date__c.addDays(7), 'Assert that the scheduled date is after 7 days.');
     }
 
     /*********************************************************************************************************
@@ -423,10 +423,10 @@ private class PMT_PaymentWizard_TEST {
 
         // look for the data
         npe01__OppPayment__c[] opmt = getUnpaidPayments(opp.Id);
-        System.assertEquals(4, opmt.size());
-        System.assertEquals('Stock', opmt[0].npe01__payment_method__c);
-        System.assertEquals(100, opmt[0].npe01__payment_amount__c);
-        System.assertEquals(opmt[1].npe01__scheduled_date__c, opmt[0].npe01__scheduled_date__c.addDays(365));
+        System.assertEquals(4, opmt.size(), 'Assert that opmt size equals 4.');
+        System.assertEquals('Stock', opmt[0].npe01__payment_method__c, 'This function is called by the payment method.');
+        System.assertEquals(100, opmt[0].npe01__payment_amount__c, 'Test if the payment amount is equal to 100.');
+        System.assertEquals(opmt[1].npe01__scheduled_date__c, opmt[0].npe01__scheduled_date__c.addDays(365), 'Assert that the scheduled date is the same as the scheduled date in the second list.');
     }
 
     /*********************************************************************************************************
@@ -442,7 +442,7 @@ private class PMT_PaymentWizard_TEST {
 
         PMT_PaymentWizard_CTRL controller = new PMT_PaymentWizard_CTRL();
 
-        System.assertEquals(null, controller.currentOpp);
+        System.assertEquals(null, controller.currentOpp, 'Assert that currentOpp is not null.');
         UTIL_UnitTestData_TEST.assertPageHasError(System.Label.pmtWizardMsgNoOppFound);
     }
 
@@ -461,7 +461,7 @@ private class PMT_PaymentWizard_TEST {
 
         PMT_PaymentWizard_CTRL controller = new PMT_PaymentWizard_CTRL();
 
-        System.assertEquals(null, controller.currentOpp);
+        System.assertEquals(null, controller.currentOpp, 'Assert that currentOpp is not null.');
         UTIL_UnitTestData_TEST.assertPageHasError(System.Label.pmtWizardMsgNoOppFound);
     }
 
@@ -482,7 +482,7 @@ private class PMT_PaymentWizard_TEST {
         System.runAs(UTIL_UnitTestData_TEST.createStandardProfileUser()) {
             PMT_PaymentWizard_CTRL controller = new PMT_PaymentWizard_CTRL();
 
-            System.assertEquals(null, controller.currentOpp);
+            System.assertEquals(null, controller.currentOpp, 'Assert that currentOpp is not null.');
             UTIL_UnitTestData_TEST.assertPageHasError(System.Label.pmtWizardMsgNoOppFound);
         }
     }
@@ -504,8 +504,8 @@ private class PMT_PaymentWizard_TEST {
         System.runAs(UTIL_UnitTestData_TEST.createStandardProfileUser()) {
             PMT_PaymentWizard_CTRL controller = new PMT_PaymentWizard_CTRL();
 
-            System.assertNotEquals(null, controller.currentOpp);
-            System.assertEquals(false, controller.hasFeatureAccess);
+            System.assertNotEquals(null, controller.currentOpp, 'Assert that the current opp is not null.');
+            System.assertEquals(false, controller.hasFeatureAccess, 'Checks that the controller has feature access.');
         }
     }
 
@@ -526,8 +526,8 @@ private class PMT_PaymentWizard_TEST {
         System.runAs(UTIL_UnitTestData_TEST.createStandardProfileUser()) {
             PMT_PaymentWizard_CTRL controller = new PMT_PaymentWizard_CTRL();
 
-            System.assertNotEquals(null, controller.currentOpp);
-            System.assertEquals(false, controller.hasFeatureAccess);
+            System.assertNotEquals(null, controller.currentOpp, 'Assert that the current opp is not null.');
+            System.assertEquals(false, controller.hasFeatureAccess, 'Checks that the controller has feature access.');
         }
     }
 
@@ -560,7 +560,7 @@ private class PMT_PaymentWizard_TEST {
 
         npe01__OppPayment__c[] opmtUpdate = getPayments(opp.Id);
         opmtUpdate[0].npe01__payment_amount__c = 50;
-        System.assertEquals(true, opmtUpdate[0].npe01__paid__c);
+        System.assertEquals(true, opmtUpdate[0].npe01__paid__c, 'Test if the opmtUpdate value is the same as the paid value.');
         update opmtUpdate;
 
         npe01__OppPayment__c newOpmt = new npe01__OppPayment__c(
@@ -574,7 +574,7 @@ private class PMT_PaymentWizard_TEST {
         Test.startTest();
 
         npe01__OppPayment__c[] opmtAllStart = getPayments(opp.Id);
-        System.assertEquals(2, opmtAllStart.size());
+        System.assertEquals(2, opmtAllStart.size(), 'Test that the size of opmtAllStart is 2.');
 
         PageReference pageRef = Page.PMT_PaymentWizard;
         Test.setCurrentPage(pageRef);
@@ -585,20 +585,20 @@ private class PMT_PaymentWizard_TEST {
         PMT_PaymentWizard_CTRL controller = new PMT_PaymentWizard_CTRL();
 
         // set values
-        System.assertEquals(false, controller.haveAmount);
+        System.assertEquals(false, controller.haveAmount, 'Checks that the controller has a amount.');
         controller.removePaidPayments();
-        System.assertEquals(true, controller.removePaidPayments);
+        System.assertEquals(true, controller.removePaidPayments, 'Checks if the controller method is called with the value true.');
         controller.intervalUnit = 'Monthly';
         controller.numberOfPayments = 4;
         controller.samplePayment.npe01__Scheduled_Date__c = Date.newInstance(2001,12,12);
 
         PageReference ref = controller.calculate();
-        System.assertEquals(4, controller.getPayments().size());
+        System.assertEquals(4, controller.getPayments().size(), 'Test if the number of payments is equal to 4.');
 
         PageReference savePage = controller.createPayments();
 
         npe01__OppPayment__c[] opmt = getPayments(opp.Id);
-        System.assertEquals(4, opmt.size());
+        System.assertEquals(4, opmt.size(), 'Assert that opmt size equals 4.');
     }
 
     /*********************************************************************************************************
@@ -658,15 +658,15 @@ private class PMT_PaymentWizard_TEST {
         Test.stopTest();
 
         npe01__OppPayment__c[] opmt = getUnpaidPayments(opp.Id);
-        System.assertEquals(12, opmt.size());
+        System.assertEquals(12, opmt.size(), 'Assert that the size of opmt is equal to 12.');
         for (npe01__OppPayment__c pmt : opmt) {
-            System.assertEquals('Stock', pmt.npe01__payment_method__c);
-            System.assertEquals(100, pmt.npe01__payment_amount__c);
-            System.assertEquals(opp.Name, pmt.npe01__Custom_Payment_Field__c);
+            System.assertEquals('Stock', pmt.npe01__payment_method__c, 'This function should be removed in the future.');
+            System.assertEquals(100, pmt.npe01__payment_amount__c, 'Test for payment amount.');
+            System.assertEquals(opp.Name, pmt.npe01__Custom_Payment_Field__c, 'This function is used to assert that the payment field s name is the same as the one');
         }
 
         System.assertEquals(null, savePage, 'The page reference is null, the redirect will occur on the page');
-        System.assert(redirect);
+        System.assert(redirect, 'Assert that redirect is not called.');
     }
 
     /*********************************************************************************************************
@@ -692,7 +692,7 @@ private class PMT_PaymentWizard_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(opp.id, controller.currentOpp.id);
+        System.assertEquals(opp.id, controller.currentOpp.id, 'Assert that the current opp is the same as the one in the controller.');
         UTIL_UnitTestData_TEST.assertPageHasMessage(System.Label.pmtWizardPaymentsDisabledTitle, ApexPages.Severity.WARNING);
 
     }
@@ -720,7 +720,7 @@ private class PMT_PaymentWizard_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(opp.id, controller.currentOpp.id);
+        System.assertEquals(opp.id, controller.currentOpp.id, 'Assert that the current opp is the same as the one in the controller.');
         UTIL_UnitTestData_TEST.assertPageHasMessage(System.Label.pmtWizardPaymentsDisabledTitle, ApexPages.Severity.WARNING);
 
     }

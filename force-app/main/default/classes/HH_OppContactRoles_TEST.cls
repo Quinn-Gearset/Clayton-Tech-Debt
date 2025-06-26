@@ -98,12 +98,12 @@ private class HH_OppContactRoles_TEST {
         List<OpportunityContactRole> createdRoles = getOppContactRoles(o.id);
 
         if (strProcessor == CAO_Constants.BUCKET_PROCESSOR) {
-            System.assertEquals(0,createdRoles.size());
+            System.assertEquals(0,createdRoles.size(), 'Checks that all roles have been created.');
         } else {
-            System.assertEquals(2,createdRoles.size());
-            System.assertEquals(CAO_Constants.OCR_DONOR_ROLE,createdRoles[0].Role);
-            System.assert(createdRoles[0].IsPrimary);
-            System.assertEquals(CAO_Constants.HH_MEMBER_CONTACT_ROLE,createdRoles[1].Role);
+            System.assertEquals(2,createdRoles.size(), 'Checks that 2 roles are created.');
+            System.assertEquals(CAO_Constants.OCR_DONOR_ROLE,createdRoles[0].Role, 'Checks that OCR DONOR role is the same as the first created role.');
+            System.assert(createdRoles[0].IsPrimary, 'Assert that the user is the primary role.');
+            System.assertEquals(CAO_Constants.HH_MEMBER_CONTACT_ROLE,createdRoles[1].Role, 'Checks that the role of the created role is equal to the role of the created role of');
         }
     }
 
@@ -214,9 +214,9 @@ private class HH_OppContactRoles_TEST {
 
         List<OpportunityContactRole> createdRoles = getOppContactRoles(o.id);
         if (strProcessor == CAO_Constants.BUCKET_PROCESSOR) {
-            System.assertEquals(0,createdRoles.size());
+            System.assertEquals(0,createdRoles.size(), 'Checks that all roles have been created.');
         } else {
-            System.assertEquals(1,createdRoles.size());
+            System.assertEquals(1,createdRoles.size(), 'Checks that the number of roles created is equal to the number of roles created.');
         }
     }
 
@@ -265,7 +265,7 @@ private class HH_OppContactRoles_TEST {
         Test.stopTest();
 
         List<OpportunityContactRole> createdRoles = getOppContactRoles(o.id);
-        System.assertEquals(1,createdRoles.size());
+        System.assertEquals(1,createdRoles.size(), 'Checks that the number of roles created is equal to the number of roles created.');
     }
 
 
@@ -310,7 +310,7 @@ private class HH_OppContactRoles_TEST {
         Test.stopTest();
 
         List<OpportunityContactRole> createdRoles = getOppContactRoles(o.id);
-        System.assertEquals(0,createdRoles.size());
+        System.assertEquals(0,createdRoles.size(), 'Checks that all roles have been created.');
     }
 
     @isTest
@@ -348,8 +348,8 @@ private class HH_OppContactRoles_TEST {
         };
         Test.stopTest();
 
-        System.assertEquals(2, [SELECT count() FROM Opportunity]);
-        System.assertEquals(2, [SELECT count() FROM OpportunityContactRole]);
+        System.assertEquals(2, [SELECT count() FROM Opportunity], 'Asserts that the number of opportunities is equal to 2.');
+        System.assertEquals(2, [SELECT count() FROM OpportunityContactRole], 'Checks that the number of opportunity contact roles is equal to 2.');
     }
 
     @isTest
@@ -389,10 +389,10 @@ private class HH_OppContactRoles_TEST {
         HH_OppContactRoles_TDTM.strRefreshSetting = strRefresh;
 
         List<Contact> listCon = UTIL_UnitTestData_TEST.CreateMultipleTestContacts(5);
-        System.assertEquals(null, listCon[0].AccountId);
+        System.assertEquals(null, listCon[0].AccountId, 'Test if the account id is equal to the first account id in the list.');
         List<Account> listAcc = UTIL_UnitTestData_TEST.CreateMultipleTestAccounts(3, CAO_Constants.HH_ACCOUNT_TYPE);
         insert listAcc;
-        system.assertNotEquals(null, listAcc[0].Id);
+        system.assertNotEquals(null, listAcc[0].Id, 'Assert that the listAcc is not null.');
 
         // specify the account for each contact, some sharing HH account.
         listCon[0].AccountId = listAcc[0].Id;
@@ -412,15 +412,15 @@ private class HH_OppContactRoles_TEST {
 
         //check for contact roles
         List<OpportunityContactRole> listOCR = [SELECT OpportunityId, Role, ContactId, IsPrimary FROM OpportunityContactRole];
-        System.assertEquals(18, listOCR.size());
+        System.assertEquals(18, listOCR.size(), 'Checks that the OCR list is the same size as 18.');
 
         List<Contact> acctSrcContacts = new List<Contact>{ listCon[0], listCon[1] };
         List<OpportunityContactRole> acctSrcOCRs = getOppContactRoles(acctSrcContacts);
-        System.assertEquals(8, acctSrcOCRs.size());
+        System.assertEquals(8, acctSrcOCRs.size(), 'Checks that the number of OCRs in the acctSrcOCRs array is equal');
 
         List<Contact> acctDestContacts = new List<Contact>{ listCon[2], listCon[3] };
         List<OpportunityContactRole> acctDestOCRs = getOppContactRoles(acctDestContacts);
-        System.assertEquals(8, acctDestOCRs.size());
+        System.assertEquals(8, acctDestOCRs.size(), 'Checks that the number of OCRs in the acctDestOCRs array is equal');
 
         // now let's move a contact to a different household
         listCon[0].AccountId = listAcc[1].Id;
@@ -429,19 +429,19 @@ private class HH_OppContactRoles_TEST {
         Test.stopTest();
 
         List<OpportunityContactRole> acctSrcOCRsUpdated = getOppContactRoles(new List<Contact>{ listCon[0] });
-        System.assertEquals(4, acctSrcOCRsUpdated.size());
+        System.assertEquals(4, acctSrcOCRsUpdated.size(), 'This test asserts that the number of OCRs updated is the same as the number of');
 
-        System.assertEquals(listAcc[1].Id, listCon[0].AccountId);
+        System.assertEquals(listAcc[1].Id, listCon[0].AccountId, 'Assert that the account ID of the list con equals the account ID of the first list con');
 
         List<Contact> acctDestContactsUpdated = new List<Contact>{ listCon[0], listCon[2], listCon[3] };
         List<OpportunityContactRole> acctDestOCRsUpdated = getOppContactRoles(acctDestContactsUpdated);
 
         if (strRefresh.equalsIgnoreCase('none')) {
-            System.assertEquals(12, acctDestOCRsUpdated.size());
+            System.assertEquals(12, acctDestOCRsUpdated.size(), 'Checks that 12 OCRs were updated.');
         } else if (strRefresh.equalsIgnoreCase('Open Opportunities')) {
-            System.assertEquals(14, acctDestOCRsUpdated.size());
+            System.assertEquals(14, acctDestOCRsUpdated.size(), 'Checks that the number of OCRs updated is equal to 14.');
         } else if (strRefresh.equalsIgnoreCase('Open and Closed Opportunities')) {
-            System.assertEquals(16, acctDestOCRsUpdated.size());
+            System.assertEquals(16, acctDestOCRsUpdated.size(), 'This function asserts that the number of OCRs updated is equal to 16.');
         }
     }
 
@@ -571,7 +571,7 @@ private class HH_OppContactRoles_TEST {
         List<OpportunityContactRole> updatedRoles = getPrimaryOppContactRoles(opp.id);
 
         // verify the primary ocr has not changed.
-        System.assertEquals(createdRoles[0].ContactId, updatedRoles[0].ContactId);
+        System.assertEquals(createdRoles[0].ContactId, updatedRoles[0].ContactId, 'This method is used to assert that the contacts created and updated have the same values.');
     }
 
     // Helpers

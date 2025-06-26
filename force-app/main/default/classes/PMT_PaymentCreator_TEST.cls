@@ -74,16 +74,16 @@ private with sharing class PMT_PaymentCreator_TEST {
         testOppList.add(opp2);
         insert(testOppList);
         //at this moment no payments should have been created for opp2, cause amount is null BUG #1285
-        system.assertEquals(0, [select id,npe01__paid__c, npe01__payment_amount__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp2.Id].size());
+        system.assertEquals(0, [select id,npe01__paid__c, npe01__payment_amount__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp2.Id].size(), 'Assert that all opportunity c are paid and payment amount.');
         opp2.amount = 150;
         update(opp2);
         //at this moment payments should have been created for opp2, cause amount is changed to >0 BUG #1285
-        system.assertEquals(1, [select id,npe01__paid__c, npe01__payment_amount__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp2.Id].size());
+        system.assertEquals(1, [select id,npe01__paid__c, npe01__payment_amount__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp2.Id].size(), 'Assert that the number of opportunity c is equal to 1.');
 
         
         npe01__OppPayment__c[] opmtUpdate = [select id,npe01__paid__c, npe01__payment_amount__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp1.Id];
         opmtUpdate[0].npe01__payment_amount__c = 50;
-        system.assertEquals(true, opmtUpdate[0].npe01__paid__c);
+        system.assertEquals(true, opmtUpdate[0].npe01__paid__c, 'asserts that the opmtUpdate is the paid opmtUpdate');
         update opmtUpdate;
         
         npe01__OppPayment__c pmtUnpaid = new npe01__OppPayment__c(
@@ -110,16 +110,16 @@ private with sharing class PMT_PaymentCreator_TEST {
         // look for the data
         //should be two, one paid, one written off for the balance 
         npe01__OppPayment__c[] opmtAll = [select id, npe01__payment_method__c, npe01__payment_amount__c, npe01__paid__c, npe01__written_off__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp1.Id];
-        system.assertEquals(3, opmtAll.size());
+        system.assertEquals(3, opmtAll.size(), 'Assert that 3 opmtAll. size == 3');
                 
         npe01__OppPayment__c[] opmtPaid = [select id, npe01__payment_method__c, npe01__payment_amount__c, npe01__paid__c, npe01__written_off__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp1.Id and npe01__paid__c = true and npe01__written_off__c = false];
-        system.assertEquals(1, opmtPaid.size());
-        system.assertEquals(50, opmtPaid[0].npe01__payment_amount__c);
+        system.assertEquals(1, opmtPaid.size(), 'Assert that opmtPaid size is equal to 1.');
+        system.assertEquals(50, opmtPaid[0].npe01__payment_amount__c, 'This function asserts that the payment amount of the opmtPaid is equal to 50.');
         
         npe01__OppPayment__c[] opmtWrittenOff = [select id, npe01__payment_method__c, npe01__payment_amount__c, npe01__paid__c, npe01__written_off__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp1.Id and npe01__paid__c = false and npe01__written_off__c = true order by npe01__payment_amount__c];
-        system.assertEquals(2, opmtWrittenOff.size());
-        system.assertEquals(50, opmtWrittenOff[0].npe01__payment_amount__c);       
-        system.assertEquals(50, opmtWrittenOff[1].npe01__payment_amount__c);       
+        system.assertEquals(2, opmtWrittenOff.size(), 'Checks that the size of opmtWrittenOff is equal to 2.');
+        system.assertEquals(50, opmtWrittenOff[0].npe01__payment_amount__c, 'This function should be used in test cases.');       
+        system.assertEquals(50, opmtWrittenOff[1].npe01__payment_amount__c, 'This function should be used in test cases.');       
     }
 
     /*********************************************************************************************************
@@ -184,7 +184,7 @@ private with sharing class PMT_PaymentCreator_TEST {
         Map<Id, Opportunity> createdTestOpportunities = createTestOpportunities(testOpportunities);
 
         List<npe01__OppPayment__c> createdPayments = getCreatedPayments(createdTestOpportunities.keySet());
-        System.assertEquals(0, createdPayments.size());
+        System.assertEquals(0, createdPayments.size(), 'Checks that all payments have been created.');
         
         Test.startTest();
         for (Opportunity testOpportunity :createdTestOpportunities.values()) {
@@ -198,10 +198,10 @@ private with sharing class PMT_PaymentCreator_TEST {
         System.assertEquals(testOpportunitiesCount, createdPayments.size(), testOpportunitiesCount + ' new payments should be created.');
         for (npe01__OppPayment__c createdPayment : createdPayments) {
             Opportunity paymentOpportunity = createdTestOpportunities.get(createdPayment.npe01__Opportunity__c);
-            System.assertNotEquals(null, paymentOpportunity);
-            System.assertEquals(paymentOpportunity.CloseDate, createdPayment.npe01__Payment_Date__c);
-            System.assertEquals(paymentOpportunity.Amount, createdPayment.npe01__Payment_Amount__c);
-            System.assertEquals(true, createdPayment.npe01__Paid__c);
+            System.assertNotEquals(null, paymentOpportunity, 'This method asserts that paymentOpportunity is not null.');
+            System.assertEquals(paymentOpportunity.CloseDate, createdPayment.npe01__Payment_Date__c, 'This method asserts that the paymentOpportunity. CloseDate is equal to the date supplied');
+            System.assertEquals(paymentOpportunity.Amount, createdPayment.npe01__Payment_Amount__c, 'This method is here for testing purposes. It is here for testing purposes.');
+            System.assertEquals(true, createdPayment.npe01__Paid__c, 'This method asserts that the payment method is paid.');
         }
     }
 
@@ -226,7 +226,7 @@ private with sharing class PMT_PaymentCreator_TEST {
         Map<Id, Opportunity> createdTestOpportunities = createTestOpportunities(testOpportunities);
 
         List<npe01__OppPayment__c> createdPayments = getCreatedPayments(createdTestOpportunities.keySet());
-        System.assertEquals(0, createdPayments.size());
+        System.assertEquals(0, createdPayments.size(), 'Checks that all payments have been created.');
         
         Test.startTest();
         for (Opportunity testOpportunity :createdTestOpportunities.values()) {
@@ -240,10 +240,10 @@ private with sharing class PMT_PaymentCreator_TEST {
         System.assertEquals(testOpportunitiesCount, createdPayments.size(), testOpportunitiesCount + ' new payments should be created.');
         for (npe01__OppPayment__c createdPayment : createdPayments) {
             Opportunity paymentOpportunity = createdTestOpportunities.get(createdPayment.npe01__Opportunity__c);
-            System.assertNotEquals(null, paymentOpportunity);
-            System.assertEquals(paymentOpportunity.CloseDate, createdPayment.npe01__Payment_Date__c);
-            System.assertEquals(paymentOpportunity.Amount, createdPayment.npe01__Payment_Amount__c);
-            System.assertEquals(true, createdPayment.npe01__Paid__c);
+            System.assertNotEquals(null, paymentOpportunity, 'This method asserts that paymentOpportunity is not null.');
+            System.assertEquals(paymentOpportunity.CloseDate, createdPayment.npe01__Payment_Date__c, 'This method asserts that the paymentOpportunity. CloseDate is equal to the date supplied');
+            System.assertEquals(paymentOpportunity.Amount, createdPayment.npe01__Payment_Amount__c, 'This method is here for testing purposes. It is here for testing purposes.');
+            System.assertEquals(true, createdPayment.npe01__Paid__c, 'This method asserts that the payment method is paid.');
         }
     }
 
@@ -268,7 +268,7 @@ private with sharing class PMT_PaymentCreator_TEST {
         Map<Id, Opportunity> createdTestOpportunities = createTestOpportunities(testOpportunities);
 
         List<npe01__OppPayment__c> createdPayments = getCreatedPayments(createdTestOpportunities.keySet());
-        System.assertEquals(0, createdPayments.size());
+        System.assertEquals(0, createdPayments.size(), 'Checks that all payments have been created.');
         
         Test.startTest();
         for (Opportunity testOpportunity :createdTestOpportunities.values()) {
@@ -282,10 +282,10 @@ private with sharing class PMT_PaymentCreator_TEST {
         System.assertEquals(testOpportunitiesCount, createdPayments.size(), testOpportunitiesCount + ' new payments should be created.');
         for (npe01__OppPayment__c createdPayment : createdPayments) {
             Opportunity paymentOpportunity = createdTestOpportunities.get(createdPayment.npe01__Opportunity__c);
-            System.assertNotEquals(null, paymentOpportunity);
-            System.assertEquals(paymentOpportunity.CloseDate, createdPayment.npe01__Scheduled_Date__c);
-            System.assertEquals(paymentOpportunity.Amount, createdPayment.npe01__Payment_Amount__c);
-            System.assertEquals(false, createdPayment.npe01__Paid__c);
+            System.assertNotEquals(null, paymentOpportunity, 'This method asserts that paymentOpportunity is not null.');
+            System.assertEquals(paymentOpportunity.CloseDate, createdPayment.npe01__Scheduled_Date__c, 'This method asserts that the date passed in parameter is equal to the date passed in parameter.');
+            System.assertEquals(paymentOpportunity.Amount, createdPayment.npe01__Payment_Amount__c, 'This method is here for testing purposes. It is here for testing purposes.');
+            System.assertEquals(false, createdPayment.npe01__Paid__c, 'This method asserts that the payment method is paid.');
         } 
     }
 
@@ -310,7 +310,7 @@ private with sharing class PMT_PaymentCreator_TEST {
         Map<Id, Opportunity> createdTestOpportunities = createTestOpportunities(testOpportunities);
 
         List<npe01__OppPayment__c> createdPayments = getCreatedPayments(createdTestOpportunities.keySet());
-        System.assertEquals(0, createdPayments.size());
+        System.assertEquals(0, createdPayments.size(), 'Checks that all payments have been created.');
         
         Test.startTest();
         for (Opportunity testOpportunity :createdTestOpportunities.values()) {
@@ -324,10 +324,10 @@ private with sharing class PMT_PaymentCreator_TEST {
         System.assertEquals(testOpportunitiesCount, createdPayments.size(), testOpportunitiesCount + ' new payments should be created.');
         for (npe01__OppPayment__c createdPayment : createdPayments) {
             Opportunity paymentOpportunity = createdTestOpportunities.get(createdPayment.npe01__Opportunity__c);
-            System.assertNotEquals(null, paymentOpportunity);
-            System.assertEquals(paymentOpportunity.CloseDate, createdPayment.npe01__Scheduled_Date__c);
-            System.assertEquals(paymentOpportunity.Amount, createdPayment.npe01__Payment_Amount__c);
-            System.assertEquals(false, createdPayment.npe01__Paid__c);
+            System.assertNotEquals(null, paymentOpportunity, 'This method asserts that paymentOpportunity is not null.');
+            System.assertEquals(paymentOpportunity.CloseDate, createdPayment.npe01__Scheduled_Date__c, 'This method asserts that the date passed in parameter is equal to the date passed in parameter.');
+            System.assertEquals(paymentOpportunity.Amount, createdPayment.npe01__Payment_Amount__c, 'This method is here for testing purposes. It is here for testing purposes.');
+            System.assertEquals(false, createdPayment.npe01__Paid__c, 'This method asserts that the payment method is paid.');
         } 
     }
 
@@ -349,7 +349,7 @@ private with sharing class PMT_PaymentCreator_TEST {
         Map<Id, Opportunity> createdTestOpportunities = createTestOpportunities(testOpportunities);
 
         List<npe01__OppPayment__c> createdPayments = getCreatedPayments(createdTestOpportunities.keySet());
-        System.assertEquals(0, createdPayments.size());
+        System.assertEquals(0, createdPayments.size(), 'Checks that all payments have been created.');
         
         Test.startTest();
         for (Opportunity testOpportunity :createdTestOpportunities.values()) {
@@ -380,7 +380,7 @@ private with sharing class PMT_PaymentCreator_TEST {
         Map<Id, Opportunity> createdTestOpportunities = createTestOpportunities(testOpportunities);
 
         List<npe01__OppPayment__c> createdPayments = getCreatedPayments(createdTestOpportunities.keySet());
-        System.assertEquals(0, createdPayments.size());
+        System.assertEquals(0, createdPayments.size(), 'Checks that all payments have been created.');
         
         Test.startTest();
         for (Opportunity testOpportunity :createdTestOpportunities.values()) {
@@ -462,7 +462,7 @@ private with sharing class PMT_PaymentCreator_TEST {
         Test.stopTest();
 
         list<npe01__OppPayment__c> opmtAll = [select id, npe01__payment_method__c, npe01__payment_amount__c, npe01__paid__c, npe01__written_off__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp.Id];
-        system.assertEquals(1, opmtAll.size());
+        system.assertEquals(1, opmtAll.size(), 'Assert that all opmtAll are equal.');
     }
 
     /*********************************************************************************************************
@@ -495,7 +495,7 @@ private with sharing class PMT_PaymentCreator_TEST {
         Test.stopTest();
 
         list<npe01__OppPayment__c> opmtAll = [select id, npe01__payment_method__c, npe01__payment_amount__c, npe01__paid__c, npe01__written_off__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp.Id];
-        system.assertEquals(0, opmtAll.size());
+        system.assertEquals(0, opmtAll.size(), 'Assert that all opmtAll are empty.');
     }
 
     /*********************************************************************************************************
@@ -540,9 +540,9 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         list<npe01__OppPayment__c> opmtAll = [select id, npe01__payment_method__c, npe01__payment_amount__c, npe01__paid__c, npe01__written_off__c from npe01__OppPayment__c WHERE npe01__opportunity__c = :opp.Id];
         if (rtIdGift != null)
-            system.assertEquals(0, opmtAll.size());
+            system.assertEquals(0, opmtAll.size(), 'Assert that all opmtAll are empty.');
         else
-            system.assertEquals(1, opmtAll.size());
+            system.assertEquals(1, opmtAll.size(), 'Assert that all opmtAll are equal.');
     }
     
     private static testMethod void testOpportunityWillAutoClosefterAllPaymentsReceived() {
@@ -564,9 +564,9 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         List<npe01__OppPayment__c> payments = oh.getPayments();
 
-        System.assertEquals(1, payments.size());
-        System.assertEquals(oh.opp.Amount, payments.get(0).npe01__Payment_Amount__c);
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(1, payments.size(), 'Asserts that the payments are in the same order as the payments in the payment table.');
+        System.assertEquals(oh.opp.Amount, payments.get(0).npe01__Payment_Amount__c, 'asserts that the payment amount is equal to the one in the payments list');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
 
         payments.get(0).npe01__Paid__c = true;
 
@@ -578,8 +578,8 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         oh.refresh();
 
-        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade());
-        System.assertEquals(closedWonStage, oh.opp.StageName);
+        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade(), 'Checks that the total payments made is equal to the total payments made.');
+        System.assertEquals(closedWonStage, oh.opp.StageName, 'Asserts that closedWonStage is the same as the closedWonStage.');
     }
 
     private static testMethod void testOpportunityWillAutoCloseIfAmountUpdatedToMatchPayments() {
@@ -612,9 +612,9 @@ private with sharing class PMT_PaymentCreator_TEST {
         });
         oh.refresh();
 
-        System.assertEquals(500, oh.opp.Amount);
-        System.assertEquals(250, oh.getTotalPaymentsMade());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(500, oh.opp.Amount, 'Checks that the amount of OCP is 500.');
+        System.assertEquals(250, oh.getTotalPaymentsMade(), 'Checks that the total amount of payments made is 250.');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
 
         Test.startTest();
 
@@ -625,9 +625,9 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         oh.refresh();
 
-        System.assertEquals(250, oh.opp.Amount);
-        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade());
-        System.assertEquals(closedWonStage, oh.opp.StageName);
+        System.assertEquals(250, oh.opp.Amount, 'Checks that the value of this operator is 250.');
+        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade(), 'Checks that the total payments made is equal to the total payments made.');
+        System.assertEquals(closedWonStage, oh.opp.StageName, 'Asserts that closedWonStage is the same as the closedWonStage.');
     }
 
     private static testMethod void testOpportunityWillNotAutoCloseIfNotAllPaymentsReceived() {
@@ -660,9 +660,9 @@ private with sharing class PMT_PaymentCreator_TEST {
         });
         oh.refresh();
 
-        System.assertEquals(500, oh.opp.Amount);
-        System.assertEquals(0, oh.getTotalPaymentsMade());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(500, oh.opp.Amount, 'Checks that the amount of OCP is 500.');
+        System.assertEquals(0, oh.getTotalPaymentsMade(), 'Checks that the total amount of payments made has been met.');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
 
         Test.startTest();
 
@@ -673,9 +673,9 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         oh.refresh();
 
-        System.assertEquals(500, oh.opp.Amount);
-        System.assertEquals(250, oh.getTotalPaymentsMade());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(500, oh.opp.Amount, 'Checks that the amount of OCP is 500.');
+        System.assertEquals(250, oh.getTotalPaymentsMade(), 'Checks that the total amount of payments made is 250.');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
     }
 
     private static testMethod void testOpportunityWillNotAutoCloseIfNoStageNameSet() {
@@ -696,9 +696,9 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         List<npe01__OppPayment__c> payments = oh.getPayments();
 
-        System.assertEquals(1, payments.size());
-        System.assertEquals(oh.opp.Amount, payments.get(0).npe01__Payment_Amount__c);
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(1, payments.size(), 'Asserts that the payments are in the same order as the payments in the payment table.');
+        System.assertEquals(oh.opp.Amount, payments.get(0).npe01__Payment_Amount__c, 'asserts that the payment amount is equal to the one in the payments list');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
 
         payments.get(0).npe01__Paid__c = true;
 
@@ -710,8 +710,8 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         oh.refresh();
 
-        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade(), 'Checks that the total payments made is equal to the total payments made.');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
     }
 
     private static testMethod void testOpportunityWillNotAutoCloseIfAlreadyClosed() {
@@ -745,9 +745,9 @@ private with sharing class PMT_PaymentCreator_TEST {
         });
         oh.refresh();
 
-        System.assertEquals(500, oh.opp.Amount);
-        System.assertEquals(250, oh.getTotalPaymentsMade());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(500, oh.opp.Amount, 'Checks that the amount of OCP is 500.');
+        System.assertEquals(250, oh.getTotalPaymentsMade(), 'Checks that the total amount of payments made is 250.');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
 
         Test.startTest();
 
@@ -759,9 +759,9 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         oh.refresh();
 
-        System.assertEquals(250, oh.opp.Amount);
-        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade());
-        System.assertEquals(closedLostStage, oh.opp.StageName);
+        System.assertEquals(250, oh.opp.Amount, 'Checks that the value of this operator is 250.');
+        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade(), 'Checks that the total payments made is equal to the total payments made.');
+        System.assertEquals(closedLostStage, oh.opp.StageName, 'Asserts that the closedLostStage is the same as the closedLostStage.');
     }
 
     private static testMethod void testOpportunityWillNotAutoCloseIfAllPaymentsWrittenOff() {
@@ -783,10 +783,10 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         List<npe01__OppPayment__c> payments = oh.getPayments();
 
-        System.assertEquals(1, payments.size());
-        System.assertEquals(oh.opp.Amount, payments.get(0).npe01__Payment_Amount__c);
-        System.assertEquals(0, oh.getTotalPaymentsMade());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(1, payments.size(), 'Asserts that the payments are in the same order as the payments in the payment table.');
+        System.assertEquals(oh.opp.Amount, payments.get(0).npe01__Payment_Amount__c, 'asserts that the payment amount is equal to the one in the payments list');
+        System.assertEquals(0, oh.getTotalPaymentsMade(), 'Checks that the total amount of payments made has been met.');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
 
         payments.get(0).npe01__Written_Off__c = true;
 
@@ -798,8 +798,8 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         oh.refresh();
 
-        System.assertEquals(0, oh.getTotalPaymentsMade());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(0, oh.getTotalPaymentsMade(), 'Checks that the total amount of payments made has been met.');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
     }
 
     private static testMethod void testOpportunityWillNotAutoCloseClosesIfAmountSetToZero() {
@@ -822,8 +822,8 @@ private with sharing class PMT_PaymentCreator_TEST {
         oh.deletePayments();
         oh.refresh();
 
-        System.assertEquals(0, oh.getPayments().size());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(0, oh.getPayments().size(), 'Checks that the number of payments in the OH is equal to the number of payments in');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
 
         Test.startTest();
 
@@ -834,9 +834,9 @@ private with sharing class PMT_PaymentCreator_TEST {
 
         oh.refresh();
 
-        System.assertEquals(0, oh.opp.Amount);
-        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade());
-        System.assertEquals(openStage, oh.opp.StageName);
+        System.assertEquals(0, oh.opp.Amount, 'Checks that the value of the OCP is 0.');
+        System.assertEquals(oh.opp.Amount, oh.getTotalPaymentsMade(), 'Checks that the total payments made is equal to the total payments made.');
+        System.assertEquals(openStage, oh.opp.StageName, 'Assert that OpenStage is equal to OpenStage.');
     }
 
     class OpportunityHelper {
@@ -1086,7 +1086,7 @@ private with sharing class PMT_PaymentCreator_TEST {
             LIMIT 1
         ];
 
-        System.assertEquals(closedWonStage,opp.StageName);
+        System.assertEquals(closedWonStage,opp.StageName, 'Asserts that the closedWonStage is the same as the opp. StageName.');
     }
 
     /*********************************************************************************************************
@@ -1149,7 +1149,7 @@ private with sharing class PMT_PaymentCreator_TEST {
                                                 WHERE Id = : opp.Id
                                                 LIMIT 1].StageName;
 
-        System.assertEquals(closedWonStage,insertedOpportunityStageName);
+        System.assertEquals(closedWonStage,insertedOpportunityStageName, 'Asserts that the closedWonStage and insertedOpportunityStage names are equal.');
     }
 
 }

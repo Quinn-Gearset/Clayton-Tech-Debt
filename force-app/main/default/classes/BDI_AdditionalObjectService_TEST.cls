@@ -262,55 +262,55 @@ private class BDI_AdditionalObjectService_TEST {
             }
         }
 
-        System.assertEquals(null,testDataImportAResult.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c);
-        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c);
+        System.assertEquals(null,testDataImportAResult.FailureInformation__c, 'TestDataImportAResult. FailureInformation is null.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c, 'This test asserts that the BDI_DataImport_API. bdiImported is equal');
+        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c, 'This test fails if the account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c, 'This method asserts that the value of this property is not the same as the value of the');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c, 'Test Data Import A Result');
 
-        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_1_Import_Status__c);
-        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_2_Import_Status__c);
-        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.DonationImported__c, 'TestDataImportAResult. DonationImported is not equal to testDataImportBResult');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c, 'TestDataImportAResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_1_Import_Status__c, 'Test data import A result.');
+        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c, 'This test fails if the import result is not the same as the import result of the G');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_2_Import_Status__c, 'Test data import A result.');
+        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import A Result');
 
-        System.assertEquals(null,testDataImportBResult.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportBResult.Status__c);
-        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c);
+        System.assertEquals(null,testDataImportBResult.FailureInformation__c, 'TestDataImportBResult. FailureInformation is a no - op if the value is null');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportBResult.Status__c, 'This test asserts that the BDI_DataImport_API. bdiImported is equal');
+        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c, 'This test fails if Account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c, 'Test data import with status bdiCreated');
+        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c, 'This method asserts that the value of the property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c, 'Test Data Import');
 
-        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_1_Import_Status__c);
-        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_2_Import_Status__c);
-        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c, 'TestDataImportBResult. DonationCampaignImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.DonationImported__c, 'This method is called when the testDataImportBResult object is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c, 'TestDataImportBResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_1_Import_Status__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c, 'This method is called when the testDataImportBResult object is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_2_Import_Status__c, 'Test data import');
+        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_1_ImportStatus__c, 'Test Data Import Status');
+        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import');
 
         OpportunityContactRole ocrA1;
         OpportunityContactRole ocrA2;
@@ -334,11 +334,11 @@ private class BDI_AdditionalObjectService_TEST {
         }
 
         // Confirm that the desired ocrs were created correctly
-        System.assertEquals(8,ocrAll.size()); // the number 8 includes the automatically created donor and household member OCRs
-        System.assertEquals('Soft Credit',ocrA1.Role);
-        System.assertEquals('Soft Credit',ocrA2.Role);
-        System.assertEquals('Soft Credit',ocrB1.Role);
-        System.assertEquals('Soft Credit',ocrB2.Role);
+        System.assertEquals(8,ocrAll.size(), 'Checks that the OCR all is the same size as the OCR all.'); // the number 8 includes the automatically created donor and household member OCRs
+        System.assertEquals('Soft Credit',ocrA1.Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals('Soft Credit',ocrA2.Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals('Soft Credit',ocrB1.Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals('Soft Credit',ocrB2.Role, 'Checks that the OCR role is the same as the OCR role.');
 
         Allocation__c gauAlloA1;
         Allocation__c gauAlloA2;
@@ -361,11 +361,11 @@ private class BDI_AdditionalObjectService_TEST {
         }
 
         // Confirm that the desired GAU Allocations were created correctly
-        System.assertEquals(4,gauAlloAll.size());
-        System.assertEquals(75,gauAlloA1.Percent__c);
-        System.assertEquals(25,gauAlloA2.Percent__c);
-        System.assertEquals(75,gauAlloB1.Percent__c);
-        System.assertEquals(25,gauAlloB2.Percent__c);
+        System.assertEquals(4,gauAlloAll.size(), 'Checks that the size of the GauAlloAll array is equal to 4.');
+        System.assertEquals(75,gauAlloA1.Percent__c, 'This test is not a problem with the GAUAL LOA1 library.');
+        System.assertEquals(25,gauAlloA2.Percent__c, 'This test is not a problem with the GAUALALLOA2 library.');
+        System.assertEquals(75,gauAlloB1.Percent__c, 'This test is not a problem with the GAUAL LOB1 library.');
+        System.assertEquals(25,gauAlloB2.Percent__c, 'This test is not a problem with the GAUAL LOB2 library.');
     }
 
 
@@ -471,50 +471,50 @@ private class BDI_AdditionalObjectService_TEST {
 
         }
 
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c);
-        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c);
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c, 'This test asserts that the BDI_DataImport_API. bdiImported is equal');
+        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c, 'This test fails if the account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c, 'This method asserts that the value of this property is not the same as the value of the');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c, 'Test Data Import A Result');
 
-        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_1_Import_Status__c);
-        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_2_Import_Status__c);
-        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.DonationImported__c, 'TestDataImportAResult. DonationImported is not equal to testDataImportBResult');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c, 'TestDataImportAResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_1_Import_Status__c, 'Test data import A result.');
+        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c, 'This test fails if the import result is not the same as the import result of the G');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_2_Import_Status__c, 'Test data import A result.');
+        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported tests for equality.');
+        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c, 'This function asserts that the value of the attribute opportunity_Contact_Role_1');
+        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import A Result');
 
-        System.assertEquals(BDI_DataImport_API.bdiFailed,testDataImportBResult.Status__c);
-        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c);
+        System.assertEquals(BDI_DataImport_API.bdiFailed,testDataImportBResult.Status__c, 'Checks that the BDI_DataImport_API. bdiFailed equals testDataImport');
+        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c, 'This test fails if Account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c, 'Test data import with status bdiCreated');
+        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c, 'This method asserts that the value of the property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c, 'Test Data Import');
 
-        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_1_Import_Status__c);
-        System.assertEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c);
+        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c, 'TestDataImportBResult. DonationCampaignImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.DonationImported__c, 'This method is called when the testDataImportBResult object is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c, 'TestDataImportBResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_1_Import_Status__c, 'Test data import.');
+        System.assertEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c, 'TestDataImportBResult. GAU_Allocation_2_Imported');
         System.assert(testDataImportBResult.GAU_Allocation_2_Import_Status__c.startsWith(
-                                                                    System.label.bdiAdditionalObjRequiredFieldsNull));
+                                                                    System.label.bdiAdditionalObjRequiredFieldsNull), 'This function is called by the test code to assert that the status of the import is correct');
 
     }
 
@@ -576,53 +576,53 @@ private class BDI_AdditionalObjectService_TEST {
 
         }
 
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c);
-        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c);
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c, 'This test asserts that the BDI_DataImport_API. bdiImported is equal');
+        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c, 'This test fails if the account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c, 'This method asserts that the value of this property is not the same as the value of the');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c, 'Test Data Import A Result');
 
-        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_1_Import_Status__c);
-        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_2_Import_Status__c);
-        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.DonationImported__c, 'TestDataImportAResult. DonationImported is not equal to testDataImportBResult');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c, 'TestDataImportAResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_1_Import_Status__c, 'Test data import A result.');
+        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c, 'This test fails if the import result is not the same as the import result of the G');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_2_Import_Status__c, 'Test data import A result.');
+        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import A Result');
 
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportBResult.Status__c);
-        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c);
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportBResult.Status__c, 'This test asserts that the BDI_DataImport_API. bdiImported is equal');
+        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c, 'This test fails if Account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c, 'Test data import with status bdiCreated');
+        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c, 'This method asserts that the value of the property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c, 'Test Data Import');
 
-        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_1_Import_Status__c);
-        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_2_Import_Status__c);
-        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c, 'TestDataImportBResult. DonationCampaignImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.DonationImported__c, 'This method is called when the testDataImportBResult object is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c, 'TestDataImportBResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_1_Import_Status__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c, 'This method is called when the testDataImportBResult object is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_2_Import_Status__c, 'Test data import');
+        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_1_ImportStatus__c, 'Test Data Import Status');
+        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import');
 
         // Changing OCR values to test update clearing out GAU values to avoid errors.
         testDataImportAResult.Status__c = null;
@@ -694,10 +694,10 @@ private class BDI_AdditionalObjectService_TEST {
             }
         }
 
-        System.assertEquals(System.label.bdiUpdated,testDataImportAResult2.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertEquals(System.label.bdiUpdated,testDataImportAResult2.Opportunity_Contact_Role_2_ImportStatus__c);
-        System.assertEquals(System.label.bdiUpdated,testDataImportBResult2.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertEquals(System.label.bdiUpdated,testDataImportBResult2.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertEquals(System.label.bdiUpdated,testDataImportAResult2.Opportunity_Contact_Role_1_ImportStatus__c, 'Test Data Import Status');
+        System.assertEquals(System.label.bdiUpdated,testDataImportAResult2.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import Status');
+        System.assertEquals(System.label.bdiUpdated,testDataImportBResult2.Opportunity_Contact_Role_1_ImportStatus__c, 'Test Data Import Status');
+        System.assertEquals(System.label.bdiUpdated,testDataImportBResult2.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import Status');
 
         OpportunityContactRole ocrA1;
         OpportunityContactRole ocrA2;
@@ -721,11 +721,11 @@ private class BDI_AdditionalObjectService_TEST {
 
         // Confirm that only the appropriate opportunity contact roles were changed
         // the number 8 includes the automatically created donor and household member OCRs
-        System.assertEquals(8,ocrAll.size()); 
-        System.assertEquals('Other',ocrA1.Role);
-        System.assertEquals('Soft Credit',ocrA2.Role);
-        System.assertEquals('Soft Credit',ocrB1.Role);
-        System.assertEquals('Other',ocrB2.Role);
+        System.assertEquals(8,ocrAll.size(), 'Checks that the OCR all is the same size as the OCR all.'); 
+        System.assertEquals('Other',ocrA1.Role, 'Checks that the OCR role is the same as the other role.');
+        System.assertEquals('Soft Credit',ocrA2.Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals('Soft Credit',ocrB1.Role, 'Checks that the OCR role is the same as the OCR role.');
+        System.assertEquals('Other',ocrB2.Role, 'Checks that the OCR role is the same as the other role.');
     }
 
 
@@ -840,7 +840,7 @@ private class BDI_AdditionalObjectService_TEST {
         Contact honoreeContB;
 
         Contact[] createdConts = [SELECT Id, LastName FROM Contact];
-        System.assertEquals(6,createdConts.size());
+        System.assertEquals(6,createdConts.size(), 'Checks that the number of created Controllers is equal to 6.');
 
         for (Contact cont : createdConts) {
             if (cont.LastName == 'testgroupAcontact01Alternate@fakedata.com') {
@@ -851,14 +851,14 @@ private class BDI_AdditionalObjectService_TEST {
         }
 
         // Checking to make sure that the honoree contacts were created.
-        System.assert(honoreeContA != null);
-        System.assert(honoreeContB != null);
+        System.assert(honoreeContA != null, 'Assert that the Honoree ContA is not null.');
+        System.assert(honoreeContB != null, 'Assert that the Honoree ContB is not null.');
 
         Opportunity opptA;
         Opportunity opptB;
 
         Opportunity[] updatedOppts = [SELECT Id, Honoree_Contact__c FROM Opportunity];
-        System.assertEquals(2,updatedOppts.size());
+        System.assertEquals(2,updatedOppts.size(), 'Assert that the number of updated ops is the same as the number of updated ops.');
 
         for (Opportunity oppt : updatedOppts) {
             if (oppt.Id == testDataImportAResult.DonationImported__c) {
@@ -870,57 +870,57 @@ private class BDI_AdditionalObjectService_TEST {
 
         //Confirm that the predecessor child opportunities exist and were properly updated with the
         //Honoree contact id.
-        System.assert(opptA != null);
-        System.assert(opptB != null);
-        System.assertEquals(honoreeContA.Id,opptA.Honoree_Contact__c);
-        System.assertEquals(honoreeContB.Id,opptB.Honoree_Contact__c);
+        System.assert(opptA != null, 'Assert that opptA is not null.');
+        System.assert(opptB != null, 'Assert that opptB is not null.');
+        System.assertEquals(honoreeContA.Id,opptA.Honoree_Contact__c, 'Checks that the Honoree Contact is the same as the opptA. H');
+        System.assertEquals(honoreeContB.Id,opptB.Honoree_Contact__c, 'This function is used to assert that the Honoree_Contact_c object is');
     
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c);
-        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_1_Import_Status__c);
-        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_2_Import_Status__c);
-        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c, 'This test asserts that the BDI_DataImport_API. bdiImported is equal');
+        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c, 'This test fails if the account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c, 'This method asserts that the value of this property is not the same as the value of the');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.DonationImported__c, 'TestDataImportAResult. DonationImported is not equal to testDataImportBResult');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c, 'TestDataImportAResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_1_Import_Status__c, 'Test data import A result.');
+        System.assertNotEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c, 'This test fails if the import result is not the same as the import result of the G');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.GAU_Allocation_2_Import_Status__c, 'Test data import A result.');
+        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import A Result');
 
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportBResult.Status__c);
-        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c);
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportBResult.Status__c, 'This test asserts that the BDI_DataImport_API. bdiImported is equal');
+        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c, 'This test fails if Account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c, 'Test data import with status bdiCreated');
+        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c, 'This method asserts that the value of the property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c, 'Test Data Import');
 
-        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_1_Import_Status__c);
-        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_2_Import_Status__c);
-        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c, 'TestDataImportBResult. DonationCampaignImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.DonationImported__c, 'This method is called when the testDataImportBResult object is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c, 'TestDataImportBResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_1_Import_Status__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c, 'This method is called when the testDataImportBResult object is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.GAU_Allocation_2_Import_Status__c, 'Test data import');
+        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_1_ImportStatus__c, 'Test Data Import Status');
+        System.assertNotEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported tests for equality.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Opportunity_Contact_Role_2_ImportStatus__c, 'Test Data Import');
     }
 
     @isTest
@@ -976,16 +976,16 @@ private class BDI_AdditionalObjectService_TEST {
                 OR Id = :doubleErrorDataImport.Id
         ];
 
-        System.assertEquals(2,dataImports.size());
+        System.assertEquals(2,dataImports.size(), 'Checks that the number of data imports is equal to 2.');
 
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiFailed, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.GAU_Allocation_1_Import_Status__c);
-            System.assertNotEquals(null, dataImport.FailureInformation__c);
+            System.assertEquals(BDI_DataImport_API.bdiFailed, dataImport.Status__c, 'Checks that the BDI_DataImport_API. bdiFailed equals the status of');
+            System.assertNotEquals(null, dataImport.GAU_Allocation_1_Import_Status__c, 'This method asserts that the values of GAU_Allocation_1_Import_Status are');
+            System.assertNotEquals(null, dataImport.FailureInformation__c, 'Assert that the failure information is not null.');
 
             if (dataImport.Id == doubleErrorDataImport.Id) {
                 System.assertNotEquals(null,
-                        dataImport.Opportunity_Contact_Role_1_ImportStatus__c);
+                        dataImport.Opportunity_Contact_Role_1_ImportStatus__c, 'This method will throw an exception if the object is null.');
             }
         }
     }
@@ -1427,26 +1427,26 @@ private class BDI_AdditionalObjectService_TEST {
         BDI_DynamicSource dsA2 = dsgA.dynamicSourceByObjMappingDevName.get(dynSourceA2.objectMappingDevName);
         BDI_DynamicSource dsB1 = dsgB.dynamicSourceByObjMappingDevName.get(dynSourceB1.objectMappingDevName);
 
-        System.assert(dsA1 != null);
-        System.assert(dsA2 != null);
-        System.assert(dsB1 != null);
-        System.assert(dsA1.importedRecordId != null);
-        System.assert(dsA2.importedRecordId != null);
-        System.assert(dsB1.importedRecordId != null);
-        System.assert(dsA1.importedRecordStatus == System.label.bdiCreated);
-        System.assert(dsA2.importedRecordStatus == System.label.bdiCreated);
-        System.assert(dsB1.importedRecordStatus == System.label.bdiCreated);
+        System.assert(dsA1 != null, 'This is a no - op if dsA1 is null.');
+        System.assert(dsA2 != null, 'Assert that dsA2 is not null.');
+        System.assert(dsB1 != null, 'This is a no - op if dsB1 is null.');
+        System.assert(dsA1.importedRecordId != null, 'This method is only used for testing.');
+        System.assert(dsA2.importedRecordId != null, 'Checks that the DSA2 record is imported.');
+        System.assert(dsB1.importedRecordId != null, 'This method is only called if the DSB1 object is not null.');
+        System.assert(dsA1.importedRecordStatus == System.label.bdiCreated, 'asserts that the imported record status is the same as the bdiCreated status');
+        System.assert(dsA2.importedRecordStatus == System.label.bdiCreated, 'asserts that the record is created');
+        System.assert(dsB1.importedRecordStatus == System.label.bdiCreated, 'asserts that the imported record status is the same as the status of the imported record');
         
         //Making sure the created contact record info was not updated on the DI field itself.
-        System.assertEquals(null,testDataImportAResult.Contact1_Title__c);
-        System.assertEquals(null,testDataImportBResult.Contact1_Title__c);
+        System.assertEquals(null,testDataImportAResult.Contact1_Title__c, 'Test data import a result for the same title.');
+        System.assertEquals(null,testDataImportBResult.Contact1_Title__c, 'This function asserts that the Contact1_Title is set to the same value as the Contact');
 
         Contact honoreeContA1;
         Contact honoreeContA2;
         Contact honoreeContB;
 
         Contact[] createdConts = [SELECT Id, LastName FROM Contact];
-        System.assertEquals(7,createdConts.size());
+        System.assertEquals(7,createdConts.size(), 'Checks that the number of created Controllers is equal to 7.');
 
         for (Contact cont : createdConts) {
             if (cont.LastName == 'testgroupAcontact01DSAlternate@fakedata.com') {
@@ -1459,19 +1459,19 @@ private class BDI_AdditionalObjectService_TEST {
         }
 
         // Checking to make sure that the honoree contacts were created.
-        System.assert(honoreeContA1 != null);
-        System.assert(honoreeContA2 != null);
-        System.assert(honoreeContB != null);
+        System.assert(honoreeContA1 != null, 'Assert that the Honoree ContA1 is not null.');
+        System.assert(honoreeContA2 != null, 'Assert that the Honoree ContA2 is not null.');
+        System.assert(honoreeContB != null, 'Assert that the Honoree ContB is not null.');
 
-        System.assert(testDataImportAResult.Additional_Object_JSON__c != null);
-        System.assert(testDataImportBResult.Additional_Object_JSON__c != null);
+        System.assert(testDataImportAResult.Additional_Object_JSON__c != null, 'Test if Additional_Object_JSON_c is not null.');
+        System.assert(testDataImportBResult.Additional_Object_JSON__c != null, 'Test if Additional_Object_JSON is not null');
 
         
         Opportunity opptA;
         Opportunity opptB;
 
         Opportunity[] updatedOppts = [SELECT Id, Honoree_Contact__c FROM Opportunity];
-        System.assertEquals(2,updatedOppts.size());
+        System.assertEquals(2,updatedOppts.size(), 'Assert that the number of updated ops is the same as the number of updated ops.');
 
         for (Opportunity oppt : updatedOppts) {
             if (oppt.Id == testDataImportAResult.DonationImported__c) {
@@ -1484,8 +1484,8 @@ private class BDI_AdditionalObjectService_TEST {
         Set<Id> honoreeContsA = new Set<Id>{honoreeContA1.Id,honoreeContA2.Id};
         //Since only one of the honoree contacts for oppt A could be on the the oppt, this will look
         //for either
-        System.assert(honoreeContsA.contains(opptA.Honoree_Contact__c));
-        System.assertEquals(opptB.Honoree_Contact__c, dsB1.importedRecordId);
+        System.assert(honoreeContsA.contains(opptA.Honoree_Contact__c), 'Checks that the Honoree contact is present.');
+        System.assertEquals(opptB.Honoree_Contact__c, dsB1.importedRecordId, 'This function is used to assert that the Honoree_Contact class is the same');
     }
 
     /*******************************************************************************************************
@@ -1671,30 +1671,30 @@ private class BDI_AdditionalObjectService_TEST {
             }
         }
 
-        System.assertEquals(null,testDataImportAResult.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c);
-        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c);
+        System.assertEquals(null,testDataImportAResult.FailureInformation__c, 'TestDataImportAResult. FailureInformation is null.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDataImportAResult.Status__c, 'This test asserts that the BDI_DataImport_API. bdiImported is equal');
+        System.assertNotEquals(null,testDataImportAResult.Account1Imported__c, 'This test fails if the account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportAResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact1ImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.Contact2Imported__c, 'This method asserts that the value of this property is not the same as the value of the');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.Contact2ImportStatus__c, 'Test Data Import A Result');
 
-        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c);
-        System.assertEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(null,testDataImportAResult.GAU_Allocation_1_Import_Status__c);
-        System.assertEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(null,testDataImportAResult.GAU_Allocation_2_Import_Status__c);
-        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertNotEquals(null,testDataImportAResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiMatched,testDataImportAResult.DonationCampaignImportStatus__c, 'Test Data Import A Result');
+        System.assertNotEquals(null,testDataImportAResult.DonationImported__c, 'TestDataImportAResult. DonationImported is not equal to testDataImportBResult');
+        System.assertEquals(System.label.bdiCreated,testDataImportAResult.DonationImportStatus__c, 'TestDataImportAResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportAResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertEquals(null,testDataImportAResult.GAU_Allocation_1_Imported__c, 'TestDataImportAResult. GAU_Allocation_1_Imported');
+        System.assertEquals(null,testDataImportAResult.GAU_Allocation_1_Import_Status__c, 'Test data import a result.');
+        System.assertEquals(null,testDataImportAResult.GAU_Allocation_2_Imported__c, 'TestDataImportAResult. GAU_Allocation_2_Imported is null.');
+        System.assertEquals(null,testDataImportAResult.GAU_Allocation_2_Import_Status__c, 'TestDataImportAResult. GAU_Allocation_2_Import_Status__c');
+        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported tests for equality.');
+        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_1_ImportStatus__c, 'This function asserts that the value of the attribute opportunity_Contact_Role_1');
+        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported tests for equality.');
+        System.assertEquals(null,testDataImportAResult.Opportunity_Contact_Role_2_ImportStatus__c, 'This function asserts that the value of OPportunity_Contact_Role_2_Import');
 
         System.assert(testDataImportBResult.FailureInformation__c.contains(
             UTIL_Describe.getFieldDescribe(
@@ -1708,30 +1708,30 @@ private class BDI_AdditionalObjectService_TEST {
             testDataImportBResult.FailureInformation__c);
 
         System.assert(testDataImportBResult.FailureInformation__c.contains(
-                                                            'GAU_Allocation_1_GAU__c'));
-        System.assertEquals(BDI_DataImport_API.bdiFailed,testDataImportBResult.Status__c);
-        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c);
+                                                            'GAU_Allocation_1_GAU__c'), 'This method is called when the test data import fails due to a missing GAU allocation.');
+        System.assertEquals(BDI_DataImport_API.bdiFailed,testDataImportBResult.Status__c, 'Checks that the BDI_DataImport_API. bdiFailed equals testDataImport');
+        System.assertNotEquals(null,testDataImportBResult.Account1Imported__c, 'This test fails if Account1 is imported.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account1ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Account2Imported__c, 'This test fails if Account2Imported is null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Account2ImportStatus__c, 'Test data import.');
+        System.assertNotEquals(null,testDataImportBResult.Contact1Imported__c, 'This method asserts that the value of this property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact1ImportStatus__c, 'Test data import with status bdiCreated');
+        System.assertNotEquals(null,testDataImportBResult.Contact2Imported__c, 'This method asserts that the value of the property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.Contact2ImportStatus__c, 'Test Data Import');
 
-        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c);
-        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c);
-        System.assertEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c);
-        System.assertEquals(null,testDataImportBResult.GAU_Allocation_1_Import_Status__c);
-        System.assertEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c);
-        System.assertEquals(null,testDataImportBResult.GAU_Allocation_2_Import_Status__c);
-        System.assertEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_Imported__c);
-        System.assertEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_ImportStatus__c);
-        System.assertEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_Imported__c);
-        System.assertEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_ImportStatus__c);
+        System.assertNotEquals(null,testDataImportBResult.DonationCampaignImported__c, 'This method asserts that the value of the object property is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationCampaignImportStatus__c, 'TestDataImportBResult. DonationCampaignImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.DonationImported__c, 'This method is called when the testDataImportBResult object is not null.');
+        System.assertEquals(System.label.bdiCreated,testDataImportBResult.DonationImportStatus__c, 'TestDataImportBResult. DonationImportStatus__c');
+        System.assertNotEquals(null,testDataImportBResult.HouseholdAccountImported__c, 'This method asserts that the HouseholdAccountImported object is not null.');
+        System.assertEquals(null,testDataImportBResult.GAU_Allocation_1_Imported__c, 'TestDataImportBResult. GAU_Allocation_1_Imported');
+        System.assertEquals(null,testDataImportBResult.GAU_Allocation_1_Import_Status__c, 'Test data import result.');
+        System.assertEquals(null,testDataImportBResult.GAU_Allocation_2_Imported__c, 'TestDataImportBResult. GAU_Allocation_2_Imported');
+        System.assertEquals(null,testDataImportBResult.GAU_Allocation_2_Import_Status__c, 'TestDataImportBResult. GAU_Allocation_2_Import_Status__c');
+        System.assertEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_Imported__c, 'Opportunity_Contact_Role_1_Imported is a valid value for this property');
+        System.assertEquals(null,testDataImportBResult.Opportunity_Contact_Role_1_ImportStatus__c, 'This function asserts that the value of the attribute opportunity_Contact_Role_1');
+        System.assertEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_Imported__c, 'Opportunity_Contact_Role_2_Imported is a valid object for Opport');
+        System.assertEquals(null,testDataImportBResult.Opportunity_Contact_Role_2_ImportStatus__c, 'Opportunity_Contact_Role_2_ImportStatus is a constant?');
 
         BDI_DynamicSourceGroup dsgA = 
             (BDI_DynamicSourceGroup)JSON.deserialize(testDataImportAResult.Additional_Object_JSON__c,
@@ -1746,21 +1746,21 @@ private class BDI_AdditionalObjectService_TEST {
         BDI_DynamicSource dsB1 = dsgB.dynamicSourceByObjMappingDevName.get(dynSourceB1.objectMappingDevName);
         BDI_DynamicSource dsB2 = dsgB.dynamicSourceByObjMappingDevName.get(dynSourceB2.objectMappingDevName);
 
-        System.assert(dsA1 != null);
-        System.assert(dsA2 != null);
-        System.assert(dsA3 != null);
-        System.assert(dsB1 != null);
-        System.assert(dsB2 != null);
-        System.assert(dsA1.importedRecordId != null);
-        System.assert(dsA2.importedRecordId != null);
-        System.assert(dsA3.importedRecordId != null);
-        System.assert(dsB1.importedRecordId != null);
-        System.assert(dsB2.importedRecordId == null); //Should not have been created
-        System.assert(dsA1.importedRecordStatus == System.label.bdiCreated);
-        System.assert(dsA2.importedRecordStatus == System.label.bdiCreated);
-        System.assert(dsA3.importedRecordStatus == System.label.bdiCreated);
-        System.assert(dsB1.importedRecordStatus == System.label.bdiCreated);
-        System.assert(dsB2.importedRecordStatus.contains('Error'));
+        System.assert(dsA1 != null, 'This is a no - op if dsA1 is null.');
+        System.assert(dsA2 != null, 'Assert that dsA2 is not null.');
+        System.assert(dsA3 != null, 'Assert that dsA3 is not null.');
+        System.assert(dsB1 != null, 'This is a no - op if dsB1 is null.');
+        System.assert(dsB2 != null, 'Assert that dsB2 is not null.');
+        System.assert(dsA1.importedRecordId != null, 'This method is only used for testing.');
+        System.assert(dsA2.importedRecordId != null, 'Checks that the DSA2 record is imported.');
+        System.assert(dsA3.importedRecordId != null, 'Checks that the DSA3 record ID is set.');
+        System.assert(dsB1.importedRecordId != null, 'This method is only called if the DSB1 object is not null.');
+        System.assert(dsB2.importedRecordId == null, 'This method is not thread - safe.'); //Should not have been created
+        System.assert(dsA1.importedRecordStatus == System.label.bdiCreated, 'asserts that the imported record status is the same as the bdiCreated status');
+        System.assert(dsA2.importedRecordStatus == System.label.bdiCreated, 'asserts that the record is created');
+        System.assert(dsA3.importedRecordStatus == System.label.bdiCreated, 'asserts that the record is created');
+        System.assert(dsB1.importedRecordStatus == System.label.bdiCreated, 'asserts that the imported record status is the same as the status of the imported record');
+        System.assert(dsB2.importedRecordStatus.contains('Error'), 'Checks that the imported record status is not Error.');
 
         Allocation__c gauAlloA1;
         Allocation__c gauAlloA2;
@@ -1783,11 +1783,11 @@ private class BDI_AdditionalObjectService_TEST {
         }
 
         // Confirm that the desired GAU Allocations were created correctly
-        System.assertEquals(3,gauAlloAll.size());
-        System.assertEquals(75,gauAlloA1.Percent__c);
-        System.assertEquals(25,gauAlloA2.Percent__c);
-        System.assertEquals(75,gauAlloB1.Percent__c);
-        System.assertEquals(null,gauAlloB2);
+        System.assertEquals(3,gauAlloAll.size(), 'Checks that the size of the GauAlloAll array is equal to 3.');
+        System.assertEquals(75,gauAlloA1.Percent__c, 'This test is not a problem with the GAUAL LOA1 library.');
+        System.assertEquals(25,gauAlloA2.Percent__c, 'This test is not a problem with the GAUALALLOA2 library.');
+        System.assertEquals(75,gauAlloB1.Percent__c, 'This test is not a problem with the GAUAL LOB1 library.');
+        System.assertEquals(null,gauAlloB2, 'This is a test case.');
 
         OpportunityContactRole ocrA1;
         OpportunityContactRole[] ocrAll = new OpportunityContactRole[]{};
@@ -1803,7 +1803,7 @@ private class BDI_AdditionalObjectService_TEST {
 
         // Confirm that the desired ocr were created correctly
         // the number 5 includes the automatically created donor and household member OCRs
-        System.assertEquals(5,ocrAll.size()); 
-        System.assertEquals('Soft Credit',ocrA1.Role);
+        System.assertEquals(5,ocrAll.size(), 'Checks that the OCR all are equal.'); 
+        System.assertEquals('Soft Credit',ocrA1.Role, 'Checks that the OCR role is the same as the OCR role.');
     }
 }

@@ -90,7 +90,7 @@ private class RLLP_OppRollupBATCH_TEST {
         
         Id acctId = [select AccountId from Contact where Id = :contact.Id][0].AccountId;
         Account acct = [select Id, npo02__TotalOppAmount__c from Account where Id = :acctId];
-        System.assertEquals(acct.npo02__TotalOppAmount__c, giftAmount);
+        System.assertEquals(acct.npo02__TotalOppAmount__c, giftAmount, 'Test for equality of the total opp amount and gift amount.');
     }
 
     static testMethod void testOppContactRollupBatch() {
@@ -124,8 +124,8 @@ private class RLLP_OppRollupBATCH_TEST {
         Test.stopTest();
         
         contact = [select npo02__TotalOppAmount__c, npo02__NumberOfClosedOpps__c from Contact where Id=:contact.Id];
-        System.assertEquals(300, contact.npo02__TotalOppAmount__c);
-        System.assertEquals(3, contact.npo02__NumberOfClosedOpps__c);
+        System.assertEquals(300, contact.npo02__TotalOppAmount__c, 'Checks that the total OPP amount is 300.');
+        System.assertEquals(3, contact.npo02__NumberOfClosedOpps__c, 'This test asserts that the number of closed opps is equal to 3.');
     }
     
     static testMethod void testOppSoftCreditRollupBatch() {
@@ -163,8 +163,8 @@ private class RLLP_OppRollupBATCH_TEST {
         contact18 = [select npo02__Soft_Credit_This_Year__c, npo02__Soft_Credit_Total__c,
                      npo02__OppsClosedThisYear__c, npo02__TotalOppAmount__c
                             from Contact where Id=:contact18.Id];
-        System.assertEquals(giftAmount, contact18.npo02__Soft_Credit_This_Year__c);
-        System.assertEquals(giftAmount, contact18.npo02__Soft_Credit_Total__c);
+        System.assertEquals(giftAmount, contact18.npo02__Soft_Credit_This_Year__c, 'This is a test function to assert that the gift amount is equal to the gift');
+        System.assertEquals(giftAmount, contact18.npo02__Soft_Credit_Total__c, 'This function asserts that the gift amount is equal to the soft credit total.');
     }
 
     static testMethod void testOppPartialSoftCreditRollupBatch() {
@@ -209,10 +209,10 @@ private class RLLP_OppRollupBATCH_TEST {
         contact18 = [select npo02__Soft_Credit_This_Year__c, npo02__Soft_Credit_Total__c,
             Number_of_Soft_Credits_This_Year__c, Number_of_Soft_Credits__c
                             from Contact where Id=:contact18.Id];
-        System.assertEquals(giftAmount/2, contact18.npo02__Soft_Credit_This_Year__c);
-        System.assertEquals(giftAmount/2, contact18.npo02__Soft_Credit_Total__c);
-        system.assertEquals(1, contact18.Number_of_Soft_Credits__c);
-        system.assertEquals(1, contact18.Number_of_Soft_Credits_This_Year__c);
+        System.assertEquals(giftAmount/2, contact18.npo02__Soft_Credit_This_Year__c, 'This is a test function to assert that the gift amount is the same as the g');
+        System.assertEquals(giftAmount/2, contact18.npo02__Soft_Credit_Total__c, 'This function is used to assert that the gift amount is equal to the soft credit total');
+        system.assertEquals(1, contact18.Number_of_Soft_Credits__c, 'This test asserts that the number of soft credits is equal to the number of credits');
+        system.assertEquals(1, contact18.Number_of_Soft_Credits_This_Year__c, 'This is a test case. It asserts that the number of soft credits is equal to');
     }
     
 }

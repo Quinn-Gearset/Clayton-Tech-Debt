@@ -61,15 +61,15 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(0, contacts.size());
+        System.assertEquals(0, contacts.size(), 'Asserts that the contacts array is empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(3, dataImports.size());
+        System.assertEquals(3, dataImports.size(), 'Checks that the number of data imports is equal to 3.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertEquals(null, dataImport.Contact1Imported__c);
-            System.assertEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertEquals(null, dataImport.Contact1Imported__c, 'This method asserts that Contact1Imported is not null.');
+            System.assertEquals(null, dataImport.HouseholdAccountImported__c, 'This method is called from the TestCase in order to assert that the HouseholdAccount');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c, 'Checks that the label of the import is the same as the label of the import.');
         }
     }
 
@@ -96,17 +96,17 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(0, contacts.size());
+        System.assertEquals(0, contacts.size(), 'Asserts that the contacts array is empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(3, dataImports.size());
+        System.assertEquals(3, dataImports.size(), 'Checks that the number of data imports is equal to 3.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertEquals(null, dataImport.Contact1Imported__c);
-            System.assertEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c);
-            System.assertEquals(null, dataImport.Contact2Imported__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact2ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertEquals(null, dataImport.Contact1Imported__c, 'This method asserts that Contact1Imported is not null.');
+            System.assertEquals(null, dataImport.HouseholdAccountImported__c, 'This method is called from the TestCase in order to assert that the HouseholdAccount');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c, 'Checks that the label of the import is the same as the label of the import.');
+            System.assertEquals(null, dataImport.Contact2Imported__c, 'This method is used to assert that the Contact2Imported class is not null.');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact2ImportStatus__c, 'Checks that the label of the BDI import is the same as the label of the Contact');
         }
     }
 
@@ -133,17 +133,17 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(0, contacts.size());
+        System.assertEquals(0, contacts.size(), 'Asserts that the contacts array is empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(3, dataImports.size());
+        System.assertEquals(3, dataImports.size(), 'Checks that the number of data imports is equal to 3.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertEquals(null, dataImport.Contact1Imported__c);
-            System.assertEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact2ImportStatus__c);
-            System.assertEquals(null, dataImport.Contact2Imported__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertEquals(null, dataImport.Contact1Imported__c, 'This method asserts that Contact1Imported is not null.');
+            System.assertEquals(null, dataImport.HouseholdAccountImported__c, 'This method is called from the TestCase in order to assert that the HouseholdAccount');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c, 'Checks that the label of the import is the same as the label of the import.');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact2ImportStatus__c, 'Checks that the label of the BDI import is the same as the label of the Contact');
+            System.assertEquals(null, dataImport.Contact2Imported__c, 'This method is used to assert that the Contact2Imported class is not null.');
         }
     }
 
@@ -179,17 +179,17 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(4, contacts.size());
+        System.assertEquals(4, contacts.size(), 'Checks that the number of contacts is equal to 4.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Contact1Imported__c);
-            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c);
-            System.assertNotEquals(null, dataImport.Contact2Imported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact2ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.Contact1Imported__c, 'This method asserts that the object is not null.');
+            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c, 'This method will assert that the HouseholdAccountImported object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
+            System.assertNotEquals(null, dataImport.Contact2Imported__c, 'This method asserts that the object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact2ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
         }
     }
 
@@ -216,16 +216,16 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Account> accounts = [SELECT Id, Name FROM Account];
-        System.assertEquals(0, accounts.size());
+        System.assertEquals(0, accounts.size(), 'Asserts that the number of accounts in the account store is equal to the number of accounts in');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(3, dataImports.size());
+        System.assertEquals(3, dataImports.size(), 'Checks that the number of data imports is equal to 3.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertEquals(null, dataImport.Account1Imported__c);
-            System.assertEquals(null, dataImport.Account2Imported__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Account1ImportStatus__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Account2ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertEquals(null, dataImport.Account1Imported__c, 'This test asserts that Account1 is imported.');
+            System.assertEquals(null, dataImport.Account2Imported__c, 'This test asserts that Account2Imported is not null.');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Account1ImportStatus__c, 'Check that the label of the BDI import is the same as the label of the B');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Account2ImportStatus__c, 'Check that the labels of the import labels are the same.');
         }
     }
 
@@ -261,16 +261,16 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Account> accounts = [SELECT Id, Name FROM Account];
-        System.assertEquals(4, accounts.size());
+        System.assertEquals(4, accounts.size(), 'Checks that the number of accounts is equal to 4.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Account1Imported__c);
-            System.assertNotEquals(null, dataImport.Account2Imported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Account1ImportStatus__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Account2ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.Account1Imported__c, 'This method will assert that the Account1Imported object is not null.');
+            System.assertNotEquals(null, dataImport.Account2Imported__c, 'This method is called from the test code to assert that the Account2Imported class is not');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Account1ImportStatus__c, 'Check that the label of the BDI dry - run is the same as the label of');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Account2ImportStatus__c, 'Check that the label of the BDI dry - run is the same as the label of');
         }
     }
 
@@ -310,17 +310,17 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name, AccountId, MailingCity FROM Contact];
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
 
         List<Address__c> addresses = [SELECT Id, Household_Account__c, MailingCity__c FROM Address__c];
-        System.assertEquals(2, addresses.size());
+        System.assertEquals(2, addresses.size(), 'Checks that 2 addresses are in the list.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.HomeAddressImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.HomeAddressImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.HomeAddressImported__c, 'This method is called by test code to assert that the object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.HomeAddressImportStatus__c, 'Check that the label of the BDI dry - run is the same as the label of');
         }
     }
 
@@ -362,17 +362,17 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name, AccountId, MailingCity FROM Contact];
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
 
         List<Address__c> addresses = [SELECT Id, Household_Account__c, MailingCity__c FROM Address__c];
-        System.assertEquals(2, addresses.size());
+        System.assertEquals(2, addresses.size(), 'Checks that 2 addresses are in the list.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(3, dataImports.size());
+        System.assertEquals(3, dataImports.size(), 'Checks that the number of data imports is equal to 3.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertEquals(null, dataImport.HomeAddressImported__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.HomeAddressImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertEquals(null, dataImport.HomeAddressImported__c, 'This method is called by test code to assert that the object is null.');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.HomeAddressImportStatus__c, 'This test asserts that the label of the BDI import is the same as the label of');
         }
     }
 
@@ -399,21 +399,21 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(0, contacts.size());
+        System.assertEquals(0, contacts.size(), 'Asserts that the contacts array is empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(3, dataImports.size());
+        System.assertEquals(3, dataImports.size(), 'Checks that the number of data imports is equal to 3.');
         for (DataImport__c dataImport : dataImports) {
             if (dataImport.Contact1_Firstname__c == 'fail') {
-                System.assertEquals(BDI_DataImport_API.bdiDryRunError, dataImport.Status__c);
-                System.assertEquals(null, dataImport.Contact1Imported__c);
-                System.assertEquals(null, dataImport.HouseholdAccountImported__c);
-                System.assertNotEquals(null, dataImport.Contact1ImportStatus__c);
+                System.assertEquals(BDI_DataImport_API.bdiDryRunError, dataImport.Status__c, 'Checks that the BDI_DataImport_API. bdiDryRunError is the same');
+                System.assertEquals(null, dataImport.Contact1Imported__c, 'This method asserts that Contact1Imported is not null.');
+                System.assertEquals(null, dataImport.HouseholdAccountImported__c, 'This method is called from the TestCase in order to assert that the HouseholdAccount');
+                System.assertNotEquals(null, dataImport.Contact1ImportStatus__c, 'Checks that the status of the import is not null.');
             } else {
-                System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-                System.assertEquals(null, dataImport.Contact1Imported__c);
-                System.assertEquals(null, dataImport.HouseholdAccountImported__c);
-                System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c);
+                System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+                System.assertEquals(null, dataImport.Contact1Imported__c, 'This method asserts that Contact1Imported is not null.');
+                System.assertEquals(null, dataImport.HouseholdAccountImported__c, 'This method is called from the TestCase in order to assert that the HouseholdAccount');
+                System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c, 'Checks that the label of the import is the same as the label of the import.');
             }
         }
     }
@@ -441,25 +441,25 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(0, contacts.size());
+        System.assertEquals(0, contacts.size(), 'Asserts that the contacts array is empty.');
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(0, opps.size());
+        System.assertEquals(0, opps.size(), 'Assert that all opps are empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertEquals(null, dataImport.Contact1Imported__c);
-            System.assertEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertEquals(null, dataImport.Contact1Imported__c, 'This method asserts that Contact1Imported is not null.');
+            System.assertEquals(null, dataImport.HouseholdAccountImported__c, 'This method is called from the TestCase in order to assert that the HouseholdAccount');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c, 'Checks that the label of the import is the same as the label of the import.');
 
-            System.assertEquals(null, dataImport.DonationImported__c);
-            System.assertEquals(null, dataImport.Donation_Possible_Matches__c);
-            System.assertEquals(null, dataImport.DonationImportStatus__c);
+            System.assertEquals(null, dataImport.DonationImported__c, 'This method is called by the test code to assert that the class is not null.');
+            System.assertEquals(null, dataImport.Donation_Possible_Matches__c, 'This method is used to assert that the dataImport. DonationPossible_Matches class is');
+            System.assertEquals(null, dataImport.DonationImportStatus__c, 'Checks that the status of the import is not null.');
 
-            System.assertEquals(null, dataImport.PaymentImported__c);
-            System.assertEquals(null, dataImport.Payment_Possible_Matches__c);
-            System.assertEquals(null, dataImport.PaymentImportStatus__c);
+            System.assertEquals(null, dataImport.PaymentImported__c, 'This method is called from test code to assert that the payment is imported.');
+            System.assertEquals(null, dataImport.Payment_Possible_Matches__c, 'This method asserts that the paymentPossible_Matches attribute is null.');
+            System.assertEquals(null, dataImport.PaymentImportStatus__c, 'This method is only used for testing.');
         }
     }
 
@@ -500,25 +500,25 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(0, opps.size());
+        System.assertEquals(0, opps.size(), 'Assert that all opps are empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Contact1Imported__c);
-            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.Contact1Imported__c, 'This method asserts that the object is not null.');
+            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c, 'This method will assert that the HouseholdAccountImported object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
 
-            System.assertEquals(null, dataImport.DonationImported__c);
-            System.assertEquals(null, dataImport.Donation_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.DonationImportStatus__c);
+            System.assertEquals(null, dataImport.DonationImported__c, 'This method is called by the test code to assert that the class is not null.');
+            System.assertEquals(null, dataImport.Donation_Possible_Matches__c, 'This method is used to assert that the dataImport. DonationPossible_Matches class is');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.DonationImportStatus__c, 'Checks that the label of the BDI dry - run import is the same as the label');
 
-            System.assertEquals(null, dataImport.PaymentImported__c);
-            System.assertEquals(null, dataImport.Payment_Possible_Matches__c);
-            System.assertEquals(null, dataImport.PaymentImportStatus__c);
+            System.assertEquals(null, dataImport.PaymentImported__c, 'This method is called from test code to assert that the payment is imported.');
+            System.assertEquals(null, dataImport.Payment_Possible_Matches__c, 'This method asserts that the paymentPossible_Matches attribute is null.');
+            System.assertEquals(null, dataImport.PaymentImportStatus__c, 'This method is only used for testing.');
         }
     }
 
@@ -565,25 +565,25 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(2, opps.size());
+        System.assertEquals(2, opps.size(), 'Assert that 2 opps are in the opps list.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Contact1Imported__c);
-            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.Contact1Imported__c, 'This method asserts that the object is not null.');
+            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c, 'This method will assert that the HouseholdAccountImported object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
 
-            System.assertNotEquals(null, dataImport.DonationImported__c);
-            System.assertEquals(null, dataImport.Donation_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.DonationImportStatus__c);
+            System.assertNotEquals(null, dataImport.DonationImported__c, 'This method asserts that no dataImport. DonationImported object is imported.');
+            System.assertEquals(null, dataImport.Donation_Possible_Matches__c, 'This method is used to assert that the dataImport. DonationPossible_Matches class is');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.DonationImportStatus__c, 'Checks that the label of the BDI dry - run is the same as the label of');
 
-            System.assertNotEquals(null, dataImport.PaymentImported__c);
-            System.assertEquals(null, dataImport.Payment_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.PaymentImportStatus__c);
+            System.assertNotEquals(null, dataImport.PaymentImported__c, 'This method is called from the test suite to assert that the payment is not imported.');
+            System.assertEquals(null, dataImport.Payment_Possible_Matches__c, 'This method asserts that the paymentPossible_Matches attribute is null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.PaymentImportStatus__c, 'Check that the label of the BDI dry run is the same as the label of the');
         }
     }
 
@@ -632,25 +632,25 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(2, opps.size());
+        System.assertEquals(2, opps.size(), 'Assert that 2 opps are in the opps list.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Contact1Imported__c);
-            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.Contact1Imported__c, 'This method asserts that the object is not null.');
+            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c, 'This method will assert that the HouseholdAccountImported object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
 
-            System.assertNotEquals(null, dataImport.DonationImported__c);
-            System.assertEquals(null, dataImport.Donation_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatchedId, dataImport.DonationImportStatus__c);
+            System.assertNotEquals(null, dataImport.DonationImported__c, 'This method asserts that no dataImport. DonationImported object is imported.');
+            System.assertEquals(null, dataImport.Donation_Possible_Matches__c, 'This method is used to assert that the dataImport. DonationPossible_Matches class is');
+            System.assertEquals(Label.bdiDryRunMatchedId, dataImport.DonationImportStatus__c, 'Checks that the label of the BDI dry - run is the same as the label of');
 
-            System.assertNotEquals(null, dataImport.PaymentImported__c);
-            System.assertEquals(null, dataImport.Payment_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.PaymentImportStatus__c);
+            System.assertNotEquals(null, dataImport.PaymentImported__c, 'This method is called from the test suite to assert that the payment is not imported.');
+            System.assertEquals(null, dataImport.Payment_Possible_Matches__c, 'This method asserts that the paymentPossible_Matches attribute is null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.PaymentImportStatus__c, 'Check that the label of the BDI dry run is the same as the label of the');
         }
     }
 
@@ -678,7 +678,7 @@ public with sharing class BDI_DryRun_TEST {
 
         // find auto-created payments
         List<npe01__OppPayment__c> listPaymentExisting = [SELECT Id FROM npe01__OppPayment__c ORDER BY npe01__Opportunity__c];
-        System.assertEquals(2, listPaymentExisting.size());
+        System.assertEquals(2, listPaymentExisting.size(), 'This method is used to assert that the number of payment existing payments is equal to 2.');
 
         List<DataImport__c> dataImports = new List<DataImport__c>();
         dataImports.add(BDI_DataImport_TEST.newDI('c1', 'C1', 100));
@@ -702,25 +702,25 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(2, opps.size());
+        System.assertEquals(2, opps.size(), 'Assert that 2 opps are in the opps list.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Contact1Imported__c);
-            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.Contact1Imported__c, 'This method asserts that the object is not null.');
+            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c, 'This method will assert that the HouseholdAccountImported object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
 
-            System.assertNotEquals(null, dataImport.DonationImported__c);
-            System.assertEquals(null, dataImport.Donation_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatchedId, dataImport.DonationImportStatus__c);
+            System.assertNotEquals(null, dataImport.DonationImported__c, 'This method asserts that no dataImport. DonationImported object is imported.');
+            System.assertEquals(null, dataImport.Donation_Possible_Matches__c, 'This method is used to assert that the dataImport. DonationPossible_Matches class is');
+            System.assertEquals(Label.bdiDryRunMatchedId, dataImport.DonationImportStatus__c, 'Checks that the label of the BDI dry - run is the same as the label of');
 
-            System.assertNotEquals(null, dataImport.PaymentImported__c);
-            System.assertEquals(null, dataImport.Payment_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatchedId, dataImport.PaymentImportStatus__c);
+            System.assertNotEquals(null, dataImport.PaymentImported__c, 'This method is called from the test suite to assert that the payment is not imported.');
+            System.assertEquals(null, dataImport.Payment_Possible_Matches__c, 'This method asserts that the paymentPossible_Matches attribute is null.');
+            System.assertEquals(Label.bdiDryRunMatchedId, dataImport.PaymentImportStatus__c, 'Check that the label of the BDI dry run is the same as the label of the');
         }
     }
 
@@ -771,25 +771,25 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> listCon = [SELECT Id, Name FROM Contact];
-        System.assertEquals(2, listCon.size());
+        System.assertEquals(2, listCon.size(), 'Test if the size of the list is equal to 2.');
         List<Opportunity> listOpp = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(4, listOpp.size());
+        System.assertEquals(4, listOpp.size(), 'Assert that the size of the listOpp is equal to 4.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Contact1Imported__c);
-            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.Contact1Imported__c, 'This method asserts that the object is not null.');
+            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c, 'This method will assert that the HouseholdAccountImported object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
 
-            System.assertNotEquals(null, dataImport.DonationImported__c);
-            System.assertNotEquals(null, dataImport.Donation_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatchedBest, dataImport.DonationImportStatus__c);
+            System.assertNotEquals(null, dataImport.DonationImported__c, 'This method asserts that no dataImport. DonationImported object is imported.');
+            System.assertNotEquals(null, dataImport.Donation_Possible_Matches__c, 'This method asserts that the dataImport. DonationPossible_Matches object is not null.');
+            System.assertEquals(Label.bdiDryRunMatchedBest, dataImport.DonationImportStatus__c, 'Checks that the label of the BDI dry - run is the same as the label of');
 
-            System.assertNotEquals(null, dataImport.PaymentImported__c);
-            System.assertNotEquals(null, dataImport.Payment_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatchedBest, dataImport.PaymentImportStatus__c);
+            System.assertNotEquals(null, dataImport.PaymentImported__c, 'This method is called from the test suite to assert that the payment is not imported.');
+            System.assertNotEquals(null, dataImport.Payment_Possible_Matches__c, 'This method asserts that the payment possible matches are not null.');
+            System.assertEquals(Label.bdiDryRunMatchedBest, dataImport.PaymentImportStatus__c, 'Check that the label of the BDI dry - run is the same as the label of');
         }
     }
 
@@ -831,25 +831,25 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(0, opps.size());
+        System.assertEquals(0, opps.size(), 'Assert that all opps are empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunError, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Contact1Imported__c);
-            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunError, dataImport.Status__c, 'Checks that the BDI_DataImport_API. bdiDryRunError is the same');
+            System.assertNotEquals(null, dataImport.Contact1Imported__c, 'This method asserts that the object is not null.');
+            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c, 'This method will assert that the HouseholdAccountImported object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
 
-            System.assertEquals(null, dataImport.DonationImported__c);
-            System.assertEquals(null, dataImport.Donation_Possible_Matches__c);
-            System.assertEquals(Label.bdiErrorInvalidOppRTName, dataImport.DonationImportStatus__c);
+            System.assertEquals(null, dataImport.DonationImported__c, 'This method is called by the test code to assert that the class is not null.');
+            System.assertEquals(null, dataImport.Donation_Possible_Matches__c, 'This method is used to assert that the dataImport. DonationPossible_Matches class is');
+            System.assertEquals(Label.bdiErrorInvalidOppRTName, dataImport.DonationImportStatus__c, 'This function asserts that the label of the BDI error is the same as the label of');
 
-            System.assertEquals(null, dataImport.PaymentImported__c);
-            System.assertEquals(null, dataImport.Payment_Possible_Matches__c);
-            System.assertEquals(null, dataImport.PaymentImportStatus__c);
+            System.assertEquals(null, dataImport.PaymentImported__c, 'This method is called from test code to assert that the payment is imported.');
+            System.assertEquals(null, dataImport.Payment_Possible_Matches__c, 'This method asserts that the paymentPossible_Matches attribute is null.');
+            System.assertEquals(null, dataImport.PaymentImportStatus__c, 'This method is only used for testing.');
         }
     }
 
@@ -878,21 +878,21 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(0, contacts.size());
+        System.assertEquals(0, contacts.size(), 'Asserts that the contacts array is empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(3, dataImports.size());
+        System.assertEquals(3, dataImports.size(), 'Checks that the number of data imports is equal to 3.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertEquals(null, dataImport.Contact1Imported__c);
-            System.assertEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertEquals(null, dataImport.Contact1Imported__c, 'This method asserts that Contact1Imported is not null.');
+            System.assertEquals(null, dataImport.HouseholdAccountImported__c, 'This method is called from the TestCase in order to assert that the HouseholdAccount');
+            System.assertEquals(Label.bdiDryRunNoMatch, dataImport.Contact1ImportStatus__c, 'Checks that the label of the import is the same as the label of the import.');
         }
 
         batch = [SELECT Id, Records_Failed__c, Records_Successfully_Processed__c, Last_Processed_On__c FROM DataImportBatch__c];
-        System.assertEquals(null, batch.Records_Failed__c);
-        System.assertEquals(null, batch.Records_Successfully_Processed__c);
-        System.assertEquals(null, batch.Last_Processed_On__c);
+        System.assertEquals(null, batch.Records_Failed__c, 'This test asserts that the values of the batch. Records_Failed objects are equal.');
+        System.assertEquals(null, batch.Records_Successfully_Processed__c, 'This method asserts that the batch. Records_Successfully_Processed attribute is null.');
+        System.assertEquals(null, batch.Last_Processed_On__c, 'This method is called when batch. Last_Processed_On is null.');
     }
 
     /*********************************************************************************************************
@@ -969,13 +969,13 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(0, opps.size());
+        System.assertEquals(0, opps.size(), 'Assert that all opps are empty.');
 
         List<Campaign> campaigns = [SELECT Id, Name FROM Campaign ORDER BY Id];
-        System.assertEquals(0, campaigns.size());
+        System.assertEquals(0, campaigns.size(), 'Asserts that the campaigns are empty.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
 
         System.assertEquals(null, dataImports[0].DonationCampaignImported__c, 'DonationCampaignImported__c should not be populated.');
         System.assertEquals(System.Label.bdiDryRunNoMatch, dataImports[0].DonationCampaignImportStatus__c, 'DonationCampaignImportStatus__c should show no match');
@@ -1036,21 +1036,21 @@ public with sharing class BDI_DryRun_TEST {
 
         // verify expected results
         List<Contact> contacts = [SELECT Id, Name FROM Contact];
-        System.assertEquals(2, contacts.size());
+        System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
-        System.assertEquals(2, opps.size());
+        System.assertEquals(2, opps.size(), 'Assert that 2 opps are in the opps list.');
 
         dataImports = getUpdatedDataImports();
-        System.assertEquals(2, dataImports.size());
+        System.assertEquals(2, dataImports.size(), 'Checks that 2 data imports are present.');
         for (DataImport__c dataImport : dataImports) {
-            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c);
-            System.assertNotEquals(null, dataImport.Contact1Imported__c);
-            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c);
-            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c);
+            System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, dataImport.Status__c, 'Checks whether the BDI_DataImport_API. bdiDryRunValidated is the same');
+            System.assertNotEquals(null, dataImport.Contact1Imported__c, 'This method asserts that the object is not null.');
+            System.assertNotEquals(null, dataImport.HouseholdAccountImported__c, 'This method will assert that the HouseholdAccountImported object is not null.');
+            System.assertEquals(Label.bdiDryRunMatched, dataImport.Contact1ImportStatus__c, 'Checks whether the label of the BDI dry run is the same as the label of the');
 
-            System.assertNotEquals(null, dataImport.DonationImported__c);
-            System.assertEquals(null, dataImport.Donation_Possible_Matches__c);
-            System.assertEquals(Label.bdiDryRunMatchedId, dataImport.DonationImportStatus__c);
+            System.assertNotEquals(null, dataImport.DonationImported__c, 'This method asserts that no dataImport. DonationImported object is imported.');
+            System.assertEquals(null, dataImport.Donation_Possible_Matches__c, 'This method is used to assert that the dataImport. DonationPossible_Matches class is');
+            System.assertEquals(Label.bdiDryRunMatchedId, dataImport.DonationImportStatus__c, 'Checks that the label of the BDI dry - run is the same as the label of');
 
             System.assertEquals(null, dataImport.Payment_Possible_Matches__c,
                     'These Opps each have a single written-off Payment. ' +

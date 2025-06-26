@@ -166,8 +166,8 @@ private class ERR_Notifier_TEST {
         Messaging.SingleEmailMessage emailMessage = notifierService.createEmailMessage(null, new List<Error__c>(), errorRecipients);
         Test.stopTest();
 
-        System.assert(emailMessage.getPlainTextBody().containsIgnoreCase('not an active user'));
-        System.assert(emailMessage.getPlainTextBody().containsIgnoreCase(errorNotifRecipient));
+        System.assert(emailMessage.getPlainTextBody().containsIgnoreCase('not an active user'), 'Checks that the email message contains not an active user.');
+        System.assert(emailMessage.getPlainTextBody().containsIgnoreCase(errorNotifRecipient), 'Checks that the message is not a valid email.');
     }
 
     /**********************************************************************************************
@@ -190,7 +190,7 @@ private class ERR_Notifier_TEST {
         Messaging.SingleEmailMessage emailMessage = notifierService.createEmailMessage(null, new List<Error__c>(), errorRecipients);
         Test.stopTest();
 
-        System.assert(!emailMessage.getPlainTextBody().containsIgnoreCase('not an active user'));
+        System.assert(!emailMessage.getPlainTextBody().containsIgnoreCase('not an active user'), 'Checks that the email message contains no active user.');
     }
 
     /**********************************************************************************************

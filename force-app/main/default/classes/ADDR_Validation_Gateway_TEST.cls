@@ -62,9 +62,9 @@ public with sharing class ADDR_Validation_Gateway_TEST {
         ADDR_SmartyStreets_Gateway.AddressResponse sr = gateway.verifyAddress('single-address');
         Test.stopTest();
 
-        system.assert(sr != null);
-        system.assertEquals(sr.delivery_line_1, '1 Infinite Loop');
-        system.assertEquals(37.33118, sr.metadata.latitude);
+        system.assert(sr != null, 'Assert that the system is not null.');
+        system.assertEquals(sr.delivery_line_1, '1 Infinite Loop', 'Infinite loop is a message that is not received by the server.');
+        system.assertEquals(37.33118, sr.metadata.latitude, 'Checks that the latitude of the SR is equal to 37. 33118.');
         UTIL_Debug.debug(logginglevel.warn, sr.getFullAddress());
     }
 
@@ -76,9 +76,9 @@ public with sharing class ADDR_Validation_Gateway_TEST {
             new list<String>{'One Infinite Loop Cupertino multiple-address, CA', 'Two Infinite Loop Cupertino, CA'} );
         Test.stopTest();
 
-        system.assertEquals('1 Infinite Loop', srs[0].delivery_line_1);
-        system.assertEquals(37.33118, srs[0].metadata.latitude);
-        system.assertEquals('1 Infinite Loop', srs[1].delivery_line_1);
+        system.assertEquals('1 Infinite Loop', srs[0].delivery_line_1, 'Assert that the delivery line 1 is the same as the loop.');
+        system.assertEquals(37.33118, srs[0].metadata.latitude, 'Assert that the latitude of the srs is equal to 37. 33118.');
+        system.assertEquals('1 Infinite Loop', srs[1].delivery_line_1, 'Infinite Loop is a constant line');
     }
 
     public static testMethod void testZip() {
@@ -88,10 +88,10 @@ public with sharing class ADDR_Validation_Gateway_TEST {
         ADDR_SmartyStreets_Gateway.ZipResponse sz = gateway.verifyZip('single-zip');
         Test.stopTest();
 
-        system.assert(sz != null);
-        system.assertEquals(3, sz.city_states.size());
-        system.assertEquals(1, sz.zipcodes.size());
-        system.assertEquals(47.957763, sz.zipcodes[0].latitude);
+        system.assert(sz != null, 'Assert that sz is not null');
+        system.assertEquals(3, sz.city_states.size(), 'Checks that the number of city states is equal to 3.');
+        system.assertEquals(1, sz.zipcodes.size(), 'Asserts that the size of the zipcodes array is equal to 1.');
+        system.assertEquals(47.957763, sz.zipcodes[0].latitude, 'Checks that the latitude of the zipcode is equal to 47. 957763.');
     }
 
     public static testMethod void testBadInput() {
@@ -103,10 +103,10 @@ public with sharing class ADDR_Validation_Gateway_TEST {
             sr = gateway.verifyAddress('400');
         } catch (Exception e) {
             System.debug('****' + e.getStackTraceString());
-            system.assertEquals('Bad input. Required fields missing from input or are malformed.', e.getMessage());
+            system.assertEquals('Bad input. Required fields missing from input or are malformed.', e.getMessage(), 'Assert that the message is not malformed.');
         }
         Test.stopTest();
-        system.assertEquals(null, sr);
+        system.assertEquals(null, sr, 'Assert that the System is equal to the System itself.');
     }
 
     public static testMethod void testBadAuth() {
@@ -118,10 +118,10 @@ public with sharing class ADDR_Validation_Gateway_TEST {
             sr = gateway.verifyAddress('401');
         } catch (Exception e) {
         	UTIL_Debug.debug('****' + e.getStackTraceString());
-            system.assertEquals('Unauthorized. Authentication failure; invalid credentials.', e.getMessage());
+            system.assertEquals('Unauthorized. Authentication failure; invalid credentials.', e.getMessage(), 'Assert that authentication failure.');
         }
         Test.stopTest();
-        system.assertEquals(null, sr);
+        system.assertEquals(null, sr, 'Assert that the System is equal to the System itself.');
     }
 
     public static testMethod void testNoSubscription() {
@@ -133,10 +133,10 @@ public with sharing class ADDR_Validation_Gateway_TEST {
             sr = gateway.verifyAddress('402');
         } catch (Exception e) {
             System.debug('****' + e.getStackTraceString());
-            system.assertEquals('Payment required. No active subscription found.', e.getMessage());
+            system.assertEquals('Payment required. No active subscription found.', e.getMessage(), 'Asserts that payment required.');
         }
         Test.stopTest();
-        system.assertEquals(null, sr);
+        system.assertEquals(null, sr, 'Assert that the System is equal to the System itself.');
     }
 
     public static testMethod void testServerError() {
@@ -148,9 +148,9 @@ public with sharing class ADDR_Validation_Gateway_TEST {
             sr = gateway.verifyAddress('500');
         } catch (Exception e) {
             System.debug('****' + e.getStackTraceString());
-            system.assertEquals('Internal server error. General service failure; retry request.', e.getMessage());
+            system.assertEquals('Internal server error. General service failure; retry request.', e.getMessage(), 'This is a helper function to assert that the message of the exception is the same as the');
         }
         Test.stopTest();
-        system.assertEquals(null, sr);
+        system.assertEquals(null, sr, 'Assert that the System is equal to the System itself.');
     }
 }

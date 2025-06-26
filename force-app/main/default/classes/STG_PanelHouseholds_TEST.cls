@@ -53,7 +53,7 @@ private class STG_PanelHouseholds_TEST {
     **********************************************************************************************************/   
     private static testMethod void testPanelHasPanelId() {
         STG_PanelHouseholds_CTRL panel = new STG_PanelHouseholds_CTRL();
-        System.assertEquals('idPanelHH', panel.idPanel());
+        System.assertEquals('idPanelHH', panel.idPanel(), 'Checks that the idPanelHH is the same as the panel.');
     }
 
     /*********************************************************************************************************

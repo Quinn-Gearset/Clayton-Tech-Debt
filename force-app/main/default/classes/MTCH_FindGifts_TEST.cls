@@ -71,7 +71,7 @@ public with sharing class MTCH_FindGifts_TEST {
         // create some Contacts in Household Accounts
         insert listCon = UTIL_UnitTestData_TEST.createMultipleTestContacts(cItem);
         listCon = [SELECT Id, FirstName, LastName, AccountId FROM Contact];
-        System.assertEquals(cItem, listCon.size());
+        System.assertEquals(cItem, listCon.size(), 'asserts that cItem is the same as the listCon size');
 
         // create an Opportunity for each Contact
         listOpp = UTIL_UnitTestData_TEST.oppsForContactWithAccountList(
@@ -124,20 +124,20 @@ public with sharing class MTCH_FindGifts_TEST {
         Test.setCurrentPage(Page.MTCH_FindGifts);
         MTCH_FindGifts_CTRL ctrl = new MTCH_FindGifts_CTRL(new ApexPages.StandardController(oppMG));
 
-        System.assertEquals(cItem/2, ctrl.potentialGifts.size());
-        System.assertEquals(cItem/2, ctrl.selection.size());
-        System.assertEquals(false, ctrl.selection.get(listOpp[0].Id));
-        System.assertEquals(false, ctrl.selection.get(listOpp[2].Id));
-        System.assertEquals(0, ctrl.oppTotalSelected.Amount);
+        System.assertEquals(cItem/2, ctrl.potentialGifts.size(), 'Checks that cItem is the same as cItem + 2.');
+        System.assertEquals(cItem/2, ctrl.selection.size(), 'Assert that cItem and cItem - 2 are the same.');
+        System.assertEquals(false, ctrl.selection.get(listOpp[0].Id), 'Test if the current selection is the same as the current selection.');
+        System.assertEquals(false, ctrl.selection.get(listOpp[2].Id), 'Test if the selection is equal to the selected item.');
+        System.assertEquals(0, ctrl.oppTotalSelected.Amount, 'Checks that the total selected opps are equal.');
 
         ctrl.selection.put(listOpp[0].Id, true);
         ctrl.selection.put(listOpp[2].Id, true);
 
-        System.assertEquals(200, ctrl.oppTotalSelected.Amount);
-        System.assertEquals(0, [SELECT count() FROM Partial_Soft_Credit__c]);
+        System.assertEquals(200, ctrl.oppTotalSelected.Amount, 'Test for the total selected OPP amount.');
+        System.assertEquals(0, [SELECT count() FROM Partial_Soft_Credit__c], 'Test for equality of the number of soft credit partial payments.');
 
         Test.startTest();
-        System.assertNotEquals(null, ctrl.saveAndClose());
+        System.assertNotEquals(null, ctrl.saveAndClose(), 'Test if the current state of the controller is not equal to the state of the controller.');
         Test.stopTest();
 
         assertMatchingGiftsCount(2);
@@ -152,20 +152,20 @@ public with sharing class MTCH_FindGifts_TEST {
         Test.setCurrentPage(Page.MTCH_FindGifts);
         MTCH_FindGifts_CTRL ctrl = new MTCH_FindGifts_CTRL(new ApexPages.StandardController(oppMG));
 
-        System.assertEquals(cItem/2, ctrl.potentialGifts.size());
-        System.assertEquals(cItem/2, ctrl.selection.size());
-        System.assertEquals(false, ctrl.selection.get(listOpp[0].Id));
-        System.assertEquals(false, ctrl.selection.get(listOpp[2].Id));
-        System.assertEquals(0, ctrl.oppTotalSelected.Amount);
+        System.assertEquals(cItem/2, ctrl.potentialGifts.size(), 'Checks that cItem is the same as cItem + 2.');
+        System.assertEquals(cItem/2, ctrl.selection.size(), 'Assert that cItem and cItem - 2 are the same.');
+        System.assertEquals(false, ctrl.selection.get(listOpp[0].Id), 'Test if the current selection is the same as the current selection.');
+        System.assertEquals(false, ctrl.selection.get(listOpp[2].Id), 'Test if the selection is equal to the selected item.');
+        System.assertEquals(0, ctrl.oppTotalSelected.Amount, 'Checks that the total selected opps are equal.');
 
         ctrl.selection.put(listOpp[0].Id, true);
         ctrl.selection.put(listOpp[2].Id, true);
 
-        System.assertEquals(100, ctrl.oppTotalSelected.Amount);
-        System.assertEquals(0, [SELECT count() FROM Partial_Soft_Credit__c]);
+        System.assertEquals(100, ctrl.oppTotalSelected.Amount, 'Checks that the total selected opps is equal to 100.');
+        System.assertEquals(0, [SELECT count() FROM Partial_Soft_Credit__c], 'Test for equality of the number of soft credit partial payments.');
 
         Test.startTest();
-        System.assertNotEquals(null, ctrl.saveAndClose());
+        System.assertNotEquals(null, ctrl.saveAndClose(), 'Test if the current state of the controller is not equal to the state of the controller.');
         Test.stopTest();
 
         assertMatchingGiftsCount(2);
@@ -181,20 +181,20 @@ public with sharing class MTCH_FindGifts_TEST {
         Test.setCurrentPage(Page.MTCH_FindGifts);
         MTCH_FindGifts_CTRL ctrl = new MTCH_FindGifts_CTRL(new ApexPages.StandardController(oppMG));
 
-        System.assertEquals(cItem/2, ctrl.potentialGifts.size());
-        System.assertEquals(cItem/2, ctrl.selection.size());
-        System.assertEquals(true, ctrl.selection.get(listOpp[0].Id));
-        System.assertEquals(true, ctrl.selection.get(listOpp[2].Id));
-        System.assertEquals(200, ctrl.oppTotalSelected.Amount);
+        System.assertEquals(cItem/2, ctrl.potentialGifts.size(), 'Checks that cItem is the same as cItem + 2.');
+        System.assertEquals(cItem/2, ctrl.selection.size(), 'Assert that cItem and cItem - 2 are the same.');
+        System.assertEquals(true, ctrl.selection.get(listOpp[0].Id), 'Assert that the current selection is the same as the current selection.');
+        System.assertEquals(true, ctrl.selection.get(listOpp[2].Id), 'Test if current selection is equal to selected one.');
+        System.assertEquals(200, ctrl.oppTotalSelected.Amount, 'Test for the total selected OPP amount.');
 
         ctrl.selection.put(listOpp[0].Id, false);
         ctrl.selection.put(listOpp[2].Id, false);
 
-        System.assertEquals(0, ctrl.oppTotalSelected.Amount);
-        System.assertEquals(2, [SELECT count() FROM Partial_Soft_Credit__c]);
+        System.assertEquals(0, ctrl.oppTotalSelected.Amount, 'Checks that the total selected opps are equal.');
+        System.assertEquals(2, [SELECT count() FROM Partial_Soft_Credit__c], 'Asserts that the number of soft credit records is equal to 2.');
 
         Test.startTest();
-        System.assertNotEquals(null, ctrl.saveAndClose());
+        System.assertNotEquals(null, ctrl.saveAndClose(), 'Test if the current state of the controller is not equal to the state of the controller.');
         Test.stopTest();
 
         assertMatchingGiftsCount(0);
@@ -209,8 +209,8 @@ public with sharing class MTCH_FindGifts_TEST {
         Test.setCurrentPage(Page.MTCH_FindGifts);
         MTCH_FindGifts_CTRL ctrl = new MTCH_FindGifts_CTRL(new ApexPages.StandardController(oppMG));
 
-        System.assertEquals(cItem/2, ctrl.potentialGifts.size());
-        System.assertEquals(cItem/2, ctrl.selection.size());
+        System.assertEquals(cItem/2, ctrl.potentialGifts.size(), 'Checks that cItem is the same as cItem + 2.');
+        System.assertEquals(cItem/2, ctrl.selection.size(), 'Assert that cItem and cItem - 2 are the same.');
 
         // search for more opps
         ctrl.showSearchSection();
@@ -218,28 +218,28 @@ public with sharing class MTCH_FindGifts_TEST {
         ctrl.searchFieldsWrapper.First_Soft_Credit_Date__c = Date.today().addYears(-1);
         ctrl.searchFieldsWrapper.Last_Soft_Credit_Date__c = Date.today().addYears(1);
         ctrl.searchMore();
-        System.assertEquals(cItem, ctrl.potentialGifts.size());
-        System.assertEquals(cItem, ctrl.selection.size());
+        System.assertEquals(cItem, ctrl.potentialGifts.size(), 'Checks that cItem is the same as the number of gifts in the list of');
+        System.assertEquals(cItem, ctrl.selection.size(), 'Assert that cItem and ctrl. selection. size are equal');
 
         // SELECT from the searched opps
-        System.assertEquals(false, ctrl.selection.get(listOpp[5].Id));
-        System.assertEquals(false, ctrl.selection.get(listOpp[6].Id));
-        System.assertEquals(0, ctrl.oppTotalSelected.Amount);
+        System.assertEquals(false, ctrl.selection.get(listOpp[5].Id), 'Test if the selection is equal to the selected item.');
+        System.assertEquals(false, ctrl.selection.get(listOpp[6].Id), 'Test if the current selection is equal to the selected one.');
+        System.assertEquals(0, ctrl.oppTotalSelected.Amount, 'Checks that the total selected opps are equal.');
 
         ctrl.selection.put(listOpp[5].Id, true);
         ctrl.selection.put(listOpp[6].Id, true);
 
-        System.assertEquals(200, ctrl.oppTotalSelected.Amount);
-        System.assertEquals(0, [SELECT count() FROM Partial_Soft_Credit__c]);
+        System.assertEquals(200, ctrl.oppTotalSelected.Amount, 'Test for the total selected OPP amount.');
+        System.assertEquals(0, [SELECT count() FROM Partial_Soft_Credit__c], 'Test for equality of the number of soft credit partial payments.');
 
         Test.startTest();
-        System.assertNotEquals(null, ctrl.saveAndClose());
+        System.assertNotEquals(null, ctrl.saveAndClose(), 'Test if the current state of the controller is not equal to the state of the controller.');
         Test.stopTest();
 
         assertMatchingGiftsCount(2);
 
         // does nothing, but hey, let's get that code coverage up!
-        System.assertEquals(null, ctrl.refresh());
+        System.assertEquals(null, ctrl.refresh(), 'Test if the refresh method is called.');
     }
 
     /*********************************************************************************************************
@@ -285,9 +285,9 @@ public with sharing class MTCH_FindGifts_TEST {
      * @return void
      */
     private static void assertMatchingGiftsCount(Integer expectedCount) {
-        System.assertEquals(expectedCount, [SELECT count() FROM Partial_Soft_Credit__c]);
-        System.assertEquals(expectedCount, [SELECT count() FROM OpportunityContactRole where OpportunityId = :oppMG.Id]);
-        System.assertEquals(expectedCount, [SELECT count() FROM Opportunity where Matching_Gift_Status__c = :RECEIVED_STATUS]);
-        System.assertEquals(expectedCount, [SELECT count() FROM Opportunity where Matching_Gift__c = :oppMG.Id]);
+        System.assertEquals(expectedCount, [SELECT count() FROM Partial_Soft_Credit__c], 'Asserts that the number of soft credit records is equal to the expected count.');
+        System.assertEquals(expectedCount, [SELECT count() FROM OpportunityContactRole where OpportunityId = :oppMG.Id], 'This is a hack to avoid the fact that the opportunity_contact_role table');
+        System.assertEquals(expectedCount, [SELECT count() FROM Opportunity where Matching_Gift_Status__c = :RECEIVED_STATUS], 'Asserts that the number of opportunity matches the expected count.');
+        System.assertEquals(expectedCount, [SELECT count() FROM Opportunity where Matching_Gift__c = :oppMG.Id], 'Asserts that the number of opportunity matches the expected number of gifts.');
     }
 }

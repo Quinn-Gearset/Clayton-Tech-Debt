@@ -808,7 +808,7 @@ private class fflib_AnyOrderTest
 				+ '\nACTUAL ARGS: ("bob"), ("fred"), ("bob")'
 				+ '\n---'
 				+ '\nEXPECTED ARGS: "bob"',
-				ex.getMessage()
+				ex.getMessage(), 'Asserts that all the items in the sequence are equal.'
 			);
 		}
 	}
@@ -857,7 +857,7 @@ private class fflib_AnyOrderTest
 				+ '\nACTUAL ARGS: ("bob"), ("fred")'
 				+ '\n---'
 				+ '\nEXPECTED ARGS: [any String]',
-				ex.getMessage()
+				ex.getMessage(), 'Checks that all objects in the sequence are equal.'
 			);
 		}
 	}
@@ -896,7 +896,7 @@ private class fflib_AnyOrderTest
 				+ '\nACTUAL ARGS: ("bob"), ("fred"), ("fred"), ("bob"), ("bob"), ("bob"), ("bob"), ("bob"), ("fred")'
 				+ '\n---'
 				+ '\nEXPECTED ARGS: "bob"',
-				ex.getMessage()
+				ex.getMessage(), 'Assert that all the elements in the sequence are equal.'
 			);
 		}
 	}

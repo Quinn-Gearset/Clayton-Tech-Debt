@@ -167,7 +167,7 @@ private class BGE_ConfigurationWizard_CTRL_TEST {
 
         DataImportBatch__c batchConfig = initBatchConfigTest();
         String newName = 'New Name';
-        System.assertNotEquals(newName, batchConfig.Name);
+        System.assertNotEquals(newName, batchConfig.Name, 'This is a test function to ensure that the name of the batch config is not the same');
 
         String batchInfoJSON = '{' +
             '"name":"' + newName + '",' +

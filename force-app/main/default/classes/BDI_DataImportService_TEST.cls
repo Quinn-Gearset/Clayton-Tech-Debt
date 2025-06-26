@@ -46,21 +46,21 @@ private with sharing class BDI_DataImportService_TEST {
     private static void testUniqueIdHandling() {
         System.assertEquals(
             UTIL_Namespace.StrTokenNSPrefix('Contact1_Website__c'),
-            BDI_DataImportService.strDICustomIDField('Contact1', 'Website')
+            BDI_DataImportService.strDICustomIDField('Contact1', 'Website'), 'Unlikely to be a transient error.'
         );
 
-        System.assertEquals('Contact1_Foo__c', BDI_DataImportService.strDICustomIDField('Contact1', 'Foo__c'));
+        System.assertEquals('Contact1_Foo__c', BDI_DataImportService.strDICustomIDField('Contact1', 'Foo__c'), 'System. assertEquals - This will assert that Contact1_Foo is the same as');
 
         String expectedCustomIdField = UTIL_Namespace.getNamespace().equalsIgnoreCase(UTIL_Namespace.HARDCODED_NPSP_NAMESPACE)
             ? 'npsp__Contact1_Bar__c'
             : 'Contact1_Bar__c';
-        System.assertEquals(expectedCustomIdField, BDI_DataImportService.strDICustomIDField('Contact1', 'npsp__Bar__c'));
+        System.assertEquals(expectedCustomIdField, BDI_DataImportService.strDICustomIDField('Contact1', 'npsp__Bar__c'), 'This test asserts that the string value of the BDI_DataImportService. strDI');
 
-        System.assertEquals('Contact1_Baz__c', BDI_DataImportService.strDICustomIDField('Contact1', 'randomNS__Baz__c'));
+        System.assertEquals('Contact1_Baz__c', BDI_DataImportService.strDICustomIDField('Contact1', 'randomNS__Baz__c'), 'System. assertEquals returns a string with the value of Contact1_Baz');
 
         System.assertEquals(
             UTIL_Namespace.StrTokenNSPrefix('Contact1_Buz__c'),
-            BDI_DataImportService.strDICustomIDField('Contact1', UTIL_Namespace.StrTokenNSPrefix('Buz__c'))
+            BDI_DataImportService.strDICustomIDField('Contact1', UTIL_Namespace.StrTokenNSPrefix('Buz__c')), 'System. assertEquals method.'
         );
     }
 
@@ -81,7 +81,7 @@ private with sharing class BDI_DataImportService_TEST {
 
         service.disableAllOppRollups();
 
-        System.assertEquals(expectedHandlers, TDTM_Config_API.getCachedRecords());
+        System.assertEquals(expectedHandlers, TDTM_Config_API.getCachedRecords(), 'This test asserts that the expected handlers are the same.');
     }
 
     /*******************************************************************************************************************
@@ -221,22 +221,22 @@ private with sharing class BDI_DataImportService_TEST {
         String[] fieldsToIgnore2 = new String[]{'Donation_Amount__c','Donation_Date__c'};
 
         // Should be true since two fields are populated
-        System.assertEquals(true, BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI1, testFieldMap));
+        System.assertEquals(true, BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI1, testFieldMap), 'This test asserts that the data import service is populated for the object mapped to the field names');
 
         // Should be false since none of the fields specified is populated
-        System.assertEquals(false, BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI2, testFieldMap));
+        System.assertEquals(false, BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI2, testFieldMap), 'This test asserts that the data import service is populated for the object mapping of the test field');
 
         // Should still be true since one of the fields not being igorned is populated
         System.assertEquals(true, 
-                    BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI1, testFieldMap, fieldsToIgnore1));
+                    BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI1, testFieldMap, fieldsToIgnore1), 'This method checks if all the fields in the object are populated.');
 
         // Should be false since populated field is not in the field map
         System.assertEquals(false, 
-                    BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI2, testFieldMap, fieldsToIgnore1));
+                    BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI2, testFieldMap, fieldsToIgnore1), 'This method checks if there are any fields populated for the object mapping.');
 
         // Should be false because both populated fields are now being ignored
         System.assertEquals(false, 
-                    BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI1, testFieldMap, fieldsToIgnore2));
+                    BDI_DataImportService.anyFieldsPopulatedForObjectMapping(testDI1, testFieldMap, fieldsToIgnore2), 'This method checks if there are any fields populated for the object mapping.');
     }
 
     // Helpers

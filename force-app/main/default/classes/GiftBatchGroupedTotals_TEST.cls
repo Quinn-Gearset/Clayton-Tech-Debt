@@ -86,17 +86,17 @@ private with sharing class GiftBatchGroupedTotals_TEST {
         GiftBatchGroupedTotals batchTotals = new GiftBatchGroupedTotals(allProxies);
 
         Map<String, Integer> totalsForBatch0 = batchTotals.totalsFor(DUMMY_BATCH_ID_0);
-        System.assertEquals(1, totalsForBatch0.get(GiftBatchAggregateGroupName.PROCESSED.name()));
-        System.assertEquals(2 + 4, totalsForBatch0.get(GiftBatchAggregateGroupName.FAILED.name()));
-        System.assertEquals(4, totalsForBatch0.get(GiftBatchAggregateGroupName.FAILED_PAYMENT.name()));
-        System.assertEquals(4, totalsForBatch0.get(GiftBatchAggregateGroupName.EXPIRED_PAYMENT.name()));
-        System.assertEquals(3, totalsForBatch0.get(GiftBatchAggregateGroupName.AUTHORIZED_PAYMENT.name()));
-        System.assertEquals(1 + 2 + 3 + 4, totalsForBatch0.get(GiftBatchAggregateGroupName.TOTAL.name()));
+        System.assertEquals(1, totalsForBatch0.get(GiftBatchAggregateGroupName.PROCESSED.name()), 'This method is used to assert that the total count for the batch is equal to 1.');
+        System.assertEquals(2 + 4, totalsForBatch0.get(GiftBatchAggregateGroupName.FAILED.name()), 'This test asserts that the total number of failed Gift batches is equal to 2 + 4');
+        System.assertEquals(4, totalsForBatch0.get(GiftBatchAggregateGroupName.FAILED_PAYMENT.name()), 'This method is used to assert that the total of failed payments for a batch group is equal');
+        System.assertEquals(4, totalsForBatch0.get(GiftBatchAggregateGroupName.EXPIRED_PAYMENT.name()), 'This method is used to check that the total of expired payments for the batch group is equal');
+        System.assertEquals(3, totalsForBatch0.get(GiftBatchAggregateGroupName.AUTHORIZED_PAYMENT.name()), 'This method is used to check that the total of the batch has been reached.');
+        System.assertEquals(1 + 2 + 3 + 4, totalsForBatch0.get(GiftBatchAggregateGroupName.TOTAL.name()), 'This test asserts that the total number of metrics in the batch is equal to the number of');
 
         Map<String, Integer> totalsForBatch1 = batchTotals.totalsFor(DUMMY_BATCH_ID_1);
-        System.assertEquals(0, totalsForBatch1.get(GiftBatchAggregateGroupName.PROCESSED.name()));
-        System.assertEquals(11, totalsForBatch1.get(GiftBatchAggregateGroupName.FAILED.name()));
-        System.assertEquals(11, totalsForBatch1.get(GiftBatchAggregateGroupName.FAILED_PAYMENT.name()));
-        System.assertEquals(5 + 6, totalsForBatch1.get(GiftBatchAggregateGroupName.TOTAL.name()));
+        System.assertEquals(0, totalsForBatch1.get(GiftBatchAggregateGroupName.PROCESSED.name()), 'This method is used to assert that the total count for the batch 1 group is equal to');
+        System.assertEquals(11, totalsForBatch1.get(GiftBatchAggregateGroupName.FAILED.name()), 'This test asserts that totalsForBatch1 is equal to 11.');
+        System.assertEquals(11, totalsForBatch1.get(GiftBatchAggregateGroupName.FAILED_PAYMENT.name()), 'This method is used to assert that the totals for the failed payment group are equal.');
+        System.assertEquals(5 + 6, totalsForBatch1.get(GiftBatchAggregateGroupName.TOTAL.name()), 'This test checks that the total count of the Gift Batch is equal to 5 + 6');
     }
 }

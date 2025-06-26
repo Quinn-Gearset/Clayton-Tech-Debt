@@ -77,16 +77,16 @@ public with sharing class GE_GiftEntryController_TEST {
            (List<GE_GiftEntryController.OpportunityWrapper>)
            JSON.deserialize(openDonationsForDummyOrgString, List<GE_GiftEntryController.OpportunityWrapper>.class);
 
-        System.assertEquals(2, openDonationsForDummyOrg.size());
-        System.assertEquals('Dummy Opp 0', openDonationsForDummyOrg[0].opportunity.Name);
-        System.assertEquals(3, openDonationsForDummyOrg[0].opportunity.npe01__OppPayment__r.size());
+        System.assertEquals(2, openDonationsForDummyOrg.size(), 'Checks that 2 open donations are in the dummy org.');
+        System.assertEquals('Dummy Opp 0', openDonationsForDummyOrg[0].opportunity.Name, 'Dummy opportunity name should be equal to openDonationsForDummyOrg [ 0 ]');
+        System.assertEquals(3, openDonationsForDummyOrg[0].opportunity.npe01__OppPayment__r.size(), 'This method is used to assert that the number of open donations is equal to 3.');
 
         DonationService donationService = new DonationService();
         DonationsView donationsView = donationService.getDonationsView(dummyOrg.Id);
 
-        System.assertEquals(2, donationsView.donations.size());
-        System.assertEquals('Dummy Opp 0', donationsView.donations[0].opportunity.get('Name'));
-        System.assertEquals(3, donationsView.donations[0].unpaidPayments.size());
+        System.assertEquals(2, donationsView.donations.size(), 'Asserts that the number of donations is equal to 2.');
+        System.assertEquals('Dummy Opp 0', donationsView.donations[0].opportunity.get('Name'), 'Dummy Opp 0 is not a dummy opportunity');
+        System.assertEquals(3, donationsView.donations[0].unpaidPayments.size(), 'Checks that the number of unpaid payments in the donations view is equal to 3.');
     }
 
     @IsTest
@@ -120,8 +120,8 @@ public with sharing class GE_GiftEntryController_TEST {
         GiftView viewModel = service.viewModelFrom(new GiftId(dataImport.id));
 
         String account1NameField = String.valueOf(DataImport__c.Account1_Name__c);
-        System.assertEquals('Dummy First Name', viewModel.fields.get(account1NameField));
-        System.assertEquals(2, viewModel.softCredits.all.size());
+        System.assertEquals('Dummy First Name', viewModel.fields.get(account1NameField), 'This is a hack to avoid the wrong behavior when using the dummy first name field.');
+        System.assertEquals(2, viewModel.softCredits.all.size(), 'Checks that the size of the softCredits list is equal to 2.');
         Test.stopTest();
     }
 
@@ -542,12 +542,12 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
     static void shouldUpsertDataImportRecord() {
         DataImport__c inMemoryDataImport = BDI_DataImport_TEST.newDI('First', 'Last', 100);
         DataImport__c dataImportRecord = GE_GiftEntryController.upsertDataImport(JSON.serialize(inMemoryDataImport));
-        System.assert(dataImportRecord.Id != null);
+        System.assert(dataImportRecord.Id != null, 'This method is only used for testing.');
 
         dataImportRecord.Payment_Authorization_Token__c = 'TEST_TOKEN';
         DataImport__c updatedDataImportRecord = GE_GiftEntryController.upsertDataImport(JSON.serialize(dataImportRecord));
-        System.assertEquals(dataImportRecord.Id, updatedDataImportRecord.Id);
-        System.assertEquals('TEST_TOKEN', updatedDataImportRecord.Payment_Authorization_Token__c);
+        System.assertEquals(dataImportRecord.Id, updatedDataImportRecord.Id, 'This method is used to assert that the dataImportRecord and updatedDataImportRecord are equal');
+        System.assertEquals('TEST_TOKEN', updatedDataImportRecord.Payment_Authorization_Token__c, 'Test for the test token.');
     }
 
     /***
@@ -570,12 +570,12 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
         UTIL_CustomSettingsFacade.getGiftEntrySettingsForTests(giftEntryCustomSetting);
 
         GE_GiftEntryController.RenderWrapper frw = GE_GiftEntryController.getDefaultSGERenderWrapper();
-        System.assert(frw.formTemplate != null);
-        System.assert(frw.formTemplate.name == template.name);
+        System.assert(frw.formTemplate != null, 'Assert that frw. formTemplate is not null.');
+        System.assert(frw.formTemplate.name == template.name, 'asserts that frw. formTemplate. name == template. name');
 
         frw = GE_GiftEntryController.getRenderWrapperById(defaultTemplate.Id);
-        System.assert(frw.formTemplate != null);
-        System.assert(frw.formTemplate.name == template.name);
+        System.assert(frw.formTemplate != null, 'Assert that frw. formTemplate is not null.');
+        System.assert(frw.formTemplate.name == template.name, 'asserts that frw. formTemplate. name == template. name');
 
     }
     @IsTest
@@ -590,7 +590,7 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
         Test.stopTest();
 
         System.assertNotEquals(null, bdiFieldMappingSet, 'Expected to receive field mappings, got null.');
-        System.assertEquals('Default_Field_Mapping_Set', bdiFieldMappingSet.DeveloperName);
+        System.assertEquals('Default_Field_Mapping_Set', bdiFieldMappingSet.DeveloperName, 'This method is used to assert that the developer s name is the same as the default field');
 
     }
 
@@ -607,7 +607,7 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
         String templateJSON1 = JSON.serialize(template1);
         GE_GiftEntryController.storeFormTemplate(null,template1.name, template1.description, template1.version, templateJSON1);
 
-        System.assertEquals(2, GE_GiftEntryController.getAllFormTemplates().size());
+        System.assertEquals(2, GE_GiftEntryController.getAllFormTemplates().size(), 'This method is used to check that the number of form templates is the same.');
     }
 
     @IsTest
@@ -710,11 +710,11 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
 
         Form_Template__c[] formTemplates = [SELECT Id, Name FROM Form_Template__c];
 
-        System.assertEquals(2, formTemplates.size());
+        System.assertEquals(2, formTemplates.size(), 'Checks that 2 form templates are available.');
         GE_GiftEntryController.deleteFormTemplates(new String[]{ formTemplates[0].Id, formTemplates[1].Id });
 
         formTemplates = [SELECT Id, Name FROM Form_Template__c];
-        System.assertEquals(0, formTemplates.size());
+        System.assertEquals(0, formTemplates.size(), 'Checks that all form templates are available.');
     }
 
     /***
@@ -739,7 +739,7 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
         GE_Template.Template templateResult = GE_GiftEntryController.retrieveDefaultSGEFormTemplate();
         String templateResultJSON = JSON.serialize(templateResult);
 
-        System.assertEquals(templateJSON, templateResultJSON);
+        System.assertEquals(templateJSON, templateResultJSON, 'Assert that templateJSON and templateResultJSON are equal.');
     }
 
     /***
@@ -756,8 +756,8 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
         GE_GiftEntryController.ColumnHeaderData selectedHeaders =
                 GE_GiftEntryController.retrieveCustomColumnHeaders('Templates');
 
-        System.assertEquals(3, allHeaders.size());
-        System.assertEquals(1, selectedHeaders.columnHeaders.size());
+        System.assertEquals(3, allHeaders.size(), 'Checks that the size of all headers is equal to 3.');
+        System.assertEquals(1, selectedHeaders.columnHeaders.size(), 'Checks that the number of selected columns is equal to 1.');
     }
 
     /***
@@ -789,9 +789,9 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
 
         Custom_Column_Header__c columnHeaderToCheck = updatedColumnHeadersList.columnHeaders[0];
 
-        System.assertEquals(1, selectedHeaders.columnHeaders.size());
-        System.assertEquals(1, updatedColumnHeadersList.columnHeaders.size());
-        System.assertEquals('Name', columnHeaderToCheck.Field_Api_Name__c);
+        System.assertEquals(1, selectedHeaders.columnHeaders.size(), 'Checks that the number of selected columns is equal to 1.');
+        System.assertEquals(1, updatedColumnHeadersList.columnHeaders.size(), 'This method asserts that the size of the updatedColumnHeadersList is equal to 1.');
+        System.assertEquals('Name', columnHeaderToCheck.Field_Api_Name__c, 'Checks that the column header name is the same as the field name in the header.');
     }
 
     /****
@@ -814,7 +814,7 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
         SObject[] objects = GE_GiftEntryController.retrieveRecords(
                 selectFields, sObjectApiName, whereClause, orderByClause, limitClause);
 
-        System.assertEquals(3, objects.size());
+        System.assertEquals(3, objects.size(), 'Asserts that 3 objects are in the list.');
     }
 
     /****
@@ -911,7 +911,7 @@ ElevateBatchItemType.ONE_TIME, TEST_PAYMENT_METHOD_CARD);
                 FROM Form_Template__c
         ];
 
-        System.assert(String.isNotBlank(failure.getMessage()));
+        System.assert(String.isNotBlank(failure.getMessage()), 'Assert that the failure message is not blank.');
         System.assertEquals(1, formTemplates.size(), 'A Form Template in use should not be deleted');
 
     }

@@ -47,8 +47,8 @@ private class InstallationNotifications_TEST {
       InstallationNotifications.notificationTypeSelector = stubFor(customNotificationTypeSelectorMock);
       InstallationNotifications notifications = new InstallationNotifications();
       Test.stopTest();
-      System.assert(!notifications.canPublish(notifications.activeNotifications[0]));
-      System.assert(MockAudienceImpl.userId == null);
+      System.assert(!notifications.canPublish(notifications.activeNotifications[0]), 'Checks if there are active notifications.');
+      System.assert(MockAudienceImpl.userId == null, 'Test if the user id is null.');
    }
 
    @isTest
@@ -66,8 +66,8 @@ private class InstallationNotifications_TEST {
       InstallationNotifications notifications = new InstallationNotifications();
       Test.stopTest();
 
-      System.assert(notifications.canPublish(notifications?.activeNotifications[0]));
-      System.assert(MockAudienceImpl.userId != null);
+      System.assert(notifications.canPublish(notifications?.activeNotifications[0]), 'Checks if the current user can publish notifications.');
+      System.assert(MockAudienceImpl.userId != null, 'Test if the user id is set.');
    }
 
    @isTest
@@ -85,8 +85,8 @@ private class InstallationNotifications_TEST {
       InstallationNotifications notifications = new InstallationNotifications();
       Test.stopTest();
 
-      System.assert(notifications.canPublish(notifications?.activeNotifications[0]));
-      System.assert(MockAudienceImpl.userId != null);
+      System.assert(notifications.canPublish(notifications?.activeNotifications[0]), 'Checks if the current user can publish notifications.');
+      System.assert(MockAudienceImpl.userId != null, 'Test if the user id is set.');
    }
 
    @isTest
@@ -104,8 +104,8 @@ private class InstallationNotifications_TEST {
       InstallationNotifications notifications = new InstallationNotifications();
       Test.stopTest();
 
-      System.assertEquals(notifications.customNotificationTypes, null);
-      System.assertEquals(notifications.activeNotificationsByType, null);
+      System.assertEquals(notifications.customNotificationTypes, null, 'Checks that the custom notification types are equal.');
+      System.assertEquals(notifications.activeNotificationsByType, null, 'Checks that there are no active notifications for this type.');
 
    }
 
@@ -123,8 +123,8 @@ private class InstallationNotifications_TEST {
       InstallationNotifications.notificationTypeSelector = stubFor(customNotificationTypeSelectorMock);
       InstallationNotifications notifications = new InstallationNotifications();
       Test.stopTest();
-      System.assert(!notifications.canPublish(notifications.activeNotifications[0]));
-      System.assert(MockAudienceImpl.userId == null);
+      System.assert(!notifications.canPublish(notifications.activeNotifications[0]), 'Checks if there are active notifications.');
+      System.assert(MockAudienceImpl.userId == null, 'Test if the user id is null.');
    }
 
    @isTest
@@ -140,9 +140,9 @@ private class InstallationNotifications_TEST {
       InstallationNotifications.notificationTypeSelector = stubFor(customNotificationTypeSelectorMock);
       InstallationNotifications notifications = new InstallationNotifications();
       Test.stopTest();
-      System.assert(notifications.canPublish(notifications.activeNotifications[0]));
-      System.assert(MockAudienceImpl.userId != null);
-      System.assert(!notifications.canPublish(notifications.activeNotifications[1]));
+      System.assert(notifications.canPublish(notifications.activeNotifications[0]), 'Checks if the current user can publish notifications.');
+      System.assert(MockAudienceImpl.userId != null, 'Test if the user id is set.');
+      System.assert(!notifications.canPublish(notifications.activeNotifications[1]), 'Checks if there is a notification available.');
 
    }
 

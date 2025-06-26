@@ -165,22 +165,22 @@ private class LD_LeadConvertOverride_TEST {
 
         Contact[] convertedContacts = getContacts();
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
-        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c);
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
+        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c, 'This test asserts that the contacts are in the system s individual form.');
 
         String accountName = convertedContacts[0].FirstName + ' ' + convertedContacts[0].LastName;
         if (CAO_Constants.isOneToOne()) {
-            system.assertEquals(accountName, convertedContacts[0].Account.Name);
+            system.assertEquals(accountName, convertedContacts[0].Account.Name, 'Assert that the account name is the same as the first contact in the list of convertedContacts');
             assertAccountWithName(accountName);
 
         } else if (CAO_Constants.isHHAccountModel()) {
-            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name);
+            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name, 'This function asserts that the last name of the account is the same as the account name of');
         } else if (CAO_Constants.isBucketModel()) {
-            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name);
+            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name, 'This test asserts that the account name is the same as the account name of the first Contact');
         }
 
         // make sure no affilations created
-        system.assertEquals(0, [select count() from npe5__Affiliation__c]);
+        system.assertEquals(0, [select count() from npe5__Affiliation__c], 'Asserts that all affiliations are equal.');
     }
 
     /*******************************************************************************************************
@@ -255,14 +255,14 @@ private class LD_LeadConvertOverride_TEST {
         Contact[] convertedContacts = getContacts();
         lead[] unconvertedLeads = getUnconvertedLeads();
         //no lead still unconverted
-        system.assertEquals(0,unconvertedLeads.size());
+        system.assertEquals(0,unconvertedLeads.size(), 'Asserts that the number of unconverted leads is the same as the number of unc');
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
         //the account for this contact should be an individual account, no matter the model
-        system.assertEquals(true, convertedContacts[0].Account.npe01__Systemisindividual__c);
+        system.assertEquals(true, convertedContacts[0].Account.npe01__Systemisindividual__c, 'asserts that the system is a systemisindividual');
 
         // make sure no affilations created
-        system.assertEquals(0, [select count() from npe5__Affiliation__c]);
+        system.assertEquals(0, [select count() from npe5__Affiliation__c], 'Asserts that all affiliations are equal.');
     }
 
     /*******************************************************************************************************
@@ -325,15 +325,15 @@ private class LD_LeadConvertOverride_TEST {
         Contact[] convertedContacts = getContacts();
         lead[] unconvertedLeads = getUnconvertedLeads();
         //no lead still unconverted
-        system.assertEquals(0,unconvertedLeads.size());
+        system.assertEquals(0,unconvertedLeads.size(), 'Asserts that the number of unconverted leads is the same as the number of unc');
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
         //the account for this contact should be a normal account, no matter the model
-        system.assertEquals(false, convertedContacts[0].Account.npe01__Systemisindividual__c);
-        system.assertEquals(companyName, convertedContacts[0].Account.Name);
+        system.assertEquals(false, convertedContacts[0].Account.npe01__Systemisindividual__c, 'assertEquals - This function asserts that the system is a systemisindividual.');
+        system.assertEquals(companyName, convertedContacts[0].Account.Name, 'asserts company name equals company name');
 
         // make sure affilation created (and only 1 even though strAfflAccountId also says New!)
-        system.assertEquals(1, [select count() from npe5__Affiliation__c]);
+        system.assertEquals(1, [select count() from npe5__Affiliation__c], 'Asserts that the number of affiliations in the system is equal to 1.');
     }
 
     /*******************************************************************************************************
@@ -402,15 +402,15 @@ private class LD_LeadConvertOverride_TEST {
         Contact[] convertedContacts = getContacts();
         lead[] unconvertedLeads = getUnconvertedLeads();
         //no lead still unconverted
-        system.assertEquals(0,unconvertedLeads.size());
+        system.assertEquals(0,unconvertedLeads.size(), 'Asserts that the number of unconverted leads is the same as the number of unc');
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
         //the account for this contact should be a normal account, no matter the model
-        system.assertEquals(false, convertedContacts[0].Account.npe01__Systemisindividual__c);
-        system.assertEquals(companyName, convertedContacts[0].Account.Name);
+        system.assertEquals(false, convertedContacts[0].Account.npe01__Systemisindividual__c, 'assertEquals - This function asserts that the system is a systemisindividual.');
+        system.assertEquals(companyName, convertedContacts[0].Account.Name, 'asserts company name equals company name');
 
         // make sure affilation created
-        system.assertEquals(1, [select count() from npe5__Affiliation__c]);
+        system.assertEquals(1, [select count() from npe5__Affiliation__c], 'Asserts that the number of affiliations in the system is equal to 1.');
     }
 
     /*******************************************************************************************************
@@ -481,15 +481,15 @@ private class LD_LeadConvertOverride_TEST {
         Contact[] convertedContacts = getContacts();
         lead[] unconvertedLeads = getUnconvertedLeads();
         //no lead still unconverted
-        system.assertEquals(0,unconvertedLeads.size());
+        system.assertEquals(0,unconvertedLeads.size(), 'Asserts that the number of unconverted leads is the same as the number of unc');
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
         //the account for this contact should an individual account
-        system.assertEquals(true, convertedContacts[0].Account.npe01__Systemisindividual__c);
-        system.assertNotEquals(companyName, convertedContacts[0].Account.Name);
+        system.assertEquals(true, convertedContacts[0].Account.npe01__Systemisindividual__c, 'asserts that the system is a systemisindividual');
+        system.assertNotEquals(companyName, convertedContacts[0].Account.Name, 'Asserts that companyName is not the same as the first Contact in the list.');
 
         // make sure affilation created to the original company
-        system.assertEquals(1, [select count() from npe5__Affiliation__c where npe5__Organization__c = :acc.Id]);
+        system.assertEquals(1, [select count() from npe5__Affiliation__c where npe5__Organization__c = :acc.Id], 'Asserts that the number of affiliations in the organization is equal to 1.');
     }
 
     /*******************************************************************************************************
@@ -555,19 +555,19 @@ private class LD_LeadConvertOverride_TEST {
         Contact[] convertedContacts = getContacts();
         lead[] unconvertedLeads = getUnconvertedLeads();
         //no lead still unconverted
-        system.assertEquals(0,unconvertedLeads.size());
+        system.assertEquals(0,unconvertedLeads.size(), 'Asserts that the number of unconverted leads is the same as the number of unc');
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
         //the account for this contact should be an individual account, no matter the model
-        system.assertEquals(true, convertedContacts[0].Account.npe01__Systemisindividual__c);
+        system.assertEquals(true, convertedContacts[0].Account.npe01__Systemisindividual__c, 'asserts that the system is a systemisindividual');
 
         // make sure HH created
         list<npo02__Household__c> listHH = [select Id, Name from npo02__Household__c];
-        system.assertEquals(1, listHH.size());
-        system.assertEquals(convertedContacts[0].npo02__Household__c, listHH[0].Id);
+        system.assertEquals(1, listHH.size(), 'asserts that the size of the list is 1');
+        system.assertEquals(convertedContacts[0].npo02__Household__c, listHH[0].Id, 'Assert that the first contact is the same as the second contact.');
 
         // make sure no affilation created
-        system.assertEquals(0, [select count() from npe5__Affiliation__c]);
+        system.assertEquals(0, [select count() from npe5__Affiliation__c], 'Asserts that all affiliations are equal.');
     }
 
 
@@ -720,31 +720,31 @@ private class LD_LeadConvertOverride_TEST {
 
         Contact[] convertedContacts = getContacts();
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
-        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c);
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
+        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c, 'This test asserts that the contacts are in the system s individual form.');
 
         String accountName = convertedContacts[0].FirstName + ' ' + convertedContacts[0].LastName;
         if (CAO_Constants.isOneToOne()) {
-            system.assertEquals(accountName, convertedContacts[0].Account.Name);
+            system.assertEquals(accountName, convertedContacts[0].Account.Name, 'Assert that the account name is the same as the first contact in the list of convertedContacts');
             assertAccountWithName(accountName);
 
         } else if (CAO_Constants.isHHAccountModel()) {
-            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name);
+            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name, 'This function asserts that the last name of the account is the same as the account name of');
         } else if (CAO_Constants.isBucketModel()) {
-            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name);
+            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name, 'This test asserts that the account name is the same as the account name of the first Contact');
         }
 
         // make sure no affilations created
-        system.assertEquals(0, [select count() from npe5__Affiliation__c]);
+        system.assertEquals(0, [select count() from npe5__Affiliation__c], 'Asserts that all affiliations are equal.');
 
         // verify address
         list<Address__c> listAddr = [select Id, MailingStreet__c, MailingCity__c, MailingState__c, MailingPostalCode__c from Address__c];
-        system.assertEquals(1, listAddr.size());
-        system.assertEquals(convertedContacts[0].Current_Address__c, listAddr[0].Id);
-        system.assertEquals(convertedContacts[0].MailingStreet, listAddr[0].MailingStreet__c);
-        system.assertEquals(convertedContacts[0].MailingCity, listAddr[0].MailingCity__c);
-        system.assertEquals(convertedContacts[0].MailingState, listAddr[0].MailingState__c);
-        system.assertEquals(convertedContacts[0].MailingPostalCode, listAddr[0].MailingPostalCode__c);
+        system.assertEquals(1, listAddr.size(), 'asserts that the size of the list is 1');
+        system.assertEquals(convertedContacts[0].Current_Address__c, listAddr[0].Id, 'Assert that the current address is the same as the list address.');
+        system.assertEquals(convertedContacts[0].MailingStreet, listAddr[0].MailingStreet__c, 'Assert that the first contact is the same as the last contact.');
+        system.assertEquals(convertedContacts[0].MailingCity, listAddr[0].MailingCity__c, 'Assert that the mailing city is the same as the list address.');
+        system.assertEquals(convertedContacts[0].MailingState, listAddr[0].MailingState__c, 'Assert that the mailing state of the contacts is the same as the mailing state of');
+        system.assertEquals(convertedContacts[0].MailingPostalCode, listAddr[0].MailingPostalCode__c, 'This function asserts that the postal code of the converted contact is the same as the postal code');
     }
 
     /*******************************************************************************************************
@@ -814,32 +814,32 @@ private class LD_LeadConvertOverride_TEST {
 
         Contact[] convertedContacts = getContacts();
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
-        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c);
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
+        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c, 'This test asserts that the contacts are in the system s individual form.');
 
         String accountName = convertedContacts[0].FirstName + ' ' + convertedContacts[0].LastName;
         if (CAO_Constants.isOneToOne()) {
-            system.assertEquals(accountName, convertedContacts[0].Account.Name);
+            system.assertEquals(accountName, convertedContacts[0].Account.Name, 'Assert that the account name is the same as the first contact in the list of convertedContacts');
             assertAccountWithName(accountName);
 
         } else if (CAO_Constants.isHHAccountModel()) {
-            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name);
+            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name, 'This function asserts that the last name of the account is the same as the account name of');
         } else if (CAO_Constants.isBucketModel()) {
-            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name);
+            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name, 'This test asserts that the account name is the same as the account name of the first Contact');
         }
 
         // verify Opp
         list<Opportunity> listOpp = [select Id, AccountId, Name, Primary_Contact__c from Opportunity];
-        system.assertEquals(1, listOpp.size());
-        system.assertEquals(ext.OppName, listOpp[0].Name);
+        system.assertEquals(1, listOpp.size(), 'Assert that the size of the list is equal to 1.');
+        system.assertEquals(ext.OppName, listOpp[0].Name, 'Assert that the OppName of the first opp is the same as the first op');
 
         // verify Opp OCR's
         list<OpportunityContactRole> listOCR = [select Id, OpportunityId, ContactId, Role, IsPrimary from OpportunityContactRole];
-        system.assertEquals(1, listOCR.size());
-        system.assertEquals(true, listOCR[0].IsPrimary);
+        system.assertEquals(1, listOCR.size(), 'Checks that OCR list is exactly 1.');
+        system.assertEquals(true, listOCR[0].IsPrimary, 'Checks that the OCR is primary.');
 
         // verify Primary Contact
-        system.assertEquals(convertedContacts[0].Id, listOpp[0].Primary_Contact__c);
+        system.assertEquals(convertedContacts[0].Id, listOpp[0].Primary_Contact__c, 'This function asserts that the primary contact of the converted list is the same as the primary contact');
     }
 
     /*******************************************************************************************************
@@ -885,7 +885,7 @@ private class LD_LeadConvertOverride_TEST {
         con.LastName = 'Testy';
         insert con;
         con = getContacts()[0];
-        system.assertNotEquals(null, con.AccountId);
+        system.assertNotEquals(null, con.AccountId, 'Assert that the account id is not null.');
 
         Test.setCurrentPageReference(new PageReference('Page.LD_LeadConvertOverride'));
         string companyName = SPECIAL_ACCOUNT_NAME;
@@ -926,32 +926,32 @@ private class LD_LeadConvertOverride_TEST {
 
         Contact[] convertedContacts = getContacts();
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
-        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c);
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
+        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c, 'This test asserts that the contacts are in the system s individual form.');
 
         String accountName = convertedContacts[0].FirstName + ' ' + convertedContacts[0].LastName;
         if (CAO_Constants.isOneToOne()) {
-            system.assertEquals(accountName, convertedContacts[0].Account.Name);
+            system.assertEquals(accountName, convertedContacts[0].Account.Name, 'Assert that the account name is the same as the first contact in the list of convertedContacts');
             List<Account> createdAccount2 = [select id from Account WHERE Id != :con.AccountId];
-            system.assertEquals(1,createdAccount2.size());
+            system.assertEquals(1,createdAccount2.size(), 'Checks that the number of created accounts is equal to the number of accounts created.');
         } else if (CAO_Constants.isHHAccountModel()) {
-            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name);
+            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name, 'This function asserts that the last name of the account is the same as the account name of');
         } else if (CAO_Constants.isBucketModel()) {
-            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name);
+            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name, 'This test asserts that the account name is the same as the account name of the first Contact');
         }
 
         // verify Opp
         list<Opportunity> listOpp = [select Id, AccountId, Name, Primary_Contact__c from Opportunity];
-        system.assertEquals(1, listOpp.size());
-        system.assertEquals(ext.OppName, listOpp[0].Name);
+        system.assertEquals(1, listOpp.size(), 'Assert that the size of the list is equal to 1.');
+        system.assertEquals(ext.OppName, listOpp[0].Name, 'Assert that the OppName of the first opp is the same as the first op');
 
         // verify Opp OCR's
         list<OpportunityContactRole> listOCR = [select Id, OpportunityId, ContactId, Role, IsPrimary from OpportunityContactRole];
-        system.assertEquals(1, listOCR.size());
-        system.assertEquals(true, listOCR[0].IsPrimary);
+        system.assertEquals(1, listOCR.size(), 'Checks that OCR list is exactly 1.');
+        system.assertEquals(true, listOCR[0].IsPrimary, 'Checks that the OCR is primary.');
 
         // verify Primary Contact
-        system.assertEquals(convertedContacts[0].Id, listOpp[0].Primary_Contact__c);
+        system.assertEquals(convertedContacts[0].Id, listOpp[0].Primary_Contact__c, 'This function asserts that the primary contact of the converted list is the same as the primary contact');
     }
 
 
@@ -1010,7 +1010,7 @@ private class LD_LeadConvertOverride_TEST {
         LD_LeadConvertOverride_CTRL ext = new LD_LeadConvertOverride_CTRL(sc);
 
         // fill the lists (for coverage)
-        System.assertEquals(2, ext.getOppAccChoices().size());
+        System.assertEquals(2, ext.getOppAccChoices().size(), 'Assert that 2 opp choices are available');
 
         // this selects the "New" option in the Contact box
         ext.convertedContactId = 'NEW_CONTACT';
@@ -1029,20 +1029,20 @@ private class LD_LeadConvertOverride_TEST {
 
         Contact[] convertedContacts = getContacts();
         //one contact should have been created
-        system.assertEquals(1,convertedContacts.size());
-        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c);
-        system.assertNotEquals(null, convertedContacts[0].Primary_Affiliation__c);
-        system.assertEquals('112 Company St', convertedContacts[0].Primary_Affiliation__r.BillingStreet);
+        system.assertEquals(1,convertedContacts.size(), 'Checks that the number of contacts is equal to 1.');
+        system.assertEquals(true,convertedContacts[0].Account.npe01__Systemisindividual__c, 'This test asserts that the contacts are in the system s individual form.');
+        system.assertNotEquals(null, convertedContacts[0].Primary_Affiliation__c, 'Asserts that the primary affiliation of the contacts is not null.');
+        system.assertEquals('112 Company St', convertedContacts[0].Primary_Affiliation__r.BillingStreet, 'This function asserts that the billing street of the primary contact is equal to 112 Company St.');
 
         String accountName = convertedContacts[0].FirstName + ' ' + convertedContacts[0].LastName;
         if (CAO_Constants.isOneToOne()) {
-            system.assertEquals(accountName, convertedContacts[0].Account.Name);
+            system.assertEquals(accountName, convertedContacts[0].Account.Name, 'Assert that the account name is the same as the first contact in the list of convertedContacts');
             assertAccountWithName(accountName);
 
         } else if (CAO_Constants.isHHAccountModel()) {
-            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name);
+            system.assertEquals(convertedContacts[0].LastName + CAO_Constants.HH_NAME_SUFFIX, convertedContacts[0].Account.Name, 'This function asserts that the last name of the account is the same as the account name of');
         } else if (CAO_Constants.isBucketModel()) {
-            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name);
+            system.assertEquals(CAO_Constants.INDIVIDUAL_ACCOUNT_NAME_FOR_TESTS, convertedContacts[0].Account.Name, 'This test asserts that the account name is the same as the account name of the first Contact');
         }
 
         // verify Opp Affiliation
@@ -1050,8 +1050,8 @@ private class LD_LeadConvertOverride_TEST {
         system.assertNotEquals(null, aff, 'Affiliation should be created.');
 
         list<Opportunity> listOpp = [select Id, AccountId, Name, Primary_Contact__c from Opportunity];
-        system.assertEquals(1, listOpp.size());
-        system.assertEquals(aff.npe5__Organization__c , listOpp[0].AccountId);
+        system.assertEquals(1, listOpp.size(), 'Assert that the size of the list is equal to 1.');
+        system.assertEquals(aff.npe5__Organization__c , listOpp[0].AccountId, 'asserts that the AccountID of the first OPP is the same as the AccountID');
     }
 
     /*******************************************************************************************************
@@ -1079,7 +1079,7 @@ private class LD_LeadConvertOverride_TEST {
         LD_LeadConvertOverride_CTRL ext = new LD_LeadConvertOverride_CTRL(sc);
 
         // fill the lists (for coverage)
-        System.assertEquals(2, ext.getOppAccChoices().size());
+        System.assertEquals(2, ext.getOppAccChoices().size(), 'Assert that 2 opp choices are available');
 
         // this selects the "New" option in the Contact box
         ext.convertedContactId = 'NEW_CONTACT';
@@ -1094,7 +1094,7 @@ private class LD_LeadConvertOverride_TEST {
         Test.stopTest();
 
         Account result = [SELECT Id,Name,BillingStreet FROM Account LIMIT 1][0];
-        System.assertEquals(l.CompanyStreet__c,result.BillingStreet);
+        System.assertEquals(l.CompanyStreet__c,result.BillingStreet, 'This method is used to assert that the company street is equal to the billing street.');
     }
 
     /*******************************************************************************************************
@@ -1162,7 +1162,7 @@ private class LD_LeadConvertOverride_TEST {
         for (FieldSetMember member : ext.conFieldSet) {
             fieldSetFields.add(member.getFieldPath());
         }
-        System.assert(ext.contactFinder.selectFields.containsAll(fieldSetFields));
+        System.assert(ext.contactFinder.selectFields.containsAll(fieldSetFields), 'Checks that all fields in the selectFields are present in the contactFinder.');
 
         String sosl = searchBuilder.build();
         System.assert(sosl.startsWith(
@@ -1242,7 +1242,7 @@ private class LD_LeadConvertOverride_TEST {
     private static void assertNoContactIsRetrieved(LD_LeadConvertOverride_CTRL ext) {
         System.assertEquals(0, ext.conMap.size(), 'Expected no Contact for the Special Account: ' + ext.conMap);
         System.assertEquals(2, ext.conList.size(), 'Labels None and New Contact should exist: ' + ext.conList);
-        System.assert(ext.lcStatuses.size() > 0);
+        System.assert(ext.lcStatuses.size() > 0, 'Assert that the status of the LCOW is set.');
     }
 
     /*********************************************************************************************************
@@ -1253,7 +1253,7 @@ private class LD_LeadConvertOverride_TEST {
     private static void assertContactIsReturned(LD_LeadConvertOverride_CTRL ext) {
         System.assertEquals(1, ext.conMap.size(), 'Contact should be retrieved: ' + ext.conMap);
         System.assertEquals(3, ext.conList.size(), 'Labels None, New Contact and existing Contact name should exist: ' + ext.conList);
-        System.assert(ext.lcStatuses.size() > 0);
+        System.assert(ext.lcStatuses.size() > 0, 'Assert that the status of the LCOW is set.');
     }
 
     /*********************************************************************************************************

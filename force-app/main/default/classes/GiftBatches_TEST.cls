@@ -41,12 +41,12 @@ private class GiftBatches_TEST {
         GiftBatchGroupedTotals groupedTotals = giftBatches.getGroupedTotals();
         Map<String, Integer> totalsForGiftBatch = groupedTotals.totalsFor(DUMMY_BATCH_ID_0);
 
-        System.assertEquals(1, totalsForGiftBatch.get(GiftBatchAggregateGroupName.PROCESSED.name()));
-        System.assertEquals(2 + 4, totalsForGiftBatch.get(GiftBatchAggregateGroupName.FAILED.name()));
-        System.assertEquals(4, totalsForGiftBatch.get(GiftBatchAggregateGroupName.FAILED_PAYMENT.name()));
-        System.assertEquals(4, totalsForGiftBatch.get(GiftBatchAggregateGroupName.EXPIRED_PAYMENT.name()));
-        System.assertEquals(3, totalsForGiftBatch.get(GiftBatchAggregateGroupName.AUTHORIZED_PAYMENT.name()));
-        System.assertEquals(1 + 2 + 3 + 4, totalsForGiftBatch.get(GiftBatchAggregateGroupName.TOTAL.name()));
+        System.assertEquals(1, totalsForGiftBatch.get(GiftBatchAggregateGroupName.PROCESSED.name()), 'This method is used to assert that the total count for a Gift Batch is equal to');
+        System.assertEquals(2 + 4, totalsForGiftBatch.get(GiftBatchAggregateGroupName.FAILED.name()), 'This test asserts that the total number of failed GiftBatches in the Gift Batch is');
+        System.assertEquals(4, totalsForGiftBatch.get(GiftBatchAggregateGroupName.FAILED_PAYMENT.name()), 'This method is used to assert that the total of failed payments for a Gift Batch is');
+        System.assertEquals(4, totalsForGiftBatch.get(GiftBatchAggregateGroupName.EXPIRED_PAYMENT.name()), 'This method is used to check that the total amount of expired payments in the Gift Batch');
+        System.assertEquals(3, totalsForGiftBatch.get(GiftBatchAggregateGroupName.AUTHORIZED_PAYMENT.name()), 'This method is used to check that the total of authorized payments for a Gift Batch is');
+        System.assertEquals(1 + 2 + 3 + 4, totalsForGiftBatch.get(GiftBatchAggregateGroupName.TOTAL.name()), 'Checks that the total number of Gift Batch aggregates is equal to the sum of all aggregate');
     }
     
     private class GiftBatchSelectorMock implements StubProvider {

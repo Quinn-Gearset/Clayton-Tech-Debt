@@ -52,9 +52,9 @@ private class UnitOfWork_TEST {
                 c2
         });
 
-        System.assert(uow.objectsToUpdate.size() == 1);
+        System.assert(uow.objectsToUpdate.size() == 1, 'Assert that there are only one object in the update queue.');
         Contact c3 = (Contact) uow.objectsToUpdate.get(0);
-        System.assert(c3.Title == 'Test Title');
+        System.assert(c3.Title == 'Test Title', 'Test for the presence of test title');
     }
 
     @IsTest
@@ -75,9 +75,9 @@ private class UnitOfWork_TEST {
                 c2
         });
 
-        System.assert(uow.objectsToUpdate.size() == 1);
+        System.assert(uow.objectsToUpdate.size() == 1, 'Assert that there are only one object in the update queue.');
         Contact c3 = (Contact) uow.objectsToUpdate.get(0);
-        System.assert(c3.LastName == 'TEST');
-        System.assert(c3.LastName.equals('TEST'));
+        System.assert(c3.LastName == 'TEST', 'Test for the last name of the system.');
+        System.assert(c3.LastName.equals('TEST'), 'Test for the last name of the application.');
     }
 }

@@ -31,11 +31,11 @@ private class fflib_ApplicationTest
 	private static void callingUnitOfWorkFactoryShouldGivenStandardImplsAndMockImpls()
 	{
 		// Standard behaviour
-		System.assert(UnitOfWork.newInstance() instanceof fflib_SObjectUnitOfWork);
+		System.assert(UnitOfWork.newInstance() instanceof fflib_SObjectUnitOfWork, 'Create a new unit of work on the system.');
  		
 		// Mocking behaviour
 		UnitOfWork.setMock(new fflib_SObjectMocks.SObjectUnitOfWork(new fflib_ApexMocks()));
-		System.assert(UnitOfWork.newInstance() instanceof fflib_SObjectMocks.SObjectUnitOfWork);
+		System.assert(UnitOfWork.newInstance() instanceof fflib_SObjectMocks.SObjectUnitOfWork, 'Test if unit of work is available.');
 	}
 
 	@IsTest
@@ -45,14 +45,14 @@ private class fflib_ApplicationTest
 		System.assert(
 				UnitOfWork.newInstance(
 						new List<SObjectType>{ Account.SObjectType}
-				) instanceof fflib_SObjectUnitOfWork);
+				) instanceof fflib_SObjectUnitOfWork, 'Create a new empty list of Account objects.');
 
 		// Mocking behaviour
 		UnitOfWork.setMock(new fflib_SObjectMocks.SObjectUnitOfWork(new fflib_ApexMocks()));
 		System.assert(
 				UnitOfWork.newInstance(
 						new List<SObjectType>{ Account.SObjectType}
-				) instanceof fflib_SObjectMocks.SObjectUnitOfWork);
+				) instanceof fflib_SObjectMocks.SObjectUnitOfWork, 'Create a new instance of the unit of work.');
 	}
 
 	@IsTest

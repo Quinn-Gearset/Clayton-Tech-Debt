@@ -88,13 +88,13 @@ private with sharing class RD2_OpportunityService_TEST {
         System.assertEquals(1, opps.size(), 'One Installment Opp should be created on RD insert: ' + opps);
 
         System.assertEquals(getExpectedOppName(rd, CLOSE_DATE), opps[0].Name, 'Opportunity Name should match');
-        System.assertEquals(getContact().Id, opps[0].npe01__Contact_Id_for_Role__c);
-        System.assertEquals(rd.npe03__Amount__c, opps[0].Amount);
-        System.assertEquals(rd.npe03__Contact__c, opps[0].Primary_Contact__c);
-        System.assertEquals(CLOSE_DATE, opps[0].CloseDate);
-        System.assertEquals(rd.npe03__Recurring_Donation_Campaign__c, opps[0].CampaignId);
-        System.assertEquals(STAGE_NAME_PLEDGED, opps[0].StageName);
-        System.assertEquals(PAYMENT_CREDIT_CARD, paymentGateway.getRecords(opps)[0].npe01__Payment_Method__c);
+        System.assertEquals(getContact().Id, opps[0].npe01__Contact_Id_for_Role__c, 'This function asserts that the Contact is the same as the one in the Role.');
+        System.assertEquals(rd.npe03__Amount__c, opps[0].Amount, 'Test for equality of NPE03 and NPE03.');
+        System.assertEquals(rd.npe03__Contact__c, opps[0].Primary_Contact__c, 'This is a test function to assert that the primary contact is the same as the primary contact');
+        System.assertEquals(CLOSE_DATE, opps[0].CloseDate, 'Assert that the close date of the first open opps is equal to the close date of');
+        System.assertEquals(rd.npe03__Recurring_Donation_Campaign__c, opps[0].CampaignId, 'Recurring Donation Campaigns are always in the same campaigns.');
+        System.assertEquals(STAGE_NAME_PLEDGED, opps[0].StageName, 'Checks that the current stage is the same as the first stage in the pipeline.');
+        System.assertEquals(PAYMENT_CREDIT_CARD, paymentGateway.getRecords(opps)[0].npe01__Payment_Method__c, 'This method is used to assert that the payment method of the gateway is the same as the');
     }
 
     /***
@@ -126,11 +126,11 @@ private with sharing class RD2_OpportunityService_TEST {
         System.assertEquals(1, opps.size(), 'One Installment Opp should be created on RD insert: ' + opps);
 
         System.assertEquals(getExpectedOppName(rd, CLOSE_DATE), opps[0].Name, 'Opportunity Name should match');
-        System.assertEquals(rd.npe03__Amount__c, opps[0].Amount);
-        System.assertEquals(rd.npe03__Recurring_Donation_Campaign__c, opps[0].CampaignId);
-        System.assertEquals(CLOSE_DATE, opps[0].CloseDate);
-        System.assertEquals(STAGE_NAME_PROMISED, opps[0].StageName);
-        System.assertEquals(PAYMENT_CREDIT_CARD, paymentGateway.getRecords(opps)[0].npe01__Payment_Method__c);
+        System.assertEquals(rd.npe03__Amount__c, opps[0].Amount, 'Test for equality of NPE03 and NPE03.');
+        System.assertEquals(rd.npe03__Recurring_Donation_Campaign__c, opps[0].CampaignId, 'Recurring Donation Campaigns are always in the same campaigns.');
+        System.assertEquals(CLOSE_DATE, opps[0].CloseDate, 'Assert that the close date of the first open opps is equal to the close date of');
+        System.assertEquals(STAGE_NAME_PROMISED, opps[0].StageName, 'Checks that the stage name is promided.');
+        System.assertEquals(PAYMENT_CREDIT_CARD, paymentGateway.getRecords(opps)[0].npe01__Payment_Method__c, 'This method is used to assert that the payment method of the gateway is the same as the');
 
         List<OpportunityContactRole> ocrs = getOppContactRoles(new Set<Id>{ opps[0].Id });
         System.assertEquals(1, ocrs.size(), 'One OCR should be created: ' + ocrs);
@@ -1112,12 +1112,12 @@ private with sharing class RD2_OpportunityService_TEST {
         System.assertEquals(1, opps.size(), 'One Installment Opp should be created on RD insert: ' + opps);
 
         System.assertEquals(getExpectedOppName(rd, CLOSE_DATE), opps[0].Name, 'Opportunity Name should match');
-        System.assertEquals(getContact().Id, opps[0].npe01__Contact_Id_for_Role__c);
-        System.assertEquals(rd.npe03__Amount__c, opps[0].Amount);
-        System.assertEquals(rd.npe03__Contact__c, opps[0].Primary_Contact__c);
-        System.assertEquals(CLOSE_DATE, opps[0].CloseDate);
-        System.assertEquals(rd.npe03__Recurring_Donation_Campaign__c, opps[0].CampaignId);
-        System.assertEquals(STAGE_NAME_PLEDGED, opps[0].StageName);
+        System.assertEquals(getContact().Id, opps[0].npe01__Contact_Id_for_Role__c, 'This function asserts that the Contact is the same as the one in the Role.');
+        System.assertEquals(rd.npe03__Amount__c, opps[0].Amount, 'Test for equality of NPE03 and NPE03.');
+        System.assertEquals(rd.npe03__Contact__c, opps[0].Primary_Contact__c, 'This is a test function to assert that the primary contact is the same as the primary contact');
+        System.assertEquals(CLOSE_DATE, opps[0].CloseDate, 'Assert that the close date of the first open opps is equal to the close date of');
+        System.assertEquals(rd.npe03__Recurring_Donation_Campaign__c, opps[0].CampaignId, 'Recurring Donation Campaigns are always in the same campaigns.');
+        System.assertEquals(STAGE_NAME_PLEDGED, opps[0].StageName, 'Checks that the current stage is the same as the first stage in the pipeline.');
         System.assert(paymentGateway.getRecords(opps).isEmpty(), 'No Payment Records should exist');
     }
 

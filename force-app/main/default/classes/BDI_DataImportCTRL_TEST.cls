@@ -56,45 +56,45 @@ private with sharing class BDI_DataImportCTRL_TEST {
         // instantiate the controller
         BDI_DataImport_CTRL ctrl = new BDI_DataImport_CTRL();
         ctrl.preload();
-        System.assertEquals(false, ctrl.isBatchJobCompleted);
-        System.assertEquals(2, ctrl.crecToProcess);
-        System.assertEquals(null, ctrl.crecProcessed);
-        System.assertEquals(null, ctrl.crecImported);
-        System.assertEquals(null, ctrl.crecFailed);
+        System.assertEquals(false, ctrl.isBatchJobCompleted, 'Tests if batch job is completed.');
+        System.assertEquals(2, ctrl.crecToProcess, 'Test for equality of the current crecToProcess value.');
+        System.assertEquals(null, ctrl.crecProcessed, 'Test if the crec processed is null.');
+        System.assertEquals(null, ctrl.crecImported, 'Test if the crecImported property is null.');
+        System.assertEquals(null, ctrl.crecFailed, 'This test asserts that the ctrl. crecFailed method is called.');
 
         ctrl.importData();
         Test.stopTest();
-        System.assertEquals(true, ctrl.isBatchJobCompleted);
-        System.assertEquals(100, ctrl.percentComplete);
-        System.assertEquals(null, ctrl.strTimeSpent);
-        System.assertNotEquals(null, ctrl.aaj);
-        System.assertEquals(2, ctrl.crecProcessed);
-        System.assertEquals(2, ctrl.crecImported);
-        System.assertEquals(0, ctrl.crecFailed);
-        System.assertEquals(0, ctrl.crecToProcess);
-        System.assertNotEquals(null, ctrl.close());
+        System.assertEquals(true, ctrl.isBatchJobCompleted, 'Tests if batch job is completed.');
+        System.assertEquals(100, ctrl.percentComplete, 'Checks that the percentage complete is equal to 100.');
+        System.assertEquals(null, ctrl.strTimeSpent, 'Test for equality of the string time spent.');
+        System.assertNotEquals(null, ctrl.aaj, 'Test if the Aaj is not null.');
+        System.assertEquals(2, ctrl.crecProcessed, 'Test if the crec processed is equal to 2.');
+        System.assertEquals(2, ctrl.crecImported, 'Test for equality of crec imported.');
+        System.assertEquals(0, ctrl.crecFailed, 'Checks that ctrl. crecFailed is false.');
+        System.assertEquals(0, ctrl.crecToProcess, 'Test if the current crec process is the same as the crec process.');
+        System.assertNotEquals(null, ctrl.close(), 'Asserts that the ctrl is not null.');
 
         // verify expected results
         Map<Id, Contact> contactById = new Map<Id, Contact>(getContacts());
-        System.assertEquals(4, contactById.size());
+        System.assertEquals(4, contactById.size(), 'Checks that the number of contacts is equal to 4.');
 
         List<Account> listAcc = getAccounts();
-        System.assertEquals(3, listAcc.size());
+        System.assertEquals(3, listAcc.size(), 'Checks that the size of the list is equal to 3.');
 
         List<Opportunity> listOpp = getOpps();
-        System.assertEquals(2, listOpp.size());
-        System.assertEquals(100, listOpp[0].Amount);
+        System.assertEquals(2, listOpp.size(), 'Assert that 2 opp lists are equal.');
+        System.assertEquals(100, listOpp[0].Amount, 'Test if the sum of the opps is equal to 100.');
 
         List<DataImport__c> listDI = getDIs();
-        System.assertEquals(2, listDI.size());
+        System.assertEquals(2, listDI.size(), 'Test that the listDI size is equal to 2.');
         for (DataImport__c di : listDI) {
-            System.assert(contactById.containsKey(di.Contact1Imported__c));
-            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name);
-            System.assert(contactById.containsKey(di.Contact2Imported__c));
-            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name);
-            System.assertNotEquals(null, di.HouseholdAccountImported__c);
-            System.assertEquals(label.bdiCreated, di.Contact1ImportStatus__c);
-            System.assertEquals(label.bdiCreated, di.Contact2ImportStatus__c);
+            System.assert(contactById.containsKey(di.Contact1Imported__c), 'This is a no - op if the contact is imported.');
+            System.assertEquals(di.Contact1_Firstname__c + ' ' + di.Contact1_Lastname__c, contactById.get(di.Contact1Imported__c).Name, 'This is a hack to avoid the import of the Contact1. Name property.');
+            System.assert(contactById.containsKey(di.Contact2Imported__c), 'Checks that Contact2Imported__c is imported.');
+            System.assertEquals(di.Contact2_Firstname__c + ' ' + di.Contact2_Lastname__c, contactById.get(di.Contact2Imported__c).Name, 'This is a hack to avoid the import of the same name twice.');
+            System.assertNotEquals(null, di.HouseholdAccountImported__c, 'This method is called from the test code to assert that the HouseholdAccountImported class');
+            System.assertEquals(label.bdiCreated, di.Contact1ImportStatus__c, 'Checks that the Contact1ImportStatus is the same as the Contact1ImportStatus.');
+            System.assertEquals(label.bdiCreated, di.Contact2ImportStatus__c, 'Assert that Contact2ImportStatus is the same as Contact2ImportStatus.');
         }
     }
 
@@ -117,47 +117,47 @@ private with sharing class BDI_DataImportCTRL_TEST {
         BDI_DataImport_CTRL ctrl = new BDI_DataImport_CTRL();
         ctrl.preload();
 
-        System.assertEquals(false, ctrl.isBatchJobCompleted);
-        System.assertEquals(2, ctrl.crecToProcess);
-        System.assertEquals(null, ctrl.crecProcessed);
-        System.assertEquals(null, ctrl.crecImported);
-        System.assertEquals(null, ctrl.crecFailed);
+        System.assertEquals(false, ctrl.isBatchJobCompleted, 'Tests if batch job is completed.');
+        System.assertEquals(2, ctrl.crecToProcess, 'Test for equality of the current crecToProcess value.');
+        System.assertEquals(null, ctrl.crecProcessed, 'Test if the crec processed is null.');
+        System.assertEquals(null, ctrl.crecImported, 'Test if the crecImported property is null.');
+        System.assertEquals(null, ctrl.crecFailed, 'This test asserts that the ctrl. crecFailed method is called.');
 
         ctrl.startDryRun();
         Test.stopTest();
 
-        System.assertEquals(true, ctrl.isBatchJobCompleted);
-        System.assertEquals(100, ctrl.percentComplete);
-        System.assertEquals(null, ctrl.strTimeSpent);
-        System.assertNotEquals(null, ctrl.aaj);
-        System.assertEquals(2, ctrl.crecProcessed);
-        System.assertEquals(2, ctrl.crecImported);
-        System.assertEquals(0, ctrl.crecFailed);
-        System.assertEquals(2, ctrl.crecToProcess);  // since the 2 records still aren't imported.
-        System.assertNotEquals(null, ctrl.close());
+        System.assertEquals(true, ctrl.isBatchJobCompleted, 'Tests if batch job is completed.');
+        System.assertEquals(100, ctrl.percentComplete, 'Checks that the percentage complete is equal to 100.');
+        System.assertEquals(null, ctrl.strTimeSpent, 'Test for equality of the string time spent.');
+        System.assertNotEquals(null, ctrl.aaj, 'Test if the Aaj is not null.');
+        System.assertEquals(2, ctrl.crecProcessed, 'Test if the crec processed is equal to 2.');
+        System.assertEquals(2, ctrl.crecImported, 'Test for equality of crec imported.');
+        System.assertEquals(0, ctrl.crecFailed, 'Checks that ctrl. crecFailed is false.');
+        System.assertEquals(2, ctrl.crecToProcess, 'Test for equality of the current crecToProcess value.');  // since the 2 records still aren't imported.
+        System.assertNotEquals(null, ctrl.close(), 'Asserts that the ctrl is not null.');
 
         // verify expected results
         list<Contact> listCon = getContacts();
-        System.assertEquals(0, listCon.size());
+        System.assertEquals(0, listCon.size(), 'Assert that the list is empty.');
 
         list<Account> listAcc = getAccounts();
-        System.assertEquals(0, listAcc.size());
+        System.assertEquals(0, listAcc.size(), 'Assert that the list is empty.');
 
         list<Opportunity> listOpp = getOpps();
-        System.assertEquals(0, listOpp.size());
+        System.assertEquals(0, listOpp.size(), 'Assert that all operations in the list are equal.');
 
         List<DataImport__c> listDI = getDIs();
-        System.assertEquals(2, listDI.size());
-        System.assertEquals(null, listDI[0].Contact1Imported__c);
-        System.assertEquals(null, listDI[0].Contact2Imported__c);
-        System.assertEquals(null, listDI[1].Contact1Imported__c);
-        System.assertEquals(null, listDI[1].Contact2Imported__c);
-        System.assertEquals(null, listDI[0].HouseholdAccountImported__c);
-        System.assertEquals(null, listDI[1].HouseholdAccountImported__c);
-        System.assertEquals(label.bdiDryRunNoMatch, listDI[0].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiDryRunNoMatch, listDI[0].Contact2ImportStatus__c);
-        System.assertEquals(label.bdiDryRunNoMatch, listDI[1].Contact1ImportStatus__c);
-        System.assertEquals(label.bdiDryRunNoMatch, listDI[1].Contact2ImportStatus__c);
+        System.assertEquals(2, listDI.size(), 'Test that the listDI size is equal to 2.');
+        System.assertEquals(null, listDI[0].Contact1Imported__c, 'Assert that Contact1Imported__c is the same as Contact2Imported__c.');
+        System.assertEquals(null, listDI[0].Contact2Imported__c, 'This function is called when the listDI is empty.');
+        System.assertEquals(null, listDI[1].Contact1Imported__c, 'This method is called when the listDI is empty.');
+        System.assertEquals(null, listDI[1].Contact2Imported__c, 'This function is called when the listDI is empty.');
+        System.assertEquals(null, listDI[0].HouseholdAccountImported__c, 'This method is called when the module is imported from the Household account.');
+        System.assertEquals(null, listDI[1].HouseholdAccountImported__c, 'This method is called when the module is imported from the Household account.');
+        System.assertEquals(label.bdiDryRunNoMatch, listDI[0].Contact1ImportStatus__c, 'Check whether the bdiDryRunNoMatch is the same as the label.');
+        System.assertEquals(label.bdiDryRunNoMatch, listDI[0].Contact2ImportStatus__c, 'Check whether the bdiDryRunNoMatch is the same as the label.');
+        System.assertEquals(label.bdiDryRunNoMatch, listDI[1].Contact1ImportStatus__c, 'Check whether the bdiDryRunNoMatch is the same as the label.');
+        System.assertEquals(label.bdiDryRunNoMatch, listDI[1].Contact2ImportStatus__c, 'Check whether the bdiDryRunNoMatch is the same as the label.');
     }
 
     /*********************************************************************************************************
@@ -249,10 +249,10 @@ private with sharing class BDI_DataImportCTRL_TEST {
         Test.startTest();
         // Verify that the data import is loaded from parameters properly and doesn't contain
         // the excluded DI
-        System.assertNotEquals(null, ctrl.dataImportIds);
-        System.assertEquals(true, ctrl.dataImportIds.contains(testDataImportA.Id));
-        System.assertEquals(false, ctrl.dataImportIds.contains(testDataImportB.Id));
-        System.assertEquals(true, ctrl.dataImportIds.contains(testDataImportC.Id));
+        System.assertNotEquals(null, ctrl.dataImportIds, 'Checks that the dataImportIds are not null.');
+        System.assertEquals(true, ctrl.dataImportIds.contains(testDataImportA.Id), 'Test if the data imports are in the list of known data imports.');
+        System.assertEquals(false, ctrl.dataImportIds.contains(testDataImportB.Id), 'This method checks if the dataImportB is in the list of data imports.');
+        System.assertEquals(true, ctrl.dataImportIds.contains(testDataImportC.Id), 'This function checks if the dataImportC has been registered.');
 
         // Run import data to validate that it is correctly created.
         ctrl.startDryRun();
@@ -298,31 +298,31 @@ private with sharing class BDI_DataImportCTRL_TEST {
 
         // Data Import record A should have had dry run processing completed and the contact
         // should have matched
-        System.assertEquals(null,testDIResultA.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiDryRunValidated,testDIResultA.Status__c);
-        System.assertNotEquals(null,testDIResultA.Contact1Imported__c);
-        System.assertEquals(System.label.bdiDryRunMatched,testDIResultA.Contact1ImportStatus__c);
-        System.assertEquals(null,testDIResultA.DonationImported__c);
-        System.assertEquals(null,testDIResultA.DonationImportStatus__c);
+        System.assertEquals(null,testDIResultA.FailureInformation__c, 'Test DI Result A.');
+        System.assertEquals(BDI_DataImport_API.bdiDryRunValidated,testDIResultA.Status__c, 'Test if the BDI_DataImport_API. bdiDryRunValidated is the same');
+        System.assertNotEquals(null,testDIResultA.Contact1Imported__c, 'Test DI result A.');
+        System.assertEquals(System.label.bdiDryRunMatched,testDIResultA.Contact1ImportStatus__c, 'Test DI result A.');
+        System.assertEquals(null,testDIResultA.DonationImported__c, 'Test DI result A. DonationImported is a no - op.');
+        System.assertEquals(null,testDIResultA.DonationImportStatus__c, 'Test DI result A. DonationImportStatus__c');
 
 
         // Data Import record B should not have been processed since it wasn't passed into the controller
-        System.assertEquals(null,testDIResultB.FailureInformation__c);
-        System.assertEquals(null,testDIResultB.Status__c);
-        System.assertEquals(null,testDIResultB.Contact1Imported__c);
-        System.assertEquals(null,testDIResultB.DonationImported__c);
-        System.assertEquals(null,testDIResultB.HouseholdAccountImported__c);
-        System.assertEquals(null,testDIResultB.HomeAddressImported__c);
-        System.assertEquals(null,testDIResultB.PaymentImported__c);
+        System.assertEquals(null,testDIResultB.FailureInformation__c, 'Test DI Tests for equality.');
+        System.assertEquals(null,testDIResultB.Status__c, 'Test DI result b. Status__c.');
+        System.assertEquals(null,testDIResultB.Contact1Imported__c, 'This test is only for testing purposes.');
+        System.assertEquals(null,testDIResultB.DonationImported__c, 'Test DI result b. DonationImported__c.');
+        System.assertEquals(null,testDIResultB.HouseholdAccountImported__c, 'Test DI result for HouseholdAccountImported.');
+        System.assertEquals(null,testDIResultB.HomeAddressImported__c, 'Test for the presence of null and the home address imported.');
+        System.assertEquals(null,testDIResultB.PaymentImported__c, 'Test DI result b. PaymentImported__c');
 
 
         // Data Import record C should have had dry run processing completed but should not have matched
-        System.assertEquals(null,testDIResultC.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiDryRunValidated,testDIResultC.Status__c);
-        System.assertEquals(null,testDIResultC.Contact1Imported__c);
-        System.assertEquals(System.label.bdiDryRunNoMatch,testDIResultC.Contact1ImportStatus__c);
-        System.assertEquals(null,testDIResultC.DonationImported__c);
-        System.assertEquals(null,testDIResultC.DonationImportStatus__c);
+        System.assertEquals(null,testDIResultC.FailureInformation__c, 'Test DI result C failure information.');
+        System.assertEquals(BDI_DataImport_API.bdiDryRunValidated,testDIResultC.Status__c, 'Test if BDI_DataImport_API. bdiDryRunValidated is the same as');
+        System.assertEquals(null,testDIResultC.Contact1Imported__c, 'Test DI Test DI Test DI Contact1Imported c.');
+        System.assertEquals(System.label.bdiDryRunNoMatch,testDIResultC.Contact1ImportStatus__c, 'Test DI Test DI Test DI Test DI Test DI Test DI Test DI DryRun No Match');
+        System.assertEquals(null,testDIResultC.DonationImported__c, 'Test DI result C. DonationImported is not a real object.');
+        System.assertEquals(null,testDIResultC.DonationImportStatus__c, 'Test DI result.');
     }
     
 
@@ -349,16 +349,16 @@ private with sharing class BDI_DataImportCTRL_TEST {
 
         ctrl.diSettings.Contact_Custom_Unique_ID__c = 'bad field';
         ctrl.importData();
-        System.assertEquals(false, ctrl.batchRunning);
+        System.assertEquals(false, ctrl.batchRunning, 'Test if batch running is false.');
 
         ctrl.diSettings.Account_Custom_Unique_ID__c = 'another bad field';
         ctrl.importData();
-        System.assertEquals(false, ctrl.batchRunning);
+        System.assertEquals(false, ctrl.batchRunning, 'Test if batch running is false.');
 
         ctrl.diSettings.Donation_Matching_Rule__c = BDI_DataImport_API.RequireExactMatch;
         ctrl.diSettings.Donation_Matching_Behavior__c = null;
         ctrl.importData();
-        System.assertEquals(false, ctrl.batchRunning);
+        System.assertEquals(false, ctrl.batchRunning, 'Test if batch running is false.');
 
         Test.stopTest();
     }
@@ -379,9 +379,9 @@ private with sharing class BDI_DataImportCTRL_TEST {
         BDI_DataImport_CTRL ctrl = new BDI_DataImport_CTRL();
 
         Test.startTest();
-        System.assertNotEquals(null, ctrl.diBatch);
-        System.assertEquals(diBatch.Id, ctrl.diBatch.Id);
-        System.assertEquals(diBatch.Name, ctrl.diBatch.Name);
+        System.assertNotEquals(null, ctrl.diBatch, 'Test if the batch is not null.');
+        System.assertEquals(diBatch.Id, ctrl.diBatch.Id, 'Test for equality of diBatch and ctrl. diBatch. Id');
+        System.assertEquals(diBatch.Name, ctrl.diBatch.Name, 'This method is used to assert that diBatch and ctrl. diBatch are equal.');
         Test.stopTest();
     }
 
@@ -462,9 +462,9 @@ private with sharing class BDI_DataImportCTRL_TEST {
 
         Test.startTest();
         // Verify that the data import is loaded from parameters properly
-        System.assertNotEquals(null, ctrl.dataImportIds);
+        System.assertNotEquals(null, ctrl.dataImportIds, 'Checks that the dataImportIds are not null.');
         List<Id> diIds = new List<Id>(ctrl.dataImportIds);
-        System.assertEquals(testDataImportA.Id, diIds[0]);
+        System.assertEquals(testDataImportA.Id, diIds[0], 'TestDataImportA. Equals');
 
         // Run import data to validate that it is correctly created.
         ctrl.importData();
@@ -508,36 +508,36 @@ private with sharing class BDI_DataImportCTRL_TEST {
         }
 
         // Data Import record A should have been processed successfully
-        System.assertEquals(null,testDIResultA.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultA.Status__c);
-        System.assertNotEquals(null,testDIResultA.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultA.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDIResultA.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultA.DonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultA.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDIResultA.HomeAddressImported__c);
-        System.assertNotEquals(null,testDIResultA.PaymentImported__c);
+        System.assertEquals(null,testDIResultA.FailureInformation__c, 'Test DI Result A.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultA.Status__c, 'Test if BDI_DataImport_API. bdiImported equals testDIResultA');
+        System.assertNotEquals(null,testDIResultA.Contact1Imported__c, 'Test DI result A.');
+        System.assertEquals(System.label.bdiCreated,testDIResultA.Contact1ImportStatus__c, 'Assert that the label of the Contact1ImportStatus is the same as the label of the');
+        System.assertNotEquals(null,testDIResultA.DonationImported__c, 'Test DI result A does not have a value.');
+        System.assertEquals(System.label.bdiCreated,testDIResultA.DonationImportStatus__c, 'Assert that the label of the BDI created is the same as the label of the B');
+        System.assertNotEquals(null,testDIResultA.HouseholdAccountImported__c, 'Test DI result A does not contain the HouseholdAccountImported constant.');
+        System.assertNotEquals(null,testDIResultA.HomeAddressImported__c, 'Test DI result A does not have the same home address as the imported home address.');
+        System.assertNotEquals(null,testDIResultA.PaymentImported__c, 'Test DI result A.');
 
 
         // Data Import record B should not have been processed since it wasn't passed into the controller
-        System.assertEquals(null,testDIResultB.FailureInformation__c);
-        System.assertEquals(null,testDIResultB.Status__c);
-        System.assertEquals(null,testDIResultB.Contact1Imported__c);
-        System.assertEquals(null,testDIResultB.DonationImported__c);
-        System.assertEquals(null,testDIResultB.HouseholdAccountImported__c);
-        System.assertEquals(null,testDIResultB.HomeAddressImported__c);
-        System.assertEquals(null,testDIResultB.PaymentImported__c);
+        System.assertEquals(null,testDIResultB.FailureInformation__c, 'Test DI Tests for equality.');
+        System.assertEquals(null,testDIResultB.Status__c, 'Test DI result b. Status__c.');
+        System.assertEquals(null,testDIResultB.Contact1Imported__c, 'This test is only for testing purposes.');
+        System.assertEquals(null,testDIResultB.DonationImported__c, 'Test DI result b. DonationImported__c.');
+        System.assertEquals(null,testDIResultB.HouseholdAccountImported__c, 'Test DI result for HouseholdAccountImported.');
+        System.assertEquals(null,testDIResultB.HomeAddressImported__c, 'Test for the presence of null and the home address imported.');
+        System.assertEquals(null,testDIResultB.PaymentImported__c, 'Test DI result b. PaymentImported__c');
 
         // Data Import record C should have been processed successfully
-        System.assertEquals(null,testDIResultC.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultC.Status__c);
-        System.assertNotEquals(null,testDIResultC.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultC.Contact1ImportStatus__c);
-        System.assertNotEquals(null,testDIResultC.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultC.DonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultC.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDIResultC.HomeAddressImported__c);
-        System.assertNotEquals(null,testDIResultC.PaymentImported__c);
+        System.assertEquals(null,testDIResultC.FailureInformation__c, 'Test DI result C failure information.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultC.Status__c, 'This test is done by checking that the BDI_DataImport_API. bdi');
+        System.assertNotEquals(null,testDIResultC.Contact1Imported__c, 'This method asserts that Contact1Imported__c is not null.');
+        System.assertEquals(System.label.bdiCreated,testDIResultC.Contact1ImportStatus__c, 'Assert that the label of the Contact1ImportStatus is the same as the label of the');
+        System.assertNotEquals(null,testDIResultC.DonationImported__c, 'Test DI result C does not have the same value as the donation imported class.');
+        System.assertEquals(System.label.bdiCreated,testDIResultC.DonationImportStatus__c, 'Assert that the label of the BDI created is the same as the label of the Don');
+        System.assertNotEquals(null,testDIResultC.HouseholdAccountImported__c, 'Test DI result for HouseholdAccountImported.');
+        System.assertNotEquals(null,testDIResultC.HomeAddressImported__c, 'This method asserts that the home address is imported.');
+        System.assertNotEquals(null,testDIResultC.PaymentImported__c, 'Test DI result for payment imported.');
     }
 
     /*********************************************************************************************************

@@ -447,7 +447,7 @@ private class UTIL_OrgTelemetry_SObject_BATCH_TEST {
         Test.stopTest();
 
         System.assertEquals(NUM_DATA_IMPORT_RECORDS, featureManagementMock.packageIntegerValuesByName.get(
-                UTIL_OrgTelemetry_SVC.TelemetryParameterName.Data_CountGERowsLast30DaysBatch.name()));
+                UTIL_OrgTelemetry_SVC.TelemetryParameterName.Data_CountGERowsLast30DaysBatch.name()), 'This method should be called once per test.');
     }
 
     /*

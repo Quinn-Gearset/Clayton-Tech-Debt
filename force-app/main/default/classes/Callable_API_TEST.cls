@@ -197,7 +197,7 @@ private with sharing class Callable_API_TEST {
 
         Test.stopTest();
 
-        System.assertEquals(true,  STG_Panel.stgService.stgRD.IsRecurringDonations2Enabled__c);
+        System.assertEquals(true,  STG_Panel.stgService.stgRD.IsRecurringDonations2Enabled__c, 'This test asserts that the STG_Panel. stgService. IsRecurringDon');
     }
 
     /**

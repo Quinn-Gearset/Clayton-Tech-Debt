@@ -46,7 +46,7 @@ private class GiftView_TEST {
         GiftView giftView = new GiftView(giftDTO);
 
         String donationAmountField = String.valueOf(DataImport__c.Donation_Amount__c);
-        System.assertEquals(10, giftView.fields.get(donationAmountField));
+        System.assertEquals(10, giftView.fields.get(donationAmountField), 'This method is used to assert that the value of the donationAmountField is equal to');
     }
 
     @isTest
@@ -65,6 +65,6 @@ private class GiftView_TEST {
         GiftDTO giftDTO = new GiftDTO(gift);
         GiftView giftView = new GiftView(giftDTO);
 
-        System.assertEquals(2, giftView.softCredits.all.size());
+        System.assertEquals(2, giftView.softCredits.all.size(), 'Assert that 2 soft credits are available.');
     }
 }

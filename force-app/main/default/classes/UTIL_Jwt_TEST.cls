@@ -53,16 +53,16 @@ private class UTIL_Jwt_TEST {
 
         for (String key: encodeMap.keySet()) {
             System.assertEquals( encodeMap.get(key),
-                    UTIL_Jwt.transcodeBase64ToBase64Url(key));
+                    UTIL_Jwt.transcodeBase64ToBase64Url(key), 'This method is called by the test code to assert that the key is in the encode map');
         }
 
-        System.assertEquals( null, UTIL_Jwt.transcodeBase64ToBase64Url(null));
-        System.assertEquals( '', UTIL_Jwt.transcodeBase64ToBase64Url(''));
+        System.assertEquals( null, UTIL_Jwt.transcodeBase64ToBase64Url(null), 'This function asserts that the transcode is null.');
+        System.assertEquals( '', UTIL_Jwt.transcodeBase64ToBase64Url(''), 'This test is used to test if the transcode is equal to the base64url of');
         try {
             UTIL_Jwt.transcodeBase64ToBase64Url('MQ');
             System.assert(false, System.Label.geUtilJWTTestInvalidString);
         } catch(Exception e) {
-            System.assertEquals(e.getMessage(), UTIL_Jwt.INVALID_BASE64_MESSAGE);
+            System.assertEquals(e.getMessage(), UTIL_Jwt.INVALID_BASE64_MESSAGE, 'Assert that the message is valid base64 encoded');
         }
 
     }
@@ -71,16 +71,16 @@ private class UTIL_Jwt_TEST {
 
         for (String key: decodeMap.keySet()) {
             System.assertEquals( decodeMap.get(key),
-                    UTIL_Jwt.transcodeBase64UrlToBase64(key));
+                    UTIL_Jwt.transcodeBase64UrlToBase64(key), 'This method is called when the key is not in the decodeMap.');
         }
 
-        System.assertEquals( null, UTIL_Jwt.transcodeBase64UrlToBase64(null));
-        System.assertEquals( '', UTIL_Jwt.transcodeBase64UrlToBase64(''));
+        System.assertEquals( null, UTIL_Jwt.transcodeBase64UrlToBase64(null), 'This function asserts that the transcode is null.');
+        System.assertEquals( '', UTIL_Jwt.transcodeBase64UrlToBase64(''), 'This test is used to test if the transcode is equal to the base64 encoded base');
         try {
             UTIL_Jwt.transcodeBase64UrlToBase64('MQ==');
             System.assert(false, System.Label.geUtilJWTTestInvalidString);
         } catch(Exception e) {
-            System.assertEquals(e.getMessage(), UTIL_Jwt.INVALID_BASE64URL_MESSAGE);
+            System.assertEquals(e.getMessage(), UTIL_Jwt.INVALID_BASE64URL_MESSAGE, 'Assert that the given exception is not a Base64URL error.');
         }
 
     }
@@ -89,14 +89,14 @@ private class UTIL_Jwt_TEST {
 
         for (String key: encodeMap.keySet()) {
             System.assertEquals( true,
-                    UTIL_Jwt.isBase64String(key));
+                    UTIL_Jwt.isBase64String(key), 'Checks that the key is a base64 encoded string.');
         }
 
         for (String key: decodeMap.keySet()) {
             // this key has valid format for both base64 and base64url
             if (key!='MTIz') {
                 System.assertEquals( false,
-                        UTIL_Jwt.isBase64String(key));
+                        UTIL_Jwt.isBase64String(key), 'Checks that the key is a base64 encoded string.');
             }
         }
 
@@ -106,14 +106,14 @@ private class UTIL_Jwt_TEST {
 
         for (String key: decodeMap.keySet()) {
             System.assertEquals( true,
-                    UTIL_Jwt.isBase64UrlString(key));
+                    UTIL_Jwt.isBase64UrlString(key), 'Checks that the key is a base64 - encoded string.');
         }
 
         for (String key: encodeMap.keySet()) {
             // this key has valid format for both base64 and base64url
             if (key!='MTIz') {
                 System.assertEquals( false,
-                        UTIL_Jwt.isBase64UrlString(key));
+                        UTIL_Jwt.isBase64UrlString(key), 'Checks that the key is a base64 - encoded string.');
             }
         }
 
@@ -136,22 +136,22 @@ private class UTIL_Jwt_TEST {
         Test.startTest();
         // correct signatures
         System.assertEquals(hardcodedResult, UTIL_Jwt.getSignedJWTFromString(
-                jwtPayload, jwtKey));
+                jwtPayload, jwtKey), 'This function is used to assert that the result of the JWT verification is the same as the');
         System.assertEquals(hardcodedResult2, UTIL_Jwt.getSignedJWTFromString(
-                jwtPayload2, jwtKey2));
+                jwtPayload2, jwtKey2), 'This function is used to assert that the two result fields are the same.');
 
         try {
             UTIL_Jwt.getSignedJWTFromString(jwtPayload, '');
             System.assert(false, System.Label.geUtilJWTTestInvalidKey);
         } catch(Exception e1) {
-            System.assertEquals(e1.getMessage(), UTIL_Jwt.INVALID_KEY_MESSAGE);
+            System.assertEquals(e1.getMessage(), UTIL_Jwt.INVALID_KEY_MESSAGE, 'Assert that e1 is not a valid key message');
         }
 
         try {
             UTIL_Jwt.getSignedJWTFromString(null, jwtKey);
             System.assert(false, System.Label.geUtilJWTTestInvalidPayload);
         } catch(Exception e2) {
-            System.assertEquals(e2.getMessage(), UTIL_Jwt.INVALID_PAYLOAD_MESSAGE);
+            System.assertEquals(e2.getMessage(), UTIL_Jwt.INVALID_PAYLOAD_MESSAGE, 'asserts that e2 is not a payload message');
         }
         Test.stopTest();
 
@@ -165,20 +165,20 @@ private class UTIL_Jwt_TEST {
         Auth.JWT jwtInstance = new Auth.JWT();
         jwtInstance.setIss(issuer);
 
-        System.assertNotEquals(null, UTIL_Jwt.getSignedJWT(jwtInstance, key));
+        System.assertNotEquals(null, UTIL_Jwt.getSignedJWT(jwtInstance, key), 'This method asserts that the signed JWT is not null.');
 
         try {
             UTIL_Jwt.getSignedJWT(null, key);
             System.assert(false, System.Label.geUtilJWTTestInvalidPayload);
         } catch(Exception e) {
-            System.assertEquals(e.getMessage(), UTIL_Jwt.INVALID_PAYLOAD_MESSAGE);
+            System.assertEquals(e.getMessage(), UTIL_Jwt.INVALID_PAYLOAD_MESSAGE, 'Assert that the exception message is valid payload.');
         }
 
         try {
             UTIL_Jwt.getSignedJWT(jwtInstance, null);
             System.assert(false, System.Label.geUtilJWTTestInvalidKey);
         } catch(Exception e2) {
-            System.assertEquals(e2.getMessage(), UTIL_Jwt.INVALID_KEY_MESSAGE);
+            System.assertEquals(e2.getMessage(), UTIL_Jwt.INVALID_KEY_MESSAGE, 'asserts that e2 is not a valid key message');
         }
 
 

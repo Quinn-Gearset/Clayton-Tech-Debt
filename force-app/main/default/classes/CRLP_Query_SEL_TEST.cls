@@ -60,8 +60,8 @@ private class CRLP_Query_SEL_TEST {
                 npe01__OppPayment__c.SObjectType, Allocation__c.SObjectType, OpportunityContactRole.SObjectType});
         List<Opportunity> opps2 = Database.query(soql);
         System.AssertEquals(0, opps2.size(), 'There should be no results, but the query should work');
-        System.assert(soql.contains('WHERE'));
-        System.assert(soql.contains('ContactId IN :contactIds'));
+        System.assert(soql.contains('WHERE'), 'Assert that the query string contains a WHERE clause.');
+        System.assert(soql.contains('ContactId IN :contactIds'), 'Checks that the query contains all contacts.');
 
         soql = CRLP_Query_SEL.buildDetailObjectQueryForRollup(Allocation__c.SObjectType, new List<SObjectType>());
         List<Allocation__c> allocs = Database.query(soql);

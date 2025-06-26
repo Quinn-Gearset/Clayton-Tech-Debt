@@ -310,15 +310,15 @@ public with sharing class ADDR_Cicero_TEST {
         settings.Auth_Token__c = 'foo';  // we need a fake token or we won't validate
         settings.Address_Verification_Endpoint__c = 'bar';
         List<Address__c> listAddrVerified = cicero.verifyRecords(listAddr, settings);
-        system.assertEquals(1, listAddrVerified.size());
+        system.assertEquals(1, listAddrVerified.size(), 'Assert that the number of verified addresses is equal to 1.');
         //system.assertNotEquals(null, listAddrVerified[0].Pre_Verification_Address__c);
-        system.assertEquals(true, listAddrVerified[0].Verified__c);
-        system.assertEquals('1 Market St #300', listAddrVerified[0].MailingStreet__c);
-        system.assertEquals('San Francisco', listAddrVerified[0].MailingCity__c);
-        system.assertEquals('CA', listAddrVerified[0].MailingState__c);
-        system.assertEquals('94105-1234', listAddrVerified[0].MailingPostalCode__c);
-        system.assertEquals('17', listAddrVerified[0].State_Lower_District__c);
-        system.assertEquals('11', listAddrVerified[0].State_Upper_District__c);
+        system.assertEquals(true, listAddrVerified[0].Verified__c, 'assertEquals - Asserts that the listAddrVerified field is true.');
+        system.assertEquals('1 Market St #300', listAddrVerified[0].MailingStreet__c, 'Assert that the list address is equal to the one in the list.');
+        system.assertEquals('San Francisco', listAddrVerified[0].MailingCity__c, 'Assert that the first address is San Francisco.');
+        system.assertEquals('CA', listAddrVerified[0].MailingState__c, 'Assert that the CA address is the same as the CA address.');
+        system.assertEquals('94105-1234', listAddrVerified[0].MailingPostalCode__c, 'This function is used to assert that the list of verified addresses is the same as the one');
+        system.assertEquals('17', listAddrVerified[0].State_Lower_District__c, 'Checks that the state of the address verified is the same as the state of the address verified');
+        system.assertEquals('11', listAddrVerified[0].State_Upper_District__c, 'asserts that listAddrVerified is the same as state_Upper_District__c');
 
 	}
 
@@ -341,14 +341,14 @@ public with sharing class ADDR_Cicero_TEST {
         settings.Prevent_Address_Overwrite__c = true;
         List<Address__c> listAddrVerified = cicero.verifyRecords(listAddr, settings);
 
-        system.assertEquals(1, listAddrVerified.size());
-        system.assertEquals(true, listAddrVerified[0].Verified__c);
-        system.assertEquals('', listAddrVerified[0].MailingStreet__c);
-        system.assertEquals('san francisco', listAddrVerified[0].MailingCity__c);
-        system.assertEquals('ca', listAddrVerified[0].MailingState__c);
-        system.assertEquals('94105', listAddrVerified[0].MailingPostalCode__c);
-        system.assertEquals('17', listAddrVerified[0].State_Lower_District__c);
-        system.assertEquals('11', listAddrVerified[0].State_Upper_District__c);
+        system.assertEquals(1, listAddrVerified.size(), 'Assert that the number of verified addresses is equal to 1.');
+        system.assertEquals(true, listAddrVerified[0].Verified__c, 'assertEquals - Asserts that the listAddrVerified field is true.');
+        system.assertEquals('', listAddrVerified[0].MailingStreet__c, 'Assert that the list address is empty.');
+        system.assertEquals('san francisco', listAddrVerified[0].MailingCity__c, 'asserts that the first address is san francisco');
+        system.assertEquals('ca', listAddrVerified[0].MailingState__c, 'Assert that the CA address is the same as the CA address.');
+        system.assertEquals('94105', listAddrVerified[0].MailingPostalCode__c, 'This function is used to assert that the list of verified addresses is the same as the one');
+        system.assertEquals('17', listAddrVerified[0].State_Lower_District__c, 'Checks that the state of the address verified is the same as the state of the address verified');
+        system.assertEquals('11', listAddrVerified[0].State_Upper_District__c, 'asserts that listAddrVerified is the same as state_Upper_District__c');
 
     }
     /*********************************************************************************************************
@@ -370,14 +370,14 @@ public with sharing class ADDR_Cicero_TEST {
         settings.Prevent_Address_Overwrite__c = false;
         List<Address__c> listAddrVerified = cicero.verifyRecords(listAddr, settings);
 
-        system.assertEquals(1, listAddrVerified.size());
-        system.assertEquals(true, listAddrVerified[0].Verified__c);
-        system.assertEquals('1 Market St #300', listAddrVerified[0].MailingStreet__c);
-        system.assertEquals('San Francisco', listAddrVerified[0].MailingCity__c);
-        system.assertEquals('CA', listAddrVerified[0].MailingState__c);
-        system.assertEquals('94105', listAddrVerified[0].MailingPostalCode__c);
-        system.assertEquals('17', listAddrVerified[0].State_Lower_District__c);
-        system.assertEquals('11', listAddrVerified[0].State_Upper_District__c);
+        system.assertEquals(1, listAddrVerified.size(), 'Assert that the number of verified addresses is equal to 1.');
+        system.assertEquals(true, listAddrVerified[0].Verified__c, 'assertEquals - Asserts that the listAddrVerified field is true.');
+        system.assertEquals('1 Market St #300', listAddrVerified[0].MailingStreet__c, 'Assert that the list address is equal to the one in the list.');
+        system.assertEquals('San Francisco', listAddrVerified[0].MailingCity__c, 'Assert that the first address is San Francisco.');
+        system.assertEquals('CA', listAddrVerified[0].MailingState__c, 'Assert that the CA address is the same as the CA address.');
+        system.assertEquals('94105', listAddrVerified[0].MailingPostalCode__c, 'This function is used to assert that the list of verified addresses is the same as the one');
+        system.assertEquals('17', listAddrVerified[0].State_Lower_District__c, 'Checks that the state of the address verified is the same as the state of the address verified');
+        system.assertEquals('11', listAddrVerified[0].State_Upper_District__c, 'asserts that listAddrVerified is the same as state_Upper_District__c');
 
     }
 }

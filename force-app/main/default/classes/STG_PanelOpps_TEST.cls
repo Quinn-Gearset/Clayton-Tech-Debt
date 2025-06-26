@@ -44,8 +44,8 @@ public with sharing class STG_PanelOpps_TEST {
 
         List<SelectOption> opportunityStageOptions = poc.getOpportunityClosedWonStages();
 
-        System.assert(opportunityStageOptions.size() >= 1);
-        System.assertEquals('', opportunityStageOptions.get(0).getValue());
-        System.assertEquals('-- no selection --', opportunityStageOptions.get(0).getLabel());
+        System.assert(opportunityStageOptions.size() >= 1, 'Checks that there are no more than one opportunity stage options.');
+        System.assertEquals('', opportunityStageOptions.get(0).getValue(), 'Assert that the opportunityStage is empty.');
+        System.assertEquals('-- no selection --', opportunityStageOptions.get(0).getLabel(), 'Assert that the current opportunity stage is not selected.');
     }
 }

@@ -53,21 +53,21 @@ public with sharing class ElevateAuthorizedGift_TEST {
             batchItem = new ElevateBatchItem(createAuthorizedGiftResponse());
         Test.stopTest();
 
-        System.assertEquals(DUMMY_PAYMENT_TYPE, batchItem.paymentMethod());
-        System.assertEquals(DUMMY_ID, batchItem.id());
-        System.assertEquals(DUMMY_ID, batchItem.gatewayTransactionId());
-        System.assertEquals(DUMMY_ID, batchItem.originalTransactionId());
-        System.assertEquals(DUMMY_ID, batchItem.elevateBatchId());
-        System.assertEquals(System.today().addDays(1), batchItem.authExpiration());
-        System.assertEquals(DUMMY_STATUS, batchItem.status());
-        System.assertEquals(DUMMY_EXPIRATION_YEAR, batchItem.cardExpirationYear());
-        System.assertEquals(DUMMY_EXPIRATION_MONTH, batchItem.cardExpirationMonth());
-        System.assertEquals(DUMMY_ID, batchItem.gatewayId());
-        System.assertEquals(DUMMY_ID, batchItem.gatewayTransactionId());
-        System.assertEquals(DUMMY_CARD_LAST_4, batchItem.cardLast4());
-        System.assertEquals(DUMMY_DATE, batchItem.authorizedAt());
-        System.assertEquals(DUMMY_CARD_NETWORK, batchItem.cardNetwork());
-        System.assertEquals(null, batchItem.declineReason());
+        System.assertEquals(DUMMY_PAYMENT_TYPE, batchItem.paymentMethod(), 'The batchItem. paymentMethod property is only used for testing.');
+        System.assertEquals(DUMMY_ID, batchItem.id(), 'Assert that DUMMY_ID is the same as the batchItem s id.');
+        System.assertEquals(DUMMY_ID, batchItem.gatewayTransactionId(), 'This method asserts that DUMMY_ID is the same as the gateway transaction id.');
+        System.assertEquals(DUMMY_ID, batchItem.originalTransactionId(), 'Asserts that the original transaction id is the same as the DUMMY_ID.');
+        System.assertEquals(DUMMY_ID, batchItem.elevateBatchId(), 'Assert that the DUMMY_ID is the same as the batchItem s elevation batch');
+        System.assertEquals(System.today().addDays(1), batchItem.authExpiration(), 'Assert that the current time is equal to the batchItem s authExpiration.');
+        System.assertEquals(DUMMY_STATUS, batchItem.status(), 'Checks that the status of the batch item is DUMMY_STATUS.');
+        System.assertEquals(DUMMY_EXPIRATION_YEAR, batchItem.cardExpirationYear(), 'The DUMMY_EXPIRATION_YEAR is the same as the card expiration year.');
+        System.assertEquals(DUMMY_EXPIRATION_MONTH, batchItem.cardExpirationMonth(), 'The DUMMY_EXPIRATION_MONTH is the same as the card expiration month.');
+        System.assertEquals(DUMMY_ID, batchItem.gatewayId(), 'The DUMMY_ID is the same as the gatewayId.');
+        System.assertEquals(DUMMY_ID, batchItem.gatewayTransactionId(), 'This method asserts that DUMMY_ID is the same as the gateway transaction id.');
+        System.assertEquals(DUMMY_CARD_LAST_4, batchItem.cardLast4(), 'DUMMY_CARD_LAST_4 is the last 4 card of the batch item');
+        System.assertEquals(DUMMY_DATE, batchItem.authorizedAt(), 'Checks that the current date is the same as the DUMMY_DATE.');
+        System.assertEquals(DUMMY_CARD_NETWORK, batchItem.cardNetwork(), 'DUMMY_CARD_NETWORK is the same as the batchItem. cardNetwork.');
+        System.assertEquals(null, batchItem.declineReason(), 'Assert that the declineReason of the batchItem is not null.');
     }
 
     private static ElevateBatchItemCreateResponse createAuthorizedGiftResponse() {

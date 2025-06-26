@@ -65,25 +65,25 @@ private class UTIL_CurrencyConversion_TEST {
         mockcurrCache.effectiveRatesReturn = new List<Decimal>{ 1.25 };
         mockcurrCache.effectiveDatesReturn = new List<Date>{ DEFAULT_DATE };
 
-        System.AssertEquals( 1.25, UTIL_CurrencyCache.getEffectiveExchangeRate('CAD', Date.newInstance(2017,3,15)));
-        System.AssertEquals( 800, UTIL_CurrencyConversion.convertAmount(1000, Date.Today(), 'CAD', 'USD'));
+        System.AssertEquals( 1.25, UTIL_CurrencyCache.getEffectiveExchangeRate('CAD', Date.newInstance(2017,3,15)), 'This is a test for the effective exchange rate of UTIL_CurrencyCache.');
+        System.AssertEquals( 800, UTIL_CurrencyConversion.convertAmount(1000, Date.Today(), 'CAD', 'USD'), '- - - - - - - - - - - - - - - - - -');
 
         // TEST 2: Verify converting from one non-USD currency to another non-USD currency
         // ===============================================================================
 
         // The default rate for EUR -> USD will be 0.85
         mockcurrCache.effectiveRatesReturn = new List<Decimal>{ 0.85 };
-        System.AssertEquals( 0.85, UTIL_CurrencyCache.getEffectiveExchangeRate('EUR', Date.newInstance(2017,3,15)));
-        System.AssertEquals( 1176.47, UTIL_CurrencyConversion.convertAmount(1000, Date.Today(), 'EUR', 'USD'));
+        System.AssertEquals( 0.85, UTIL_CurrencyCache.getEffectiveExchangeRate('EUR', Date.newInstance(2017,3,15)), 'This test checks that the effective exchange rate is equal to 0. 85.');
+        System.AssertEquals( 1176.47, UTIL_CurrencyConversion.convertAmount(1000, Date.Today(), 'EUR', 'USD'), '- - - - - - - - - - - - - - - - - -');
 
         // Now figure out what the conversion rate is from Canadian Dollars to Euro's
-        System.AssertEquals( 1.470588, UTIL_CurrencyConversion.getExchangeRate(Date.Today(), 'CAD', 'EUR'));
+        System.AssertEquals( 1.470588, UTIL_CurrencyConversion.getExchangeRate(Date.Today(), 'CAD', 'EUR'), 'This test checks that the currency conversion rate is equal to 1. 470588.');
 
         // $1000 CAD converted to Euro's should be 1470.59 given the exchange rates above
-        System.AssertEquals( 680, UTIL_CurrencyConversion.convertAmount(1000, Date.Today(), 'CAD', 'EUR'));
+        System.AssertEquals( 680, UTIL_CurrencyConversion.convertAmount(1000, Date.Today(), 'CAD', 'EUR'), 'This test asserts that 680 is the amount of the current day.');
 
         // Verify that converting to/from the same currency always returns the same value
-        System.AssertEquals( 1000, UTIL_CurrencyConversion.convertAmount(1000, Date.Today().addDays(95), 'CAD', 'CAD'));
+        System.AssertEquals( 1000, UTIL_CurrencyConversion.convertAmount(1000, Date.Today().addDays(95), 'CAD', 'CAD'), '- - - - - - - - - - - - - - - - - -');
 
         // TEST 3: Test when the UTIL_CurrencyConversion.alwaysUseStandardCurrencyRate flag is set to true
         // ===============================================================================================
@@ -95,13 +95,13 @@ private class UTIL_CurrencyConversion_TEST {
         mockcurrCache.defaultRate = 1.50;
 
         // The exchange rate for today should be 1.25
-        System.AssertEquals( 1.25, UTIL_CurrencyConversion.getExchangeRate(null, 'XYZ', 'USD'));
+        System.AssertEquals( 1.25, UTIL_CurrencyConversion.getExchangeRate(null, 'XYZ', 'USD'), 'This test asserts that the currency conversion rate is equal to 1. 25.');
 
         // The exchange rate for 1/1/201- should be 1.75
-        System.AssertEquals( 1.75, UTIL_CurrencyConversion.getExchangeRate(Date.newInstance(2010,1,1), 'XYZ', 'USD'));
+        System.AssertEquals( 1.75, UTIL_CurrencyConversion.getExchangeRate(Date.newInstance(2010,1,1), 'XYZ', 'USD'), 'This test asserts that the currency conversion rate is equal to 1. 75.');
 
         // Convert from USD to XYZ. Should convert using the default rate of 1.50
-        System.AssertEquals( 1.50, UTIL_CurrencyConversion.convertFromCorporateUsingStandardRates('XYZ', 1));
+        System.AssertEquals( 1.50, UTIL_CurrencyConversion.convertFromCorporateUsingStandardRates('XYZ', 1), 'This test asserts that the currency is in the range 1. 50 to 1. 50.');
     }
 
     /**

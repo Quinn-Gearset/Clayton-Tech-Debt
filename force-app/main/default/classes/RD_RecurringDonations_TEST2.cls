@@ -67,7 +67,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         insert rd;
 
         List<Opportunity> originalOpps = RD_RecurringDonations_TEST.getOppsOrderByCloseDate(rd.Id);
-        System.assertEquals(1, originalOpps.size());
+        System.assertEquals(1, originalOpps.size(), 'Assert that the number of opps in the opps table is equal to the number of');
 
         Opportunity o = originalOpps[0];
         o.StageName = UTIL_UnitTestData_TEST.getClosedWonStage();
@@ -79,8 +79,8 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Test.stopTest();
 
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(0, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id));
-        System.assertEquals(TODAY, rd.npe03__Last_Payment_Date__c);
+        System.assertEquals(0, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id), 'This function asserts that the open opp count of the RecurringDonations object is the');
+        System.assertEquals(TODAY, rd.npe03__Last_Payment_Date__c, 'This file contains a description of how the last payment date is.');
     }
 
     @isTest
@@ -94,7 +94,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
 
         List<Opportunity> originalOpps = RD_RecurringDonations_TEST.getOppsOrderByCloseDate(rd.Id);
         Integer cOpp = originalOpps.size();
-        System.assert(cOpp == 52 || cOpp == 53);
+        System.assert(cOpp == 52 || cOpp == 53, 'asserts that cOpp == 52 or cOpp == 53');
 
         Test.startTest();
         rd.npe03__Open_Ended_Status__c = RD_Constants.OPEN_ENDED_STATUS_CLOSED;
@@ -102,7 +102,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Test.stopTest();
 
         //assert all previously open opps are marked closed lost
-        System.assertEquals(53, [select count() from Opportunity where isClosed = true and isWon = false and npe03__Recurring_Donation__c = :rd.id]);
+        System.assertEquals(53, [select count() from Opportunity where isClosed = true and isWon = false and npe03__Recurring_Donation__c = :rd.id], 'Test for equality of the number of open open and closed donation.');
 
     }
 
@@ -131,8 +131,8 @@ private with sharing class RD_RecurringDonations_TEST2 {
 
         rd = rdGateway.getRecord(rd.id);
 
-        System.assertEquals(1, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id));
-        System.assertEquals(TODAY, rd.npe03__Last_Payment_Date__c);
+        System.assertEquals(1, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id), 'This function asserts that 1 recurring donation has open OPPs.');
+        System.assertEquals(TODAY, rd.npe03__Last_Payment_Date__c, 'This file contains a description of how the last payment date is.');
     }
 
     /*******************************************************************************************************
@@ -169,7 +169,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         System.assertEquals(expectedInstallments, actualOpps.size(), 'The installment on Monthly RD should match expected Opp size');
         System.assertEquals(nextDonationDate, actualOpps[0].CloseDate, 'The first Close Date should be updated Next Donation Date');
 
-        System.assertEquals(expectedInstallments, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id));
+        System.assertEquals(expectedInstallments, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id), 'This test asserts that the number of open Opps in the Recurring Donations is the');
     }
 
     //test inserting a closed/won opportunity for an open recurring donation
@@ -201,7 +201,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Test.stopTest();
 
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(50, rd.npe03__Paid_Amount__c);
+        System.assertEquals(50, rd.npe03__Paid_Amount__c, 'This test asserts that the NPE03 value is equal to 50.');
     }
 
     //test closing an opportunity for an open recurring donation
@@ -251,7 +251,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         rd.npe03__Next_Payment_Date__c = TODAY;
         insert rd;
 
-        System.assertNotEquals(0, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id));
+        System.assertNotEquals(0, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id), 'This function asserts that the open opp count of the Recurring Donations is not 0');
         //reset the semaphore
         Test.startTest();
         rd.npe03__Open_Ended_Status__c = RD_Constants.OPEN_ENDED_STATUS_CLOSED;
@@ -259,7 +259,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Test.stopTest();
 
         //there should be no open donations
-        System.assertEquals(0, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id));
+        System.assertEquals(0, RD_RecurringDonations_TEST.getOpenOppCount(rd.Id), 'This function asserts that the open opp count of the RecurringDonations object is the');
     }
 
     @isTest
@@ -296,10 +296,10 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Test.stopTest();
 
         List<Opportunity> originalOpps = new List<Opportunity>([select id, Name,amount,accountid,CloseDate,Description from Opportunity where npe03__Recurring_Donation__r.id = :rd.id or npe03__Recurring_Donation__c = :r2.id]);
-        System.assertEquals(7, originalOpps.size());
-        System.assertEquals(50, originalOpps[0].Amount);
-        System.assertNotEquals(null, originalOpps[0].Description);
-        System.assertNotEquals(null, originalOpps[1].Description);
+        System.assertEquals(7, originalOpps.size(), 'Assert that 7 opps are the same.');
+        System.assertEquals(50, originalOpps[0].Amount, 'Assert that the original opps are equal to 50.');
+        System.assertNotEquals(null, originalOpps[0].Description, 'Assert that the original operation is not equal to the first operation.');
+        System.assertNotEquals(null, originalOpps[1].Description, 'Assert that the original operation is not equal to the one in the original list.');
     }
     @isTest
     private static void tooManyInstallments() {
@@ -317,7 +317,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         } catch (exception e) {}
 
         //insert should fail because of too many installments
-        System.assertEquals(null,rd.id);
+        System.assertEquals(null,rd.id, 'Assert that rd is the same as the current thread id.');
     }
     @isTest
     private static void updateOppsFromMultipleRDs() {
@@ -345,7 +345,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         insert r2;
 
         List<Opportunity> originalOpps = new List<Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where npe03__Recurring_Donation__r.id = :rd.id or npe03__Recurring_Donation__c = :r2.id]);
-        System.assert(originalOpps.size() > 1);
+        System.assert(originalOpps.size() > 1, 'Assert that there are no operations in the original opps.');
 
         Test.startTest();
         originalOpps[0].Stagename = UTIL_UnitTestData_TEST.getClosedWonStage();
@@ -353,7 +353,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         update originalOpps;
         Test.stopTest();
 
-        System.assert(originalOpps.size() > [select count() from Opportunity where isClosed = false and (npe03__Recurring_Donation__c = :rd.id or npe03__Recurring_Donation__c = :r2.id)]);
+        System.assert(originalOpps.size() > [select count() from Opportunity where isClosed = false and (npe03__Recurring_Donation__c = :rd.id or npe03__Recurring_Donation__c = :r2.id)], 'Check that there are no opportunity left in the original list.');
     }
 
     @isTest
@@ -390,8 +390,8 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Database.saveresult[] lsr = Database.insert(olist, false);
 
         ERR_Handler.Errors errors = ERR_Handler.getErrors(lsr, olist);
-        System.assertEquals(true, errors.errorsExist);
-        System.assertEquals(1, errors.errorRecords.size());
+        System.assertEquals(true, errors.errorsExist, 'Checks that all errors exist.');
+        System.assertEquals(1, errors.errorRecords.size(), 'Checks that the number of errors is equal to 1.');
     }
 
     @isTest
@@ -429,8 +429,8 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Database.saveresult[] lsr = Database.insert(olist, false);
 
         ERR_Handler.Errors errors = ERR_Handler.getErrors(lsr, olist);
-        System.assertEquals(true, errors.errorsExist);
-        System.assertEquals(1, errors.errorRecords.size());
+        System.assertEquals(true, errors.errorsExist, 'Checks that all errors exist.');
+        System.assertEquals(1, errors.errorRecords.size(), 'Checks that the number of errors is equal to 1.');
     }
 
     @isTest
@@ -470,8 +470,8 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Database.saveresult[] lsr = Database.insert(olist, false);
 
         ERR_Handler.Errors errors = ERR_Handler.getErrors(lsr, olist);
-        System.assertEquals(true, errors.errorsExist);
-        System.assertEquals(1, errors.errorRecords.size());
+        System.assertEquals(true, errors.errorsExist, 'Checks that all errors exist.');
+        System.assertEquals(1, errors.errorRecords.size(), 'Checks that the number of errors is equal to 1.');
     }
 
     //--------------------TEST METHOD from RD_RecurringDonations_BATCH -----------------------
@@ -632,7 +632,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         //check that opps have picked up the value of the RD field set through custom field mapping
         Opportunity[] installments1 = RD_RecurringDonations_TEST.getOppsOrderByCloseDate(rd.id);
         for (opportunity opp:installments1) {
-            System.assertEquals(rd.name, opp.description);
+            System.assertEquals(rd.name, opp.description, 'assertEquals - This is a test for the equality of the name and description of the resource');
         }
 
         Test.startTest();
@@ -641,12 +641,12 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Test.stopTest();
 
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(rd.name,'TestRD CFM Update');
+        System.assertEquals(rd.name,'TestRD CFM Update', 'Test RD CFM Update');
 
         //check that opps have picked up the upated value of the RD field set through custom field mapping
         Opportunity[] installments2 = RD_RecurringDonations_TEST.getOppsOrderByCloseDate(rd.id);
         for (opportunity opp:installments2) {
-            System.assertEquals(rd.name, opp.description);
+            System.assertEquals(rd.name, opp.description, 'assertEquals - This is a test for the equality of the name and description of the resource');
         }
     }
 
@@ -680,9 +680,9 @@ private with sharing class RD_RecurringDonations_TEST2 {
 
         //check that opps have picked up the value of the RD field set through custom field mapping
         Opportunity[] installments1 = RD_RecurringDonations_TEST.getOppsOrderByCloseDate(rd.id);
-        System.assertNotEquals(0, installments1.size());
+        System.assertNotEquals(0, installments1.size(), 'Checks that the number of installments is not equal to the number of installed packages.');
         for (opportunity opp:installments1) {
-            System.assertEquals(rd.name, opp.description);
+            System.assertEquals(rd.name, opp.description, 'assertEquals - This is a test for the equality of the name and description of the resource');
         }
 
         Test.startTest();
@@ -691,13 +691,13 @@ private with sharing class RD_RecurringDonations_TEST2 {
         Test.stopTest();
 
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(rd.name, 'TestRD CFM Update');
+        System.assertEquals(rd.name, 'TestRD CFM Update', 'Test RD name');
 
         //check that opps have picked up the upated value of the RD field set through custom field mapping
         Opportunity[] installments2 = RD_RecurringDonations_TEST.getOppsOrderByCloseDate(rd.id);
-        System.assertNotEquals(0, installments2.size());
+        System.assertNotEquals(0, installments2.size(), 'Checks that the size of the installments2 is not equal to the size of the install');
         for (opportunity opp:installments2) {
-            System.assertEquals(rd.name, opp.description);
+            System.assertEquals(rd.name, opp.description, 'assertEquals - This is a test for the equality of the name and description of the resource');
         }
     }
 
@@ -887,7 +887,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
             recurringDonation.npe03__Next_Payment_Date__c = nextDonationDate.addDays(-i);
             expectedDay = nextDonationDate.addDays(-i).day();
             actualDay = RD_RecurringDonations.adjustDayOfMonth(installmentDate, recurringDonation).day();
-            System.assertEquals(expectedDay, actualDay);
+            System.assertEquals(expectedDay, actualDay, 'Assert that two days are equal.');
         }
     }
 
@@ -907,7 +907,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
             .build();
 
         actualDate = RD_RecurringDonations.adjustDayOfMonth(installmentDate, recurringDonation);
-        System.assertEquals(expectedDate, actualDate);
+        System.assertEquals(expectedDate, actualDate, 'Assert that two dates are equal.');
     }
 
     @isTest
@@ -927,7 +927,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         for (Integer i = 0; i < 3; i++) {
             expectedDay = dateEstablished.day();
             actualDay = RD_RecurringDonations.adjustDayOfMonth(installmentDate.addDays(i), recurringDonation).day();
-            System.assertEquals(expectedDay, actualDay);
+            System.assertEquals(expectedDay, actualDay, 'Assert that two days are equal.');
         }
     }
 
@@ -949,7 +949,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         for (Integer i = 0; i < 3; i++) {
             expectedDate = installmentDate.addDays(i);
             actualDate = RD_RecurringDonations.adjustDayOfMonth(expectedDate, recurringDonation);
-            System.assertEquals(expectedDate, actualDate);
+            System.assertEquals(expectedDate, actualDate, 'Assert that two dates are equal.');
         }
     }
 
@@ -971,7 +971,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
 
         expectedDay = Date.daysInMonth(installmentDate.year(), installmentDate.Month());
         actualDay = RD_RecurringDonations.adjustDayOfMonth(installmentDate, recurringDonation).day();
-        System.assertEquals(expectedDay, actualDay);
+        System.assertEquals(expectedDay, actualDay, 'Assert that two days are equal.');
     }
 
     @isTest
@@ -992,11 +992,11 @@ private with sharing class RD_RecurringDonations_TEST2 {
 
         expectedDay = Integer.valueOf(recurringDonation.Day_Of_Month__c);
         actualDay = RD_RecurringDonations.adjustDayOfMonth(installmentDate, recurringDonation).day();
-        System.assertEquals(expectedDay, actualDay);
+        System.assertEquals(expectedDay, actualDay, 'Assert that two days are equal.');
 
         recurringDonation.npe03__Next_Payment_Date__c = null;
         actualDay = RD_RecurringDonations.adjustDayOfMonth(installmentDate, recurringDonation).day();
-        System.assertEquals(expectedDay, actualDay);
+        System.assertEquals(expectedDay, actualDay, 'Assert that two days are equal.');
     }
 
 
@@ -1209,7 +1209,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         //--------------------------------
         // Confirm that only the First Opportunity has updated the Recurring Donation's npe03__Paid_Amount__c
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(50, rd.npe03__Paid_Amount__c);
+        System.assertEquals(50, rd.npe03__Paid_Amount__c, 'This test asserts that the NPE03 value is equal to 50.');
 
         //--------------------------------
         // Update the Second Opportunity's Recurring Donation field
@@ -1220,7 +1220,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         //--------------------------------
         // Confirm that the Second Opportunity has updated the Recurring Donation's npe03__Paid_Amount__c
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(150, rd.npe03__Paid_Amount__c);
+        System.assertEquals(150, rd.npe03__Paid_Amount__c, 'Test for equality of the NPE03 Paid Amount c.');
     }
 
 
@@ -1272,10 +1272,10 @@ private with sharing class RD_RecurringDonations_TEST2 {
         //--------------------------------
         // Confirm the Opportunity has updated only the Recurring Donation's (rd) npe03__Paid_Amount__c
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(50, rd.npe03__Paid_Amount__c);
+        System.assertEquals(50, rd.npe03__Paid_Amount__c, 'This test asserts that the NPE03 value is equal to 50.');
 
         r2 = rdGateway.getRecord(r2.id);
-        System.assertEquals(null, r2.npe03__Paid_Amount__c);
+        System.assertEquals(null, r2.npe03__Paid_Amount__c, 'Test for equality of NPE03 - paid amount.');
 
         //--------------------------------
         // Update the Opportunity's Recurring Donation field
@@ -1286,10 +1286,10 @@ private with sharing class RD_RecurringDonations_TEST2 {
         //--------------------------------
         // Confirm the Opportunity has updated the npe03__Paid_Amount__c for both Recurring Donations (rd & r2)
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(null, rd.npe03__Paid_Amount__c);
+        System.assertEquals(null, rd.npe03__Paid_Amount__c, 'This function asserts that rd. npe03 == rd. npe03. Paid');
 
         r2 = rdGateway.getRecord(r2.id);
-        System.assertEquals(50, r2.npe03__Paid_Amount__c);
+        System.assertEquals(50, r2.npe03__Paid_Amount__c, 'Checks that the NPE03 value is equal to 50.');
     }
 
 
@@ -1334,7 +1334,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         //--------------------------------
         // Confirm the Opportunity has updated the Recurring Donation's (rd) npe03__Paid_Amount__c
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(50, rd.npe03__Paid_Amount__c);
+        System.assertEquals(50, rd.npe03__Paid_Amount__c, 'This test asserts that the NPE03 value is equal to 50.');
 
         //--------------------------------
         // Remove the Opportunity's Recurring Donation value by setting the field to null
@@ -1345,7 +1345,7 @@ private with sharing class RD_RecurringDonations_TEST2 {
         //--------------------------------
         // Confirm the Opportunity has updated the npe03__Paid_Amount__c for both Recurring Donation (rd)
         rd = rdGateway.getRecord(rd.id);
-        System.assertEquals(null, rd.npe03__Paid_Amount__c);
+        System.assertEquals(null, rd.npe03__Paid_Amount__c, 'This function asserts that rd. npe03 == rd. npe03. Paid');
     }
 
     /**

@@ -105,13 +105,13 @@ private class BDI_MigrationMappingUtility_TEST {
 
         for (Metadata.CustomMetadataValue cmv : util.queuedMetadataTypesForDeploy[0].values) {
             if (cmv.field == 'Target_Field_API_Name__c') {
-                System.assertEquals('Custom_Field__c', cmv.value);
+                System.assertEquals('Custom_Field__c', cmv.value, 'Assert that the value of the Custom_Field is equal to the value of the Custom_');
             }
         }
 
         for (Metadata.CustomMetadataValue cmv : util.queuedMetadataTypesForDeploy[1].values) {
             if (cmv.field == 'Target_Field_API_Name__c') {
-                System.assertEquals('BillingCity', cmv.value);
+                System.assertEquals('BillingCity', cmv.value, 'Checks that the billing city is the same as the current billing city.');
             }
         }
     }
@@ -229,7 +229,7 @@ private class BDI_MigrationMappingUtility_TEST {
             (Map<String,String>)JSON.deserialize(dataImportSettings.CMT_API_Status__c, Map<String,String>.class);
 
         System.assertNotEquals(null, result.get('Status'), result);
-        System.assertEquals(result.get('Field Mapping Method'), 'Data Import Field Mapping');
+        System.assertEquals(result.get('Field Mapping Method'), 'Data Import Field Mapping', 'This test asserts that the result of a method call equals to the data import field mapping.');
     }
 
     /*******************************************************************************************************
@@ -247,7 +247,7 @@ private class BDI_MigrationMappingUtility_TEST {
         Map<String,String> result =
             (Map<String,String>)JSON.deserialize(dataImportSettings.CMT_API_Status__c, Map<String,String>.class);
 
-        System.assertEquals(result, new Map<String, String>());
+        System.assertEquals(result, new Map<String, String>(), 'Assert that the result map is equal to the result map.');
     }
 
     /*******************************************************************************************************

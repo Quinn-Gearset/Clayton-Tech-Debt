@@ -45,7 +45,7 @@ public with sharing class BDI_DataImportBatch_TEST {
     *     one batch is scheduled
     */
     static testMethod void scheduleSingleBatch() {
-        system.assertEquals(1, scheduleNBatches(1));
+        system.assertEquals(1, scheduleNBatches(1), 'Schedule N batches to be executed at once.');
     }
 
     /*********************************************************************************************************
@@ -55,7 +55,7 @@ public with sharing class BDI_DataImportBatch_TEST {
     *     multiple batches are scheduled
     */
     static testMethod void scheduleMultipleBatches() {
-        system.assertEquals(3, scheduleNBatches(3));
+        system.assertEquals(3, scheduleNBatches(3), 'Schedule N batches at once.');
     }
 
     /*********************************************************************************************************
@@ -69,7 +69,7 @@ public with sharing class BDI_DataImportBatch_TEST {
         integer maxAsync = limits.getLimitQueueableJobs() - limits.getQueueableJobs();
         integer nBatches = math.min(maxAsync, maxSOQL);
 
-        system.assertEquals(nBatches, scheduleNBatches(nBatches));
+        system.assertEquals(nBatches, scheduleNBatches(nBatches), 'Assert that the number of batches is the same as the number of batches in the scheduler.');
     }
 
     /*********************************************************************************************************
@@ -83,7 +83,7 @@ public with sharing class BDI_DataImportBatch_TEST {
         integer maxAsync = limits.getLimitQueueableJobs() - limits.getQueueableJobs();
         integer nBatches = math.min(maxAsync, maxSOQL);
 
-        system.assertEquals(nBatches, scheduleNBatches(nBatches + 1));
+        system.assertEquals(nBatches, scheduleNBatches(nBatches + 1), 'Schedule nBatches + 1 batches.');
     }
 
     /*********************************************************************************************************
@@ -190,7 +190,7 @@ public with sharing class BDI_DataImportBatch_TEST {
         List<DataImportBatch__c> queriedBatches = [SELECT Id, Batch_Status__c from DataImportBatch__c];
 
         // assert that our data import batches are present and in the correct status
-        System.assertEquals(3, queriedBatches.size());
+        System.assertEquals(3, queriedBatches.size(), 'Test that the number of batches is equal to 3.');
         for(DataImportBatch__c batch : queriedBatches) {
             System.assertEquals(BDI_DataImport_API.BATCH_STATUS_OPEN, batch.Batch_Status__c, 'Expected batch to be open.');
         }

@@ -72,8 +72,8 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testSettingsManager() {
         STG_SettingsManager_CTRL ctrl = new STG_SettingsManager_CTRL();
-        system.assertEquals('idPanelHome', STG_SettingsManager_CTRL.idPanelCurrent);
-        system.assertEquals(null, ctrl.setPanelCurrent());
+        system.assertEquals('idPanelHome', STG_SettingsManager_CTRL.idPanelCurrent, 'Checks that the current ID of the Panel is the same as the idPanelHome.');
+        system.assertEquals(null, ctrl.setPanelCurrent(), 'Assert that the panel is currently active.');
     }
 
     /*********************************************************************************************************
@@ -94,9 +94,9 @@ private with sharing class STG_SettingsManager_TEST {
             WHERE CronJobDetail.Name IN :UTIL_MasterSchedulableHelper.defaultScheduledJobs.keySet() AND
                 CronJobDetail.JobType = '7'
         ];
-        System.assertEquals(UTIL_MasterSchedulableHelper.defaultScheduledJobs.keySet().size(), masterJobs.size());
+        System.assertEquals(UTIL_MasterSchedulableHelper.defaultScheduledJobs.keySet().size(), masterJobs.size(), 'Checks that the number of default scheduled jobs is the same as the number of master jobs.');
 
-        System.assertNotEquals(null, STG_Panel.stgService);
+        System.assertNotEquals(null, STG_Panel.stgService, 'This method asserts that the STG_Panel. stgService is not null.');
     }
 
 
@@ -135,7 +135,7 @@ private with sharing class STG_SettingsManager_TEST {
         STG_Panel.stgService.stgAllo.Default__c = 'a9302003536469';
         upsert STG_Panel.stgService.stgAllo;
 
-        System.assertEquals(0, [SELECT count() FROM Error__c]);
+        System.assertEquals(0, [SELECT count() FROM Error__c], 'Test for equality of all errors.');
 
         Test.startTest();
             ctrl.onNpspSettingsLoad();
@@ -143,8 +143,8 @@ private with sharing class STG_SettingsManager_TEST {
 
         System.assertEquals(false, STG_Panel.stgService.stgAllo.Default_Allocations_Enabled__c, 'Settings should be unchecked');
         System.assertEquals(null, STG_Panel.stgService.stgAllo.Default__c, 'Default GAU value should not be filled in.');
-        System.assertEquals(1, [SELECT count() FROM Error__c]);
-        System.assertEquals(System.Label.stgErrorMissingDefaultGauRecordWithPmtAllocEnabled, ctrl.errorMsg);
+        System.assertEquals(1, [SELECT count() FROM Error__c], 'Test for equality of the number of errors in the database.');
+        System.assertEquals(System.Label.stgErrorMissingDefaultGauRecordWithPmtAllocEnabled, ctrl.errorMsg, 'assertEquals - This is a test for the case where the default GA record is missing');
     }
 
     /*********************************************************************************************************
@@ -162,7 +162,7 @@ private with sharing class STG_SettingsManager_TEST {
         STG_Panel.stgService.stgAllo.Default__c = 'a9302003536469';
         upsert STG_Panel.stgService.stgAllo;
 
-        System.assertEquals(0, [SELECT count() FROM Error__c]);
+        System.assertEquals(0, [SELECT count() FROM Error__c], 'Test for equality of all errors.');
 
         Test.startTest();
             ctrl.onNpspSettingsLoad();
@@ -170,8 +170,8 @@ private with sharing class STG_SettingsManager_TEST {
 
         System.assertEquals(false, STG_Panel.stgService.stgAllo.Default_Allocations_Enabled__c, 'Settings should be unchecked');
         System.assertEquals(null, STG_Panel.stgService.stgAllo.Default__c, 'Default GAU value should not be filled in.');
-        System.assertEquals(1, [SELECT count() FROM Error__c]);
-        System.assertEquals(System.Label.stgErrorMissingDefaultGauRecord, ctrl.errorMsg);
+        System.assertEquals(1, [SELECT count() FROM Error__c], 'Test for equality of the number of errors in the database.');
+        System.assertEquals(System.Label.stgErrorMissingDefaultGauRecord, ctrl.errorMsg, 'assertEquals - This is a test for the case where the default GARecord is missing');
     }
 
     /*********************************************************************************************************
@@ -195,8 +195,8 @@ private with sharing class STG_SettingsManager_TEST {
 
         System.assertEquals(true, STG_Panel.stgService.stgAllo.Default_Allocations_Enabled__c, 'Settings should be checked');
         System.assertEquals(gau.id, STG_Panel.stgService.stgAllo.Default__c, 'Default GAU value should be filled in.');
-        System.assertEquals(0, [SELECT count() FROM Error__c]);
-        System.assertEquals(null, ctrl.errorMsg);
+        System.assertEquals(0, [SELECT count() FROM Error__c], 'Test for equality of all errors.');
+        System.assertEquals(null, ctrl.errorMsg, 'assertEquals - Tests that errorMsg is null.');
     }
 
     /**
@@ -237,29 +237,29 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanel() {
         STG_Panel ctrl = new STG_Panel();
-        system.assertEquals(null, ctrl.idPanel());
+        system.assertEquals(null, ctrl.idPanel(), 'Assert that idPanel is null.');
         ctrl.isEditMode = true;
-        system.assertEquals(true, ctrl.isEditMode);
-        system.assertEquals(false, ctrl.isReadOnlyMode);
-        system.assertNotEquals(null, STG_Panel.stgService);
-        system.assertEquals(null, ctrl.saveSettings());
-        system.assertEquals(false, ctrl.isEditMode);
-        system.assertEquals(null, ctrl.editSettings());
-        system.assertEquals(true, ctrl.isEditMode);
-        system.assertEquals(null, ctrl.cancelEdit());
-        system.assertEquals(false, ctrl.isEditMode);
-        system.assertEquals(3, STG_Panel.listSOAccountModels.size());
-        system.assertNotEquals(null, STG_Panel.listSOHHRules);
-        system.assertNotEquals(null, STG_Panel.listSOContactRecTypes);
-        system.assertNotEquals(null, STG_Panel.listSOAccountRecTypeIds);
-        system.assertNotEquals(null, STG_Panel.listSOOppRecTypes);
-        system.assertNotEquals(null, STG_Panel.listSOOppRecTypesIds);
-        system.assertNotEquals(null, STG_Panel.listSOOppContactRoles);
-        system.assertNotEquals(null, STG_Panel.listSOOppTypes);
-        system.assertNotEquals(null, STG_Panel.listSORelTypes);
-        system.assertNotEquals(null, STG_Panel.listSOCampaignTypes);
-        system.assertNotEquals(null, STG_Panel.listSOMailingReportIds);
-        system.assertNotEquals(null, ctrl.isDisplayingRD2UpgradePage);
+        system.assertEquals(true, ctrl.isEditMode, 'Checks if the current user is in edit mode.');
+        system.assertEquals(false, ctrl.isReadOnlyMode, 'Checks if the current mode is read - only.');
+        system.assertNotEquals(null, STG_Panel.stgService, 'Checks that STG_Panel. stgService is not null.');
+        system.assertEquals(null, ctrl.saveSettings(), 'Assert that saveSettings is called after saveSettings has been called.');
+        system.assertEquals(false, ctrl.isEditMode, 'Checks if the current user is in edit mode.');
+        system.assertEquals(null, ctrl.editSettings(), 'Assert that editSettings is null.');
+        system.assertEquals(true, ctrl.isEditMode, 'Checks if the current user is in edit mode.');
+        system.assertEquals(null, ctrl.cancelEdit(), 'Checks that cancelEdit is called.');
+        system.assertEquals(false, ctrl.isEditMode, 'Checks if the current user is in edit mode.');
+        system.assertEquals(3, STG_Panel.listSOAccountModels.size(), 'Checks that 3 stg_panel. listSOAccountModels. size');
+        system.assertNotEquals(null, STG_Panel.listSOHHRules, 'Checks that the list of all the SOFT rules is not null.');
+        system.assertNotEquals(null, STG_Panel.listSOContactRecTypes, 'Checks that the list of STG_Panel. listSOContactRecTypes is not null');
+        system.assertNotEquals(null, STG_Panel.listSOAccountRecTypeIds, 'This function asserts that the list of record types in STG_Panel is not null.');
+        system.assertNotEquals(null, STG_Panel.listSOOppRecTypes, 'Assert that STG_Panel. listSOOppRecTypes is not null.');
+        system.assertNotEquals(null, STG_Panel.listSOOppRecTypesIds, 'Checks that the list of all the STG_Panel. listSOOppRecTypes');
+        system.assertNotEquals(null, STG_Panel.listSOOppContactRoles, 'Checks that the list of all the contact roles is not null.');
+        system.assertNotEquals(null, STG_Panel.listSOOppTypes, 'Assert that STG_Panel. listSOOppTypes is not null.');
+        system.assertNotEquals(null, STG_Panel.listSORelTypes, 'Assert that STG_Panel. listSORelTypes is not null.');
+        system.assertNotEquals(null, STG_Panel.listSOCampaignTypes, 'Checks that STG_Panel. listSOCampaignTypes is not null');
+        system.assertNotEquals(null, STG_Panel.listSOMailingReportIds, 'Checks that STG_Panel. listSOMailingReportIds is not null.');
+        system.assertNotEquals(null, ctrl.isDisplayingRD2UpgradePage, 'Checks that the current page is not displaying the RD2 upgrade page.');
     }
 
     /*********************************************************************************************************
@@ -269,18 +269,18 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testSettingsService() {
         STG_SettingsService svc = STG_SettingsService.stgService;
-        system.assertNotEquals(null, svc);
-        system.assertNotEquals(null, svc.stgCon);
-        system.assertNotEquals(null, svc.stgHH);
-        system.assertNotEquals(null, svc.stgRD);
-        system.assertNotEquals(null, svc.stgRel);
-        system.assertNotEquals(null, svc.stgAffl);
-        system.assertNotEquals(null, svc.stgBDE);
-        system.assertNotEquals(null, svc.stgCRLP);
-        system.assertNotEquals(null, svc.mapRDCustomField);
-        system.assertNotEquals(null, svc.listRDCustomInstallment);
-        system.assertNotEquals(null, svc.listRDCustomFieldMapping);
-        system.assertNotEquals(null, svc.listPMTFieldMapping);
+        system.assertNotEquals(null, svc, 'Assert that the given service is not null.');
+        system.assertNotEquals(null, svc.stgCon, 'Assert that the STGCon object is not null.');
+        system.assertNotEquals(null, svc.stgHH, 'asserts that stgHH is not null');
+        system.assertNotEquals(null, svc.stgRD, 'Assert that the STG RD is not null.');
+        system.assertNotEquals(null, svc.stgRel, 'Assert that the STGRel is not null.');
+        system.assertNotEquals(null, svc.stgAffl, 'Assert that the STGAffl is not null.');
+        system.assertNotEquals(null, svc.stgBDE, 'Assert that the STG BDE is not null.');
+        system.assertNotEquals(null, svc.stgCRLP, 'Assert that the STGCRLP is not null.');
+        system.assertNotEquals(null, svc.mapRDCustomField, 'This function asserts that the mapRDCustomField is not null.');
+        system.assertNotEquals(null, svc.listRDCustomInstallment, 'This function asserts that the list of RD Custom Installments is not null.');
+        system.assertNotEquals(null, svc.listRDCustomFieldMapping, 'Asserts that the list of RDCustomFieldMappings returned by the service is not null.');
+        system.assertNotEquals(null, svc.listPMTFieldMapping, 'Checks that the listPMTFieldMapping method is not null.');
         svc.saveAll();
     }
 
@@ -291,13 +291,13 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelAffl() {
         STG_PanelAffiliations_CTRL panel = new STG_PanelAffiliations_CTRL();
-        system.assertEquals('idPanelAffl', panel.idPanel());
+        system.assertEquals('idPanelAffl', panel.idPanel(), 'Checks that the idPanelAffl is the same as the panel idPanel.');
         STG_Panel.stgService.stgAffl.npe5__Automatic_Affiliation_Creation_Turned_On__c = true;
         panel.saveSettings();
-        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgAffiliationsSettings().npe5__Automatic_Affiliation_Creation_Turned_On__c);
+        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgAffiliationsSettings().npe5__Automatic_Affiliation_Creation_Turned_On__c, 'asserts that automatic affiliation creation is turned on');
         STG_Panel.stgService.stgAffl.npe5__Automatic_Affiliation_Creation_Turned_On__c = false;
         panel.saveSettings();
-        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgAffiliationsSettings().npe5__Automatic_Affiliation_Creation_Turned_On__c);
+        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgAffiliationsSettings().npe5__Automatic_Affiliation_Creation_Turned_On__c, 'asserts that automatic affiliation creation is turned on');
     }
 
     /*********************************************************************************************************
@@ -310,7 +310,7 @@ private with sharing class STG_SettingsManager_TEST {
         insert gau;
 
         STG_PanelAllocations_CTRL panel = new STG_PanelAllocations_CTRL();
-        system.assertEquals('idPanelAllocations', panel.idPanel());
+        system.assertEquals('idPanelAllocations', panel.idPanel(), 'Checks that the idPanelAllocations property of the panel is equal to the idPanelAlloc');
         system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgAllocationsSettings().Payment_Allocations_Enabled__c, 'Payment Allocations should not be enabled.');
         system.assertEquals(panel.strAllocationLevel, STG_Panel.oppLabel, 'If Payment Allocations are not enabled, allocation level should be opportunity');
         // Simulate selecting Payment Allocations without default GAU set
@@ -320,7 +320,7 @@ private with sharing class STG_SettingsManager_TEST {
 
         List<Apexpages.Message> msgs = ApexPages.getMessages();
         system.assertEquals(1, msgs.size(), 'Default GAU must be enabled');
-        system.assert(msgs[0].getDetail().contains(Label.alloDefaultNotEnabled));
+        system.assert(msgs[0].getDetail().contains(Label.alloDefaultNotEnabled), 'Check if default is enabled');
 
         system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgAllocationsSettings().Default_Allocations_Enabled__c, 'Settings should not save successfully.');
         system.assertEquals(null,UTIL_CustomSettingsFacade.getOrgAllocationsSettings().Default__c, 'Default GAU value should not be filled in.');
@@ -332,7 +332,7 @@ private with sharing class STG_SettingsManager_TEST {
 
         msgs = ApexPages.getMessages();
         system.assertEquals(2, msgs.size(), 'New error, a Default GAU value must be set');
-        system.assert(msgs[1].getDetail().contains(Label.alloDefaultGAUMissing));
+        system.assert(msgs[1].getDetail().contains(Label.alloDefaultGAUMissing), 'Checks that default gaum missing label is present.');
 
         // Finally, set everything correctly
         STG_PanelAllocations_CTRL.allo = null;
@@ -354,13 +354,13 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelBDE() {
         STG_PanelBDE_CTRL panel = new STG_PanelBDE_CTRL();
-        system.assertEquals('idPanelBDE', panel.idPanel());
+        system.assertEquals('idPanelBDE', panel.idPanel(), 'Checks that the idPanelBDE is the same as the panel.');
         STG_Panel.stgService.stgBDE.Opportunity_Naming__c = true;
         panel.saveSettings();
-        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgBDESettings().Opportunity_Naming__c);
+        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgBDESettings().Opportunity_Naming__c, 'asserts that the opportunity naming is set in the system settings');
         STG_Panel.stgService.stgBDE.Opportunity_Naming__c = false;
         panel.saveSettings();
-        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgBDESettings().Opportunity_Naming__c);
+        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgBDESettings().Opportunity_Naming__c, 'asserts that the opportunity naming is turned off');
     }
 
     /*********************************************************************************************************
@@ -370,10 +370,10 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelContactRoles() {
         STG_PanelContactRoles_CTRL panel = new STG_PanelContactRoles_CTRL();
-        system.assertEquals('idPanelConRoles', panel.idPanel());
+        system.assertEquals('idPanelConRoles', panel.idPanel(), 'Checks that the panel s id is equal to the idConRoles property of the panel.');
         STG_Panel.stgService.stgCon.npe01__Enable_Opportunity_Contact_Role_Trigger__c = true;
         panel.saveSettings();
-        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Enable_Opportunity_Contact_Role_Trigger__c);
+        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Enable_Opportunity_Contact_Role_Trigger__c, 'asserts that Enable Opportunity Contact Role Trigger is enabled');
         STG_Panel.stgService.stgCon.npe01__Enable_Opportunity_Contact_Role_Trigger__c = false;
         STG_Panel.stgService.stgCon.npe01__Opportunity_Contact_Role_Default_role__c = 'Decision Maker';
         STG_Panel.stgService.stgHH.npo02__Household_Contact_Roles_On__c = true;
@@ -393,17 +393,17 @@ private with sharing class STG_SettingsManager_TEST {
         String oneToOneRecordTypeLabel = STG_PanelContacts_CTRL.strOneToOneRecordTypeLabel;
 
         STG_PanelContacts_CTRL panel = new STG_PanelContacts_CTRL();
-        system.assertEquals('idPanelCon', panel.idPanel());
+        system.assertEquals('idPanelCon', panel.idPanel(), 'Assert that the panel is the same as the panel con.');
 
         STG_Panel.stgService.stgCon.npe01__Account_Processor__c = CAO_Constants.HH_ACCOUNT_PROCESSOR;
         panel.saveSettings();
 
-        system.assertEquals('Household Account', UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Account_Processor__c);
+        system.assertEquals('Household Account', UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Account_Processor__c, 'asserts that Household Account is set in the org contacts settings');
 
         STG_Panel.stgService.stgCon.npe01__Account_Processor__c = CAO_Constants.ONE_TO_ONE_PROCESSOR;
         panel.saveSettings();
 
-        system.assertEquals('One-to-One', UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Account_Processor__c);
+        system.assertEquals('One-to-One', UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Account_Processor__c, 'Checks that Account Processor is set to One - to - One');
     }
 
     /*********************************************************************************************************
@@ -499,13 +499,13 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelLeads() {
         STG_PanelLeads_CTRL panel = new STG_PanelLeads_CTRL();
-        system.assertEquals('idPanelLeads', panel.idPanel());
+        system.assertEquals('idPanelLeads', panel.idPanel(), 'Checks that the idPanelLeads property of the panel is equal to the idPanel of');
         STG_Panel.stgService.stgCon.npe01__Default_Opp_on_Convert__c = true;
         panel.saveSettings();
-        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Default_Opp_on_Convert__c);
+        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Default_Opp_on_Convert__c, 'Checks if the default opp on convert is turned on or off.');
         STG_Panel.stgService.stgCon.npe01__Default_Opp_on_Convert__c = false;
         panel.saveSettings();
-        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Default_Opp_on_Convert__c);
+        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Default_Opp_on_Convert__c, 'asserts that the default opp on convert is turned off');
     }
 
     /*********************************************************************************************************
@@ -515,13 +515,13 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelMembership() {
         STG_PanelMembership_CTRL panel = new STG_PanelMembership_CTRL();
-        system.assertEquals('idPanelMembership', panel.idPanel());
+        system.assertEquals('idPanelMembership', panel.idPanel(), 'Checks that the panel membership is the same as the panel itself.');
         STG_Panel.stgService.stgHH.npo02__Membership_Grace_Period__c = 10;
         panel.saveSettings();
-        system.assertEquals(10, UTIL_CustomSettingsFacade.getOrgHouseholdsSettings().npo02__Membership_Grace_Period__c);
+        system.assertEquals(10, UTIL_CustomSettingsFacade.getOrgHouseholdsSettings().npo02__Membership_Grace_Period__c, 'Checks membership grace period.');
         STG_Panel.stgService.stgHH.npo02__Membership_Grace_Period__c = 20;
         panel.saveSettings();
-        system.assertEquals(20, UTIL_CustomSettingsFacade.getOrgHouseholdsSettings().npo02__Membership_Grace_Period__c);
+        system.assertEquals(20, UTIL_CustomSettingsFacade.getOrgHouseholdsSettings().npo02__Membership_Grace_Period__c, 'Checks membership grace period.');
     }
 
     /*********************************************************************************************************
@@ -531,10 +531,10 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelOppBatch() {
         STG_PanelOppBatch_CTRL panel = new STG_PanelOppBatch_CTRL();
-        system.assertEquals('idPanelOppBatch', panel.idPanel());
-        system.assertEquals(false, panel.isRunningBatch);
+        system.assertEquals('idPanelOppBatch', panel.idPanel(), 'Assert that the idPanelOppBatch is the same as the panel idPanel.');
+        system.assertEquals(false, panel.isRunningBatch, 'Asserts that the panel is running batch.');
         panel.runBatch();
-        system.assertEquals(true, panel.isRunningBatch);
+        system.assertEquals(true, panel.isRunningBatch, 'Checks that the panel is running batch.');
     }
 
     /*********************************************************************************************************
@@ -544,13 +544,13 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelOppRollups() {
         STG_PanelOppRollups_CTRL panel = new STG_PanelOppRollups_CTRL();
-        system.assertEquals('idPanelOppRollup', panel.idPanel());
+        system.assertEquals('idPanelOppRollup', panel.idPanel(), 'Checks that the idPanelOppRollup is the same as the idPanel of the');
         STG_Panel.stgService.stgHH.npo02__Batch_Size__c = 10;
         panel.saveSettings();
-        system.assertEquals(10, UTIL_CustomSettingsFacade.getOrgHouseholdsSettings().npo02__Batch_Size__c);
+        system.assertEquals(10, UTIL_CustomSettingsFacade.getOrgHouseholdsSettings().npo02__Batch_Size__c, 'asserts that batch size is equal to 10');
         STG_Panel.stgService.stgHH.npo02__Batch_Size__c = 20;
         panel.saveSettings();
-        system.assertEquals(20, UTIL_CustomSettingsFacade.getOrgHouseholdsSettings().npo02__Batch_Size__c);
+        system.assertEquals(20, UTIL_CustomSettingsFacade.getOrgHouseholdsSettings().npo02__Batch_Size__c, 'check that batch size is equal to 20');
     }
 
     /*********************************************************************************************************
@@ -560,13 +560,13 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelOpps() {
         STG_PanelOpps_CTRL panel = new STG_PanelOpps_CTRL();
-        system.assertEquals('idPanelOpp', panel.idPanel());
+        system.assertEquals('idPanelOpp', panel.idPanel(), 'Checks that the idPanelOpp is the same as the panel.');
         STG_Panel.stgService.stgCon.npe01__Payments_Enabled__c = true;
         panel.saveSettings();
-        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Payments_Enabled__c);
+        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Payments_Enabled__c, 'asserts that payments are enabled');
         STG_Panel.stgService.stgCon.npe01__Payments_Enabled__c = false;
         panel.saveSettings();
-        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Payments_Enabled__c);
+        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgContactsSettings().npe01__Payments_Enabled__c, 'asserts that payments are enabled');
     }
 
     /*********************************************************************************************************
@@ -576,7 +576,7 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelOppNaming() {
         STG_PanelOppNaming_CTRL panel = new STG_PanelOppNaming_CTRL();
-        system.assertEquals('idPanelOppNaming', panel.idPanel());
+        system.assertEquals('idPanelOppNaming', panel.idPanel(), 'Assert that the panel s opp naming is the same as the panel s opp naming');
         panel.newONS();
         panel.currentONS.Date_Format__c = 'YYYY-MM-dd';
         panel.currentONS.Opportunity_Name_Format__c = '{!Contact.LastName} {!CloseDate}';
@@ -592,43 +592,43 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelPaymentMapping() {
         STG_PanelPaymentMapping_CTRL panel = new STG_PanelPaymentMapping_CTRL();
-        system.assertEquals('idPanelPaymentMapping', panel.idPanel());
-        system.assertEquals(false, ApexPages.hasMessages());
-        system.assertNotEquals(null, panel.getSourceFields());
-        system.assertNotEquals(null, panel.getTargetFields());
-        system.assertEquals(null, panel.newPfm());
-        system.assertNotEquals(null, panel.pfmNew);
-        system.assertEquals(true, panel.isEditMode);
-        system.assertEquals(null, panel.cancelPfmEdit());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertEquals(null, panel.newPfm());
-        system.assertNotEquals(null, panel.pfmNew);
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals('idPanelPaymentMapping', panel.idPanel(), 'Asserts that the idPanelPaymentMapping is the same as the panel idPanel.');
+        system.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        system.assertNotEquals(null, panel.getSourceFields(), 'Assert that the source fields of the panel are not null.');
+        system.assertNotEquals(null, panel.getTargetFields(), 'Assert that the target fields are not null.');
+        system.assertEquals(null, panel.newPfm(), 'Assert that panel is not null.');
+        system.assertNotEquals(null, panel.pfmNew, 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
+        system.assertEquals(null, panel.cancelPfmEdit(), 'Asserts that cancelPfmEdit is called.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertEquals(null, panel.newPfm(), 'Assert that panel is not null.');
+        system.assertNotEquals(null, panel.pfmNew, 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.pfmNew.npe01__Opportunity_Field__c = null;
         panel.pfmNew.npe01__Payment_Field__c = null;
-        system.assertEquals(null, panel.savePfm());
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals(null, panel.savePfm(), 'Assert that the panel s savePfm property is null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.pfmNew.npe01__Opportunity_Field__c = 'Amount';
-        system.assertEquals(null, panel.onSelectSourceField());
+        system.assertEquals(null, panel.onSelectSourceField(), 'Assert that the source field of the panel is the same as the onSelectSourceField method');
         panel.pfmNew.npe01__Payment_Field__c = 'npe01__Payment_Amount__c';
-        system.assertEquals(true, panel.isPfmNewValid);
-        system.assertEquals(null, panel.savePfm());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertNotEquals(null, panel.listPMTFieldMapping);
-        system.assertEquals(1, panel.listPMTFieldMapping.size());
+        system.assertEquals(true, panel.isPfmNewValid, 'Checks if the panel is valid.');
+        system.assertEquals(null, panel.savePfm(), 'Assert that the panel s savePfm property is null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertNotEquals(null, panel.listPMTFieldMapping, 'Assert that the panel s listPMTFieldMapping is not null.');
+        system.assertEquals(1, panel.listPMTFieldMapping.size(), 'Checks that the size of the panel is equal to 1.');
         panel.pfmIdDelete = panel.listPMTFieldMapping[0].Id;
-        system.assertEquals(null, panel.deletePfm());
-        system.assertNotEquals(null, panel.listPMTFieldMapping);
-        system.assertEquals(0, panel.listPMTFieldMapping.size());
+        system.assertEquals(null, panel.deletePfm(), 'Delete the panel.');
+        system.assertNotEquals(null, panel.listPMTFieldMapping, 'Assert that the panel s listPMTFieldMapping is not null.');
+        system.assertEquals(0, panel.listPMTFieldMapping.size(), 'Checks that the number of PMT fields is the same as the number of PMT fields');
 
         // save a bogus mapping, and verify our check complains
         panel.pfmNew.npe01__Opportunity_Field__c = 'NoExist';
         panel.pfmNew.npe01__Payment_Field__c = 'NoExist';
-        system.assertEquals(true, panel.isPfmNewValid);
-        system.assertEquals(null, panel.savePfm());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertNotEquals(null, panel.listPMTFieldMapping);
-        system.assertEquals(1, panel.listPMTFieldMapping.size());
+        system.assertEquals(true, panel.isPfmNewValid, 'Checks if the panel is valid.');
+        system.assertEquals(null, panel.savePfm(), 'Assert that the panel s savePfm property is null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertNotEquals(null, panel.listPMTFieldMapping, 'Assert that the panel s listPMTFieldMapping is not null.');
+        system.assertEquals(1, panel.listPMTFieldMapping.size(), 'Checks that the size of the panel is equal to 1.');
 
     }
 
@@ -639,21 +639,21 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelRD() {
         STG_PanelRD_CTRL panel = new STG_PanelRD_CTRL();
-        system.assertEquals('idPanelRD', panel.idPanel());
+        system.assertEquals('idPanelRD', panel.idPanel(), 'Assert that idPanelRD is the same as panel.');
         panel.init();
-        system.assertNotEquals(null, panel.listSORDCloseOptions);
-        system.assertNotEquals(null, panel.listSORDCloseOptions);
+        system.assertNotEquals(null, panel.listSORDCloseOptions, 'Assert that listSORDCloseOptions is not null');
+        system.assertNotEquals(null, panel.listSORDCloseOptions, 'Assert that listSORDCloseOptions is not null');
 
         STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c = 10;
-        system.assertEquals(null, panel.saveSettings());
-        system.assertEquals(10, STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c);
+        system.assertEquals(null, panel.saveSettings(), 'Assert that the settings of the panel are equal.');
+        system.assertEquals(10, STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c, 'Opportunity forecast months c');
         STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c = 5;
-        system.assertEquals(null, panel.saveSettings());
-        system.assertEquals(5, STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c);
+        system.assertEquals(null, panel.saveSettings(), 'Assert that the settings of the panel are equal.');
+        system.assertEquals(5, STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c, 'Opportunity forecast months are equal to 5');
         STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c = 15;
-        system.assertEquals(null, panel.saveSettings());
-        system.assertEquals(15, STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c);
-        system.assertEquals(15, UTIL_CustomSettingsFacade.getOrgRecurringDonationsSettings().npe03__Opportunity_Forecast_Months__c);
+        system.assertEquals(null, panel.saveSettings(), 'Assert that the settings of the panel are equal.');
+        system.assertEquals(15, STG_Panel.stgService.stgRD.npe03__Opportunity_Forecast_Months__c, 'Opportunity forecast months are equal to OPPORTunity forecast months.');
+        system.assertEquals(15, UTIL_CustomSettingsFacade.getOrgRecurringDonationsSettings().npe03__Opportunity_Forecast_Months__c, 'Checks that the NPE - 03 Opportunity Forecast Months are set in the');
     }
 
     /*********************************************************************************************************
@@ -928,9 +928,9 @@ private with sharing class STG_SettingsManager_TEST {
             panel.delONS();
 
             UTIL_UnitTestData_TEST.assertPageHasError(System.Label.stgDeletePermissionError);
-            System.assertEquals(1, panel.listOppNameSettings.size());
-            System.assertEquals(1, panel.mapOppNameSettings.size());
-            System.assertEquals(1, Opportunity_Naming_Settings__c.getAll().size());
+            System.assertEquals(1, panel.listOppNameSettings.size(), 'Checks that the number of opp name settings is equal to 1.');
+            System.assertEquals(1, panel.mapOppNameSettings.size(), 'Checks that the size of the mapOppNameSettings is equal to 1.');
+            System.assertEquals(1, Opportunity_Naming_Settings__c.getAll().size(), 'Assert that Opportunity_Naming_Settings is exactly 1.');
         }
 
         Test.stopTest();
@@ -955,8 +955,8 @@ private with sharing class STG_SettingsManager_TEST {
         panel.delONS();
 
         //verify if the settings are deleted
-        System.assertEquals(0, Opportunity_Naming_Settings__c.getAll().size());
-        System.assertEquals(0, panel.listOppNameSettings.size());
+        System.assertEquals(0, Opportunity_Naming_Settings__c.getAll().size(), 'Assert that all Opportunity_Naming_Settings are set.');
+        System.assertEquals(0, panel.listOppNameSettings.size(), 'Checks that the number of opp name settings is the same as the number of opp');
 
         Test.stopTest();
     }
@@ -982,8 +982,8 @@ private with sharing class STG_SettingsManager_TEST {
             panel.deleteFm();
 
             UTIL_UnitTestData_TEST.assertPageHasError(System.Label.stgDeletePermissionError);
-            System.assertEquals(1, npe03__Custom_Field_Mapping__c.getAll().size());
-            System.assertEquals(1, panel.listRDCustomFieldMapping.size());
+            System.assertEquals(1, npe03__Custom_Field_Mapping__c.getAll().size(), 'This test asserts that the size of the mapping table is equal to 1.');
+            System.assertEquals(1, panel.listRDCustomFieldMapping.size(), 'This method asserts that the size of the panel is equal to the number of custom fields in');
         }
 
         Test.stopTest();
@@ -1007,8 +1007,8 @@ private with sharing class STG_SettingsManager_TEST {
         panel.deleteFm();
 
         //verify if the settings are deleted
-        System.assertEquals(0, npe03__Custom_Field_Mapping__c.getAll().size());
-        system.assertEquals(0, panel.listRDCustomFieldMapping.size());
+        System.assertEquals(0, npe03__Custom_Field_Mapping__c.getAll().size(), 'This test asserts that all mappings are initialized.');
+        system.assertEquals(0, panel.listRDCustomFieldMapping.size(), 'Checks that the size of the list of custom field mappings is the same as the size of');
 
         Test.stopTest();
 
@@ -1036,8 +1036,8 @@ private with sharing class STG_SettingsManager_TEST {
             panel.deleteCi();
 
             UTIL_UnitTestData_TEST.assertPageHasError(System.Label.stgDeletePermissionError);
-            System.assertEquals(1, npe03__Custom_Installment_Settings__c.getAll().size());
-            System.assertEquals(1, STG_Panel.stgService.listRDCustomInstallment.size());
+            System.assertEquals(1, npe03__Custom_Installment_Settings__c.getAll().size(), 'Checks that all the installed NPE03 s settings are available.');
+            System.assertEquals(1, STG_Panel.stgService.listRDCustomInstallment.size(), 'This method is used to check that the size of STG_Panel. stgService');
         }
 
         Test.stopTest();
@@ -1063,8 +1063,8 @@ private with sharing class STG_SettingsManager_TEST {
         panel.deleteCi();
 
         //verify if the settings are deleted
-        System.assertEquals(0, npe03__Custom_Installment_Settings__c.getAll().size());
-        system.assertEquals(0, STG_Panel.stgService.listRDCustomInstallment.size());
+        System.assertEquals(0, npe03__Custom_Installment_Settings__c.getAll().size(), 'Checks that all the custom installment settings are available.');
+        system.assertEquals(0, STG_Panel.stgService.listRDCustomInstallment.size(), 'Checks that the number of STG_Panel. stgService. listRDCustomInstall');
 
         Test.stopTest();
 
@@ -1091,8 +1091,8 @@ private with sharing class STG_SettingsManager_TEST {
             panel.deletePfm();
 
             UTIL_UnitTestData_TEST.assertPageHasError(System.Label.stgDeletePermissionError);
-            System.assertEquals(1, npe01__Payment_Field_Mapping_Settings__c.getAll().size() );
-            System.assertEquals(1, STG_Panel.stgService.listPMTFieldMapping.size());
+            System.assertEquals(1, npe01__Payment_Field_Mapping_Settings__c.getAll().size(), 'This function asserts that the number of payment field mapping settings is equal to 1.' );
+            System.assertEquals(1, STG_Panel.stgService.listPMTFieldMapping.size(), 'This method is used to check that the number of mappings in the STG panel is equal');
         }
 
         Test.stopTest();
@@ -1116,8 +1116,8 @@ private with sharing class STG_SettingsManager_TEST {
         panel.pfmIdDelete = panel.listPMTFieldMapping[0].Id;
         panel.deletePfm();
         //verify if the settings are deleted
-        System.assertEquals(0, npe01__Payment_Field_Mapping_Settings__c.getAll().size());
-        System.assertEquals(0, panel.listPMTFieldMapping.size());
+        System.assertEquals(0, npe01__Payment_Field_Mapping_Settings__c.getAll().size(), 'This function asserts that all PaymentField_Mapping_Settings are set.');
+        System.assertEquals(0, panel.listPMTFieldMapping.size(), 'Checks that the size of the panel listPMTFieldMapping is equal to the number of');
 
         Test.stopTest();
 
@@ -1146,8 +1146,8 @@ private with sharing class STG_SettingsManager_TEST {
             panel.deleteRl();
 
             UTIL_UnitTestData_TEST.assertPageHasError(System.Label.stgDeletePermissionError);
-            System.assertEquals(1, npe4__Relationship_Lookup__c.getAll().size());
-            System.assertEquals(1, panel.listRelLookup.size());
+            System.assertEquals(1, npe4__Relationship_Lookup__c.getAll().size(), 'Checks that the size of the relationship table is equal to 1.');
+            System.assertEquals(1, panel.listRelLookup.size(), 'Checks that the size of the panel list is equal to 1.');
         }
 
         Test.stopTest();
@@ -1173,8 +1173,8 @@ private with sharing class STG_SettingsManager_TEST {
         panel.rlIdDelete = panel.listRelLookup[0].Id;
         panel.deleteRl();
 
-        System.assertEquals(0, npe4__Relationship_Lookup__c.getAll().size());
-        System.assertEquals(0, panel.listRelLookup.size());
+        System.assertEquals(0, npe4__Relationship_Lookup__c.getAll().size(), 'Checks that all relationships are available.');
+        System.assertEquals(0, panel.listRelLookup.size(), 'Checks that the panel list is empty.');
 
         Test.stopTest();
     }
@@ -1202,8 +1202,8 @@ private with sharing class STG_SettingsManager_TEST {
             panel.deleteAc();
 
             UTIL_UnitTestData_TEST.assertPageHasError(System.Label.stgDeletePermissionError);
-            System.assertEquals(1, npe4__Relationship_Auto_Create__c.getAll().size());
-            System.assertEquals(1, panel.listRelAutoCreate.size());
+            System.assertEquals(1, npe4__Relationship_Auto_Create__c.getAll().size(), 'Assert that all relationships are initialized.');
+            System.assertEquals(1, panel.listRelAutoCreate.size(), 'Checks that the number of auto - create panels is equal to one.');
         }
 
         Test.stopTest();
@@ -1249,8 +1249,8 @@ private with sharing class STG_SettingsManager_TEST {
         panel.acIdDelete = panel.listRelAutoCreate[0].Id;
         panel.deleteAc();
 
-        System.assertEquals(0, npe4__Relationship_Auto_Create__c.getAll().size());
-        System.assertEquals(0, panel.listRelAutoCreate.size());
+        System.assertEquals(0, npe4__Relationship_Auto_Create__c.getAll().size(), 'Asserts that all relationships are initialized.');
+        System.assertEquals(0, panel.listRelAutoCreate.size(), 'Checks that the number of auto - create panels is the same.');
 
         Test.stopTest();
     }
@@ -1279,8 +1279,8 @@ private with sharing class STG_SettingsManager_TEST {
             panel.activeUDR.deleteMe();
 
             UTIL_UnitTestData_TEST.assertPageHasError(System.Label.stgDeletePermissionError);
-            System.assertEquals(1, npo02__User_Rollup_Field_Settings__c.getAll().size());
-            System.assertEquals(1, panel.udrlist.size());
+            System.assertEquals(1, npo02__User_Rollup_Field_Settings__c.getAll().size(), 'This function asserts that the number of rollup fields is equal to 1.');
+            System.assertEquals(1, panel.udrlist.size(), 'Assert that the size of the UDR list is equal to 1.');
         }
 
         Test.stopTest();
@@ -1310,8 +1310,8 @@ private with sharing class STG_SettingsManager_TEST {
         panel.udrList = null;
         UTIL_ListCustomSettingsFacade.mapUserRollupFieldSettings = null;
 
-        System.assertEquals(0, npo02__User_Rollup_Field_Settings__c.getAll().size());
-        System.assertEquals(0, panel.udrlist.size());
+        System.assertEquals(0, npo02__User_Rollup_Field_Settings__c.getAll().size(), 'This function asserts that the number of Rollup Field Settings is equal to the number of Roll');
+        System.assertEquals(0, panel.udrlist.size(), 'Assert that the size of the panel is equal to the number of UDRs currently displayed');
 
         Test.stopTest();
     }
@@ -1341,10 +1341,10 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelRDBatch() {
         STG_PanelRDBatch_CTRL panel = new STG_PanelRDBatch_CTRL();
-        system.assertEquals('idPanelRDBatch', panel.idPanel());
-        system.assertEquals(false, panel.isRunningBatch);
+        system.assertEquals('idPanelRDBatch', panel.idPanel(), 'Checks that the panel is the correct panel in the rDBatch.');
+        system.assertEquals(false, panel.isRunningBatch, 'Asserts that the panel is running batch.');
         panel.runBatch();
-        system.assertEquals(true, panel.isRunningBatch);
+        system.assertEquals(true, panel.isRunningBatch, 'Checks that the panel is running batch.');
     }
 
     /*********************************************************************************************************
@@ -1354,34 +1354,34 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelRDCustomFieldMapping() {
         STG_PanelRDCustomFieldMapping_CTRL panel = new STG_PanelRDCustomFieldMapping_CTRL();
-        system.assertEquals('idPanelRDFieldMap', panel.idPanel());
-        system.assertEquals(false, ApexPages.hasMessages());
-        system.assertNotEquals(null, STG_PanelRDCustomFieldMapping_CTRL.listSORDFields);
-        system.assertNotEquals(null, STG_PanelRDCustomFieldMapping_CTRL.listSOOppFields);
-        system.assertEquals(null, panel.newCustomFieldMapping());
-        system.assertNotEquals(null, panel.fmNew);
-        system.assertEquals(true, panel.isEditMode);
-        system.assertEquals(null, panel.cancelCustomFieldMapping());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertEquals(null, panel.newCustomFieldMapping());
-        system.assertNotEquals(null, panel.fmNew);
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals('idPanelRDFieldMap', panel.idPanel(), 'Assert that idPanelRDFieldMap is the same as panel.');
+        system.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        system.assertNotEquals(null, STG_PanelRDCustomFieldMapping_CTRL.listSORDFields, 'This function asserts that the STG_PanelRDCustomFieldMapping_CTRL. list');
+        system.assertNotEquals(null, STG_PanelRDCustomFieldMapping_CTRL.listSOOppFields, 'This function asserts that the list of custom fields in STG_PanelRDCustomFieldMapping');
+        system.assertEquals(null, panel.newCustomFieldMapping(), 'Asserts that the panel has a custom field mapping.');
+        system.assertNotEquals(null, panel.fmNew, 'Assert that panel. fmNew is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
+        system.assertEquals(null, panel.cancelCustomFieldMapping(), 'Asserts that cancelCustomFieldMapping is called on the same panel.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertEquals(null, panel.newCustomFieldMapping(), 'Asserts that the panel has a custom field mapping.');
+        system.assertNotEquals(null, panel.fmNew, 'Assert that panel. fmNew is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.fmNew.npe03__Recurring_Donation_Field__c = null;
         panel.fmNew.npe03__Opportunity_Field__c = null;
-        system.assertEquals(null, panel.createCustomFieldMapping());
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals(null, panel.createCustomFieldMapping(), 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.fmNew.npe03__Opportunity_Field__c = 'Amount';
         panel.fmNew.npe03__Recurring_Donation_Field__c = 'npe03__Amount__c';
-        system.assertEquals(null, panel.createCustomFieldMapping());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertNotEquals(null, panel.listRDCustomFieldMapping);
-        system.assertEquals(1, panel.listRDCustomFieldMapping.size());
+        system.assertEquals(null, panel.createCustomFieldMapping(), 'Assert that the panel is not null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertNotEquals(null, panel.listRDCustomFieldMapping, 'Assert that the panel. listRDCustomFieldMapping is not null.');
+        system.assertEquals(1, panel.listRDCustomFieldMapping.size(), 'Checks that the size of the list of custom field mappings is equal to 1.');
         panel.fmIdDelete = 'not a valid id';
-        system.assertEquals(null, panel.deleteFm());
+        system.assertEquals(null, panel.deleteFm(), 'Asserts that the deleteFm property of the panel is not null.');
         panel.fmIdDelete = panel.listRDCustomFieldMapping[0].Id;
-        system.assertEquals(null, panel.deleteFm());
-        system.assertNotEquals(null, panel.listRDCustomFieldMapping);
-        system.assertEquals(0, panel.listRDCustomFieldMapping.size());
+        system.assertEquals(null, panel.deleteFm(), 'Asserts that the deleteFm property of the panel is not null.');
+        system.assertNotEquals(null, panel.listRDCustomFieldMapping, 'Assert that the panel. listRDCustomFieldMapping is not null.');
+        system.assertEquals(0, panel.listRDCustomFieldMapping.size(), 'Checks that the size of the list of custom field mappings is the same as the size of');
     }
 
     /*********************************************************************************************************
@@ -1391,36 +1391,36 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelRDCustomInstallment() {
         STG_PanelRDCustomInstallment_CTRL panel = new STG_PanelRDCustomInstallment_CTRL();
-        system.assertEquals('idPanelRDInstPd', panel.idPanel());
-        system.assertEquals(false, ApexPages.hasMessages());
-        system.assertNotEquals(null, STG_PanelRDCustomInstallment_CTRL.listSORDCustomPeriod);
-        system.assertEquals(null, panel.newCustomInstallment());
-        system.assertNotEquals(null, panel.ciNew);
-        system.assertEquals(true, panel.isEditMode);
-        system.assertEquals(null, panel.cancelCustomInstallment());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertEquals(null, panel.newCustomInstallment());
-        system.assertNotEquals(null, panel.ciNew);
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals('idPanelRDInstPd', panel.idPanel(), 'Assert that idPanelRDInstPd is the same as panel.');
+        system.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        system.assertNotEquals(null, STG_PanelRDCustomInstallment_CTRL.listSORDCustomPeriod, 'Checks that the list of SORD custom installments is not null.');
+        system.assertEquals(null, panel.newCustomInstallment(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.ciNew, 'Assert that panel. ciNew is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
+        system.assertEquals(null, panel.cancelCustomInstallment(), 'Checks that cancel custom installment is not null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertEquals(null, panel.newCustomInstallment(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.ciNew, 'Assert that panel. ciNew is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.ciNew.Name = null;
         panel.ciNew.npe03__Value__c = null;
         panel.ciNew.npe03__Increment__c = null;
-        system.assertEquals(null, panel.createCustomInstallment());
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals(null, panel.createCustomInstallment(), 'Checks that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.ciNew.Name = 'TestInstallment';
         panel.ciNew.npe03__Value__c = 10;
         panel.ciNew.npe03__Increment__c = 'Days';
-        system.assertEquals(null, panel.createCustomInstallment());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertNotEquals(null, STG_Panel.stgService.listRDCustomInstallment);
-        system.assertEquals(1, STG_Panel.stgService.listRDCustomInstallment.size());
+        system.assertEquals(null, panel.createCustomInstallment(), 'Checks that the panel is not null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertNotEquals(null, STG_Panel.stgService.listRDCustomInstallment, 'This method asserts that STG_Panel. stgService. listRDCustomInstallment');
+        system.assertEquals(1, STG_Panel.stgService.listRDCustomInstallment.size(), 'Checks that the number of STG_Panel. stgService. listRDCustomInstall');
         //system.assertEquals(null, panel.getSettingsFirstTime());
         panel.ciIdDelete = 'not a valid id';
-        system.assertEquals(null, panel.deleteCi());
+        system.assertEquals(null, panel.deleteCi(), 'Asserts that the deleteCi method is called.');
         panel.ciIdDelete = STG_Panel.stgService.listRDCustomInstallment[0].Id;
-        system.assertEquals(null, panel.deleteCi());
-        system.assertNotEquals(null, STG_Panel.stgService.listRDCustomInstallment);
-        system.assertEquals(0, STG_Panel.stgService.listRDCustomInstallment.size());
+        system.assertEquals(null, panel.deleteCi(), 'Asserts that the deleteCi method is called.');
+        system.assertNotEquals(null, STG_Panel.stgService.listRDCustomInstallment, 'This method asserts that STG_Panel. stgService. listRDCustomInstallment');
+        system.assertEquals(0, STG_Panel.stgService.listRDCustomInstallment.size(), 'Checks that the number of STG_Panel. stgService. listRDCustomInstall');
     }
 
     /*********************************************************************************************************
@@ -1430,33 +1430,33 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelRel() {
         STG_PanelRel_CTRL panel = new STG_PanelRel_CTRL();
-        system.assertEquals('idPanelRel', panel.idPanel());
+        system.assertEquals('idPanelRel', panel.idPanel(), 'Asserts that the panel is the same as the panel rel.');
         STG_Panel.stgService.stgRel.npe4__Allow_AutoCreated_Duplicates__c = true;
         panel.saveSettings();
-        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgRelationshipSettings().npe4__Allow_AutoCreated_Duplicates__c);
+        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgRelationshipSettings().npe4__Allow_AutoCreated_Duplicates__c, 'asserts that the NPE4 settings are set correctly');
         STG_Panel.stgService.stgRel.npe4__Allow_AutoCreated_Duplicates__c = false;
         panel.saveSettings();
-        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgRelationshipSettings().npe4__Allow_AutoCreated_Duplicates__c);
+        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgRelationshipSettings().npe4__Allow_AutoCreated_Duplicates__c, 'asserts that the NPE4 settings are not set.');
 
         STG_Panel.stgService.stgRel.Enable_Custom_Field_Sync__c = true;
         panel.saveSettings();
-        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgRelationshipSettings().Enable_Custom_Field_Sync__c);
+        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgRelationshipSettings().Enable_Custom_Field_Sync__c, 'asserts that Enable_Custom_Field_Sync is true for the current organization');
         STG_Panel.stgService.stgRel.Enable_Custom_Field_Sync__c = false;
         panel.saveSettings();
-        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgRelationshipSettings().Enable_Custom_Field_Sync__c);
+        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgRelationshipSettings().Enable_Custom_Field_Sync__c, 'asserts that Enable_Custom_Field_Sync is false');
 
         STG_Panel.stgService.stgRel.npe4__Gender_Field__c = 'description';
         panel.saveSettings();
         system.assertEquals(UTIL_Describe.getFieldLabel('Contact','description'),panel.strGenderFieldLabel,'Gender label doesn\'t match.');
 
         // no settings to start
-        system.assertEquals(0,panel.listExcludedFields.size());
+        system.assertEquals(0,panel.listExcludedFields.size(), 'Checks that there are no fields in the panel.');
         system.assertEquals('',panel.excludedLabels,'Excluded Labels is not blank.');
         // add a value to listExcludedFields and confirm that correct setting was added
         panel.listExcludedFields = new List<String>{'npe4__description__c'};
         panel.saveSettings();
-        system.assertEquals(1,UTIL_ListCustomSettingsFacade.getMapRelationshipFieldSyncSettings().size());
-        system.assertEquals(UTIL_Describe.getFieldLabel('npe4__Relationship__c','npe4__description__c'),panel.excludedLabels.trim());
+        system.assertEquals(1,UTIL_ListCustomSettingsFacade.getMapRelationshipFieldSyncSettings().size(), 'asserts that 1 map relationship field sync settings is set');
+        system.assertEquals(UTIL_Describe.getFieldLabel('npe4__Relationship__c','npe4__description__c'),panel.excludedLabels.trim(), 'assert that the label of the relationship and the description of the panel are not excluded');
 
         // cause deletion of that setting record by setting empty string, confirm results
         panel.listExcludedFields = new List<String>();
@@ -1476,40 +1476,40 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelRelAuto() {
         STG_PanelRelAuto_CTRL panel = new STG_PanelRelAuto_CTRL();
-        system.assertEquals('idPanelRelAuto', panel.idPanel());
-        system.assertEquals(false, ApexPages.hasMessages());
-        system.assertEquals(null, panel.newRelAutoCreate());
-        system.assertNotEquals(null, panel.acNew);
-        system.assertEquals(true, panel.isEditMode);
-        system.assertEquals(null, panel.cancelRelAutoCreate());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertEquals(null, panel.newRelAutoCreate());
-        system.assertNotEquals(null, panel.acNew);
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals('idPanelRelAuto', panel.idPanel(), 'Assert that the panel is the same as the panel relAuto.');
+        system.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        system.assertEquals(null, panel.newRelAutoCreate(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.acNew, 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
+        system.assertEquals(null, panel.cancelRelAutoCreate(), 'Assert that cancelRelAutoCreate is called.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertEquals(null, panel.newRelAutoCreate(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.acNew, 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.acNew.npe4__Object__c = null;
         panel.acNew.npe4__Field__c = null;
         panel.acNew.npe4__Relationship_Type__c = null;
         panel.acNew.npe4__Campaign_Types__c = null;
-        system.assertEquals(null, panel.createRelAutoCreate());
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals(null, panel.createRelAutoCreate(), 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.acNew.npe4__Object__c = 'Contact';
         panel.acNew.npe4__Field__c = 'ReportsToId';
         panel.acNew.npe4__Relationship_Type__c = 'coworker';
         panel.acNew.npe4__Campaign_Types__c = null;
-        system.assertEquals(null, panel.createRelAutoCreate());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertNotEquals(null, panel.listRelAutoCreate);
-        system.assertEquals(1, panel.listRelAutoCreate.size());
+        system.assertEquals(null, panel.createRelAutoCreate(), 'Assert that the panel is not null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertNotEquals(null, panel.listRelAutoCreate, 'Assert that the panel s listRelAutoCreate property is not null.');
+        system.assertEquals(1, panel.listRelAutoCreate.size(), 'Checks that the number of auto - create panels is equal to 1.');
         panel.acIdDelete = 'not a valid id';
-        system.assertEquals(null, panel.deleteAc());
+        system.assertEquals(null, panel.deleteAc(), 'Delete the Ac dialog.');
         panel.acIdDelete = panel.listRelAutoCreate[0].Id;
-        system.assertEquals(null, panel.deleteAc());
-        system.assertNotEquals(null, panel.listRelAutoCreate);
-        system.assertEquals(0, panel.listRelAutoCreate.size());
+        system.assertEquals(null, panel.deleteAc(), 'Delete the Ac dialog.');
+        system.assertNotEquals(null, panel.listRelAutoCreate, 'Assert that the panel s listRelAutoCreate property is not null.');
+        system.assertEquals(0, panel.listRelAutoCreate.size(), 'Assert that the number of auto - create panels is the same.');
         panel.acNew.npe4__Object__c = 'Contact';
-        system.assertNotEquals(null, panel.listSOACfield);
+        system.assertNotEquals(null, panel.listSOACfield, 'Assert that the panel is not null.');
         panel.acNew.npe4__Object__c = 'CampaignMember';
-        system.assertNotEquals(null, panel.listSOACfield);
+        system.assertNotEquals(null, panel.listSOACfield, 'Assert that the panel is not null.');
     }
 
     /*********************************************************************************************************
@@ -1519,36 +1519,36 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelRelReciprocal() {
         STG_PanelRelReciprocal_CTRL panel = new STG_PanelRelReciprocal_CTRL();
-        system.assertEquals('idPanelRelReciprocal', panel.idPanel());
-        system.assertEquals(false, ApexPages.hasMessages());
-        system.assertEquals(null, panel.newRelLookup());
-        system.assertNotEquals(null, panel.rlNew);
-        system.assertEquals(true, panel.isEditMode);
-        system.assertEquals(null, panel.cancelRelLookup());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertEquals(null, panel.newRelLookup());
-        system.assertNotEquals(null, panel.rlNew);
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals('idPanelRelReciprocal', panel.idPanel(), 'Checks that the panel is the same as the panel relreciprocal panel.');
+        system.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        system.assertEquals(null, panel.newRelLookup(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.rlNew, 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
+        system.assertEquals(null, panel.cancelRelLookup(), 'Assert that cancelRelLookup is called.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertEquals(null, panel.newRelLookup(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.rlNew, 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.rlNew.Name = null;
         panel.rlNew.npe4__Male__c = null;
         panel.rlNew.npe4__Female__c = null;
         panel.rlNew.npe4__Neutral__c = null;
-        system.assertEquals(null, panel.createRelLookup());
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals(null, panel.createRelLookup(), 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.rlNew.Name = 'foo';
         panel.rlNew.npe4__Male__c = 'bar';
         panel.rlNew.npe4__Female__c = 'baz';
         panel.rlNew.npe4__Neutral__c = 'buz';
-        system.assertEquals(null, panel.createRelLookup());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertNotEquals(null, panel.listRelLookup);
-        system.assertEquals(1, panel.listRelLookup.size());
+        system.assertEquals(null, panel.createRelLookup(), 'Assert that the panel is not null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertNotEquals(null, panel.listRelLookup, 'Assert that the panel is not null.');
+        system.assertEquals(1, panel.listRelLookup.size(), 'Checks that the number of panels is equal to 1.');
         panel.rlIdDelete = 'not a valid id';
-        system.assertEquals(null, panel.deleteRl());
+        system.assertEquals(null, panel.deleteRl(), 'Asserts that the delete panel is not null.');
         panel.rlIdDelete = panel.listRelLookup[0].Id;
-        system.assertEquals(null, panel.deleteRl());
-        system.assertNotEquals(null, panel.listRelLookup);
-        system.assertEquals(0, panel.listRelLookup.size());
+        system.assertEquals(null, panel.deleteRl(), 'Asserts that the delete panel is not null.');
+        system.assertNotEquals(null, panel.listRelLookup, 'Assert that the panel is not null.');
+        system.assertEquals(0, panel.listRelLookup.size(), 'Assert that the panel list is empty.');
     }
 
     /*********************************************************************************************************
@@ -1558,59 +1558,59 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelUserRollup() {
         STG_PanelUserRollup_CTRL panel = new STG_PanelUserRollup_CTRL();
-        system.assertEquals('idPanelUserRollup', panel.idPanel());
-        system.assertEquals(false, ApexPages.hasMessages());
+        system.assertEquals('idPanelUserRollup', panel.idPanel(), 'Checks that the idPanelUserRollup is the same as the panel idPanel');
+        system.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
         panel.startBuild();
-        system.assertNotEquals(null, panel.activeUDR);
-        system.assertEquals(true, panel.isEditMode);
-        system.assertNotEquals(null, panel.getSourceFields());
-        system.assertNotEquals(null, panel.getTargetFields());
-        system.assertNotEquals(null, panel.getTargetObjects());
-        system.assertNotEquals(null, panel.getValidOperators());
+        system.assertNotEquals(null, panel.activeUDR, 'Assert that the UDR is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
+        system.assertNotEquals(null, panel.getSourceFields(), 'Assert that the source fields of the panel are not null.');
+        system.assertNotEquals(null, panel.getTargetFields(), 'Assert that the target fields are not null.');
+        system.assertNotEquals(null, panel.getTargetObjects(), 'Assert that the target objects of the panel are not null.');
+        system.assertNotEquals(null, panel.getValidOperators(), 'Assert that all operators are not null.');
         panel.clearForSourceField();
         panel.clearForOperation();
         panel.clearForTargetObject();
         panel.cancel();
-        system.assertEquals(false, panel.isEditMode);
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
         panel.startBuild();
-        system.assertNotEquals(null, panel.activeUDR);
-        system.assertEquals(true, panel.isEditMode);
+        system.assertNotEquals(null, panel.activeUDR, 'Assert that the UDR is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.activeUDR.SourceField = null;
         panel.activeUDR.Operation = null;
         panel.activeUDR.TargetObject = null;
         panel.activeUDR.TargetField = null;
-        system.assertEquals(false, panel.activeUDR.getisValid());
+        system.assertEquals(false, panel.activeUDR.getisValid(), 'Checks that the UDR is valid.');
         panel.activeUDR.save();
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.activeUDR.SourceField = 'Amount';
         panel.activeUDR.Operation = 'SUM';
         panel.activeUDR.TargetObject = 'Contact';
         panel.activeUDR.TargetField = 'Description';
-        system.assertEquals(true, panel.activeUDR.getisValid());
-        system.assertNotEquals(null, panel.getSourceFields());
-        system.assertNotEquals(null, panel.getTargetFields());
-        system.assertNotEquals(null, panel.getTargetObjects());
-        system.assertNotEquals(null, panel.getValidOperators());
-        system.assertNotEquals(null, panel.udrList);
+        system.assertEquals(true, panel.activeUDR.getisValid(), 'Checks that the UDR is valid.');
+        system.assertNotEquals(null, panel.getSourceFields(), 'Assert that the source fields of the panel are not null.');
+        system.assertNotEquals(null, panel.getTargetFields(), 'Assert that the target fields are not null.');
+        system.assertNotEquals(null, panel.getTargetObjects(), 'Assert that the target objects of the panel are not null.');
+        system.assertNotEquals(null, panel.getValidOperators(), 'Assert that all operators are not null.');
+        system.assertNotEquals(null, panel.udrList, 'Assert that the panel is not null.');
         panel.activeUDR.TargetObject = 'Account';
-        system.assertNotEquals(null, panel.getTargetFields());
+        system.assertNotEquals(null, panel.getTargetFields(), 'Assert that the target fields are not null.');
         panel.activeUDR.TargetObject = 'npo02__Household__c';
-        system.assertNotEquals(null, panel.getTargetFields());
+        system.assertNotEquals(null, panel.getTargetFields(), 'Assert that the target fields are not null.');
         panel.activeUDR.TargetObject = 'Contact';
         panel.activeUDR.save();
-        system.assertEquals(false, panel.isEditMode);
-        system.assertNotEquals(null, panel.udrlist);
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertNotEquals(null, panel.udrlist, 'Assert that the panel is not null.');
         panel.udrList = null;
         UTIL_ListCustomSettingsFacade.mapUserRollupFieldSettings = null;
-        system.assertEquals(1, panel.udrlist.size());
+        system.assertEquals(1, panel.udrlist.size(), 'Assert that the number of UDRs in the panel is equal to 1.');
         panel.startBuild();
-        system.assertNotEquals(null, panel.getTargetFields());
+        system.assertNotEquals(null, panel.getTargetFields(), 'Assert that the target fields are not null.');
         panel.activeUDR = panel.udrlist[0];
         panel.activeUDR.deleteMe();
         panel.udrList = null;
         UTIL_ListCustomSettingsFacade.mapUserRollupFieldSettings = null;
-        system.assertNotEquals(null, panel.udrlist);
-        system.assertEquals(0, panel.udrlist.size());
+        system.assertNotEquals(null, panel.udrlist, 'Assert that the panel is not null.');
+        system.assertEquals(0, panel.udrlist.size(), 'Assert that the size of the UDR list is the same as the number of UDR');
 
     }
 
@@ -1633,16 +1633,16 @@ private with sharing class STG_SettingsManager_TEST {
         controller.activeUDR.SourceField = 'Amount';
 
         list<SelectOption> operatorList = controller.getValidOperators();
-        system.assert(operatorList.size() == 4);
+        system.assert(operatorList.size() == 4, 'This function asserts that there are exactly 4 operators in the operator list.');
 
         controller.activeUDR.SourceField = 'CloseDate';
         operatorList = controller.getValidOperators();
-        system.assert(operatorList.size() == 2);
+        system.assert(operatorList.size() == 2, 'This function asserts that there is only one operator in the list.');
 
         controller.activeUDR.Operation = 'MAX';
 
         list<SelectOption> targetObjectList = controller.getTargetObjects();
-        system.assertEquals(targetObjectList.size(), 3);
+        system.assertEquals(targetObjectList.size(), 3, 'Checks that the number of objects in the target object list equals 3.');
 
         controller.activeUDR.TargetObject = 'Account';
 
@@ -1668,20 +1668,20 @@ private with sharing class STG_SettingsManager_TEST {
         UTIL_ListCustomSettingsFacade.mapUserRollupFieldSettings = null;
 
         //existing invalid rollups will cause test failure
-        system.assertEquals(controller.activeUDR.getisValid(), true);
+        system.assertEquals(controller.activeUDR.getisValid(), true, 'Checks that the active UDR is valid.');
         list<STG_PanelUserRollup_CTRL.UDR> udrlist = controller.udrList;
-        system.assert(udrList.size() > 0);
+        system.assert(udrList.size() > 0, 'asserts that there is no ucr list');
 
         //test clearing the three different lists
         controller.clearForTargetObject();
-        system.assert(controller.activeUDR.TargetField == null);
+        system.assert(controller.activeUDR.TargetField == null, 'This method is called when the controller is not active.');
         controller.clearForOperation();
-        system.assert(controller.activeUDR.TargetObject != null);
+        system.assert(controller.activeUDR.TargetObject != null, 'This method is called by the UI thread when the active UDR is active.');
         controller.clearForSourceField();
-        system.assert(controller.activeUDR.Operation == null);
+        system.assert(controller.activeUDR.Operation == null, 'This method is called by the controller when it is not active.');
 
         controller.cancel();
-        system.assertEquals(null, controller.activeUDR);
+        system.assertEquals(null, controller.activeUDR, 'Assert that the UDR is active.');
 
         //generate a new one so we can call its delete sequence
         controller.startBuild();
@@ -1728,13 +1728,13 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelCRLP() {
         STG_PanelCustomizableRollup_CTRL panel = new STG_PanelCustomizableRollup_CTRL();
-        System.assertEquals('idPanelCustomizableRollup', panel.idPanel());
-        System.assertEquals(true, panel.isRunningUserIsAdmin);
-        System.assertEquals(false, panel.isPolling);
-        System.assertEquals(false, ApexPages.hasMessages());
-        System.assert(panel.showCRLPSettings);
-        System.assert(panel.isRunningUserIsAdmin);
-        System.assertEquals(false, ApexPages.hasMessages());
+        System.assertEquals('idPanelCustomizableRollup', panel.idPanel(), 'Checks that the idPanelCustomizableRollup property of the underlying Panel is equal to the');
+        System.assertEquals(true, panel.isRunningUserIsAdmin, 'Checks if the current user is an admin.');
+        System.assertEquals(false, panel.isPolling, 'Checks if the panel is polling.');
+        System.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        System.assert(panel.showCRLPSettings, 'Checks if CRLP settings are displayed.');
+        System.assert(panel.isRunningUserIsAdmin, 'Checks if the current user is an admin.');
+        System.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
 
         // Clear cache so test passes in orgs that have rollups
         CRLP_Rollup_SEL.cachedRollups = new List<Rollup__mdt>();
@@ -1776,13 +1776,13 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelSchedule() {
         STG_PanelSchedule_CTRL panel = new STG_PanelSchedule_CTRL();
-        system.assertEquals('idPanelSchedule', panel.idPanel());
+        system.assertEquals('idPanelSchedule', panel.idPanel(), 'Assert that the panel schedule is the same as the panel.');
         STG_Panel.stgService.stgErr.Don_t_Auto_Schedule_Default_NPSP_Jobs__c = true;
         panel.saveSettings();
-        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgErrorSettings().Don_t_Auto_Schedule_Default_NPSP_Jobs__c);
+        system.assertEquals(true, UTIL_CustomSettingsFacade.getOrgErrorSettings().Don_t_Auto_Schedule_Default_NPSP_Jobs__c, 'This function checks if the value of Don t Auto - Schedule Default NSP Jobs is set');
         STG_Panel.stgService.stgErr.Don_t_Auto_Schedule_Default_NPSP_Jobs__c = false;
         panel.saveSettings();
-        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgErrorSettings().Don_t_Auto_Schedule_Default_NPSP_Jobs__c);
+        system.assertEquals(false, UTIL_CustomSettingsFacade.getOrgErrorSettings().Don_t_Auto_Schedule_Default_NPSP_Jobs__c, 'This function should only be used in unit tests.');
     }
 
     /*********************************************************************************************************
@@ -1792,38 +1792,38 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelTDTM() {
         STG_PanelTDTM_CTRL panel = new STG_PanelTDTM_CTRL();
-        system.assertEquals('idPanelTDTM', panel.idPanel());
-        system.assertEquals(false, ApexPages.hasMessages());
-        system.assertEquals(null, panel.newTh());
-        system.assertNotEquals(null, panel.thNew);
-        system.assertEquals(true, panel.isEditMode);
-        system.assertEquals(null, panel.cancelTh());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertEquals(null, panel.newTh());
-        system.assertNotEquals(null, panel.thNew);
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals('idPanelTDTM', panel.idPanel(), 'Assert that the panel is the same as the one in the panel panel table.');
+        system.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        system.assertEquals(null, panel.newTh(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.thNew, 'Assert that panel. thNew is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
+        system.assertEquals(null, panel.cancelTh(), 'Asserts that the cancel panel is not null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertEquals(null, panel.newTh(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.thNew, 'Assert that panel. thNew is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.thNew.Object__c = null;
         panel.thNew.Class__c = null;
         panel.thNew.Trigger_Action__c = null;
         panel.thNew.Load_Order__c = null;
-        system.assertEquals(null, panel.createTh());
-        system.assertEquals(true, panel.isEditMode);
+        system.assertEquals(null, panel.createTh(), 'Assert that the panel is not null.');
+        system.assertEquals(true, panel.isEditMode, 'Checks if the panel is in edit mode.');
         panel.thNew.Object__c = 'foo';
         panel.thNew.Class__c = 'bar';
         panel.thNew.Trigger_Action__c = 'AfterInsert';
         panel.thNew.Load_Order__c = 1;
         panel.thNew.Active__c = false;
-        system.assertEquals(null, panel.createTh());
-        system.assertEquals(false, panel.isEditMode);
-        system.assertNotEquals(null, panel.listTH);
-        system.assertEquals(1, panel.listTH.size());
+        system.assertEquals(null, panel.createTh(), 'Assert that the panel is not null.');
+        system.assertEquals(false, panel.isEditMode, 'Checks that the panel is in edit mode.');
+        system.assertNotEquals(null, panel.listTH, 'Assert that the panel is not null.');
+        system.assertEquals(1, panel.listTH.size(), 'Assert that the panel list is exactly 1.');
         panel.thIdDelete = 'not a valid id';
-        system.assertEquals(null, panel.deleteTh());
+        system.assertEquals(null, panel.deleteTh(), 'Asserts that the deleteTh method is called.');
         panel.thIdDelete = panel.listTH[0].Id;
-        system.assertEquals(null, panel.deleteTh());
-        system.assertNotEquals(null, panel.listTH);
-        system.assertEquals(0, panel.listTH.size());
-        system.assertNotEquals(null, panel.listSOTriggerAction);
+        system.assertEquals(null, panel.deleteTh(), 'Asserts that the deleteTh method is called.');
+        system.assertNotEquals(null, panel.listTH, 'Assert that the panel is not null.');
+        system.assertEquals(0, panel.listTH.size(), 'Assert that panel list is empty');
+        system.assertNotEquals(null, panel.listSOTriggerAction, 'Assert that the panel is not null.');
     }
 
     /*********************************************************************************************************
@@ -1833,33 +1833,33 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelErrorLog() {
         STG_PanelErrorLog_CTRL panel = new STG_PanelErrorLog_CTRL();
-        system.assertEquals('idPanelErrorLog', panel.idPanel());
+        system.assertEquals('idPanelErrorLog', panel.idPanel(), 'Checks that the idPanelErrorLog is the same as the panel id.');
         UTIL_SoqlListView_CTRL slv = new UTIL_SoqlListView_CTRL();
         panel.setComponentController(slv);
         slv.pageController = panel;
-        system.assertNotEquals(null, panel.getStrSoql());
-        system.assertNotEquals(null, panel.getstrFields());
-        system.assertNotEquals(null, panel.getstrNameField());
-        system.assertNotEquals(null, panel.getstrObjectType());
-        system.assertEquals(null, panel.NewItem());
-        system.assertNotEquals(null, panel.EditItem(null));
-        system.assertNotEquals(null, panel.getslvConsumer());
-        system.assertEquals(null, panel.clearErrorLog());
-        system.assertNotEquals(null, slv.setCon);
-        system.assertNotEquals(null, slv.cRecordsPerPage);
-        system.assertEquals(null, slv.showMoreRecordsPerPage());
-        system.assertNotEquals(null, slv.NumberOfPages);
-        system.assertNotEquals(null, slv.NumberOfItems);
-        system.assertNotEquals(null, slv.listSLVObj);
-        system.assertNotEquals(null, slv.listSLVObjCurrent);
+        system.assertNotEquals(null, panel.getStrSoql(), 'Assert that the string is not null.');
+        system.assertNotEquals(null, panel.getstrFields(), 'Assert that all the fields in the panel are not null.');
+        system.assertNotEquals(null, panel.getstrNameField(), 'Assert that the name field of the panel is not null.');
+        system.assertNotEquals(null, panel.getstrObjectType(), 'Assert that the panel is not null.');
+        system.assertEquals(null, panel.NewItem(), 'Assert that the panel is not null.');
+        system.assertNotEquals(null, panel.EditItem(null), 'Asserts that the currently displayed panel is not the same as the currently displayed panel.');
+        system.assertNotEquals(null, panel.getslvConsumer(), 'Assert that the slv consumer is not null.');
+        system.assertEquals(null, panel.clearErrorLog(), 'Assert that the error log is cleared.');
+        system.assertNotEquals(null, slv.setCon, 'Assert that slv. setCon is not null.');
+        system.assertNotEquals(null, slv.cRecordsPerPage, 'Assert that slv. cRecordsPerPage is not null.');
+        system.assertEquals(null, slv.showMoreRecordsPerPage(), 'Assert that slv. showMoreRecordsPerPage is called.');
+        system.assertNotEquals(null, slv.NumberOfPages, 'This method asserts that the value of slv. NumberOfPages is not equal to null');
+        system.assertNotEquals(null, slv.NumberOfItems, 'This test asserts that the number of items in the collection is not equal to the number of');
+        system.assertNotEquals(null, slv.listSLVObj, 'Assert that slv. listSLVObj is not null.');
+        system.assertNotEquals(null, slv.listSLVObjCurrent, 'Assert that the list of SLV objects is not null.');
         slv.strAlphaFilter = '%';
-        system.assertNotEquals(null, slv.strAlphaFilter);
-        system.assertEquals(null, slv.AlphaFilter());
-        system.assertNotEquals(null, slv.listAlphaFilters);
-        system.assertNotEquals(null, slv.SortItemField);
-        system.assertNotEquals(null, slv.SortItemAsc);
-        system.assertEquals(null, slv.SortItem());
-        system.assertNotEquals(null, slv.showCheckboxes);
+        system.assertNotEquals(null, slv.strAlphaFilter, 'Assert that the filter is not equal to the filter.');
+        system.assertEquals(null, slv.AlphaFilter(), 'This test asserts that the alpha filter is null.');
+        system.assertNotEquals(null, slv.listAlphaFilters, 'Assert that slv. listAlphaFilters is not null.');
+        system.assertNotEquals(null, slv.SortItemField, 'assert that sortItemField is not null');
+        system.assertNotEquals(null, slv.SortItemAsc, 'Sort is not equal to sort. SortItemAsc');
+        system.assertEquals(null, slv.SortItem(), 'Assert that slv. SortItem is null.');
+        system.assertNotEquals(null, slv.showCheckboxes, 'Assert that slv. showCheckboxes is not null.');
 
     }
 
@@ -1871,8 +1871,8 @@ private with sharing class STG_SettingsManager_TEST {
     private static void testPanelHealthCheck() {
         STG_PanelHealthCheck_CTRL panel = new STG_PanelHealthCheck_CTRL();
         
-        System.assertEquals('idPanelHealthCheck', panel.idPanel());
-        System.assertEquals(null, panel.runDetector());
+        System.assertEquals('idPanelHealthCheck', panel.idPanel(), 'Checks that the panel health check is the same as the one in the panel.');
+        System.assertEquals(null, panel.runDetector(), 'Assert that the panel is not null.');
     }
 
     /*********************************************************************************************************
@@ -1882,10 +1882,10 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelLvlAssignBatch() {
         STG_PanelLvlAssignBatch_CTRL panel = new STG_PanelLvlAssignBatch_CTRL();
-        system.assertEquals('idPanelLvlAssignBatch', panel.idPanel());
-        system.assertEquals(false, panel.isRunningBatch);
+        system.assertEquals('idPanelLvlAssignBatch', panel.idPanel(), 'Assert that idPanelLvlAssignBatch is the same as idPanel');
+        system.assertEquals(false, panel.isRunningBatch, 'Asserts that the panel is running batch.');
         panel.runBatch();
-        system.assertEquals(true, panel.isRunningBatch);
+        system.assertEquals(true, panel.isRunningBatch, 'Checks that the panel is running batch.');
     }
 
     /*********************************************************************************************************
@@ -1895,12 +1895,12 @@ private with sharing class STG_SettingsManager_TEST {
     @isTest
     private static void testPanelPanelPrimaryContactRoleMergeBatch() {
         STG_PanelPrimaryContactRoleMerge_CTRL panel = new STG_PanelPrimaryContactRoleMerge_CTRL();
-        system.assertEquals('idPanelPrimaryContactRoleMergeBatch', panel.idPanel());
-        system.assertEquals(false, panel.isRunningBatch);
+        system.assertEquals('idPanelPrimaryContactRoleMergeBatch', panel.idPanel(), 'Assert that the primary panel has the same primary contact role merge batch as the panel.');
+        system.assertEquals(false, panel.isRunningBatch, 'Asserts that the panel is running batch.');
         Test.startTest();
         panel.runBatch();
         Test.stopTest();
-        system.assertEquals(true, panel.isRunningBatch);
+        system.assertEquals(true, panel.isRunningBatch, 'Checks that the panel is running batch.');
     }
 
     /***

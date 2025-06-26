@@ -49,9 +49,9 @@ public class ADV_Adapter_TEST {
         try {
             List<Trigger_Handler__c> triggerHandlers = theAdapter.getDefaultTdtmConfigNpspRecords(null);
             //Add this to make sure it throws exception
-            System.assert(false);
+            System.assert(false, 'This method will assert that the test is not called.');
         } catch (Exception ex) {
-            System.assertEquals(Label.adapterException, ex.getMessage());
+            System.assertEquals(Label.adapterException, ex.getMessage(), 'Assert that the adapterException is the same as the one in the label.');
         }
         Test.stopTest();
     }
@@ -69,9 +69,9 @@ public class ADV_Adapter_TEST {
         try {
             theAdapter.rollupAccounts(null);
             //Add this to make sure it throws exception
-            System.assert(false);
+            System.assert(false, 'This method will assert that the test is not called.');
         } catch (Exception ex) {
-            System.assertEquals(Label.adapterException, ex.getMessage());
+            System.assertEquals(Label.adapterException, ex.getMessage(), 'Assert that the adapterException is the same as the one in the label.');
         }
         Test.stopTest();
     }
@@ -89,9 +89,9 @@ public class ADV_Adapter_TEST {
         try {
             theAdapter.moveOppsToContactAccount(null, null);
             //Add this to make sure it throws exception
-            System.assert(false);
+            System.assert(false, 'This method will assert that the test is not called.');
         } catch (Exception ex) {
-            System.assertEquals(Label.adapterException, ex.getMessage());
+            System.assertEquals(Label.adapterException, ex.getMessage(), 'Assert that the adapterException is the same as the one in the label.');
         }
         Test.stopTest();
     }
@@ -109,9 +109,9 @@ public class ADV_Adapter_TEST {
         try {
             theAdapter.configAccountForContact(null);
             //Add this to make sure it throws exception
-            System.assert(false);
+            System.assert(false, 'This method will assert that the test is not called.');
         } catch (Exception ex) {
-            System.assertEquals(Label.adapterException, ex.getMessage());
+            System.assertEquals(Label.adapterException, ex.getMessage(), 'Assert that the adapterException is the same as the one in the label.');
         }
         Test.stopTest();
     }
@@ -129,9 +129,9 @@ public class ADV_Adapter_TEST {
         try {
             theAdapter.configAccountTDTM(null, null, null);
             //Add this to make sure it throws exception
-            System.assert(false);
+            System.assert(false, 'This method will assert that the test is not called.');
         } catch (Exception ex) {
-            System.assertEquals(Label.adapterException, ex.getMessage());
+            System.assertEquals(Label.adapterException, ex.getMessage(), 'Assert that the adapterException is the same as the one in the label.');
         }
         Test.stopTest();
     }

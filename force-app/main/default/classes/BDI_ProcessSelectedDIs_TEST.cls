@@ -57,11 +57,11 @@ private class BDI_ProcessSelectedDIs_TEST {
         Test.stopTest();
         
         // Confirm no error messages were generated
-        System.assertEquals(false, ApexPages.hasMessages());
+        System.assertEquals(false, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
 
         // Confirm that the URL contains the correct Ids
-        System.assert(pr.getUrl().contains(testDIs[0].Id));
-        System.assert(pr.getUrl().contains(testDIs[1].Id));
+        System.assert(pr.getUrl().contains(testDIs[0].Id), 'Checks that the URL of the page contains the test DIs.');
+        System.assert(pr.getUrl().contains(testDIs[1].Id), 'Checks that the URL of the page is the test DIs.');
     }
 
 
@@ -89,8 +89,8 @@ private class BDI_ProcessSelectedDIs_TEST {
             new String[]{String.valueOf(ctrl.maxNumOfDi)});
 
         // Confirm error message was generated
-        System.assertEquals(true, ApexPages.hasMessages());
-        System.assertEquals(errorMsg,ApexPages.getMessages()[0].getDetail());
+        System.assertEquals(true, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        System.assertEquals(errorMsg,ApexPages.getMessages()[0].getDetail(), 'Assert that the error message is the same as the first detail message.');
     }
 
     /*********************************************************************************************************
@@ -111,8 +111,8 @@ private class BDI_ProcessSelectedDIs_TEST {
         Test.stopTest();
         
         // Confirm error message was generated
-        System.assertEquals(true, ApexPages.hasMessages());
-        System.assertEquals(System.label.bdiSelectNoDIRecordsSelected,ApexPages.getMessages()[0].getDetail());
+        System.assertEquals(true, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        System.assertEquals(System.label.bdiSelectNoDIRecordsSelected,ApexPages.getMessages()[0].getDetail(), 'Assert that the system label bdiSelectNoDIRecordsSelected is the same as the detail');
     }
 
     /*********************************************************************************************************
@@ -138,8 +138,8 @@ private class BDI_ProcessSelectedDIs_TEST {
         Test.stopTest();
         
         // Confirm error message was generated
-        System.assertEquals(true, ApexPages.hasMessages());
-        System.assertEquals(System.label.bdiSelectCantProcessImportedRecords,ApexPages.getMessages()[0].getDetail());
+        System.assertEquals(true, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        System.assertEquals(System.label.bdiSelectCantProcessImportedRecords,ApexPages.getMessages()[0].getDetail(), 'Assert that the system label bdiSelectCantProcessImportedRecords is the same as the');
 
         ctrl.returnToListView();
     }
@@ -169,8 +169,8 @@ private class BDI_ProcessSelectedDIs_TEST {
         Test.stopTest();
         
         // Confirm error message was generated
-        System.assertEquals(true, ApexPages.hasMessages());
-        System.assertEquals(System.label.bdiSelectCantProcessBatchDIRecords,ApexPages.getMessages()[0].getDetail());
+        System.assertEquals(true, ApexPages.hasMessages(), 'Checks that ApexPages has messages.');
+        System.assertEquals(System.label.bdiSelectCantProcessBatchDIRecords,ApexPages.getMessages()[0].getDetail(), 'Assert that the label bdiSelectCantProcessBatchDIRecords is the same as the');
     }
 
     /*********************************************************************************************************

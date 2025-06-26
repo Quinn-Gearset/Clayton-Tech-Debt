@@ -45,9 +45,9 @@ private with sharing class UTIL_FiscalYearInfo_TEST {
         UTIL_FiscalYearInfo fiscalYearInfo = UTIL_FiscalYearInfo.getInstance()
             .withUseFiscalYear(false);
 
-        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 3, 1)));
-        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 4, 1)));
-        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 3, 1)));
+        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 3, 1)), 'Checks that the current date is the same as the fiscal year.');
+        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 4, 1)), 'Checks that the current date is the same as the fiscal year.');
+        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 3, 1)), 'Checks that the current date is the same as the fiscal year.');
     }
 
     /**
@@ -66,12 +66,12 @@ private with sharing class UTIL_FiscalYearInfo_TEST {
         //A fiscal year is April through March.
         //The fiscal year and the current calendar year align beginning the start month, ie
         //the fiscal year starts in the start month.
-        System.assertEquals(2013, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 3, 31)));
-        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 4, 1)));
-        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 5, 1)));
+        System.assertEquals(2013, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 3, 31)), 'Checks that the given date is the same as the fiscal year.');
+        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 4, 1)), 'Checks that the current date is the same as the fiscal year.');
+        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 5, 1)), 'Checks that the current date is the same as the fiscal year.');
 
-        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 3, 1)));
-        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 4, 1)));
+        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 3, 1)), 'Checks that the current date is the same as the fiscal year.');
+        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 4, 1)), 'Checks that the current date is the same as the fiscal year.');
     }
 
     /**
@@ -90,12 +90,12 @@ private with sharing class UTIL_FiscalYearInfo_TEST {
         //A fiscal year is April through March.
         //The fiscal year and the current calendar year align before the start month, ie
         //the fiscal year ends before the start month and the next fiscal year starts in the start month.
-        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 3, 31)));
-        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 4, 1)));
-        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 5, 1)));
+        System.assertEquals(2014, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 3, 31)), 'Checks that the given date is the same as the fiscal year.');
+        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 4, 1)), 'Checks that the current year is the same as the fiscal year.');
+        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2014, 5, 1)), 'Checks that the current year is the same as the fiscal year.');
 
-        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 3, 1)));
-        System.assertEquals(2016, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 4, 1)));
+        System.assertEquals(2015, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 3, 1)), 'Checks that the current date is the same as the fiscal year.');
+        System.assertEquals(2016, fiscalYearInfo.getFiscalYear(Date.newInstance(2015, 4, 1)), 'Checks that the current date is the same as the fiscal year.');
     }
 
     /**

@@ -105,16 +105,16 @@ private class ERR_Handler_TEST {
 
         List<Error__c> errors = errorGateway.getRecords();
 
-        System.assertEquals(1, errors.size());
+        System.assertEquals(1, errors.size(), 'Asserts that the number of errors is equal to 1.');
         UTIL_Debug.debug('****Errors: ' + JSON.serializePretty(errors));
 
         //Verify error was posted to chatter group
         if(Schema.SObjectType.User.isFeedEnabled()) {
             List<SObject> chatterPosts = Database.query('SELECT Title FROM FeedItem where ParentId = :chatterGroupId');
-            System.assertEquals(1, chatterPosts.size());
-            System.assertEquals('Salesforce Error', chatterPosts[0].get('Title'));
+            System.assertEquals(1, chatterPosts.size(), 'Checks that the number of chatter posts is equal to 1.');
+            System.assertEquals('Salesforce Error', chatterPosts[0].get('Title'), 'This is a hack to make sure that Salesforce errors are not displayed in the chatter');
             for(Error__c error : errors) {
-                System.assertEquals(true, error.Posted_in_Chatter__c);
+                System.assertEquals(true, error.Posted_in_Chatter__c, 'Posted in Chatter is the same as posted in Chatter.');
             }
         }
     }
@@ -134,12 +134,12 @@ private class ERR_Handler_TEST {
         Test.stopTest();
 
         List<Error__c> errors = errorGateway.getRecords();
-        System.assertEquals(1, errors.size());
+        System.assertEquals(1, errors.size(), 'Asserts that the number of errors is equal to 1.');
 
         //Verify error was emailed
         for(Error__c error : errors) {
-            System.assertEquals(true, error.Email_Sent__c);
-            System.assertEquals(ERR_Handler_API.Context.TDTM.name(), error.Context_Type__c);
+            System.assertEquals(true, error.Email_Sent__c, 'Test for equality of email sent.');
+            System.assertEquals(ERR_Handler_API.Context.TDTM.name(), error.Context_Type__c, 'This function is used to assert that the name of the context is the same as the name');
         }
     }
 
@@ -181,21 +181,21 @@ private class ERR_Handler_TEST {
         }
         // assert an error record was created - Required fields are missing: [npe4__Contact__c]
         // from the reciprocal relationship that gets automatically created.
-        System.assertEquals(1, [SELECT count() FROM Error__c]);
+        System.assertEquals(1, [SELECT count() FROM Error__c], 'Test for equality of the number of errors in the database.');
 
         //update relationship - this will create the missing npe4__Contact__c field
         relationships[0].npe4__RelatedContact__c = contact1.id;
         Database.SaveResult[] updateResults = Database.update(relationships, false);
-        System.assertNotEquals(null, relationships[0].npe4__Contact__c);
+        System.assertNotEquals(null, relationships[0].npe4__Contact__c, 'Assert that the contact object is not null.');
 
         //get errors
         ERR_Handler.Errors errors = ERR_Handler.getErrors(updateResults, (List<SObject>)relationships);
         //we still get an error, because of the Related_Contact_Do_Not_Change validation rule on Relationship
-        System.assertEquals(true, errors.errorsExist);
-        System.assertEquals(1, errors.errorRecords.size());
+        System.assertEquals(true, errors.errorsExist, 'Checks that all errors exist.');
+        System.assertEquals(1, errors.errorRecords.size(), 'Checks that the number of errors is equal to 1.');
 
         //assert no additional error record was created on update
-        System.assertEquals(1, [SELECT count() FROM Error__c]);
+        System.assertEquals(1, [SELECT count() FROM Error__c], 'Test for equality of the number of errors in the database.');
     }
 
     /*******************************************************************************************************
@@ -229,13 +229,13 @@ private class ERR_Handler_TEST {
         Test.stopTest();
 
         //assert contact record creation was rolled back
-        System.assertEquals(0, [SELECT count() FROM Contact]);
+        System.assertEquals(0, [SELECT count() FROM Contact], 'Asserts that the number of contacts is equal to 0.');
 
         //assert relationship record was not stored
-        System.assertEquals(0, [SELECT count() FROM npe4__Relationship__c]);
+        System.assertEquals(0, [SELECT count() FROM npe4__Relationship__c], 'Asserts that the number of relationships in the database is equal to 0.');
 
         //assert an error record was created - Required fields are missing: [npe4__Contact__c]
-        System.assertEquals(1, [SELECT count() FROM Error__c]);
+        System.assertEquals(1, [SELECT count() FROM Error__c], 'Test for equality of the number of errors in the database.');
     }
 
     /*******************************************************************************************************
@@ -258,12 +258,12 @@ private class ERR_Handler_TEST {
         Test.stopTest();
 
         List<Error__c> errors = errorGateway.getRecords();
-        System.assertEquals(1, errors.size());
+        System.assertEquals(1, errors.size(), 'Asserts that the number of errors is equal to 1.');
 
         //Verify error was NOT emailed
         for (Error__c error : errors) {
-            System.assertEquals(true, error.Email_Sent__c);
-            System.assertEquals(ERR_Handler_API.Context.TDTM.name(), error.Context_Type__c);
+            System.assertEquals(true, error.Email_Sent__c, 'Test for equality of email sent.');
+            System.assertEquals(ERR_Handler_API.Context.TDTM.name(), error.Context_Type__c, 'This function is used to assert that the name of the context is the same as the name');
         }
     }
 

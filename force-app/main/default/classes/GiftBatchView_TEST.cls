@@ -38,26 +38,26 @@ private class GiftBatchView_TEST {
     @isTest
     static void shouldReturn200TotalDonationsAmount() {
         GiftBatchView giftBatchView = createDummyGiftBatchViewWith(new Gifts());
-        System.assertEquals(200, giftBatchView.totalDonationsAmount);
+        System.assertEquals(200, giftBatchView.totalDonationsAmount, 'This method is used to test the total donations amount of the batch view.');
     }
 
     @isTest
     static void shouldReturn2TotalGiftsCount() {
         GiftBatchView giftBatchView = createDummyGiftBatchViewWith(new Gifts());
-        System.assertEquals(2, giftBatchView.totals.get('TOTAL'));
+        System.assertEquals(2, giftBatchView.totals.get('TOTAL'), 'This method is used to assert that the total number of batches is 2.');
     }
 
     @isTest
     static void shouldHave2GiftViews() {
         Gifts gifts = new Gifts(DUMMY_DATA_IMPORTS_WITH_CONTACT_FIRST_NAME);
         GiftBatchView giftBatchView = createDummyGiftBatchViewWith(gifts);
-        System.assertEquals(2, giftBatchView.gifts.size());
+        System.assertEquals(2, giftBatchView.gifts.size(), 'This method is called when the number of gifts in the batch view is equal to');
     }
 
     @isTest
     static void shouldHave0GiftViews() {
         GiftBatchView giftBatchView = createDummyGiftBatchViewWith(new Gifts());
-        System.assertEquals(0, giftBatchView.gifts.size());
+        System.assertEquals(0, giftBatchView.gifts.size(), 'This method asserts that the number of gifts in the batch has been set.');
     }
 
     private static GiftBatchView createDummyGiftBatchViewWith(Gifts gifts) {

@@ -46,7 +46,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void toStringReturnsOrderByForAField() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name);
 
-        System.assertEquals('Name', field.toString());
+        System.assertEquals('Name', field.toString(), 'Checks that the field name is equal to the field name.');
     }
 
     /*******************************************************************************************************
@@ -55,7 +55,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void toStringReturnsOrderByForFieldAndDescSortOrder() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name, SORT_DESC);
 
-        System.assertEquals('Name DESC', field.toString());
+        System.assertEquals('Name DESC', field.toString(), 'This is a test for the case where the field is DESC.');
     }
 
     /*******************************************************************************************************
@@ -64,7 +64,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void toStringReturnsOrderByForFieldAndAscSortOrder() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name, SORT_ASC);
 
-        System.assertEquals('Name', field.toString());
+        System.assertEquals('Name', field.toString(), 'Checks that the field name is equal to the field name.');
     }
 
     /*******************************************************************************************************
@@ -73,7 +73,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void toStringReturnsOrderByForFieldAndSortOrderAndNullOrderLast() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name, SORT_DESC, NULLS_LAST);
 
-        System.assertEquals('Name DESC NULLS LAST', field.toString());
+        System.assertEquals('Name DESC NULLS LAST', field.toString(), 'This test asserts that the field is equal to the field passed in.');
     }
 
     /*******************************************************************************************************
@@ -82,7 +82,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void toStringReturnsOrderByForFieldAndSortOrderAndNullOrderFirst() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name, SORT_DESC, NULLS_FIRST);
 
-        System.assertEquals('Name DESC', field.toString());
+        System.assertEquals('Name DESC', field.toString(), 'This is a test for the case where the field is DESC.');
     }
 
     /*******************************************************************************************************
@@ -91,7 +91,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void toStringReturnsOrderByForRelationshipField() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name).fromRelationship(Contact.AccountId);
 
-        System.assertEquals('Account.Name', field.toString());
+        System.assertEquals('Account.Name', field.toString(), 'This method is used to assert that the Account. Name field is equal to the field passed');
     }
 
     /*******************************************************************************************************
@@ -100,7 +100,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void getFieldNameReturnsName() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name);
 
-        System.assertEquals('Name', field.getFieldName());
+        System.assertEquals('Name', field.getFieldName(), 'Checks that the field name is the same as the field name.');
     }
 
     /*******************************************************************************************************
@@ -109,7 +109,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void getFieldNameReturnsNameForTheRelationshipField() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name).fromRelationship(Contact.AccountId);
 
-        System.assertEquals('Name', field.getFieldName());
+        System.assertEquals('Name', field.getFieldName(), 'Checks that the field name is the same as the field name.');
     }
 
     /*******************************************************************************************************
@@ -118,7 +118,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void isSortDescReturnsTrueForDescSortOrder() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name, SORT_DESC);
 
-        System.assert(field.isSortDesc());
+        System.assert(field.isSortDesc(), 'This method asserts that the field is sort - desc.');
     }
 
     /*******************************************************************************************************
@@ -127,7 +127,7 @@ private class UTIL_OrderBy_TEST {
     @isTest static void isSortDescReturnsFalseForAscSortOrder() {
         UTIL_OrderBy.FieldExpression field = new UTIL_OrderBy.FieldExpression(Account.Name, SORT_ASC);
 
-        System.assert(!field.isSortDesc());
+        System.assert(!field.isSortDesc(), 'This method is only used for sorting.');
     }
 
     /*******************************************************************************************************
@@ -138,7 +138,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
 
-        System.assertEquals(0, record.compareTo(other));
+        System.assertEquals(0, record.compareTo(other), 'Compares two records and asserts that their values are equal.');
     }
 
     /*******************************************************************************************************
@@ -149,7 +149,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(Name = 'FOO'), field);
 
-        System.assertEquals(0, record.compareTo(other));
+        System.assertEquals(0, record.compareTo(other), 'Compares two records and asserts that their values are equal.');
     }
 
     /*******************************************************************************************************
@@ -160,7 +160,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(Name = 'xyz'), field);
 
-        System.assert(record.compareTo(other) < 0);
+        System.assert(record.compareTo(other) < 0, 'This method asserts that the two records are sorted before the other.');
     }
 
     /*******************************************************************************************************
@@ -171,7 +171,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(Name = 'xyz'), field);
 
-        System.assert(record.compareTo(other) > 0);
+        System.assert(record.compareTo(other) > 0, 'This method asserts that the two records are sorted in ascending order.');
     }
 
     /*******************************************************************************************************
@@ -182,7 +182,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(Name = 'abc'), field);
 
-        System.assert(record.compareTo(other) > 0);
+        System.assert(record.compareTo(other) > 0, 'This method asserts that the two records are sorted in ascending order.');
     }
 
     /*******************************************************************************************************
@@ -193,7 +193,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(Name = 'abc'), field);
 
-        System.assert(record.compareTo(other) < 0);
+        System.assert(record.compareTo(other) < 0, 'This method asserts that the two records are sorted before the other.');
     }
 
     /*******************************************************************************************************
@@ -204,7 +204,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(), field);
 
-        System.assert(record.compareTo(other) < 0);
+        System.assert(record.compareTo(other) < 0, 'This method asserts that the two records are sorted before the other.');
     }
 
     /*******************************************************************************************************
@@ -215,7 +215,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(), field);
 
-        System.assert(record.compareTo(other) > 0);
+        System.assert(record.compareTo(other) > 0, 'This method asserts that the two records are sorted in ascending order.');
     }
 
     /*******************************************************************************************************
@@ -226,7 +226,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(), field);
 
-        System.assert(record.compareTo(other) < 0);
+        System.assert(record.compareTo(other) < 0, 'This method asserts that the two records are sorted before the other.');
     }
 
     /*******************************************************************************************************
@@ -237,7 +237,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(), field);
 
-        System.assert(record.compareTo(other) > 0);
+        System.assert(record.compareTo(other) > 0, 'This method asserts that the two records are sorted in ascending order.');
     }
 
     /*******************************************************************************************************
@@ -248,7 +248,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
 
-        System.assert(record.compareTo(other) > 0);
+        System.assert(record.compareTo(other) > 0, 'This method asserts that the two records are sorted in ascending order.');
     }
 
     /*******************************************************************************************************
@@ -259,7 +259,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy.SortableRecord record = new UTIL_OrderBy.SortableRecord(new Account(), field);
         UTIL_OrderBy.SortableRecord other = new UTIL_OrderBy.SortableRecord(new Account(Name = 'foo'), field);
 
-        System.assert(record.compareTo(other) < 0);
+        System.assert(record.compareTo(other) < 0, 'This method asserts that the two records are sorted before the other.');
     }
 
     /*******************************************************************************************************
@@ -278,10 +278,10 @@ private class UTIL_OrderBy_TEST {
         };
 
         List<sObject> sortedRecords = orderBy.sort(records);
-        System.assertEquals('abc', (String) sortedRecords[0].get('LastName'));
-        System.assertEquals('foo', ((String) sortedRecords[1].get('LastName')).toLowerCase());
-        System.assertEquals('foo', ((String) sortedRecords[2].get('LastName')).toLowerCase());
-        System.assertEquals('xyz', (String) sortedRecords[3].get('LastName'));
+        System.assertEquals('abc', (String) sortedRecords[0].get('LastName'), 'This is a test function to assert that the last name of the record is abc.');
+        System.assertEquals('foo', ((String) sortedRecords[1].get('LastName')).toLowerCase(), 'Test for equality of foo.');
+        System.assertEquals('foo', ((String) sortedRecords[2].get('LastName')).toLowerCase(), 'Test for equality of last name.');
+        System.assertEquals('xyz', (String) sortedRecords[3].get('LastName'), 'Assert that xyz is the same as last name');
     }
 
     /*******************************************************************************************************
@@ -301,10 +301,10 @@ private class UTIL_OrderBy_TEST {
         };
 
         List<sObject> sortedRecords = orderBy.sort(records);
-        System.assertEquals('abc', (String) sortedRecords[0].get('LastName'));
-        System.assertEquals('abar', (String) sortedRecords[1].get('FirstName'));
-        System.assertEquals('zbar', (String) sortedRecords[2].get('FirstName'));
-        System.assertEquals('xyz', (String) sortedRecords[3].get('LastName'));
+        System.assertEquals('abc', (String) sortedRecords[0].get('LastName'), 'This is a test function to assert that the last name of the record is abc.');
+        System.assertEquals('abar', (String) sortedRecords[1].get('FirstName'), 'Test for equality of abar.');
+        System.assertEquals('zbar', (String) sortedRecords[2].get('FirstName'), 'This is a hack to make sure that zbar is the same as the first record in');
+        System.assertEquals('xyz', (String) sortedRecords[3].get('LastName'), 'Assert that xyz is the same as last name');
     }
 
     /*******************************************************************************************************
@@ -323,10 +323,10 @@ private class UTIL_OrderBy_TEST {
         };
 
         List<sObject> sortedRecords = orderBy.sort(records);
-        System.assertEquals('rafael', (String) sortedRecords[0].get('FirstName'));
-        System.assertEquals('abc', (String) sortedRecords[1].get('LastName'));
-        System.assertEquals('foo', (String) sortedRecords[2].get('LastName'));
-        System.assertEquals('xyz', (String) sortedRecords[3].get('LastName'));
+        System.assertEquals('rafael', (String) sortedRecords[0].get('FirstName'), 'This is a hack to ensure that the first record is rafael.');
+        System.assertEquals('abc', (String) sortedRecords[1].get('LastName'), 'This is a test function to assert that the last record is abc.');
+        System.assertEquals('foo', (String) sortedRecords[2].get('LastName'), 'This is a test function to assert that the last name of the record is foo.');
+        System.assertEquals('xyz', (String) sortedRecords[3].get('LastName'), 'Assert that xyz is the same as last name');
     }
 
     /*******************************************************************************************************
@@ -345,10 +345,10 @@ private class UTIL_OrderBy_TEST {
         };
 
         List<sObject> sortedRecords = orderBy.sort(records);
-        System.assertEquals('abc', (String) sortedRecords[0].get('LastName'));
-        System.assertEquals('foo', (String) sortedRecords[1].get('LastName'));
-        System.assertEquals('xyz', (String) sortedRecords[2].get('LastName'));
-        System.assertEquals('rafael', (String) sortedRecords[3].get('FirstName'));
+        System.assertEquals('abc', (String) sortedRecords[0].get('LastName'), 'This is a test function to assert that the last name of the record is abc.');
+        System.assertEquals('foo', (String) sortedRecords[1].get('LastName'), 'This is a test function to assert that the last record is foo.');
+        System.assertEquals('xyz', (String) sortedRecords[2].get('LastName'), 'Assert that xyz is the same as last name');
+        System.assertEquals('rafael', (String) sortedRecords[3].get('FirstName'), 'This is a hack to ensure that the first name is rafael.');
     }
 
     /*******************************************************************************************************
@@ -367,11 +367,11 @@ private class UTIL_OrderBy_TEST {
         orderBy.isPostSort = true;
 
         List<sObject> sortedRecords = orderBy.sort(records);
-        System.assertEquals(records.size(), sortedRecords.size());
+        System.assertEquals(records.size(), sortedRecords.size(), 'Checks that the size of the records and sortedRecords are the same.');
 
-        System.assertEquals(records[2].Name, (String) sortedRecords[0].get('Name'));
-        System.assertEquals(records[0].Name, (String) sortedRecords[1].get('Name'));
-        System.assertEquals(records[1].Name, (String) sortedRecords[2].get('Name'));
+        System.assertEquals(records[2].Name, (String) sortedRecords[0].get('Name'), 'Checks that the records are equal.');
+        System.assertEquals(records[0].Name, (String) sortedRecords[1].get('Name'), 'Checks that the records are equal.');
+        System.assertEquals(records[1].Name, (String) sortedRecords[2].get('Name'), 'Checks that the records are equal.');
     }
 
     /*******************************************************************************************************
@@ -390,11 +390,11 @@ private class UTIL_OrderBy_TEST {
         orderBy.isPostSort = true;
 
         List<sObject> sortedRecords = orderBy.sort(records);
-        System.assertEquals(records.size(), sortedRecords.size());
+        System.assertEquals(records.size(), sortedRecords.size(), 'Checks that the size of the records and sortedRecords are the same.');
 
-        System.assertEquals(records[1].Name, (String) sortedRecords[0].get('Name'));
-        System.assertEquals(records[0].Name, (String) sortedRecords[1].get('Name'));
-        System.assertEquals(records[2].Name, (String) sortedRecords[2].get('Name'));
+        System.assertEquals(records[1].Name, (String) sortedRecords[0].get('Name'), 'Checks that the records are equal.');
+        System.assertEquals(records[0].Name, (String) sortedRecords[1].get('Name'), 'Checks that the records are equal.');
+        System.assertEquals(records[2].Name, (String) sortedRecords[2].get('Name'), 'Checks that the records are equal.');
     }
 
     /*******************************************************************************************************
@@ -422,9 +422,9 @@ private class UTIL_OrderBy_TEST {
             records[4], records[3], records[2], records[1], records[0]
         };
         for (Integer i = 0; i < records.size(); i++) {
-            System.assertEquals(expectedRecords[i].LastName, (String) sortedRecords[i].get('LastName'));
-            System.assertEquals(expectedRecords[i].FirstName, (String) sortedRecords[i].get('FirstName'));
-            System.assertEquals(expectedRecords[i].Title, (String) sortedRecords[i].get('Title'));
+            System.assertEquals(expectedRecords[i].LastName, (String) sortedRecords[i].get('LastName'), 'This is a test to see if the last record in the record list matches the expected records');
+            System.assertEquals(expectedRecords[i].FirstName, (String) sortedRecords[i].get('FirstName'), 'This is a test function to assert that the first record in the record list is the same');
+            System.assertEquals(expectedRecords[i].Title, (String) sortedRecords[i].get('Title'), 'Checks that the record with index i has the same title as the record with index i in');
         }
     }
 
@@ -465,10 +465,10 @@ private class UTIL_OrderBy_TEST {
             records[2], records[3], records[0], records[4], records[1]
         };
         for (Integer i = 0; i < expectedRecords.size(); i++) {
-            System.assertEquals(expectedRecords[i].LastName, (String) sortedRecords[i].get('LastName'));
-            System.assertEquals(expectedRecords[i].FirstName, (String) sortedRecords[i].get('FirstName'));
-            System.assertEquals(expectedRecords[i].Title, (String) sortedRecords[i].get('Title'));
-            System.assertEquals(expectedRecords[i].AccountId, (Id) sortedRecords[i].get('AccountId'));
+            System.assertEquals(expectedRecords[i].LastName, (String) sortedRecords[i].get('LastName'), 'This is a test to see if the last record in the record list matches the expected records');
+            System.assertEquals(expectedRecords[i].FirstName, (String) sortedRecords[i].get('FirstName'), 'This is a test function to assert that the first record in the record list is the same');
+            System.assertEquals(expectedRecords[i].Title, (String) sortedRecords[i].get('Title'), 'Checks that the record with index i has the same title as the record with index i in');
+            System.assertEquals(expectedRecords[i].AccountId, (Id) sortedRecords[i].get('AccountId'), 'This is a test to see if the account id is the same as the record in the');
         }
     }
 
@@ -487,7 +487,7 @@ private class UTIL_OrderBy_TEST {
         String orderByClause = orderBy.build();
 
         // if any field is encrypted, then order by clause should be empty and post sort should be applied
-        System.assertEquals('', orderByClause);
+        System.assertEquals('', orderByClause, 'This test asserts that the order by clause is empty.');
         System.assert(orderBy.isPostSort, 'The Order By should be post sortable');
     }
 
@@ -509,7 +509,7 @@ private class UTIL_OrderBy_TEST {
 
         String orderByClause = orderBy.build();
 
-        System.assertEquals('LastName DESC, FirstName NULLS LAST, Title', orderByClause);
+        System.assertEquals('LastName DESC, FirstName NULLS LAST, Title', orderByClause, 'This test asserts that the order clause is equal to the order clause.');
         System.assert(!orderBy.isPostSort, 'The Order By should not be post sortable');
     }
 
@@ -520,7 +520,7 @@ private class UTIL_OrderBy_TEST {
         UTIL_OrderBy orderBy = new UTIL_OrderBy();
 
         String orderByClause = orderBy.build();
-        System.assertEquals('', orderByClause);
+        System.assertEquals('', orderByClause, 'This test asserts that the order by clause is empty.');
     }
 
     /*******************************************************************************************************
@@ -541,11 +541,11 @@ private class UTIL_OrderBy_TEST {
         );
 
         UTIL_OrderBy orderBy = new UTIL_OrderBy();
-        System.assertEquals(opp.Name, new UTIL_OrderBy.FieldExpression(Opportunity.Name).getValue(opp));
-        System.assertEquals(accountId, new UTIL_OrderBy.FieldExpression(Opportunity.AccountId).getValue(opp));
-        System.assertEquals(acc.Name, new UTIL_OrderBy.FieldExpression(Account.Name).fromRelationship(Opportunity.AccountId).getValue(opp));
-        System.assertEquals(contactId, new UTIL_OrderBy.FieldExpression(Opportunity.Primary_Contact__c).getValue(opp));
-        System.assertEquals(con.LastName, new UTIL_OrderBy.FieldExpression(Contact.LastName).fromRelationship(Opportunity.Primary_Contact__c).getValue(opp));
+        System.assertEquals(opp.Name, new UTIL_OrderBy.FieldExpression(Opportunity.Name).getValue(opp), 'asserts that opp. Name equals opportunity. Name');
+        System.assertEquals(accountId, new UTIL_OrderBy.FieldExpression(Opportunity.AccountId).getValue(opp), 'asserts that opportunity. AccountId equals opp. AccountId');
+        System.assertEquals(acc.Name, new UTIL_OrderBy.FieldExpression(Account.Name).fromRelationship(Opportunity.AccountId).getValue(opp), 'asserts that the Account s name is equal to the opportunity s account name');
+        System.assertEquals(contactId, new UTIL_OrderBy.FieldExpression(Opportunity.Primary_Contact__c).getValue(opp), 'assertEquals - Asserts that the contactId is equal to the opportunity s primary');
+        System.assertEquals(con.LastName, new UTIL_OrderBy.FieldExpression(Contact.LastName).fromRelationship(Opportunity.Primary_Contact__c).getValue(opp), 'assertEquals - Asserts that LastName is equal to LastName of primary contact.');
     }
 
 }

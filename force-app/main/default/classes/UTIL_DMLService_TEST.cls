@@ -64,7 +64,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedContacts = getContacts();
 
-        System.assertEquals(false, retrievedContacts.isEmpty());
+        System.assertEquals(false, retrievedContacts.isEmpty(), 'Checks that all contacts have been retrieved.');
     }
 
 
@@ -86,7 +86,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedContacts = getContacts();
 
-        System.assertEquals(NUMBER_OF_RECORDS_TWO, retrievedContacts.size());
+        System.assertEquals(NUMBER_OF_RECORDS_TWO, retrievedContacts.size(), 'Checks that the number of retrieved contacts is equal to the number of retrieved contacts in the database');
     }
 
 
@@ -107,7 +107,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedContacts = getContacts();
 
-        System.assertEquals(false, retrievedContacts.isEmpty());
+        System.assertEquals(false, retrievedContacts.isEmpty(), 'Checks that all contacts have been retrieved.');
     }
 
 
@@ -131,7 +131,7 @@ private with sharing class UTIL_DMLService_TEST {
         
         List<Contact> retrievedContacts = getContacts();
 
-        System.assertEquals(NUMBER_OF_RECORDS_ZERO, retrievedContacts.size());
+        System.assertEquals(NUMBER_OF_RECORDS_ZERO, retrievedContacts.size(), 'Checks that the number of retrieved contacts is equal to the number of retrieved contacts.');
     }
 
 
@@ -153,7 +153,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedContacts = getContacts();
 
-        System.assertEquals(NUMBER_OF_RECORDS_ONE, retrievedContacts.size());
+        System.assertEquals(NUMBER_OF_RECORDS_ONE, retrievedContacts.size(), 'Checks that the number of retrieved contacts is equal to the number of retrieved contacts.');
     }
 
 
@@ -174,7 +174,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedContacts = getContacts();
 
-        System.assertEquals(false, retrievedContacts.isEmpty());
+        System.assertEquals(false, retrievedContacts.isEmpty(), 'Checks that all contacts have been retrieved.');
     }
 
 
@@ -196,7 +196,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedContacts = getContacts();
 
-        System.assertEquals(NUMBER_OF_RECORDS_TWO, retrievedContacts.size());
+        System.assertEquals(NUMBER_OF_RECORDS_TWO, retrievedContacts.size(), 'Checks that the number of retrieved contacts is equal to the number of retrieved contacts in the database');
     }
 
 
@@ -217,15 +217,15 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedInsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedInsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedInsertedContacts.isEmpty(), 'This method asserts that the list of contacts was retrieved successfully.');
 
         con.FirstName = 'Cloudy';
         UTIL_DMLService.updateRecord(con);
 
         List<Contact> retrieveUpdatedContacts = getContacts();
 
-        System.assertEquals(false, retrieveUpdatedContacts.isEmpty());
-        System.assertEquals(con.FirstName, retrieveUpdatedContacts[0].FirstName);
+        System.assertEquals(false, retrieveUpdatedContacts.isEmpty(), 'This method asserts that all the information in the retrieveUpdatedContacts property is true.');
+        System.assertEquals(con.FirstName, retrieveUpdatedContacts[0].FirstName, 'This is a test function to assert that the first contact is the same as the first contact');
     }
 
 
@@ -247,7 +247,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedInsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedInsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedInsertedContacts.isEmpty(), 'This method asserts that the list of contacts was retrieved successfully.');
 
         contacts[0].FirstName = 'Cloudy';
         contacts[0].FirstName = 'Cody';
@@ -255,9 +255,9 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrieveUpdatedContacts = getContacts();
 
-        System.assertEquals(false, retrieveUpdatedContacts.isEmpty());
-        System.assertEquals(contacts[0].FirstName, retrieveUpdatedContacts[0].FirstName);
-        System.assertEquals(contacts[1].FirstName, retrieveUpdatedContacts[1].FirstName);
+        System.assertEquals(false, retrieveUpdatedContacts.isEmpty(), 'This method asserts that all the information in the retrieveUpdatedContacts property is true.');
+        System.assertEquals(contacts[0].FirstName, retrieveUpdatedContacts[0].FirstName, 'This is a test to see if the first name of the contacts is the same as the');
+        System.assertEquals(contacts[1].FirstName, retrieveUpdatedContacts[1].FirstName, 'This is a test to see if the first name of the contacts is the same as the');
     }
 
 
@@ -278,15 +278,15 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedInsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedInsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedInsertedContacts.isEmpty(), 'This method asserts that the list of contacts was retrieved successfully.');
 
         con.FirstName = 'Cloudy';
         UTIL_DMLService.updateRecord(con, false);
 
         List<Contact> retrieveUpdatedContacts = getContacts();
 
-        System.assertEquals(false, retrieveUpdatedContacts.isEmpty());
-        System.assertEquals(con.FirstName, retrieveUpdatedContacts[0].FirstName);
+        System.assertEquals(false, retrieveUpdatedContacts.isEmpty(), 'This method asserts that all the information in the retrieveUpdatedContacts property is true.');
+        System.assertEquals(con.FirstName, retrieveUpdatedContacts[0].FirstName, 'This is a test function to assert that the first contact is the same as the first contact');
     }
 
 
@@ -308,7 +308,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedInsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedInsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedInsertedContacts.isEmpty(), 'This method asserts that the list of contacts was retrieved successfully.');
 
         contacts[0].FirstName = 'Cloudy';
         contacts[0].FirstName = 'Cody';
@@ -316,9 +316,9 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrieveUpdatedContacts = getContacts();
 
-        System.assertEquals(false, retrieveUpdatedContacts.isEmpty());
-        System.assertEquals(contacts[0].FirstName, retrieveUpdatedContacts[0].FirstName);
-        System.assertEquals(contacts[1].FirstName, retrieveUpdatedContacts[1].FirstName);
+        System.assertEquals(false, retrieveUpdatedContacts.isEmpty(), 'This method asserts that all the information in the retrieveUpdatedContacts property is true.');
+        System.assertEquals(contacts[0].FirstName, retrieveUpdatedContacts[0].FirstName, 'This is a test to see if the first name of the contacts is the same as the');
+        System.assertEquals(contacts[1].FirstName, retrieveUpdatedContacts[1].FirstName, 'This is a test to see if the first name of the contacts is the same as the');
     }
 
 
@@ -339,15 +339,15 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedInsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedInsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedInsertedContacts.isEmpty(), 'This method asserts that the list of contacts was retrieved successfully.');
 
         con.FirstName = 'Cloudy';
         UTIL_DMLService.updateRecord(con, new Database.DMLOptions());
 
         List<Contact> retrieveUpdatedContacts = getContacts();
 
-        System.assertEquals(false, retrieveUpdatedContacts.isEmpty());
-        System.assertEquals(con.FirstName, retrieveUpdatedContacts[0].FirstName);
+        System.assertEquals(false, retrieveUpdatedContacts.isEmpty(), 'This method asserts that all the information in the retrieveUpdatedContacts property is true.');
+        System.assertEquals(con.FirstName, retrieveUpdatedContacts[0].FirstName, 'This is a test function to assert that the first contact is the same as the first contact');
     }
 
 
@@ -369,7 +369,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedInsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedInsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedInsertedContacts.isEmpty(), 'This method asserts that the list of contacts was retrieved successfully.');
 
         contacts[0].FirstName = 'Cloudy';
         contacts[0].FirstName = 'Cody';
@@ -377,9 +377,9 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrieveUpdatedContacts = getContacts();
 
-        System.assertEquals(false, retrieveUpdatedContacts.isEmpty());
-        System.assertEquals(contacts[0].FirstName, retrieveUpdatedContacts[0].FirstName);
-        System.assertEquals(contacts[1].FirstName, retrieveUpdatedContacts[1].FirstName);
+        System.assertEquals(false, retrieveUpdatedContacts.isEmpty(), 'This method asserts that all the information in the retrieveUpdatedContacts property is true.');
+        System.assertEquals(contacts[0].FirstName, retrieveUpdatedContacts[0].FirstName, 'This is a test to see if the first name of the contacts is the same as the');
+        System.assertEquals(contacts[1].FirstName, retrieveUpdatedContacts[1].FirstName, 'This is a test to see if the first name of the contacts is the same as the');
     }
     /***
     * @description Verifies records are updated and no error is generated
@@ -456,14 +456,14 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Account> retrievedUpsertedAccount = getAccounts();
 
-        System.assertEquals(false, retrievedUpsertedAccount.isEmpty());
+        System.assertEquals(false, retrievedUpsertedAccount.isEmpty(), 'This method asserts that the retrievedUpsertedAccount is empty.');
 
         acct.Name = 'Cloudy';
         UTIL_DMLService.upsertRecord(acct);
 
         retrievedUpsertedAccount = getAccounts();
 
-        System.assertEquals(acct.Name, retrievedUpsertedAccount[0].Name);
+        System.assertEquals(acct.Name, retrievedUpsertedAccount[0].Name, 'This is a test to make sure that the account name is the same as the one retrieved');
     }
 
 
@@ -485,7 +485,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedUpsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedUpsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedUpsertedContacts.isEmpty(), 'This method asserts that the collection of contacts is empty.');
 
         contacts[0].FirstName = 'Cloudy';
         contacts[0].FirstName = 'Cody';
@@ -493,8 +493,8 @@ private with sharing class UTIL_DMLService_TEST {
 
         retrievedUpsertedContacts = getContacts();
 
-        System.assertEquals(contacts[0].FirstName, retrievedUpsertedContacts[0].FirstName);
-        System.assertEquals(contacts[1].FirstName, retrievedUpsertedContacts[1].FirstName);
+        System.assertEquals(contacts[0].FirstName, retrievedUpsertedContacts[0].FirstName, 'This method is used to assert that the first name of the contact is the same as the');
+        System.assertEquals(contacts[1].FirstName, retrievedUpsertedContacts[1].FirstName, 'This is a test to make sure that the first name of the contact is the same as');
     }
 
 
@@ -515,14 +515,14 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedUpsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedUpsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedUpsertedContacts.isEmpty(), 'This method asserts that the collection of contacts is empty.');
 
         con.FirstName = 'Cloudy';
         UTIL_DMLService.upsertRecord(con, false);
 
         retrievedUpsertedContacts = getContacts();
 
-        System.assertEquals(con.FirstName, retrievedUpsertedContacts[0].FirstName);
+        System.assertEquals(con.FirstName, retrievedUpsertedContacts[0].FirstName, 'This is a test to make sure that the first contact is the same as the first contact');
     }
 
 
@@ -544,7 +544,7 @@ private with sharing class UTIL_DMLService_TEST {
 
         List<Contact> retrievedUpsertedContacts = getContacts();
 
-        System.assertEquals(false, retrievedUpsertedContacts.isEmpty());
+        System.assertEquals(false, retrievedUpsertedContacts.isEmpty(), 'This method asserts that the collection of contacts is empty.');
 
         contacts[0].FirstName = 'Cloudy';
         contacts[0].FirstName = 'Cody';
@@ -552,8 +552,8 @@ private with sharing class UTIL_DMLService_TEST {
 
         retrievedUpsertedContacts = getContacts();
 
-        System.assertEquals(contacts[0].FirstName, retrievedUpsertedContacts[0].FirstName);
-        System.assertEquals(contacts[1].FirstName, retrievedUpsertedContacts[1].FirstName);
+        System.assertEquals(contacts[0].FirstName, retrievedUpsertedContacts[0].FirstName, 'This method is used to assert that the first name of the contact is the same as the');
+        System.assertEquals(contacts[1].FirstName, retrievedUpsertedContacts[1].FirstName, 'This is a test to make sure that the first name of the contact is the same as');
     }
 
     /***
@@ -620,13 +620,13 @@ private with sharing class UTIL_DMLService_TEST {
         Account acct = new Account(Name='Blue Cloud', BillingCity='San Francisco');
         UTIL_DMLService.insertRecord(acct);
         List<Account> retrievedAccts = getAccounts();
-        System.assertEquals('Blue Cloud', retrievedAccts[0].Name);
+        System.assertEquals('Blue Cloud', retrievedAccts[0].Name, 'Checks that the name of the retrievedAccts matches the name of the Blue Cloud');
 
         Account dupeAcct = new Account(Name='Blue Cloud', BillingCity='San Francisco');
         Database.SaveResult sr = UTIL_DMLService.insertRecord(dupeAcct, false); // AllOrNone flag set to false to check if the Duplicate Rule's Action is set to Block. 
         if (!sr.isSuccess()) {
             for (Database.Error duplicateError : sr.getErrors()) {
-                System.assertEquals(ERROR_STATUS_CODE_DUPLICATES_DETECTED, String.valueOf(duplicateError.getStatusCode()));
+                System.assertEquals(ERROR_STATUS_CODE_DUPLICATES_DETECTED, String.valueOf(duplicateError.getStatusCode()), 'Checks that the status code of the duplicate error is equal to the one specified in the error');
                 Datacloud.DuplicateResult duplicateResult = ((Database.DuplicateError)duplicateError).getDuplicateResult();
                 // If isAllowSave is false, the running Org has the Duplicate Rule's Action set to Block so end test.
                 if (!duplicateResult.isAllowSave()) return;
@@ -643,19 +643,19 @@ private with sharing class UTIL_DMLService_TEST {
         UTIL_DMLService.insertRecord(dupeAcct);
 
         retrievedAccts = getAccounts();
-        System.assertEquals(NUMBER_OF_RECORDS_TWO, retrievedAccts.size());
+        System.assertEquals(NUMBER_OF_RECORDS_TWO, retrievedAccts.size(), 'Checks that the number of retrieved accts is equal to the number of retrieved acct');
 
         Account dupeAcctUpdate = new Account(Name='Blue Cloud Update', BillingCity='San Francisco');
         UTIL_DMLService.insertRecord(dupeAcctUpdate);
         retrievedAccts = getAccounts();
-        System.assertEquals(NUMBER_OF_RECORDS_THREE, retrievedAccts.size());
+        System.assertEquals(NUMBER_OF_RECORDS_THREE, retrievedAccts.size(), 'Checks that the number of retrieved accts is equal to the number of retrieved acct');
 
         dupeAcctUpdate.Name = 'Blue Cloud';
         UTIL_DMLService.updateRecord(dupeAcctUpdate);
 
         retrievedAccts = getAccounts();
         for(Account eachAcct : retrievedAccts) {
-            System.assertEquals('Blue Cloud', eachAcct.Name);
+            System.assertEquals('Blue Cloud', eachAcct.Name, 'Checks that eachAcct is the Blue Cloud.');
         }
     }
 
@@ -678,13 +678,13 @@ private with sharing class UTIL_DMLService_TEST {
         UTIL_DMLService.insertRecord(con);
 
         List<Contact> retrievedContacts = getContacts();
-        System.assertEquals('Blue', retrievedContacts[0].FirstName);
+        System.assertEquals('Blue', retrievedContacts[0].FirstName, 'This method is used to assert that the first contact is Blue.');
 
         Contact dupeContact = new Contact(FirstName='Blue',LastName='Cloud', Email='blue@cloud.com', AccountId=acct.Id);
         Database.SaveResult sr = UTIL_DMLService.insertRecord(dupeContact, false); // AllOrNone flag set to false to check if the Duplicate Rule's Action is set to Block. 
         if (!sr.isSuccess()) {
             for (Database.Error duplicateError : sr.getErrors()) {
-                System.assertEquals(ERROR_STATUS_CODE_DUPLICATES_DETECTED, String.valueOf(duplicateError.getStatusCode()));
+                System.assertEquals(ERROR_STATUS_CODE_DUPLICATES_DETECTED, String.valueOf(duplicateError.getStatusCode()), 'Checks that the status code of the duplicate error is equal to the one specified in the error');
                 Datacloud.DuplicateResult duplicateResult = ((Database.DuplicateError)duplicateError).getDuplicateResult();
                 // If isAllowSave is false, the running Org has the Duplicate Rule Action set to Block so end test.
                 if (!duplicateResult.isAllowSave()) return;
@@ -700,19 +700,19 @@ private with sharing class UTIL_DMLService_TEST {
 
         UTIL_DMLService.insertRecord(dupeContact);
         retrievedContacts = getContacts();
-        System.assertEquals(NUMBER_OF_RECORDS_TWO, retrievedContacts.size());
+        System.assertEquals(NUMBER_OF_RECORDS_TWO, retrievedContacts.size(), 'Checks that the number of retrieved contacts is equal to the number of retrieved contacts in the database');
 
         Contact dupeContactUpdate = new Contact(FirstName='Blue Update',LastName='Cloud', Email='blue@cloud.com', AccountId=acct.Id);
         UTIL_DMLService.insertRecord(dupeContactUpdate);
         retrievedContacts = getContacts();
-        System.assertEquals(NUMBER_OF_RECORDS_THREE, retrievedContacts.size());
+        System.assertEquals(NUMBER_OF_RECORDS_THREE, retrievedContacts.size(), 'Checks that the number of retrieved contacts is equal to the number of retrieved contacts in the database');
 
         dupeContactUpdate.FirstName = 'Blue';
         UTIL_DMLService.updateRecord(dupeContactUpdate);
 
         retrievedContacts = getContacts();
         for(Contact eachCon : retrievedContacts) {
-            System.assertEquals('Blue', eachCon.FirstName);
+            System.assertEquals('Blue', eachCon.FirstName, 'Test for equality of Blue.');
         }
     }
 

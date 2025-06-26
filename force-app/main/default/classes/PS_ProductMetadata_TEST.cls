@@ -84,8 +84,8 @@ private with sharing class PS_ProductMetadata_TEST {
         Map<String, Object> updatedUntypedMetadata = productMetadata.mergeWithExistingMetadata(untypedMetadata);
 
         PS_ProductMetadata updatedMetadata = parseUntypedMetadata(updatedUntypedMetadata);
-        System.assertEquals(newCampaignId, updatedMetadata.campaign.id);
-        System.assertEquals('CRM', updatedMetadata.origin.type);
+        System.assertEquals(newCampaignId, updatedMetadata.campaign.id, 'Checks that the new campaign ID is the same as the updated campaign ID.');
+        System.assertEquals('CRM', updatedMetadata.origin.type, 'Checks that the type of the updated metadata is the same as the type of the original metadata');
     }
 
     @IsTest
@@ -99,16 +99,16 @@ private with sharing class PS_ProductMetadata_TEST {
         Map<String, Object> updatedUntypedMetadata = productMetadata.mergeWithExistingMetadata(untypedMetadata);
 
         PS_ProductMetadata updatedMetadata = parseUntypedMetadata(updatedUntypedMetadata);
-        System.assertEquals(newCampaignId, updatedMetadata.campaign.id);
-        System.assertEquals('CRM', updatedMetadata.origin.type);
+        System.assertEquals(newCampaignId, updatedMetadata.campaign.id, 'Checks that the new campaign ID is the same as the updated campaign ID.');
+        System.assertEquals('CRM', updatedMetadata.origin.type, 'Checks that the type of the updated metadata is the same as the type of the original metadata');
 
         Map<String, Object> consentData = (Map<String, Object>) updatedUntypedMetadata.get('consent');
 
         String consentMessage = (String) consentData.get('message');
         Boolean optin = (Boolean) consentData.get('optin');
 
-        System.assertEquals('Some message', consentMessage);
-        System.assertEquals(true, optin);
+        System.assertEquals('Some message', consentMessage, 'Assert that some message is equal to some consent message.');
+        System.assertEquals(true, optin, 'Test if the optin is true.');
     }
 
     @IsTest
@@ -122,7 +122,7 @@ private with sharing class PS_ProductMetadata_TEST {
 
         PS_ProductMetadata updatedMetadata = parseUntypedMetadata(updatedUntypedMetadata);
 
-        System.assertEquals(newCampaignId, updatedMetadata.campaign.id);
+        System.assertEquals(newCampaignId, updatedMetadata.campaign.id, 'Checks that the new campaign ID is the same as the updated campaign ID.');
     }
 
     /**

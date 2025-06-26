@@ -50,17 +50,17 @@ private with sharing class STG_PanelHealthCheck_TEST {
         insert acc;
         Opportunity opp = buildOpportunity(acc.Id);
         insert opp;
-        System.assertEquals(1, [select count() from npe01__OppPayment__c]);
+        System.assertEquals(1, [select count() from npe01__OppPayment__c], 'Test for equality of the number of payments in the OPP payment table.');
         
         STG_PanelHealthCheck_CTRL hc = new STG_PanelHealthCheck_CTRL();
-        System.assertEquals(0, hc.listDR.size());
+        System.assertEquals(0, hc.listDR.size(), 'Test that the size of the list is equal to the size of the list.');
         
         Test.startTest();
         hc.verifyNoMissingOppPayments();
         Test.stopTest();
         
-        System.assertEquals(1, hc.listDR.size());
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusSuccess, hc.listDR[0].strStatus);
+        System.assertEquals(1, hc.listDR.size(), 'Test that the size of the list is equal to 1.');
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusSuccess, hc.listDR[0].strStatus, 'Checks that STG_PanelHealthCheck_CTRL. statusSuccess is equal to STG');
     }
 
     /*******************************************************************************************************
@@ -76,18 +76,18 @@ private with sharing class STG_PanelHealthCheck_TEST {
         insert acc;
         Opportunity opp = buildOpportunity(acc.Id);
         insert opp;
-        System.assertEquals(1, [select count() from npe01__OppPayment__c]);
+        System.assertEquals(1, [select count() from npe01__OppPayment__c], 'Test for equality of the number of payments in the OPP payment table.');
         delete [select Id from npe01__OppPayment__c];
         
         STG_PanelHealthCheck_CTRL hc = new STG_PanelHealthCheck_CTRL();
-        System.assertEquals(0, hc.listDR.size());
+        System.assertEquals(0, hc.listDR.size(), 'Test that the size of the list is equal to the size of the list.');
         
         Test.startTest();
         hc.verifyNoMissingOppPayments();
         Test.stopTest();
         
-        System.assertEquals(1, hc.listDR.size());
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusWarning, hc.listDR[0].strStatus);
+        System.assertEquals(1, hc.listDR.size(), 'Test that the size of the list is equal to 1.');
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusWarning, hc.listDR[0].strStatus, 'Checks status of STG panel health check.');
     }
 
 
@@ -108,14 +108,14 @@ private with sharing class STG_PanelHealthCheck_TEST {
         insert lvl1;
 
         STG_PanelHealthCheck_CTRL hc = new STG_PanelHealthCheck_CTRL();
-        System.assertEquals(0, hc.listDR.size());
+        System.assertEquals(0, hc.listDR.size(), 'Test that the size of the list is equal to the size of the list.');
         
         Test.startTest();
         hc.verifyLevels();
         Test.stopTest();
         
-        System.assertEquals(1, hc.listDR.size());
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, hc.listDR[0].strStatus);
+        System.assertEquals(1, hc.listDR.size(), 'Test that the size of the list is equal to 1.');
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, hc.listDR[0].strStatus, 'Checks status of the health check panel.');
     }
 
     /*******************************************************************************************************
@@ -135,14 +135,14 @@ private with sharing class STG_PanelHealthCheck_TEST {
         insert lvl1;
 
         STG_PanelHealthCheck_CTRL hc = new STG_PanelHealthCheck_CTRL();
-        System.assertEquals(0, hc.listDR.size());
+        System.assertEquals(0, hc.listDR.size(), 'Test that the size of the list is equal to the size of the list.');
         
         Test.startTest();
         hc.verifyLevels();
         Test.stopTest();
         
-        System.assertEquals(2, hc.listDR.size());
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, hc.listDR[0].strStatus);
+        System.assertEquals(2, hc.listDR.size(), 'Test that the size of the list is equal to 2.');
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, hc.listDR[0].strStatus, 'Checks status of the health check panel.');
     }
 
     /*******************************************************************************************************
@@ -157,16 +157,16 @@ private with sharing class STG_PanelHealthCheck_TEST {
         STG_Panel.stgService.stgCon.Honoree_Opportunity_Contact_Role__c = 'Donor';
 
         STG_PanelHealthCheck_CTRL hc = new STG_PanelHealthCheck_CTRL();
-        System.assertEquals(0, hc.listDR.size());
+        System.assertEquals(0, hc.listDR.size(), 'Test that the size of the list is equal to the size of the list.');
         
         Test.startTest();
         hc.verifyOppContactRolesSettings();
         Test.stopTest();
         
-        System.assertEquals(1, hc.listDR.size());
+        System.assertEquals(1, hc.listDR.size(), 'Test that the size of the list is equal to 1.');
         //count number of line breaks to ensure only one health check failed
-        System.assertEquals(1,  hc.listDR[0].strDetails.countMatches('<br/>'));
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, hc.listDR[0].strStatus);
+        System.assertEquals(1,  hc.listDR[0].strDetails.countMatches('<br/>'), 'Assert that the list of drags is equal to 1.');
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, hc.listDR[0].strStatus, 'Checks status of the health check panel.');
     }
 
     /*******************************************************************************************************
@@ -303,10 +303,10 @@ private with sharing class STG_PanelHealthCheck_TEST {
 
         //Confirm there is a Success Detect Result
         System.assertEquals(1, panelHealthCheckController.listDR.size(), 'We should have 1 Detect Result');
-        System.assertEquals(System.Label.healthLabelAccountDefaultRT, panelHealthCheckController.listDR[0].strName);
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusSuccess, panelHealthCheckController.listDR[0].strStatus);
-        System.assertEquals(null, panelHealthCheckController.listDR[0].strDetails);
-        System.assertEquals(null, panelHealthCheckController.listDR[0].strSolution);
+        System.assertEquals(System.Label.healthLabelAccountDefaultRT, panelHealthCheckController.listDR[0].strName, 'Checks that the label of the panelHealthCheckController. listDR is the same as the label');
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusSuccess, panelHealthCheckController.listDR[0].strStatus, 'This function asserts that the status of the panel health check controller is the same as the status');
+        System.assertEquals(null, panelHealthCheckController.listDR[0].strDetails, 'This method is used to assert that the list of available health checks is equal to the current');
+        System.assertEquals(null, panelHealthCheckController.listDR[0].strSolution, 'This method is called when the panelHealthCheckController. listDR is empty.');
     }
 
     /*******************************************************************************************************
@@ -364,15 +364,15 @@ private with sharing class STG_PanelHealthCheck_TEST {
 
         //Confirm there is a Failed Detect Result
         System.assertEquals(1, panelHealthCheckController.listDR.size(), 'We should have 1 Detect Result');
-        System.assertEquals(System.Label.healthLabelAccountDefaultRT, panelHealthCheckController.listDR[0].strName);
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, panelHealthCheckController.listDR[0].strStatus);
+        System.assertEquals(System.Label.healthLabelAccountDefaultRT, panelHealthCheckController.listDR[0].strName, 'Checks that the label of the panelHealthCheckController. listDR is the same as the label');
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, panelHealthCheckController.listDR[0].strStatus, 'Checks that the status of the panel health check controller is the same as the status of the');
         System.assertEquals(
             String.format(System.Label.healthDetailsAccountDefaultRTIssue, new List<String>{accountDefaultRecordTypeInfo.getName().escapeEcmaScript()}),
-            panelHealthCheckController.listDR[0].strDetails
+            panelHealthCheckController.listDR[0].strDetails, 'System. assertEquals method.'
         );
         System.assertEquals(
             System.Label.healthSolutionAccountDefaultRTIssue,
-            panelHealthCheckController.listDR[0].strSolution
+            panelHealthCheckController.listDR[0].strSolution, 'This method checks if the system assert equals the given expectation.'
         );
     }
 
@@ -428,10 +428,10 @@ private with sharing class STG_PanelHealthCheck_TEST {
 
         //Confirm there is a Failed Detect Result
         System.assertEquals(1, panelHealthCheckController.listDR.size(), 'We should have 1 Detect Result');
-        System.assertEquals(System.Label.healthLabelAccountDefaultRT, panelHealthCheckController.listDR[0].strName);
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, panelHealthCheckController.listDR[0].strStatus);
-        System.assertEquals(System.Label.healthDetailsAccountDefaultRTInvalid, panelHealthCheckController.listDR[0].strDetails);
-        System.assertEquals(System.Label.healthSolutionAccountDefaultRTInvalid, panelHealthCheckController.listDR[0].strSolution);
+        System.assertEquals(System.Label.healthLabelAccountDefaultRT, panelHealthCheckController.listDR[0].strName, 'Checks that the label of the panelHealthCheckController. listDR is the same as the label');
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, panelHealthCheckController.listDR[0].strStatus, 'Checks that the status of the panel health check controller is the same as the status of the');
+        System.assertEquals(System.Label.healthDetailsAccountDefaultRTInvalid, panelHealthCheckController.listDR[0].strDetails, 'Checks that the health details account default RT is invalid.');
+        System.assertEquals(System.Label.healthSolutionAccountDefaultRTInvalid, panelHealthCheckController.listDR[0].strSolution, 'Checks that the health solution account default RT invalid is not the same as the current solution account');
     }
 
     /*******************************************************************************************************
@@ -480,9 +480,9 @@ private with sharing class STG_PanelHealthCheck_TEST {
 
         //Confirm there is a Failed Detect Result, because of the invalid ID
         System.assertEquals(1, panelHealthCheckController.listDR.size(), 'We should have 1 Detect Result');
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, panelHealthCheckController.listDR[0].strStatus);
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, panelHealthCheckController.listDR[0].strStatus, 'Checks that the status of the panel health check controller is the same as the status of the');
         System.assertEquals(true, String.isNotBlank(panelHealthCheckController.listDR[0].strDetails), 'A System.Exception should be thrown');
-        System.assertEquals(null, panelHealthCheckController.listDR[0].strSolution);
+        System.assertEquals(null, panelHealthCheckController.listDR[0].strSolution, 'This method is called when the panelHealthCheckController. listDR is empty.');
     }
 
     /*********************************************************************************************************
@@ -545,8 +545,8 @@ private with sharing class STG_PanelHealthCheck_TEST {
         healthCheck.verifyOppContactRoles();
 
         System.assertEquals(1, healthCheck.listDR.size(), 'One Detect Result should be created: ' + healthCheck.listDR);  
-        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, healthCheck.listDR[0].strStatus);
-        System.assertEquals(System.Label.healthSolutionOCRDupPrimary, healthCheck.listDR[0].strSolution);
+        System.assertEquals(STG_PanelHealthCheck_CTRL.statusError, healthCheck.listDR[0].strStatus, 'Checks that the status of the health check panel is the same as the status of the health');
+        System.assertEquals(System.Label.healthSolutionOCRDupPrimary, healthCheck.listDR[0].strSolution, 'Checks that the OCR duplicate primary is the same as the health check solution.');
     }
 
     // Helpers

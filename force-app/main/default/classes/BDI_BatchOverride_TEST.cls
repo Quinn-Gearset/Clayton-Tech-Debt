@@ -68,7 +68,7 @@ public with sharing class BDI_BatchOverride_TEST {
         Test.stopTest();
 
         System.assert(ctrl.redirect, 'The page should save successfully and set redirect to true.');
-        System.assertEquals(1, [select count() from DataImportBatch__c]);
+        System.assertEquals(1, [select count() from DataImportBatch__c], 'This test asserts that the number of records in the batch is equal to 1.');
     }
 
     /*********************************************************************************************************
@@ -88,7 +88,7 @@ public with sharing class BDI_BatchOverride_TEST {
         Test.stopTest();
 
         System.assert(ctrl.redirect, 'The page should save successfully and set redirect to true.');
-        System.assertEquals(1, [select count() from DataImportBatch__c where Name = 'testBatchModified']);
+        System.assertEquals(1, [select count() from DataImportBatch__c where Name = 'testBatchModified'], 'Test for equality of the number of rows in the batch.');
     }
 
     /*********************************************************************************************************
@@ -111,10 +111,10 @@ public with sharing class BDI_BatchOverride_TEST {
         Test.stopTest();
 
         System.assert(ctrl.redirect, 'The page should save successfully and set redirect to true.');
-        System.assertEquals(2, [select count() from DataImportBatch__c]);
+        System.assertEquals(2, [select count() from DataImportBatch__c], 'This test is used to assert that the number of records in the batch is equal to 2');
 
         String clonedBatchName = 'testBatch - ' + Label.lblCloned;
-        System.assertEquals(1, [SELECT count() FROM DataImportBatch__c WHERE Name =: clonedBatchName]);
+        System.assertEquals(1, [SELECT count() FROM DataImportBatch__c WHERE Name =: clonedBatchName], 'Asserts that the number of records in the cloned batch is equal to 1.');
     }
 
     /*********************************************************************************************************

@@ -15,7 +15,7 @@ private class fflib_ArrayUtilsTest
                 new List<String> {'123', '456', '789'},
                 fflib_ArrayUtils.objectToString(
                         new List<Object> {123, 456, 789}
-                )
+                ), 'Checks if all the tag IDs in the list are equal.'
         );
     }
 
@@ -26,7 +26,7 @@ private class fflib_ArrayUtilsTest
                 new List<String> {'123', '456', '789'},
                 fflib_ArrayUtils.objectToString(
                         new List<Object> {'123', '456', '789'}
-                )
+                ), 'Test if all conditions in the list are equal.'
         );
     }
 
@@ -37,7 +37,7 @@ private class fflib_ArrayUtilsTest
                 new List<String>(),
                 fflib_ArrayUtils.objectToString(
                         new List<Object>()
-                )
+                ), 'Test if all conditions in the list are equal.'
         );
     }
 
@@ -48,7 +48,7 @@ private class fflib_ArrayUtilsTest
                 new List<String> {'1', '2', '3'},
                 fflib_ArrayUtils.objectToString(
                         new Set<Object> {1, 2, 3}
-                )
+                ), 'Test if all the conditions in the specified packages are equal.'
         );
     }
 
@@ -65,7 +65,7 @@ private class fflib_ArrayUtilsTest
                                 (Object) idA,
                                 (Object) idB
                         }
-                )
+                ), 'FFCOL Method for equality of two sets of IDs.'
         );
     }
 
@@ -86,7 +86,7 @@ private class fflib_ArrayUtilsTest
                                 (Object) 'B',
                                 (Object) 'C'
                         }
-                )
+                ), 'System. assertEquals - Test if all conditions in a list are equal.'
         );
     }
 
@@ -107,7 +107,7 @@ private class fflib_ArrayUtilsTest
                                 (SObject) new Account(Name = 'B'),
                                 (SObject) new Account(Name = 'C')
                         }
-                )
+                ), 'Check if all of the managed objects in the list are equals.'
         );
     }
 
@@ -128,7 +128,7 @@ private class fflib_ArrayUtilsTest
                                 'test b',
                                 'test c'
                         }
-                )
+                ), 'System. assertEquals - Test case.'
         );
     }
 
@@ -139,7 +139,7 @@ private class fflib_ArrayUtilsTest
                 new List<String> {'abc', 'def'},
                 fflib_ArrayUtils.lowerCase(
                         new List<String> {'ABC', 'DEF'}
-                )
+                ), 'Test if all the strings in the list are equal.'
         );
     }
 
@@ -147,28 +147,28 @@ private class fflib_ArrayUtilsTest
     static void testIsEmpty()
     {
         List<String> aNull = null;
-        System.assertEquals(true, fflib_ArrayUtils.isEmpty(aNull));
-        System.assertEquals(true, fflib_ArrayUtils.isEmpty(new List<String> {}));
-        System.assertEquals(false, fflib_ArrayUtils.isEmpty(new List<String> {'a'}));
-        System.assertEquals(false, fflib_ArrayUtils.isEmpty(new List<String> {'a', 'b'}));
-        System.assertEquals(true, fflib_ArrayUtils.isEmpty(new List<Integer> {}));
-        System.assertEquals(false, fflib_ArrayUtils.isEmpty(new List<Integer> {1}));
-        System.assertEquals(false, fflib_ArrayUtils.isEmpty(new List<Integer> {1, 2}));
+        System.assertEquals(true, fflib_ArrayUtils.isEmpty(aNull), 'Test if all the arguments are null.');
+        System.assertEquals(true, fflib_ArrayUtils.isEmpty(new List<String> {}), 'Assert that all strings in the list are empty.');
+        System.assertEquals(false, fflib_ArrayUtils.isEmpty(new List<String> {'a'}), 'Assert that all strings in the list are empty.');
+        System.assertEquals(false, fflib_ArrayUtils.isEmpty(new List<String> {'a', 'b'}), 'Assert that all strings in the list are empty.');
+        System.assertEquals(true, fflib_ArrayUtils.isEmpty(new List<Integer> {}), 'Assert that all integer values in the list are empty.');
+        System.assertEquals(false, fflib_ArrayUtils.isEmpty(new List<Integer> {1}), 'Assert that all integer values are empty.');
+        System.assertEquals(false, fflib_ArrayUtils.isEmpty(new List<Integer> {1, 2}), 'Assert that all the ints in the list are empty.');
     }
 
     @IsTest
     static void testIsNotEmpty()
     {
         List<String> aNull = null;
-        System.assertEquals(false, fflib_ArrayUtils.isNotEmpty(aNull));
-        System.assertEquals(false, fflib_ArrayUtils.isNotEmpty(new List<String> {}));
-        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<String> {'a'}));
-        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<String> {'a', 'b'}));
-        System.assertEquals(false, fflib_ArrayUtils.isNotEmpty(new List<Integer> {}));
-        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<Integer> {1}));
-        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<Integer> {1, 2}));
-        System.assertEquals(false, fflib_ArrayUtils.isNotEmpty(new List<Account> {}));
-        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<Account> {new Account(Name = 'test')}));
+        System.assertEquals(false, fflib_ArrayUtils.isNotEmpty(aNull), 'Test if all the arguments are null.');
+        System.assertEquals(false, fflib_ArrayUtils.isNotEmpty(new List<String> {}), 'Assert that all strings in the list are empty.');
+        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<String> {'a'}), 'Assert that all strings in the list are empty.');
+        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<String> {'a', 'b'}), 'Assert that all strings in the list are empty.');
+        System.assertEquals(false, fflib_ArrayUtils.isNotEmpty(new List<Integer> {}), 'Assert that all integer values in the list are empty.');
+        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<Integer> {1}), 'Assert that all values in the list are set to 1.');
+        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<Integer> {1, 2}), 'Assert that all the elements in the list are equal.');
+        System.assertEquals(false, fflib_ArrayUtils.isNotEmpty(new List<Account> {}), 'Assert that all accounts in the system are empty.');
+        System.assertEquals(true, fflib_ArrayUtils.isNotEmpty(new List<Account> {new Account(Name = 'test')}), 'Assert that all the members of the list are empty.');
     }
 
     @IsTest
@@ -181,7 +181,7 @@ private class fflib_ArrayUtilsTest
         Datetime maxDatetime = fflib_ArrayUtils.maxDatetime(datetimes);
 
         // THEN - the highest Datetime should be returned
-        System.assertEquals(datetimes.get(1), maxDatetime);
+        System.assertEquals(datetimes.get(1), maxDatetime, 'Assert that the current time is equal to the max time.');
     }
 
     @IsTest
@@ -194,7 +194,7 @@ private class fflib_ArrayUtilsTest
         Datetime maxDatetime = fflib_ArrayUtils.minDatetime(datetimes);
 
         // THEN - the highest Datetime should be returned
-        System.assertEquals(datetimes.get(4), maxDatetime);
+        System.assertEquals(datetimes.get(4), maxDatetime, 'Assert that the current time is greater than or equal to the max datetime.');
     }
 
     @IsTest

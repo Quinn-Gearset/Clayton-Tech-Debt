@@ -70,7 +70,7 @@ public with sharing class fflib_MockSObjectUtil
 		final Decimal amount = 10.0;
 		Opportunity opp = new Opportunity(Id = fflib_IDGenerator.generate(Schema.Opportunity.SObjectType));
 		SObject result = addFieldValue(opp, Opportunity.ExpectedRevenue, amount);
-		System.assertEquals(amount, result.get(Opportunity.ExpectedRevenue));
+		System.assertEquals(amount, result.get(Opportunity.ExpectedRevenue), 'Assert that the expected revenue is equal to the value of the result.');
 	}
 
 	@IsTest
@@ -79,7 +79,7 @@ public with sharing class fflib_MockSObjectUtil
 		final Date today = Date.today();
 		Lead record = new Lead(Id = fflib_IDGenerator.generate(Schema.Lead.SObjectType));
 		SObject result = addFieldValue(record, Lead.ConvertedDate, today);
-		System.assertEquals(today, result.get(Lead.ConvertedDate));
+		System.assertEquals(today, result.get(Lead.ConvertedDate), 'Assert that leads are converted to the same date as today.');
 		System.debug('result: '+result);
 	}
 }

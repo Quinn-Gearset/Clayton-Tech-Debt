@@ -105,11 +105,11 @@ private class CMT_FilterRule_TEST {
         test.startTest();
 
         // Validate that the operation supporting methods retrieve and return the expected values
-        System.AssertEquals(CMT_FilterRule.FilterOperation.EQUALS, CMT_FilterRuleUI_SVC.getFilterOperationFromString('Equals'));
-        System.AssertEquals(CMT_FilterRuleUI_SVC.getFilterOperations().get(CMT_FilterRule.FilterOperation.EQUALS), 'Equals');
+        System.AssertEquals(CMT_FilterRule.FilterOperation.EQUALS, CMT_FilterRuleUI_SVC.getFilterOperationFromString('Equals'), 'Assert equality filter');
+        System.AssertEquals(CMT_FilterRuleUI_SVC.getFilterOperations().get(CMT_FilterRule.FilterOperation.EQUALS), 'Equals', 'Checks that the filter operation is equal to');
 
         // Validate that fields are returned for the given SObject
-        System.AssertNotEquals(0, CMT_FilterRuleUI_SVC.getAvailableFields(Opportunity.SObjectType).size());
+        System.AssertNotEquals(0, CMT_FilterRuleUI_SVC.getAvailableFields(Opportunity.SObjectType).size(), 'Checks that all fields are available.');
         System.AssertEquals(OCR_FIELD_COUNT, CMT_FilterRuleUI_SVC.getAvailableFields(OpportunityContactRole.SObjectType).size(),
                 'There should be exactly ' + OCR_FIELD_COUNT + ' available fields for the OpportunityContactRole object\n' +
                 CMT_FilterRuleUI_SVC.getAvailableFields(OpportunityContactRole.SObjectType));

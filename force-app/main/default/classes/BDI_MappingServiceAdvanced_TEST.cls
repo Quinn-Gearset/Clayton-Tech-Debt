@@ -54,15 +54,15 @@ private class BDI_MappingServiceAdvanced_TEST {
         //and confirm it is the custom metadata implementation
         BDI_MappingService bdiMS = BDI_DataImportService.getDefaultMappingService();
         String className = String.valueOf(bdiMS).split(':')[0];
-        System.assertEquals('BDI_MappingServiceAdvanced',className);
+        System.assertEquals('BDI_MappingServiceAdvanced',className, 'This test asserts that the class name is the same as the class name of the BDI');
 
         //Instantiate and call the data import service with the field mapping specified
         BDI_DataImportService bdiDis = new BDI_DataImportService(false, bdiMS);
         Map<String,String> accountFieldMapping = 
             bdiDis.mapDataImportFields('Account1','Account',BDI_DataImportService.listStrDataImportFields);
-        System.assertNotEquals(null,accountFieldMapping);
+        System.assertNotEquals(null,accountFieldMapping, 'This method asserts that the account field mappings are not null.');
         //Confirm that there are at least 8 records
-        System.assert(accountFieldMapping.size() >= 8);
+        System.assert(accountFieldMapping.size() >= 8, 'This method is only used for testing.');
 
         String namespace = UTIL_Namespace.getNamespace();
         String sampleField = 'npsp__account1_city__c';
@@ -71,7 +71,7 @@ private class BDI_MappingServiceAdvanced_TEST {
             sampleField = UTIL_Namespace.alignSchemaNSWithEnvironment(sampleField);
         }
         //Sample one of the fields to convfirm it is mapped correctly.
-        System.assertEquals('BillingCity',accountFieldMapping.get(sampleField));
+        System.assertEquals('BillingCity',accountFieldMapping.get(sampleField), 'This method is used to assert that the billing city is the same as the sample field.');
 
     }
 
@@ -81,15 +81,15 @@ private class BDI_MappingServiceAdvanced_TEST {
     @isTest static void shouldReturnCorrectDefaultsForDISCustSetting() {
         //Confirm that the defaults for the fields are null.
         Data_Import_Settings__c dis1 = Data_Import_Settings__c.getInstance();
-        System.assertEquals(null,dis1.Field_Mapping_Method__c);
-        System.assertEquals(null,dis1.Default_Data_Import_Field_Mapping_Set__c);
+        System.assertEquals(null,dis1.Field_Mapping_Method__c, 'This method asserts that the class is the same as the class itself.');
+        System.assertEquals(null,dis1.Default_Data_Import_Field_Mapping_Set__c, 'This method is only used for testing.');
 
         //Retreive the Data Import Settings and confirm that the defaults have been 
         //set correctly for the two CMT mapping related fields
         Data_Import_Settings__c dis2 = UTIL_CustomSettingsFacade.getDataImportSettings();
 
-        System.assertEquals(BDI_DataImportService.FM_HELP_TEXT,dis2.Field_Mapping_Method__c);
-        System.assertEquals(BDI_MappingServiceAdvanced.DEFAULT_DATA_IMPORT_FIELD_MAPPING_SET_NAME,dis2.Default_Data_Import_Field_Mapping_Set__c);
+        System.assertEquals(BDI_DataImportService.FM_HELP_TEXT,dis2.Field_Mapping_Method__c, 'This test asserts that the default Field Mapping Method is used.');
+        System.assertEquals(BDI_MappingServiceAdvanced.DEFAULT_DATA_IMPORT_FIELD_MAPPING_SET_NAME,dis2.Default_Data_Import_Field_Mapping_Set__c, 'This test asserts that the default mapping set is the same as the default mapping set.');
 
     }
 
@@ -107,9 +107,9 @@ private class BDI_MappingServiceAdvanced_TEST {
         //Retrieve a mapping service instance
         BDI_MappingServiceAdvanced bdiMSAdv = BDI_MappingServiceAdvanced.getInstance();
 
-        System.assert(bdiMSAdv.fieldMappingSet != null);
-        System.assert(bdiMSAdv.fieldMappingSet.objectMappingByDevName.size() > 0);
-        System.assert(bdiMSAdv.fieldMappingSet.fieldMappingByDevName.size() > 0);
+        System.assert(bdiMSAdv.fieldMappingSet != null, 'This method is called by the BDIMSAdv module when the field mapping set is not');
+        System.assert(bdiMSAdv.fieldMappingSet.objectMappingByDevName.size() > 0, 'This method is called by the bdiMSAdv module when the object mapping is not available');
+        System.assert(bdiMSAdv.fieldMappingSet.fieldMappingByDevName.size() > 0, 'This method is called by the bdiMSAdv module when the bdiMSAdv is');
     }
 
     /*******************************************************************************************************
@@ -132,10 +132,10 @@ private class BDI_MappingServiceAdvanced_TEST {
             BDI_MappingServiceAdvanced.DEFAULT_DATA_IMPORT_FIELD_MAPPING_SET_NAME,
             true);
 
-        System.assert(fms != null);
-        System.assert(fms.objectMappingByDevName.size() > 0);
-        System.assert(fms.fieldMappingByDevName.size() > 0);
-        System.assert(fms.fieldMappingsByObjMappingDevName.size() > 0);
+        System.assert(fms != null, 'Assert that fms is not null');
+        System.assert(fms.objectMappingByDevName.size() > 0, 'This method is not thread - safe. It is only called if there is a mapping for');
+        System.assert(fms.fieldMappingByDevName.size() > 0, 'This method is called by the test code to ensure that the mapping is valid.');
+        System.assert(fms.fieldMappingsByObjMappingDevName.size() > 0, 'This method is only called if there is a field mapping in the object.');
     }
 
     /*******************************************************************************************************

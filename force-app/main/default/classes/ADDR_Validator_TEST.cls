@@ -70,24 +70,24 @@ public with sharing class ADDR_Validator_TEST {
         contact = getContact(contact.Id);
 
         Address__c[] av = getAddressesForHousehold(contact.AccountId);
-        System.assertEquals(1, av.size());
-        System.assertEquals('1 Infinite Loop', av[0].MailingStreet__c);
+        System.assertEquals(1, av.size(), 'Assert that the size of the array is equal to 1.');
+        System.assertEquals('1 Infinite Loop', av[0].MailingStreet__c, 'Assert that 1 Infinite Loop is equal to the first Infinite Loop.');
         if (!orgConfig.isStateCountryPicklistsEnabled()) {
-            System.assertEquals('CA', av[0].MailingState__c);
+            System.assertEquals('CA', av[0].MailingState__c, 'Assert that the current mailing state is CA.');
         } else {
-            System.assertEquals('California', av[0].MailingState__c);
+            System.assertEquals('California', av[0].MailingState__c, 'Assert that California is the same as the first mailing state.');
         }
-        System.assertEquals('95014-2083', av[0].MailingPostalCode__c);
-        System.assertEquals(true, av[0].Verified__c);
-        System.assertEquals(Label.Addr_Verified, av[0].Verification_Status__c);
+        System.assertEquals('95014-2083', av[0].MailingPostalCode__c, 'Assert that the first address is 95014 - 2083.');
+        System.assertEquals(true, av[0].Verified__c, 'Assert that the values of the array are equal.');
+        System.assertEquals(Label.Addr_Verified, av[0].Verification_Status__c, 'Assert that the address is verified.');
 
-        System.assertEquals('1 Infinite Loop', contact.MailingStreet);
-        System.assertEquals('Cupertino', contact.MailingCity);
-        System.assertEquals('95014-2083', contact.MailingPostalCode);
+        System.assertEquals('1 Infinite Loop', contact.MailingStreet, 'Assert that 1 Infinite Loop is the same as the contact s MailingStreet.');
+        System.assertEquals('Cupertino', contact.MailingCity, 'Checks that the contact s MailingCity is Cupertino.');
+        System.assertEquals('95014-2083', contact.MailingPostalCode, 'Checks that the postal code of the contact is the same as the postal code of the contact');
         if (orgConfig.isStateCountryPicklistsEnabled()) {
-            System.assertEquals('California', contact.MailingState);
+            System.assertEquals('California', contact.MailingState, 'Checks that the current mailing state is California.');
         } else {
-            System.assertEquals('CA', contact.MailingState);
+            System.assertEquals('CA', contact.MailingState, 'Checks that the current mailing state is the same as the current state of the contact.');
         }
     }
 
@@ -230,10 +230,10 @@ public with sharing class ADDR_Validator_TEST {
         contact = getContact(contact.Id);
 
         Address__c[] av = getAddressesForHousehold(contact.AccountId);
-        System.assertEquals(1, av.size());
-        System.assertEquals(true, av[0].Verified__c);
-        System.assertEquals(true, av[0].Ambiguous__c);
-        System.assertEquals(Label.Addr_Verified, av[0].Verification_Status__c);
+        System.assertEquals(1, av.size(), 'Assert that the size of the array is equal to 1.');
+        System.assertEquals(true, av[0].Verified__c, 'Assert that the values of the array are equal.');
+        System.assertEquals(true, av[0].Ambiguous__c, 'Assert that the ambiguity of the ambiguity is the same as the ambigu');
+        System.assertEquals(Label.Addr_Verified, av[0].Verification_Status__c, 'Assert that the address is verified.');
     }
 
     /*******************************************************************************************************
@@ -263,14 +263,14 @@ public with sharing class ADDR_Validator_TEST {
         contact = getContact(contact.Id);
 
         Address__c[] av = getAddressesForHousehold(contact.AccountId);
-        System.assertEquals('98236', av[0].MailingPostalCode__c);
-        System.assertEquals('Clinton', av[0].MailingCity__c);
-        System.assertEquals(true, av[0].Verified__c);
-        System.assertEquals(Label.Addr_Verified, av[0].Verification_Status__c);
+        System.assertEquals('98236', av[0].MailingPostalCode__c, 'Assert that the first address is the same as the first one.');
+        System.assertEquals('Clinton', av[0].MailingCity__c, 'Assert that the first AVS mailing city is the same as the first AVS mail');
+        System.assertEquals(true, av[0].Verified__c, 'Assert that the values of the array are equal.');
+        System.assertEquals(Label.Addr_Verified, av[0].Verification_Status__c, 'Assert that the address is verified.');
 
-        System.assertEquals(null, contact.MailingStreet);
-        System.assertEquals('Clinton', contact.MailingCity);
-        System.assertEquals('98236', contact.MailingPostalCode);
+        System.assertEquals(null, contact.MailingStreet, 'Assert that the contact s mailing street is null.');
+        System.assertEquals('Clinton', contact.MailingCity, 'Checks that the contact s mailing city is the same as the clinton contact s');
+        System.assertEquals('98236', contact.MailingPostalCode, 'Checks that the postal code of the contact is the same as the postal code of the contact');
     }
 
     /*******************************************************************************************************
@@ -300,14 +300,14 @@ public with sharing class ADDR_Validator_TEST {
         contact = getContact(contact.Id);
 
         Address__c[] av = getAddressesForHousehold(contact.AccountId);
-        System.assertEquals('98236', av[0].MailingPostalCode__c);
-        System.assertEquals('Clinton', av[0].MailingCity__c);
-        System.assertEquals(true, av[0].Verified__c);
-        System.assertEquals(Label.Addr_Verified, av[0].Verification_Status__c);
+        System.assertEquals('98236', av[0].MailingPostalCode__c, 'Assert that the first address is the same as the first one.');
+        System.assertEquals('Clinton', av[0].MailingCity__c, 'Assert that the first AVS mailing city is the same as the first AVS mail');
+        System.assertEquals(true, av[0].Verified__c, 'Assert that the values of the array are equal.');
+        System.assertEquals(Label.Addr_Verified, av[0].Verification_Status__c, 'Assert that the address is verified.');
 
-        System.assertEquals(null, contact.MailingStreet);
-        System.assertEquals('Clinton', contact.MailingCity);
-        System.assertEquals('98236', contact.MailingPostalCode);
+        System.assertEquals(null, contact.MailingStreet, 'Assert that the contact s mailing street is null.');
+        System.assertEquals('Clinton', contact.MailingCity, 'Checks that the contact s mailing city is the same as the clinton contact s');
+        System.assertEquals('98236', contact.MailingPostalCode, 'Checks that the postal code of the contact is the same as the postal code of the contact');
     }
 
     /*******************************************************************************************************
@@ -323,11 +323,11 @@ public with sharing class ADDR_Validator_TEST {
         sc.addrVerifSettings.Address_Verification_Endpoint__c = SMARTY_STREETS_VERIFICATION_ENDPOINT;
         sc.addrVerifSettings.Class__c = SMARTY_STREETS_VALIDATOR_CLASS;
         sc.saveSettings();
-        System.assertEquals(SAVE_SETTINGS_SUCCESS_MESSAGE, sc.apiSettingsSaveMessage);
+        System.assertEquals(SAVE_SETTINGS_SUCCESS_MESSAGE, sc.apiSettingsSaveMessage, 'This test asserts that the API settings save message is equal to the one provided in the sc');
 
         sc.apiTestEntry = ZIP_CODE;
         sc.testApi();
-        System.assertNotEquals(null, sc.apiTestResult);
+        System.assertNotEquals(null, sc.apiTestResult, 'Assert that the API result is not null.');
 
         Test.startTest();
         sc.batchVerify();
@@ -335,7 +335,7 @@ public with sharing class ADDR_Validator_TEST {
 
         //The batch has its own test. This basically tests that no exception was thrown
         //since it got to set the status variable.
-        System.assertEquals(true, sc.isRunningBatch);
+        System.assertEquals(true, sc.isRunningBatch, 'Test whether the batch is running.');
     }
 
     /*******************************************************************************************************
@@ -351,7 +351,7 @@ public with sharing class ADDR_Validator_TEST {
         sc.addrVerifSettings.Address_Verification_Endpoint__c = SMARTY_STREETS_VERIFICATION_ENDPOINT;
         sc.addrVerifSettings.Class__c = '';
         sc.saveSettings();
-        System.assertEquals(SAVE_SETTINGS_SUCCESS_MESSAGE, sc.apiSettingsSaveMessage);
+        System.assertEquals(SAVE_SETTINGS_SUCCESS_MESSAGE, sc.apiSettingsSaveMessage, 'This test asserts that the API settings save message is equal to the one provided in the sc');
     }
 
     /*******************************************************************************************************
@@ -400,9 +400,9 @@ public with sharing class ADDR_Validator_TEST {
         contact = getContact(contact.Id);
 
         Address__c[] av = getAddressesForHousehold(contact.AccountId);
-        System.assertEquals(1, av.size());
-        System.assertEquals(false, av[0].Verified__c);
-        System.assertEquals(null, av[0].Verification_Status__c);
+        System.assertEquals(1, av.size(), 'Assert that the size of the array is equal to 1.');
+        System.assertEquals(false, av[0].Verified__c, 'Assert that the values of the array are equal.');
+        System.assertEquals(null, av[0].Verification_Status__c, 'Assert that the verification status of the first verification is the same as the verification status of the');
 
         createDefaultSettings();
         Test.setMock(HttpCalloutMock.class, new ADDR_MockHttpRespGenerator_TEST());
@@ -413,9 +413,9 @@ public with sharing class ADDR_Validator_TEST {
         Test.stopTest();
 
         Address__c updatedAddress = getAddress(av[0].Id);
-        System.assertEquals(true, updatedAddress.Verified__c);
+        System.assertEquals(true, updatedAddress.Verified__c, 'Test for the presence of a verified address.');
         System.assertEquals(null, updatedAddress.Verification_Status__c, 'Address should not have been verified');
-        System.assertEquals('single-address', updatedAddress.MailingStreet__c);
+        System.assertEquals('single-address', updatedAddress.MailingStreet__c, 'Checks that the address is a single - address.');
 
         //now, use the button and make sure the address verification happens, despite the fact that Verified is already checked.
         PageReference pageRef = Page.ADDR_ValidatorBTN;
@@ -428,9 +428,9 @@ public with sharing class ADDR_Validator_TEST {
         ctrl.verifyAddressButton();
 
         updatedAddress = getAddress(av[0].Id);
-        System.assertEquals(true, updatedAddress.Verified__c);
+        System.assertEquals(true, updatedAddress.Verified__c, 'Test for the presence of a verified address.');
         System.assertEquals(Label.Addr_Verified, updatedAddress.Verification_Status__c, 'Address should have been verified');
-        System.assertEquals('1 Infinite Loop', updatedAddress.MailingStreet__c);
+        System.assertEquals('1 Infinite Loop', updatedAddress.MailingStreet__c, 'This test asserts that the address is 1 Infinite Loop.');
     }
 
     /*******************************************************************************************************
@@ -453,7 +453,7 @@ public with sharing class ADDR_Validator_TEST {
 
         ctrl.apiTestEntry = ZIP_CODE;
         ctrl.testApi();
-        System.assertEquals(System.Label.stgAddrPermissionDenied, ctrl.apiTestResult);
+        System.assertEquals(System.Label.stgAddrPermissionDenied, ctrl.apiTestResult, 'Test for equality of the label of the permission denied response.');
         assertAuthIdAndTokenAreNull(ctrl);
     }
 
@@ -473,10 +473,10 @@ public with sharing class ADDR_Validator_TEST {
         ctrl.verifyAddressVerificationService(healthCheckPanel);
 
         System.assertEquals(1, healthCheckPanel.listDR.size(), 'Expecting one defect result: ' + healthCheckPanel.listDR);
-        System.assertEquals(System.Label.stgAddrPermissionDenied, healthCheckPanel.listDR[0].strDetails);
-        System.assertEquals(SETTINGS_NAME, healthCheckPanel.listDR[0].strName);
-        System.assertEquals(STATUS_ERROR, healthCheckPanel.listDR[0].strStatus);
-        System.assertEquals(null, healthCheckPanel.listDR[0].strSolution);
+        System.assertEquals(System.Label.stgAddrPermissionDenied, healthCheckPanel.listDR[0].strDetails, 'Assert that the health check panel s listDR is the same as the one in the health');
+        System.assertEquals(SETTINGS_NAME, healthCheckPanel.listDR[0].strName, 'Checks that the settings name is the same as the settings name.');
+        System.assertEquals(STATUS_ERROR, healthCheckPanel.listDR[0].strStatus, 'Checks that the status of the health check panel is the same as the status of the first');
+        System.assertEquals(null, healthCheckPanel.listDR[0].strSolution, 'Assert that the current health check panel is equal to the current health check panel.');
     }
 
     /*******************************************************************************************************
@@ -519,10 +519,10 @@ public with sharing class ADDR_Validator_TEST {
         ctrl.verifyAddressVerificationService(healthCheckPanel);
 
         System.assertEquals(1, healthCheckPanel.listDR.size(), 'Expecting one defect result: ' + healthCheckPanel.listDR);
-        System.assertEquals(expectedMessage, healthCheckPanel.listDR[0].strDetails);
-        System.assertEquals(SETTINGS_NAME, healthCheckPanel.listDR[0].strName);
-        System.assertEquals(STATUS_ERROR, healthCheckPanel.listDR[0].strStatus);
-        System.assertEquals(expectedSolution, healthCheckPanel.listDR[0].strSolution);
+        System.assertEquals(expectedMessage, healthCheckPanel.listDR[0].strDetails, 'Checks that the health check panel is equal to the expected message.');
+        System.assertEquals(SETTINGS_NAME, healthCheckPanel.listDR[0].strName, 'Checks that the settings name is the same as the settings name.');
+        System.assertEquals(STATUS_ERROR, healthCheckPanel.listDR[0].strStatus, 'Checks that the status of the health check panel is the same as the status of the first');
+        System.assertEquals(expectedSolution, healthCheckPanel.listDR[0].strSolution, 'Checks that the current health check panel s current value equals the expected value.');
     }
 
     /*******************************************************************************************************
@@ -544,10 +544,10 @@ public with sharing class ADDR_Validator_TEST {
         ctrl.verifyAddressVerificationService(healthCheckPanel);
 
         System.assertEquals(1, healthCheckPanel.listDR.size(), 'Expecting one defect result: ' + healthCheckPanel.listDR);
-        System.assertEquals(null, healthCheckPanel.listDR[0].strDetails);
-        System.assertEquals(SETTINGS_NAME, healthCheckPanel.listDR[0].strName);
-        System.assertEquals(STATUS_SUCCESS, healthCheckPanel.listDR[0].strStatus);
-        System.assertEquals(expectedMessage, healthCheckPanel.listDR[0].strSolution);
+        System.assertEquals(null, healthCheckPanel.listDR[0].strDetails, 'Checks that the health check panel is not null.');
+        System.assertEquals(SETTINGS_NAME, healthCheckPanel.listDR[0].strName, 'Checks that the settings name is the same as the settings name.');
+        System.assertEquals(STATUS_SUCCESS, healthCheckPanel.listDR[0].strStatus, 'Checks that the status of the health check panel is equal to the status of the first health');
+        System.assertEquals(expectedMessage, healthCheckPanel.listDR[0].strSolution, 'Checks that the current health check panel is equal to the expected message.');
     }
 
     /*******************************************************************************************************
@@ -559,8 +559,8 @@ public with sharing class ADDR_Validator_TEST {
         String token = settings.Auth_Token__c;
         String encodedToken = EncodingUtil.urlEncode(token, 'UTF-8');
 
-        System.assertEquals(SMARTY_STREETS_VALIDATOR_CLASS, settings.Class__c);
-        System.assertNotEquals(null, settings.Auth_Token__c);
+        System.assertEquals(SMARTY_STREETS_VALIDATOR_CLASS, settings.Class__c, 'Checks that the SMARTY_STREETS_VALIDATOR_CLASS is the');
+        System.assertNotEquals(null, settings.Auth_Token__c, 'Assert that the Auth_Token is not null.');
 
         AddressVerifierExtension addrVerifier = new AddressVerifierExtension();
         addrVerifier.encodeToken(settings);
@@ -638,7 +638,7 @@ public with sharing class ADDR_Validator_TEST {
         AddressVerifierExtension addrVerifier = new AddressVerifierExtension().returnHasAccess(false);
 
         String result = addrVerifier.verifyService(settings, ZIP_CODE);
-        System.assertEquals(System.Label.stgAddrPermissionDenied, result);
+        System.assertEquals(System.Label.stgAddrPermissionDenied, result, 'Assert that result is not the same as result.');
     }
 
     /*******************************************************************************************************
@@ -652,7 +652,7 @@ public with sharing class ADDR_Validator_TEST {
         AddressVerifierExtension addrVerifier = new AddressVerifierExtension();
 
         String result = addrVerifier.verifyService(settings, ZIP_CODE);
-        System.assertEquals(null, result);
+        System.assertEquals(null, result, 'Assert that the result is null.');
     }
 
     /*******************************************************************************************************
@@ -668,7 +668,7 @@ public with sharing class ADDR_Validator_TEST {
         Test.setMock(HttpCalloutMock.class, new MockSmartyStreetsService());
 
         String result = addrVerifier.verifyService(settings, ZIP_CODE);
-        System.assertEquals(System.Label.Addr_Valid_Key_Pair, result);
+        System.assertEquals(System.Label.Addr_Valid_Key_Pair, result, 'Assert that result is valid key pair.');
         Test.stopTest();
     }
 
@@ -840,12 +840,12 @@ public with sharing class ADDR_Validator_TEST {
     private static void assertAddressWithStatus(String verificationStatus, Id contactId, Boolean isVerified) {
         //check household got created for contact
         Contact contact = getContact(contactId);
-        System.assertNotEquals(null, contact.AccountId);
+        System.assertNotEquals(null, contact.AccountId, 'Checks that AccountId is not null.');
 
         Address__c[] av = getAddressesForHousehold(contact.AccountId);
-        System.assertEquals(1, av.size());
-        System.assertEquals(isVerified, av[0].Verified__c);
-        System.assertEquals(verificationStatus, av[0].Verification_Status__c);
+        System.assertEquals(1, av.size(), 'Assert that the size of the array is equal to 1.');
+        System.assertEquals(isVerified, av[0].Verified__c, 'Assert that the values of the verified fields are equal.');
+        System.assertEquals(verificationStatus, av[0].Verification_Status__c, 'Assert that the verificationStatus is the same as the first verification status.');
     }
 
     /*******************************************************************************************************

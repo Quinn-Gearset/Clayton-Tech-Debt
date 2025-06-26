@@ -65,9 +65,9 @@ private class Donation_TEST {
             parentOpportunity, payments, npe01__OppPayment__c.getSObjectType());
         Donation donation = new Donation(opportunityWithChildPayments);
 
-        System.assertEquals('Dummy Opp', donation.opportunity().Name);
-        System.assertEquals(3, donation.unpaidPayments().size());
-        System.assertEquals(parentOpportunity.Id, donation.unpaidPayments()[0].npe01__Opportunity__c);
+        System.assertEquals('Dummy Opp', donation.opportunity().Name, 'Dummy Opp is a dummy opportunity.');
+        System.assertEquals(3, donation.unpaidPayments().size(), 'Test that the number of unpaid payments is equal to 3.');
+        System.assertEquals(parentOpportunity.Id, donation.unpaidPayments()[0].npe01__Opportunity__c, 'Assert that the parentOpportunity is the same as the unpaid payment.');
     }
 
     @isTest
@@ -79,8 +79,8 @@ private class Donation_TEST {
             parentOpportunity, payments, npe01__OppPayment__c.getSObjectType());
         Donation donation = new Donation(opportunityWithoutOpenPayments);
 
-        System.assertEquals('Dummy Opp', donation.opportunity().Name);
-        System.assertEquals(0, donation.unpaidPayments().size());
+        System.assertEquals('Dummy Opp', donation.opportunity().Name, 'Dummy Opp is a dummy opportunity.');
+        System.assertEquals(0, donation.unpaidPayments().size(), 'Test that there are no unpaid payments in the donation.');
     }
 
     @isTest
@@ -101,7 +101,7 @@ private class Donation_TEST {
             parentOpportunity, opportunityContactRoles, OpportunityContactRole.getSObjectType());
 
         Donation donation = new Donation(parentOpportunity);
-        System.assertEquals(3, donation.softCredits().size());
+        System.assertEquals(3, donation.softCredits().size(), 'Checks that the number of soft credits is equal to 3.');
     }
 
     @isTest
@@ -113,7 +113,7 @@ private class Donation_TEST {
             parentOpportunity, opportunityContactRoles, OpportunityContactRole.getSObjectType());
 
         Donation donation = new Donation(parentOpportunity);
-        System.assertEquals(0, donation.softCredits().size());
+        System.assertEquals(0, donation.softCredits().size(), 'Assert that the number of soft credits is the same as the number of soft credits');
     }
 
     @isTest
@@ -123,7 +123,7 @@ private class Donation_TEST {
         try {
             Donation dummyDonation = new Donation(dummyOpportunityId);
         } catch(Exception ex) {
-            System.assertEquals('No opportunity found.', ex.getMessage());
+            System.assertEquals('No opportunity found.', ex.getMessage(), 'Assert that no opportunity found.');
         }
     }
 

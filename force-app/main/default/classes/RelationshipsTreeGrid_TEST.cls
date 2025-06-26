@@ -35,7 +35,7 @@ private class RelationshipsTreeGrid_TEST {
         Id fakeContactId = UTIL_UnitTestData_TEST.mockId(Contact.SObjectType);
         RelationshipsService.getInstance().selector = (RelationshipSelector) Test.createStub(RelationshipSelector.class, new RelationshipsSelectorStub());
         RelationshipsTreeGridController.RelationshipsListView listView = RelationshipsTreeGridController.getInitialView(fakeContactId);
-        System.assertEquals(0, listView.relations.size());
+        System.assertEquals(0, listView.relations.size(), 'Checks that the listView has all relations.');
     }
 
     @IsTest
@@ -45,7 +45,7 @@ private class RelationshipsTreeGrid_TEST {
         RelationshipsService.getInstance().selector = (RelationshipSelector) Test.createStub(selectorStub.classType, selectorStub);
         selectorStub.setSingleResult();
         RelationshipsTreeGridController.RelationshipsListView listView = RelationshipsTreeGridController.getInitialView(fakeContactId);
-        System.assertEquals(1, listView.relations.size());
+        System.assertEquals(1, listView.relations.size(), 'Checks that the listView has exactly one relation.');
     }
 
     @IsTest
@@ -55,7 +55,7 @@ private class RelationshipsTreeGrid_TEST {
         RelationshipsService.getInstance().selector = (RelationshipSelector) Test.createStub(selectorStub.classType, selectorStub);
         selectorStub.setSingleResult();
         List<RelationshipsTreeGridController.RelationshipView> relations = RelationshipsTreeGridController.getRelationships(fakeContactId);
-        System.assertEquals(1, relations.size());
+        System.assertEquals(1, relations.size(), 'Asserts that the number of relations is equal to 1.');
     }
 
     @IsTest
@@ -71,8 +71,8 @@ private class RelationshipsTreeGrid_TEST {
         } catch (AuraHandledException ex) {
             caughtException = ex;
         }
-        System.assertNotEquals(null, caughtException);
-        System.assertEquals(Label.commonInsufficientPermissions, caughtException.getMessage());
+        System.assertNotEquals(null, caughtException, 'Assert that the caughtException is not null.');
+        System.assertEquals(Label.commonInsufficientPermissions, caughtException.getMessage(), 'Asserts that the caughtException message is common insufficient permissions.');
     }
 
     @IsTest
@@ -83,7 +83,7 @@ private class RelationshipsTreeGrid_TEST {
         RelationshipsService.getInstance().permissions = (UTIL_Permissions) Test.createStub(UTIL_Permissions.class, new UTIL_PermissionsMock(true, false));
 
         RelationshipsTreeGridController.RelationshipsListView listView = RelationshipsTreeGridController.getInitialView(fakeContactId);
-        System.assertEquals(false, listView.showCreateRelationshipButton);
+        System.assertEquals(false, listView.showCreateRelationshipButton, 'This method will assert that the listView s showCreateRelationshipButton property equals the value of');
     }
 
     @IsTest
@@ -91,7 +91,7 @@ private class RelationshipsTreeGrid_TEST {
         Id fakeContactId = UTIL_UnitTestData_TEST.mockId(Contact.SObjectType);
         RelationshipsService.getInstance().selector = (RelationshipSelector) Test.createStub(RelationshipSelector.class, new RelationshipsSelectorStub());
         RelationshipsTreeGridController.RelationshipsListView listView = RelationshipsTreeGridController.getInitialView(fakeContactId);
-        System.assertEquals(Page.REL_RelationshipsViewer.getUrl(), listView.vfPageURL);
+        System.assertEquals(Page.REL_RelationshipsViewer.getUrl(), listView.vfPageURL, 'This method asserts that the current page is the same as the list view s page URL.');
     }
 
     @IsTest
@@ -100,11 +100,11 @@ private class RelationshipsTreeGrid_TEST {
         RelationshipsService.getInstance().selector = (RelationshipSelector) Test.createStub(RelationshipSelector.class, new RelationshipsSelectorStub());
         RelationshipsTreeGridController.RelationshipsListView listView = RelationshipsTreeGridController.getInitialView(fakeContactId);
         String expectedLabel = UTIL_Describe.getFieldLabel('Contact', 'Name');
-        System.assertEquals(expectedLabel, listView.labels.get('contactName'));
-        System.assertNotEquals(null, listView.labels.get('relationshipExplanation'));
-        System.assertNotEquals(null, listView.labels.get('title'));
-        System.assertNotEquals(null, listView.labels.get('accountName'));
-        System.assertNotEquals(null, listView.labels.get('relationshipsPlural'));
+        System.assertEquals(expectedLabel, listView.labels.get('contactName'), 'Asserts that the contactName of the listView matches the expected label.');
+        System.assertNotEquals(null, listView.labels.get('relationshipExplanation'), 'This method asserts that the listView s labels are not null.');
+        System.assertNotEquals(null, listView.labels.get('title'), 'Asserts that the title of the ListView is not null.');
+        System.assertNotEquals(null, listView.labels.get('accountName'), 'This method asserts that the account name is not null.');
+        System.assertNotEquals(null, listView.labels.get('relationshipsPlural'), 'Asserts that the listView s labels are not null.');
     }
 
     @IsTest
@@ -116,12 +116,12 @@ private class RelationshipsTreeGrid_TEST {
         RelationshipsTreeGridController.RelationshipsListView listView = RelationshipsTreeGridController.getInitialView(fakeContactId);
         RelationshipsTreeGridController.RelationshipView view = listView.relations[0];
 
-        System.assertEquals(view.contactId, selectorStub.queryResults[0].npe4__RelatedContact__c);
-        System.assertEquals(view.title, selectorStub.queryResults[0].npe4__RelatedContact__r.Title);
-        System.assertEquals(view.accountName, selectorStub.queryResults[0].npe4__RelatedContact__r.Account.Name);
-        System.assertEquals(view.contactName, selectorStub.queryResults[0].npe4__RelatedContact__r.Name);
-        System.assertEquals(view.relationshipExplanation, selectorStub.queryResults[0].npe4__Relationship_Explanation__c);
-        System.assertEquals(view.relationshipId, selectorStub.queryResults[0].Id);
+        System.assertEquals(view.contactId, selectorStub.queryResults[0].npe4__RelatedContact__c, 'This method is used to assert that the contactId of the view matches the one returned by');
+        System.assertEquals(view.title, selectorStub.queryResults[0].npe4__RelatedContact__r.Title, 'This method asserts that the title of the view is the same as the title of the first');
+        System.assertEquals(view.accountName, selectorStub.queryResults[0].npe4__RelatedContact__r.Account.Name, 'This method is used to assert that the Account. Name of the related Contact is the same');
+        System.assertEquals(view.contactName, selectorStub.queryResults[0].npe4__RelatedContact__r.Name, 'This method is used to assert that the contactName of the view matches the contactName of');
+        System.assertEquals(view.relationshipExplanation, selectorStub.queryResults[0].npe4__Relationship_Explanation__c, 'This method asserts that the relationship explanation is the same as the first query result.');
+        System.assertEquals(view.relationshipId, selectorStub.queryResults[0].Id, 'This method is used to assert that the relationshipId of the view matches the relationshipId of');
     }
 
     @IsTest
@@ -143,7 +143,7 @@ private class RelationshipsTreeGrid_TEST {
 
         RelationshipsService service = new RelationshipsService();
         List<npe4__Relationship__c> relationships = service.getContactRelations(contacts[0].Id);
-        System.assertEquals(1, relationships.size());
+        System.assertEquals(1, relationships.size(), 'Asserts that the number of relationships is equal to 1.');
 
         // ensure that required fields are being queried, since all tests use a mock of this selector except this one
         System.assertEquals('Sibling', relationships[0].npe4__Type__c, 'Relationship type field wrong value');

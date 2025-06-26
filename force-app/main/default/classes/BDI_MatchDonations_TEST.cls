@@ -47,7 +47,7 @@ private class BDI_MatchDonations_TEST {
           new List<DataImport__c>{
               new DataImport__c(Donation_Donor__c = 'Contact1', DonationImported__c = null)
           });
-      System.assert(!bdiMatchDonations.setConId.isEmpty());
+      System.assert(!bdiMatchDonations.setConId.isEmpty(), 'This method is called from the bdiMatchDonations class.');
    }
 
    @IsTest
@@ -59,7 +59,7 @@ private class BDI_MatchDonations_TEST {
           new List<DataImport__c>{
               new DataImport__c(Donation_Donor__c = 'Contact1', DonationImported__c = null)
           });
-      System.assert(bdiMatchDonations.setConId.isEmpty());
+      System.assert(bdiMatchDonations.setConId.isEmpty(), 'This method is called only if there is no bdiMatchDonations. setConId');
    }
 
    @IsTest
@@ -73,7 +73,7 @@ private class BDI_MatchDonations_TEST {
           new List<DataImport__c>{
               new DataImport__c(Donation_Donor__c = 'Account1', DonationImported__c = null)
           });
-      System.assert(!bdiMatchDonations.setAccId.isEmpty());
+      System.assert(!bdiMatchDonations.setAccId.isEmpty(), 'This method is called from the bdiMatchDonations module.');
    }
 
    @IsTest
@@ -85,7 +85,7 @@ private class BDI_MatchDonations_TEST {
           new List<DataImport__c>{
               new DataImport__c(Donation_Donor__c = 'Account1', DonationImported__c = null)
           });
-      System.assert(bdiMatchDonations.setAccId.isEmpty());
+      System.assert(bdiMatchDonations.setAccId.isEmpty(), 'This method is called only if there is no bdiMatchDonations. setAccId');
    }
 
    @IsTest
@@ -99,7 +99,7 @@ private class BDI_MatchDonations_TEST {
               new DataImport__c(Donation_Donor__c = 'Account1',
                   DonationImported__c = UTIL_UnitTestData_TEST.mockId(Opportunity.SObjectType))
           });
-      System.assert(!bdiMatchDonations.setOppId.isEmpty());
+      System.assert(!bdiMatchDonations.setOppId.isEmpty(), 'This method is only called if there is a setOppId set in the BDI');
    }
 
    private class BDI_DataImportServiceMock implements StubProvider {

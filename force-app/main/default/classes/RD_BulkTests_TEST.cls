@@ -73,6 +73,6 @@ public class RD_BulkTests_TEST {
         test.stopTest();
 
         list<Opportunity> listOpp = [select Id, Name from Opportunity];
-        system.assertEquals(opportunityCount * recurringDonationCount, listOpp.size());
+        system.assertEquals(opportunityCount * recurringDonationCount, listOpp.size(), 'Assert that all opportunity and donation lists are equal.');
     }
 }

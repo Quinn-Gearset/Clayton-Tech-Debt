@@ -309,87 +309,87 @@ public with sharing class BDI_GAUAllocationsUtil_TEST {
         }
 
         // Test that this record did not process because of the error with the GAU Allocation over 100%
-        System.assert(testDIResultA.FailureInformation__c.contains(label.bdiErrorGAUAllocationOver100));
-        System.assertEquals(BDI_DataImport_API.bdiFailed,testDIResultA.Status__c);
-        System.assertEquals(null,testDIResultA.Contact1Imported__c);
-        System.assertEquals(null,testDIResultA.Contact1ImportStatus__c);
-        System.assertEquals(null,testDIResultA.RecurringDonationImported__c);
-        System.assertEquals(null,testDIResultA.RecurringDonationImportStatus__c);
-        System.assertEquals(null,testDIResultA.DonationCampaignImported__c);
-        System.assertEquals(null,testDIResultA.DonationImported__c);
-        System.assertEquals(null,testDIResultA.DonationImportStatus__c);
-        System.assertEquals(null,testDIResultA.HouseholdAccountImported__c);
-        System.assertEquals(null,testDIResultA.HomeAddressImported__c);
-        System.assertEquals(null,testDIResultA.GAU_Allocation_1_Imported__c);
-        System.assertEquals(null,testDIResultA.GAU_Allocation_2_Imported__c);
+        System.assert(testDIResultA.FailureInformation__c.contains(label.bdiErrorGAUAllocationOver100), 'Test DI Result A for GAU allocation over 100%');
+        System.assertEquals(BDI_DataImport_API.bdiFailed,testDIResultA.Status__c, 'Test for equality of BDI_DataImport_API. bdiFailed and testDI');
+        System.assertEquals(null,testDIResultA.Contact1Imported__c, 'Test DI Test DI Test DI Result A.');
+        System.assertEquals(null,testDIResultA.Contact1ImportStatus__c, 'Test DI Test DI Test DI Result A.');
+        System.assertEquals(null,testDIResultA.RecurringDonationImported__c, 'Test DI result A. RecurringDonationImported__c is imported.');
+        System.assertEquals(null,testDIResultA.RecurringDonationImportStatus__c, 'Test DI result A. Recurring Donation Import Status');
+        System.assertEquals(null,testDIResultA.DonationCampaignImported__c, 'Test DI result A. DonationCampaignImported__c');
+        System.assertEquals(null,testDIResultA.DonationImported__c, 'Test DI result A. DonationImported is a no - op.');
+        System.assertEquals(null,testDIResultA.DonationImportStatus__c, 'Test DI result A. DonationImportStatus__c');
+        System.assertEquals(null,testDIResultA.HouseholdAccountImported__c, 'Test DI result A. HouseholdAccountImported is imported by DI.');
+        System.assertEquals(null,testDIResultA.HomeAddressImported__c, 'Test DI result A.');
+        System.assertEquals(null,testDIResultA.GAU_Allocation_1_Imported__c, 'Test DI Test DI Test DI Result A. GAU_Allocation_1_Imported c');
+        System.assertEquals(null,testDIResultA.GAU_Allocation_2_Imported__c, 'Test DI Test DI Test DI Result A. GAU_Allocation_2_Imported c');
 
         // Test that this record was created successfully, and later we will check that the default GAU was assigned.
-        System.assertEquals(null,testDIResultB.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultB.Status__c);
-        System.assertNotEquals(null,testDIResultB.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultB.Contact1ImportStatus__c);
-        System.assertEquals('Contact1',testDIResultB.Donation_Donor__c);
-        System.assertNotEquals(null,testDIResultB.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultB.DonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultB.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDIResultB.HomeAddressImported__c);
-        System.assertEquals(null,testDIResultB.GAU_Allocation_1_Imported__c);
-        System.assertEquals(null,testDIResultB.GAU_Allocation_2_Imported__c);
+        System.assertEquals(null,testDIResultB.FailureInformation__c, 'Test DI Tests for equality.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultB.Status__c, 'This test is done to assert that the BDI_DataImport_API. bdi');
+        System.assertNotEquals(null,testDIResultB.Contact1Imported__c, 'This test asserts that Contact1Imported__c is not null.');
+        System.assertEquals(System.label.bdiCreated,testDIResultB.Contact1ImportStatus__c, 'Assert that the label of the Contact1ImportStatus is the same as the label of the');
+        System.assertEquals('Contact1',testDIResultB.Donation_Donor__c, 'Test DI Test for the presence of Contact1');
+        System.assertNotEquals(null,testDIResultB.DonationImported__c, 'Test DI result b. DonationImported__c is not equal to null.');
+        System.assertEquals(System.label.bdiCreated,testDIResultB.DonationImportStatus__c, 'Assert that the label of the BDI created is the same as the label of the Don');
+        System.assertNotEquals(null,testDIResultB.HouseholdAccountImported__c, 'Test DI result for the fact that HouseholdAccountImported is not null.');
+        System.assertNotEquals(null,testDIResultB.HomeAddressImported__c, 'This method asserts that the HomeAddressImported methods are not null.');
+        System.assertEquals(null,testDIResultB.GAU_Allocation_1_Imported__c, 'Test DI Test DI Test DI Imported');
+        System.assertEquals(null,testDIResultB.GAU_Allocation_2_Imported__c, 'Test DI Test DI Test DI Test DI Test DI Test DI Imported');
 
         // Test that this DI did process successfully and created records appropriately
-        System.assertEquals(null,testDIResultC.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultC.Status__c);
-        System.assertNotEquals(null,testDIResultC.Account1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultC.Account1ImportStatus__c);
-        System.assertEquals(null,testDIResultC.DonationCampaignImported__c);
-        System.assertEquals(null,testDIResultC.DonationCampaignImportStatus__c);
-        System.assertNotEquals(null,testDIResultC.RecurringDonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultC.RecurringDonationImportStatus__c);
-        System.assertEquals(null,testDIResultC.DonationImported__c);
-        System.assertEquals(null,testDIResultC.DonationImportStatus__c);
-        System.assertEquals(null,testDIResultC.HouseholdAccountImported__c);
-        System.assertEquals(null,testDIResultC.HomeAddressImported__c);
-        System.assertNotEquals(null,testDIResultC.GAU_Allocation_1_Imported__c);
-        System.assertNotEquals(null,testDIResultC.GAU_Allocation_2_Imported__c);
+        System.assertEquals(null,testDIResultC.FailureInformation__c, 'Test DI result C failure information.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultC.Status__c, 'This test is done by checking that the BDI_DataImport_API. bdi');
+        System.assertNotEquals(null,testDIResultC.Account1Imported__c, 'Test DI result for Account1Imported.');
+        System.assertEquals(System.label.bdiCreated,testDIResultC.Account1ImportStatus__c, 'Test DI Test DI Test DI result C.');
+        System.assertEquals(null,testDIResultC.DonationCampaignImported__c, 'This test fails if the donation campaign is imported.');
+        System.assertEquals(null,testDIResultC.DonationCampaignImportStatus__c, 'This method asserts that the value of theDonationCampaignImportStatus property is equal to the');
+        System.assertNotEquals(null,testDIResultC.RecurringDonationImported__c, 'This method asserts that the RecurringDonationImported class is not null.');
+        System.assertEquals(System.label.bdiCreated,testDIResultC.RecurringDonationImportStatus__c, 'Assert that the label of the BDI created is the same as the RecurringDonation');
+        System.assertEquals(null,testDIResultC.DonationImported__c, 'Test DI result C. DonationImported is not a real object.');
+        System.assertEquals(null,testDIResultC.DonationImportStatus__c, 'Test DI result.');
+        System.assertEquals(null,testDIResultC.HouseholdAccountImported__c, 'Test DI result for HouseholdAccountImported.');
+        System.assertEquals(null,testDIResultC.HomeAddressImported__c, 'Test DI result C.');
+        System.assertNotEquals(null,testDIResultC.GAU_Allocation_1_Imported__c, 'This test is not a problem with GAU_Allocation_1_Imported');
+        System.assertNotEquals(null,testDIResultC.GAU_Allocation_2_Imported__c, 'This test is not a test.');
 
         // Test that this record was created successfully, and the partial GAU allocation was created
-        System.assertEquals(null,testDIResultD.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultD.Status__c);
-        System.assertNotEquals(null,testDIResultD.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultD.Contact1ImportStatus__c);
-        System.assertEquals('Contact1',testDIResultD.Donation_Donor__c);
-        System.assertNotEquals(null,testDIResultD.DonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultD.DonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultD.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDIResultD.HomeAddressImported__c);
-        System.assertNotEquals(null,testDIResultD.GAU_Allocation_1_Imported__c);
+        System.assertEquals(null,testDIResultD.FailureInformation__c, 'Test DI Result D assertion.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultD.Status__c, 'This test is done by checking that the BDI_DataImport_API. bdi');
+        System.assertNotEquals(null,testDIResultD.Contact1Imported__c, 'Test DI result for contact1 imported.');
+        System.assertEquals(System.label.bdiCreated,testDIResultD.Contact1ImportStatus__c, 'Assert that the label of the Contact1ImportStatus is the same as the label of the');
+        System.assertEquals('Contact1',testDIResultD.Donation_Donor__c, 'Test DI Result D. AssertEquals');
+        System.assertNotEquals(null,testDIResultD.DonationImported__c, 'Test DI result D. DonationImported is not equal to testDIResultD. Don');
+        System.assertEquals(System.label.bdiCreated,testDIResultD.DonationImportStatus__c, 'Assert that the label of the BDI created is the same as the label of the B');
+        System.assertNotEquals(null,testDIResultD.HouseholdAccountImported__c, 'Test DI result for HouseholdAccountImported.');
+        System.assertNotEquals(null,testDIResultD.HomeAddressImported__c, 'Test DI result D. HomeAddressImported__c is not imported.');
+        System.assertNotEquals(null,testDIResultD.GAU_Allocation_1_Imported__c, 'This test is not a test.');
 
         // Test that the RD record was created successfully, and the partial GAU allocation was created
-        System.assertEquals(null,testDIResultE.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultE.Status__c);
-        System.assertNotEquals(null,testDIResultE.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultE.Contact1ImportStatus__c);
-        System.assertEquals('Contact1',testDIResultE.Donation_Donor__c);
-        System.assertEquals(null,testDIResultE.DonationImported__c);
-        System.assertNotEquals(null,testDIResultE.RecurringDonationImported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultE.RecurringDonationImportStatus__c);
-        System.assertNotEquals(null,testDIResultE.HouseholdAccountImported__c);
-        System.assertNotEquals(null,testDIResultE.GAU_Allocation_1_Imported__c);
+        System.assertEquals(null,testDIResultE.FailureInformation__c, 'Test DI Result E. TestDI Result E. FailureInformation is null.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDIResultE.Status__c, 'Test if BDI_DataImport_API. bdiImported == testDIResultE');
+        System.assertNotEquals(null,testDIResultE.Contact1Imported__c, 'Test DI Test DI Test DI Result E. Contact1Imported__c');
+        System.assertEquals(System.label.bdiCreated,testDIResultE.Contact1ImportStatus__c, 'Assert that the label of the Contact1ImportStatus is the same as the label of the');
+        System.assertEquals('Contact1',testDIResultE.Donation_Donor__c, 'Test DI Tests for Contact1');
+        System.assertEquals(null,testDIResultE.DonationImported__c, 'Test DI result.');
+        System.assertNotEquals(null,testDIResultE.RecurringDonationImported__c, 'This method asserts that the RecurringDonationImported class is not null.');
+        System.assertEquals(System.label.bdiCreated,testDIResultE.RecurringDonationImportStatus__c, 'Assert that the testDIResultE s label is the same as the RecurringDonation');
+        System.assertNotEquals(null,testDIResultE.HouseholdAccountImported__c, 'Test DI result for HouseholdAccountImported.');
+        System.assertNotEquals(null,testDIResultE.GAU_Allocation_1_Imported__c, 'This test is not a test.');
 
 
         // Test that the record failed due to GAU overallocation by amount
-        System.assertNotEquals(null,testDIResultF.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiFailed,testDIResultF.Status__c);
-        System.assertNotEquals(null,testDIResultF.Contact1Imported__c);
-        System.assertEquals(System.label.bdiCreated,testDIResultF.Contact1ImportStatus__c);
-        System.assertEquals('Contact1',testDIResultF.Donation_Donor__c);
-        System.assertNotEquals(null,testDIResultF.DonationImported__c);
-        System.assertNotEquals(null,testDIResultF.HouseholdAccountImported__c);
+        System.assertNotEquals(null,testDIResultF.FailureInformation__c, 'Assert that the failure information is not null.');
+        System.assertEquals(BDI_DataImport_API.bdiFailed,testDIResultF.Status__c, 'Test for equality of BDI_DataImport_API. bdiFailed and testDI');
+        System.assertNotEquals(null,testDIResultF.Contact1Imported__c, 'Test DI result for contact1 imported.');
+        System.assertEquals(System.label.bdiCreated,testDIResultF.Contact1ImportStatus__c, 'Assert that the label of the Contact1ImportStatus is the same as the label of the');
+        System.assertEquals('Contact1',testDIResultF.Donation_Donor__c, 'Test DI Tests for the presence of Contact1');
+        System.assertNotEquals(null,testDIResultF.DonationImported__c, 'Test DI result.');
+        System.assertNotEquals(null,testDIResultF.HouseholdAccountImported__c, 'Test DI result for the fact that HouseholdAccountImported is not null.');
         // Confirm that the created GAUs were deleted automatically and errors were placed
-        System.assertEquals(null,testDIResultF.GAU_Allocation_1_Imported__c);
-        System.assertNotEquals(null,testDIResultF.GAU_Allocation_1_Import_Status__c);
-        System.assertEquals(null,testDIResultF.GAU_Allocation_2_Imported__c);
-        System.assertNotEquals(null,testDIResultF.GAU_Allocation_2_Import_Status__c);
+        System.assertEquals(null,testDIResultF.GAU_Allocation_1_Imported__c, 'Test DI Test DI Test DI Test DI Imported');
+        System.assertNotEquals(null,testDIResultF.GAU_Allocation_1_Import_Status__c, 'Test DI Test DI Test DI Result F. GAU_Allocation_1_Import_');
+        System.assertEquals(null,testDIResultF.GAU_Allocation_2_Imported__c, 'Test DI Test DI Test DI Test DI Test DI Result F. GAU_Allocation_');
+        System.assertNotEquals(null,testDIResultF.GAU_Allocation_2_Import_Status__c, 'Test DI Test DI Test DI Result F. GAU_Allocation_2_Import_');
 
         // Query the pledged Oppt for the recurring donation.
         Opportunity diTestEOppt;
@@ -405,7 +405,7 @@ public with sharing class BDI_GAUAllocationsUtil_TEST {
             }
         }
 
-        System.assertNotEquals(null,diTestEOppt);
+        System.assertNotEquals(null,diTestEOppt, 'Test for equality of diTestEOppt and diTestEOppt.');
         Allocation__c opptB1Alloc;
         Allocation__c pymtB1Alloc;
         Allocation__c opptDgau1Alloc;
@@ -452,17 +452,17 @@ public with sharing class BDI_GAUAllocationsUtil_TEST {
             }
         }
 
-        System.assertNotEquals(null,opptB1Alloc);
-        System.assertNotEquals(null,pymtB1Alloc);
-        System.assertNotEquals(null,opptDgau1Alloc);
-        System.assertNotEquals(null,opptDgau3Alloc);
-        System.assertNotEquals(null,pymtDgau1Alloc);
-        System.assertNotEquals(null,pymtDgau3Alloc);
-        System.assertNotEquals(null,rdEgau2Alloc);
-        System.assertNotEquals(null,opptEgau2Alloc);
-        System.assertNotEquals(null,opptEgau3Alloc);
-        System.assertEquals(opptB1Alloc.General_Accounting_Unit__c,gau3.id);
-        System.assertEquals(pymtB1Alloc.General_Accounting_Unit__c,gau3.id);
+        System.assertNotEquals(null,opptB1Alloc, 'Assert that opptB1Alloc is not null.');
+        System.assertNotEquals(null,pymtB1Alloc, 'Assert that the memory allocated by pymtB1 is not the same as the memory allocated');
+        System.assertNotEquals(null,opptDgau1Alloc, 'Assert that opptDgau1Alloc is not null.');
+        System.assertNotEquals(null,opptDgau3Alloc, 'Assert that opptDgau3Alloc is not null.');
+        System.assertNotEquals(null,pymtDgau1Alloc, 'Assert that the Dgau1 allocation is not null.');
+        System.assertNotEquals(null,pymtDgau3Alloc, 'Assert that the Dgau3 allocation is not null.');
+        System.assertNotEquals(null,rdEgau2Alloc, 'This is a no - op for testing purposes.');
+        System.assertNotEquals(null,opptEgau2Alloc, 'Assert that opptEgau2Alloc is not null.');
+        System.assertNotEquals(null,opptEgau3Alloc, 'Assert that opptEgau3Alloc is not null.');
+        System.assertEquals(opptB1Alloc.General_Accounting_Unit__c,gau3.id, 'This test asserts that the opptB1Alloc. General_Accounting_Unit_');
+        System.assertEquals(pymtB1Alloc.General_Accounting_Unit__c,gau3.id, 'This is a test to make sure that the pymtB1Alloc. General_Account');
         // This test record should trigger errors for both donation and payment allocations existing.
         DataImport__c testDIB2 = new DataImport__c(Account1Imported__c = testDIResultB.Account1Imported__c,
                                                     DonationImported__c = testDIResultB.DonationImported__c,
@@ -510,10 +510,10 @@ public with sharing class BDI_GAUAllocationsUtil_TEST {
                                         FROM DataImport__c
                                         WHERE Id =: testDIB2.Id LIMIT 1];
 
-        System.assertNotEquals(null,testDIResultB2);
+        System.assertNotEquals(null,testDIResultB2, 'Test DI result is not equal to testDIResultB2.');
         // Confirm that both error messages were logged in FailureInformation
-        System.assert(testDIResultB2.FailureInformation__c.contains(label.bdiErrorExistingDonationAllocations));
-        System.assert(testDIResultB2.FailureInformation__c.contains(label.bdiErrorExistingPaymentAllocations));
+        System.assert(testDIResultB2.FailureInformation__c.contains(label.bdiErrorExistingDonationAllocations), 'Test DI Result for existing donation allocations');
+        System.assert(testDIResultB2.FailureInformation__c.contains(label.bdiErrorExistingPaymentAllocations), 'This method will assert that there are no existing payment allocations in the BDI.');
     }
 
     /**
@@ -605,14 +605,14 @@ public with sharing class BDI_GAUAllocationsUtil_TEST {
                                     FROM DataImport__c
                                     WHERE Id =: testDI1.Id LIMIT 1];
 
-        System.assertEquals(null,testDI1Result.FailureInformation__c);
-        System.assertEquals(BDI_DataImport_API.bdiImported,testDI1Result.Status__c);
-        System.assertNotEquals(null,testDI1Result.Account1Imported__c);
-        System.assertEquals(System.label.bdiMatched,testDI1Result.Account1ImportStatus__c);
-        System.assertNotEquals(null,testDI1Result.DonationImported__c);
-        System.assertNotEquals(null,testDI1Result.DonationImportStatus__c);
-        System.assertNotEquals(null,testDI1Result.GAU_Allocation_1_Imported__c);
-        System.assertNotEquals(null,testDI1Result.GAU_Allocation_2_Imported__c);
+        System.assertEquals(null,testDI1Result.FailureInformation__c, 'Test for equality of null and TestDI1Result. FailureInformation.');
+        System.assertEquals(BDI_DataImport_API.bdiImported,testDI1Result.Status__c, 'Test for equality of BDI imported.');
+        System.assertNotEquals(null,testDI1Result.Account1Imported__c, 'Test DI1 result for Account1Imported__c.');
+        System.assertEquals(System.label.bdiMatched,testDI1Result.Account1ImportStatus__c, 'Test DI1 result for the same label as the import status.');
+        System.assertNotEquals(null,testDI1Result.DonationImported__c, 'Test DI1 result. DonationImported is not equals to testDI1Result. Don');
+        System.assertNotEquals(null,testDI1Result.DonationImportStatus__c, 'Test DI1 result.');
+        System.assertNotEquals(null,testDI1Result.GAU_Allocation_1_Imported__c, 'This test is not a test.');
+        System.assertNotEquals(null,testDI1Result.GAU_Allocation_2_Imported__c, 'Test DI1 result. GAU_Allocation_2_Imported is not equal to null');
 
         Allocation__c allocGAU1;
         Allocation__c allocGAU2;
@@ -637,15 +637,15 @@ public with sharing class BDI_GAUAllocationsUtil_TEST {
         }
 
         // Confirm that GAU 1 and 2 allocations exist.
-        System.assertNotEquals(null, allocGAU1);
-        System.assertEquals(50, allocGAU1.Percent__c);
-        System.assertNotEquals(null, allocGAU2);
-        System.assertEquals(50, allocGAU2.Percent__c);
+        System.assertNotEquals(null, allocGAU1, 'This is a test case.');
+        System.assertEquals(50, allocGAU1.Percent__c, 'This test asserts that the value of this constant is equal to 50.');
+        System.assertNotEquals(null, allocGAU2, 'This is a test for the presence of a null allocation.');
+        System.assertEquals(50, allocGAU2.Percent__c, 'This test asserts that the value of this constant is equal to 50.');
         // There should be no GAU 3 allocation since it is the default and should have been removed.
-        System.assertEquals(null, allocGAU3);
+        System.assertEquals(null, allocGAU3, 'Test for equality of allocGAU3.');
 
         // Query and confirm that the payment was marked as paid
         pymt1 = [SELECT Id, npe01__Paid__c FROM npe01__OppPayment__c WHERE npe01__Opportunity__c =: oppt1.Id];
-        System.assertEquals(true, pymt1.npe01__Paid__c);
+        System.assertEquals(true, pymt1.npe01__Paid__c, 'Test for equality of true and false.');
     }
 }

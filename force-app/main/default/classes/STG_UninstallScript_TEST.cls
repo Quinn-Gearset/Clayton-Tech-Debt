@@ -44,7 +44,7 @@ public with sharing class STG_UninstallScript_TEST {
         //Check jobs were scheduled
         List<CronTrigger> scheduledJobs = [SELECT Id, CronJobDetail.Id FROM CronTrigger 
            WHERE CronJobDetail.Name IN :UTIL_MasterSchedulableHelper.defaultScheduledJobs.keySet() AND CronJobDetail.JobType = '7'];
-        System.assertEquals(UTIL_MasterSchedulableHelper.defaultScheduledJobs.size(), scheduledJobs.size());
+        System.assertEquals(UTIL_MasterSchedulableHelper.defaultScheduledJobs.size(), scheduledJobs.size(), 'Checks that the number of scheduled jobs is the same as the number of default scheduled jobs.');
         
         //Run uninstall script
         Test.testUninstall(new STG_UninstallScript());
@@ -52,6 +52,6 @@ public with sharing class STG_UninstallScript_TEST {
         //Confirm scheduled job was deleted
         scheduledJobs = [SELECT Id, CronJobDetail.Id FROM CronTrigger 
            WHERE CronJobDetail.Name IN :UTIL_MasterSchedulableHelper.defaultScheduledJobs.keySet() AND CronJobDetail.JobType = '7'];
-        System.assertEquals(0, scheduledJobs.size());
+        System.assertEquals(0, scheduledJobs.size(), 'Checks that the number of scheduled jobs is the same as the number of scheduled jobs in the');
     }
 }

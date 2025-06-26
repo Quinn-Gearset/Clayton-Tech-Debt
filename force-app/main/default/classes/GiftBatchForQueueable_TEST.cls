@@ -61,8 +61,8 @@ private class GiftBatchForQueueable_TEST {
         dummyGiftBatchForQueueable.captureElevateBatches();
 
         // Assert
-        System.assertEquals(true, elevateBatchServiceMock.enqueuePaymentCaptureJobForCalled);
-        System.assertEquals(true, giftsMock.authorizedToPaymentProcessingStatusWasCalled);
+        System.assertEquals(true, elevateBatchServiceMock.enqueuePaymentCaptureJobForCalled, 'This method will assert that the mocked enqueuePaymentCaptureJobForCalled method is called.');
+        System.assertEquals(true, giftsMock.authorizedToPaymentProcessingStatusWasCalled, 'Verifies that the method called on the mocked object is called.');
     }
 
     @isTest
@@ -91,8 +91,8 @@ private class GiftBatchForQueueable_TEST {
         dummyGiftBatchForQueueable.captureElevateBatches();
 
         // Assert
-        System.assertEquals(false, elevateBatchServiceMock.enqueuePaymentCaptureJobForCalled);
-        System.assertEquals(false, giftsMock.authorizedToPaymentProcessingStatusWasCalled);
+        System.assertEquals(false, elevateBatchServiceMock.enqueuePaymentCaptureJobForCalled, 'This method will assert that elevateBatchServiceMock. enqueuePaymentCaptureJobForCalled is');
+        System.assertEquals(false, giftsMock.authorizedToPaymentProcessingStatusWasCalled, 'Verifies that the method called on the mocked object is called.');
     }
 
     @IsTest
@@ -151,9 +151,9 @@ private class GiftBatchForQueueable_TEST {
 
         // Assert
         List<DataImport__c> gifts = dummyGiftBatchForQueueable.gifts.giftsToUpdate.values();
-        System.assertEquals(2, gifts.size());
-        System.assertEquals(BDI_DataImport_API.bdiProcessing, gifts[0].Status__c);
-        System.assertEquals(BDI_DataImport_API.bdiProcessing, gifts[1].Status__c);
+        System.assertEquals(2, gifts.size(), 'Asserts that 2 gifts are in the list.');
+        System.assertEquals(BDI_DataImport_API.bdiProcessing, gifts[0].Status__c, 'This is a test to make sure that the status of the first gift is the same');
+        System.assertEquals(BDI_DataImport_API.bdiProcessing, gifts[1].Status__c, 'This is a test to make sure that the BDI_DataImport_API. b');
     }
 
     @IsTest

@@ -38,14 +38,14 @@
 private class CAO_Constants_API_TEST {
     
     static testMethod void test_cao_api() {
-        System.AssertEquals(CAO_Constants.ONE_TO_ONE_PROCESSOR, CAO_Constants_API.ONE_TO_ONE_PROCESSOR);
-        System.AssertEquals(CAO_Constants.ONE_TO_ONE_ORGANIZATION_TYPE, CAO_Constants_API.ONE_TO_ONE_ORGANIZATION_TYPE);
-        System.AssertEquals(CAO_Constants.BUCKET_PROCESSOR, CAO_Constants_API.BUCKET_PROCESSOR);
-        System.AssertEquals(CAO_Constants.BUCKET_ORGANIZATION_TYPE, CAO_Constants_API.BUCKET_ORGANIZATION_TYPE);
-        System.AssertEquals(CAO_Constants.BUCKET_ACCOUNT_NAME, CAO_Constants_API.BUCKET_ACCOUNT_NAME);
-        System.AssertEquals(CAO_Constants.HH_ACCOUNT_PROCESSOR, CAO_Constants_API.HH_ACCOUNT_PROCESSOR);
-        System.AssertEquals(CAO_Constants.HH_ACCOUNT_TYPE, CAO_Constants_API.HH_ACCOUNT_TYPE);
-        System.AssertEquals(CAO_Constants.HH_TYPE, CAO_Constants_API.HH_TYPE);
+        System.AssertEquals(CAO_Constants.ONE_TO_ONE_PROCESSOR, CAO_Constants_API.ONE_TO_ONE_PROCESSOR, 'Checks that the value of the cao_core. one_to_one_processor');
+        System.AssertEquals(CAO_Constants.ONE_TO_ONE_ORGANIZATION_TYPE, CAO_Constants_API.ONE_TO_ONE_ORGANIZATION_TYPE, 'Checks that the CAO constants are equal.');
+        System.AssertEquals(CAO_Constants.BUCKET_PROCESSOR, CAO_Constants_API.BUCKET_PROCESSOR, 'Checks that the current bucket processor is equal to the one specified in the constants.');
+        System.AssertEquals(CAO_Constants.BUCKET_ORGANIZATION_TYPE, CAO_Constants_API.BUCKET_ORGANIZATION_TYPE, 'This method checks that the value of the bucket organization type is equal to the value of the');
+        System.AssertEquals(CAO_Constants.BUCKET_ACCOUNT_NAME, CAO_Constants_API.BUCKET_ACCOUNT_NAME, 'Checks that the bucket account name is the same as the bucket name in the CAO configuration');
+        System.AssertEquals(CAO_Constants.HH_ACCOUNT_PROCESSOR, CAO_Constants_API.HH_ACCOUNT_PROCESSOR, 'Checks that the API is using the correct value.');
+        System.AssertEquals(CAO_Constants.HH_ACCOUNT_TYPE, CAO_Constants_API.HH_ACCOUNT_TYPE, 'Checks that the CAO constants are equal.');
+        System.AssertEquals(CAO_Constants.HH_TYPE, CAO_Constants_API.HH_TYPE, 'Checks that the CAO type is equal to the HH type.');
     }
     
 }

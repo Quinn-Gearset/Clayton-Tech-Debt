@@ -342,12 +342,12 @@ public class CRLP_RollupSoftCredit_TEST {
             c2 = Database.query(conQuery);
 
             // Basic rollup asserts using existing NPSP rollup fields.
-            System.assertEquals(totalDonations, c2.npo02__Soft_Credit_Total__c);
-            System.assertEquals(cnt, c2.Number_of_Soft_Credits__c);
-            System.assertEquals(firstCloseDate, c2.First_Soft_Credit_Date__c);
-            System.assertEquals(largestGiftDate, c2.Largest_Soft_Credit_Date__c);
-            System.assertEquals(baseAmt, c2.Last_Soft_Credit_Amount__c);
-            System.assertEquals(maxAmt, c2.Largest_Soft_Credit_Amount__c);
+            System.assertEquals(totalDonations, c2.npo02__Soft_Credit_Total__c, 'This function is used to assert that the totalDonations of the NPO - 02 are');
+            System.assertEquals(cnt, c2.Number_of_Soft_Credits__c, 'Assert that the number of soft credits is equal to the number of soft credits.');
+            System.assertEquals(firstCloseDate, c2.First_Soft_Credit_Date__c, 'This is a test function to assert that the date of the first close is the same as');
+            System.assertEquals(largestGiftDate, c2.Largest_Soft_Credit_Date__c, 'This is a test function to assert that the largest Gift date is the same as the');
+            System.assertEquals(baseAmt, c2.Last_Soft_Credit_Amount__c, 'This method is used to test equality of baseAmt and lastSoftCreditAmount.');
+            System.assertEquals(maxAmt, c2.Largest_Soft_Credit_Amount__c, 'This method is used to assert that the maximum amount of soft credit is the same as the');
 
             // Query the Primary Contact (should have NO Soft Credit)
             conQuery = CRLP_Query_SEL.buildObjectQueryForRollup(Contact.SObjectType) + ' WHERE Id = :conId LIMIT 1';
@@ -361,11 +361,11 @@ public class CRLP_RollupSoftCredit_TEST {
             conQuery = CRLP_Query_SEL.buildObjectQueryForRollup(Contact.SObjectType) + ' WHERE Id = :c4Id LIMIT 1';
             c4 = Database.query(conQuery);
             if (tt != TestType.TestWithAlwaysRollupToPrimary) {
-                System.assertEquals(orgDonationAmt, c4.npo02__Soft_Credit_Total__c);
-                System.assertEquals(1, c4.Number_of_Soft_Credits__c);
+                System.assertEquals(orgDonationAmt, c4.npo02__Soft_Credit_Total__c, 'This function is used to assert that the value of orgDonationAmt and c4.');
+                System.assertEquals(1, c4.Number_of_Soft_Credits__c, 'Checks that the number of soft credits is equal to the number of soft credits.');
             } else {
-                System.assertEquals(null, c4.npo02__Soft_Credit_Total__c);
-                System.assertEquals(null, c4.Number_of_Soft_Credits__c);
+                System.assertEquals(null, c4.npo02__Soft_Credit_Total__c, 'This function asserts that the value of the Soft Credit Total field is null.');
+                System.assertEquals(null, c4.Number_of_Soft_Credits__c, 'This function is used to assert that the number of soft credits is equal to the number');
             }
         }
 
@@ -382,11 +382,11 @@ public class CRLP_RollupSoftCredit_TEST {
                 + ' WHERE Id = :orgAcct2Id LIMIT 1';
             orgAcct2 = Database.query(acctQuery);
 
-            System.assertEquals(totalDonations, acct.npo02__TotalOppAmount__c);
-            System.assertEquals(cnt, acct.npo02__NumberOfClosedOpps__c);
-            System.assertEquals(firstCloseDate, acct.npo02__FirstCloseDate__c);
-            System.assertEquals(baseAmt, acct.npo02__LastOppAmount__c);
-            System.assertEquals(maxAmt, acct.npo02__LargestAmount__c);
+            System.assertEquals(totalDonations, acct.npo02__TotalOppAmount__c, 'This function is used to assert that the totalDonations of the acct object is equal to');
+            System.assertEquals(cnt, acct.npo02__NumberOfClosedOpps__c, 'Test for equality of number of closed OPPs.');
+            System.assertEquals(firstCloseDate, acct.npo02__FirstCloseDate__c, 'This is a test function to assert that the first close date is equal to the date of');
+            System.assertEquals(baseAmt, acct.npo02__LastOppAmount__c, 'This function is used to assert that the last OPP amount is the same as the last');
+            System.assertEquals(maxAmt, acct.npo02__LargestAmount__c, 'This is a test function to assert that the max amount of the acct is the same as');
 
             System.assertEquals(0, orgAcct2.npo02__TotalOppAmount__c,
                 'The npo02__TotalOppAmount__c field should be reset to zero after the batch job executes');

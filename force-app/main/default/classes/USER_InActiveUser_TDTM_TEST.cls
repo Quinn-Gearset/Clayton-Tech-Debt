@@ -53,14 +53,14 @@ public with sharing class USER_InActiveUser_TDTM_TEST {
         errorSettings.Error_Notifications_To__c = newUsers[1].Id;
         Database.insert(errorSettings, true);
 
-        System.assertEquals(newUsers[1].Id, errorSettings.Error_Notifications_To__c);
+        System.assertEquals(newUsers[1].Id, errorSettings.Error_Notifications_To__c, 'Assert that the new users are the same.');
 
         Test.startTest();
         Database.update(newUsers[1], true);
         Test.stopTest();
 
         Error_Settings__c errorSettingsSysAdmin = UTIL_CustomSettingsFacade.getErrorSettings();
-        System.assertEquals(ERR_Notifier.ERROR_NOTIFICATION_RECIPIENT_ALL_SYS_ADMINS, errorSettingsSysAdmin.Error_Notifications_To__c);
+        System.assertEquals(ERR_Notifier.ERROR_NOTIFICATION_RECIPIENT_ALL_SYS_ADMINS, errorSettingsSysAdmin.Error_Notifications_To__c, 'Checks that the system - wide error notifications are available.');
     }
 
 

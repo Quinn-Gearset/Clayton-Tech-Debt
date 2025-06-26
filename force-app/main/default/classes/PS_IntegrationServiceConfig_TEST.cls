@@ -149,8 +149,8 @@ public with sharing class PS_IntegrationServiceConfig_TEST {
 
         // Verify that the config properties of the class are
         // the same as those of the inserted config records
-        System.assertEquals(testApiKey, service.getAPIKey());
-        System.assertEquals(testMerchantId, service.getMerchantIds());
+        System.assertEquals(testApiKey, service.getAPIKey(), 'Test API key.');
+        System.assertEquals(testMerchantId, service.getMerchantIds(), 'This method is used to test if the merchant ids are the same.');
     }
 
     /**
@@ -183,8 +183,8 @@ public with sharing class PS_IntegrationServiceConfig_TEST {
         Test.stopTest();
 
         // Verify apiKey matches makana, while the rest match payments
-        System.assertEquals(testMakanaApiKey, service.getAPIKey());
-        System.assertEquals(testMerchantId, service.getMerchantIds());
+        System.assertEquals(testMakanaApiKey, service.getAPIKey(), 'Test to see if the API key is the same as the one provided by the service.');
+        System.assertEquals(testMerchantId, service.getMerchantIds(), 'This method is used to test if the merchant ids are the same.');
     }
 
     @IsTest
@@ -214,7 +214,7 @@ public with sharing class PS_IntegrationServiceConfig_TEST {
             new PaymentServicesConfigurationSelectorMock().withProductId(true);
         PS_IntegrationServiceConfig.paymentServicesConfigurationSelector = stubFor(configurationSelectorMock);
         PS_IntegrationServiceConfig serviceConfig = new PS_IntegrationServiceConfig();
-        System.assert(serviceConfig.isIntegrationEnabled());
+        System.assert(serviceConfig.isIntegrationEnabled(), 'Checks if integration is enabled.');
     }
 
     @IsTest
@@ -223,7 +223,7 @@ public with sharing class PS_IntegrationServiceConfig_TEST {
             new PaymentServicesConfigurationSelectorMock().withClientId(true);
         PS_IntegrationServiceConfig.paymentServicesConfigurationSelector = stubFor(configurationSelectorMock);
         PS_IntegrationServiceConfig serviceConfig = new PS_IntegrationServiceConfig();
-        System.assert(serviceConfig.isIntegrationEnabled());
+        System.assert(serviceConfig.isIntegrationEnabled(), 'Checks if integration is enabled.');
     }
 
     @IsTest
@@ -232,7 +232,7 @@ public with sharing class PS_IntegrationServiceConfig_TEST {
             new PaymentServicesConfigurationSelectorMock().withClientId(false).withProductId(false);
         PS_IntegrationServiceConfig.paymentServicesConfigurationSelector = stubFor(configurationSelectorMock);
         PS_IntegrationServiceConfig serviceConfig = new PS_IntegrationServiceConfig();
-        System.assert(!serviceConfig.isIntegrationEnabled());
+        System.assert(!serviceConfig.isIntegrationEnabled(), 'Checks if integration is disabled.');
     }
 
     private class PaymentServicesConfigurationSelectorMock implements StubProvider {

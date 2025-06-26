@@ -79,7 +79,7 @@ private class PMT_Payment_TEST {
         opp = database.query(soql);
 
         npe01__OppPayment__c pmt = getPaymentRecord(opp.Id);
-        System.AssertEquals((String) opp.get('CurrencyIsoCode'), (String) pmt.get('CurrencyIsoCode'));
+        System.AssertEquals((String) opp.get('CurrencyIsoCode'), (String) pmt.get('CurrencyIsoCode'), 'Assert that opp and pmt have the same currency code.');
     }
 
     /**
@@ -118,8 +118,8 @@ private class PMT_Payment_TEST {
         Test.stopTest();
 
         npe01__OppPayment__c pmt = getPaymentRecord(opp.Id);
-        System.AssertEquals((String) opp.get('CurrencyIsoCode'), (String) pmt.get('CurrencyIsoCode'));
-        System.AssertEquals(opp.Amount, (Double)pmt.npe01__Payment_Amount__c);
+        System.AssertEquals((String) opp.get('CurrencyIsoCode'), (String) pmt.get('CurrencyIsoCode'), 'Assert that opp and pmt have the same currency code.');
+        System.AssertEquals(opp.Amount, (Double)pmt.npe01__Payment_Amount__c, 'This method is intend to assert that the payment amount is equal to the value of the');
     }
 
     /**
@@ -255,7 +255,7 @@ private class PMT_Payment_TEST {
                 FROM Opportunity
                 WHERE Id = :opp.Id LIMIT 1];*/
         opp = [SELECT Name, Amount, StageName, IsClosed, IsWon FROM Opportunity WHERE Id = :opp.Id LIMIT 1];
-        System.assertEquals(closedWonStage, opp.StageName);
+        System.assertEquals(closedWonStage, opp.StageName, 'Asserts that the closedWonStage is the same as the stage name.');
     }
 
 
@@ -722,7 +722,7 @@ private class PMT_Payment_TEST {
                 FROM Opportunity
                 WHERE Id = :opp.Id LIMIT 1];*/
         opp = [SELECT Name, Amount, StageName, IsClosed, IsWon FROM Opportunity WHERE Id = :opp.Id LIMIT 1];
-        System.assertEquals(closedWonStage, opp.StageName);
+        System.assertEquals(closedWonStage, opp.StageName, 'Asserts that the closedWonStage is the same as the stage name.');
     }
 
     /**
@@ -778,7 +778,7 @@ private class PMT_Payment_TEST {
                 FROM Opportunity
                 WHERE Id = :opp.Id LIMIT 1];*/
         opp = [SELECT Name, Amount, StageName, IsClosed, IsWon FROM Opportunity WHERE Id = :opp.Id LIMIT 1];
-        System.assertEquals(closedWonStage, opp.StageName);
+        System.assertEquals(closedWonStage, opp.StageName, 'Asserts that the closedWonStage is the same as the stage name.');
     }
 
     /**
@@ -834,7 +834,7 @@ private class PMT_Payment_TEST {
                 FROM Opportunity
                 WHERE Id = :opp.Id LIMIT 1];*/
         opp = [SELECT Name, Amount, StageName, IsClosed, IsWon FROM Opportunity WHERE Id = :opp.Id LIMIT 1];
-        System.assertEquals(closedWonStage, opp.StageName);
+        System.assertEquals(closedWonStage, opp.StageName, 'Asserts that the closedWonStage is the same as the stage name.');
     }
 
     /**

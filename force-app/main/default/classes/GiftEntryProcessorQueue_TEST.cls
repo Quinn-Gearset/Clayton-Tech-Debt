@@ -134,10 +134,10 @@ private class GiftEntryProcessorQueue_TEST {
         Test.stopTest();
 
         // Assert
-        System.assertEquals(false, mockService.chainNextQueueableWasCalled);
-        System.assertEquals(true, mockService.clearLatestJobIdFromWasCalled);
-        System.assertEquals(20, [SELECT count() FROM Opportunity]);
-        System.assertEquals(10, [SELECT count() FROM DataImport__c WHERE Status__c = :BDI_DataImport_API.bdiFailed]);
+        System.assertEquals(false, mockService.chainNextQueueableWasCalled, 'This method is only used for testing.');
+        System.assertEquals(true, mockService.clearLatestJobIdFromWasCalled, 'This test ensures that the method was called with the same arguments as the method was called with');
+        System.assertEquals(20, [SELECT count() FROM Opportunity], 'Test for equality of the number of opportunities in the database.');
+        System.assertEquals(10, [SELECT count() FROM DataImport__c WHERE Status__c = :BDI_DataImport_API.bdiFailed], 'Checks that the number of failed imports is equal to 10.');
     }
 
     @IsTest
@@ -163,9 +163,9 @@ private class GiftEntryProcessorQueue_TEST {
         Test.stopTest();
 
         // Assert
-        System.assertEquals(true, mockService.chainNextQueueableWasCalled);
-        System.assertEquals(false, mockService.clearLatestJobIdFromWasCalled);
-        System.assertEquals(50, [SELECT count() FROM Opportunity]);
+        System.assertEquals(true, mockService.chainNextQueueableWasCalled, 'This test asserts that the chainNextQueueable was called.');
+        System.assertEquals(false, mockService.clearLatestJobIdFromWasCalled, 'This test is not a problem because it is called from a mock service.');
+        System.assertEquals(50, [SELECT count() FROM Opportunity], 'Test for equality of the number of opportunities in the database.');
     }
 
     @IsTest
@@ -192,9 +192,9 @@ private class GiftEntryProcessorQueue_TEST {
         Test.stopTest();
 
         // Assert
-        System.assertEquals(false, mockService.chainNextQueueableWasCalled);
-        System.assertEquals(true, mockService.clearLatestJobIdFromWasCalled);
-        System.assertEquals(true, mockService.failGiftsInProcessingWasCalled);
+        System.assertEquals(false, mockService.chainNextQueueableWasCalled, 'This method is only used for testing.');
+        System.assertEquals(true, mockService.clearLatestJobIdFromWasCalled, 'This test ensures that the method was called with the same arguments as the method was called with');
+        System.assertEquals(true, mockService.failGiftsInProcessingWasCalled, 'This test asserts that the failGiftsInProcessingWasCalled method was called.');
     }
 
     public class GiftBatchServiceMock implements StubProvider {

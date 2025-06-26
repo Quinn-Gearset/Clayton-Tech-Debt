@@ -74,10 +74,10 @@ private class HH_Container_TEST {
 
         Test.startTest();
 
-        system.assertNotEquals(null, HH_Container_LCTRL.getHousehold(hhA.Id));
-        system.assertNotEquals(null, HH_Container_LCTRL.getHousehold(hhO.Id));
-        system.assertNotEquals(null, HH_Container_LCTRL.getContacts(hhA.Id));
-        system.assertNotEquals(null, HH_Container_LCTRL.getContacts(hhO.Id));
+        system.assertNotEquals(null, HH_Container_LCTRL.getHousehold(hhA.Id), 'Assert that the Household is not null.');
+        system.assertNotEquals(null, HH_Container_LCTRL.getHousehold(hhO.Id), 'assert not equals');
+        system.assertNotEquals(null, HH_Container_LCTRL.getContacts(hhA.Id), 'This function asserts that all the contacts are not null.');
+        system.assertNotEquals(null, HH_Container_LCTRL.getContacts(hhO.Id), 'This function asserts that all contacts are not null.');
 
         Test.stopTest();
     }
@@ -93,7 +93,7 @@ private class HH_Container_TEST {
             } catch (Exception ex) {
                 permsExceptionMessage = ex.getMessage();
             }
-            System.assertNotEquals(null, permsExceptionMessage);
+            System.assertNotEquals(null, permsExceptionMessage, 'Assert that all the properties of the object are not null.');
         }
     }
 
@@ -227,10 +227,10 @@ private class HH_Container_TEST {
         Test.startTest();
 
         list<Address__c> listAddrA = HH_Container_LCTRL.getAddresses(hhA.Id, null);
-        system.assertEquals(2, listAddrA.size());
+        system.assertEquals(2, listAddrA.size(), 'Assert that 2 lists are equal.');
 
         list<Address__c> listAddrO = HH_Container_LCTRL.getAddresses(hhO.Id, null);
-        system.assertEquals(1, listAddrO.size());
+        system.assertEquals(1, listAddrO.size(), 'asserts that the size of the list is 1');
 
         Test.stopTest();
     }
@@ -257,10 +257,10 @@ private class HH_Container_TEST {
 
         HH_Container_LCTRL.upsertContacts(listCon);
         listCon = [select FirstName from Contact order by CreatedDate];
-        system.assertEquals(3, listCon.size());
-        system.assertEquals('upserted', listCon[0].FirstName);
-        system.assertEquals('upserted', listCon[1].FirstName);
-        system.assertEquals('inserted', listCon[2].FirstName);
+        system.assertEquals(3, listCon.size(), 'Assert that 3 lists are in the list');
+        system.assertEquals('upserted', listCon[0].FirstName, 'Assert that the first name of the list is upserted.');
+        system.assertEquals('upserted', listCon[1].FirstName, 'Assert that the first name of the list con is upserted.');
+        system.assertEquals('inserted', listCon[2].FirstName, 'asserts that the last name is inserted');
 
         Test.stopTest();
 
@@ -326,12 +326,12 @@ private class HH_Container_TEST {
         hhA.Name = 'updated';
         HH_Container_LCTRL.updateHousehold(hhA);
         hhA = [select Name from Account where Id = :hhA.Id];
-        system.assertEquals('updated', hhA.Name);
+        system.assertEquals('updated', hhA.Name, 'Checks that the updated field is equal to the name of the column.');
 
         hhO.Name = 'updated';
         HH_Container_LCTRL.updateHousehold(hhO);
         hhO = [select Name from npo02__Household__c where Id = :hhO.Id];
-        system.assertEquals('updated', hhO.Name);
+        system.assertEquals('updated', hhO.Name, 'asserts that the updated field is the same as the name of the object');
 
         Test.stopTest();
     }
@@ -349,7 +349,7 @@ private class HH_Container_TEST {
         Test.startTest();
 
         HH_Container_LCTRL.mergeHouseholds(hhA, listAcc);
-        system.assertEquals(0, [select count() from Account where Id in :listAcc]);
+        system.assertEquals(0, [select count() from Account where Id in :listAcc], 'Checks that the count of accounts in the list is equal to 0.');
 
         Test.stopTest();
     }
@@ -380,7 +380,7 @@ private class HH_Container_TEST {
         accounts[0] = (Account) HH_Container_LCTRL.getHousehold(accounts[0].Id);
 
         Map<Id, Contact[]> contactsByHh = getContactsByHousehold();
-        System.assertEquals(accountSize, contactsByHh.size());
+        System.assertEquals(accountSize, contactsByHh.size(), 'Checks that the account size is equal to the number of contacts in the account table.');
 
         Contact[] hhContacts = contactsByHh.get(accounts[0].Id);
         for (Integer i = 1; i < accountSize; i++) {
@@ -404,7 +404,7 @@ private class HH_Container_TEST {
 
         Account[] actualAccounts = getAccounts();
         System.assertEquals(1, actualAccounts.size(), actualAccounts);
-        System.assertEquals(accounts[0].Id, actualAccounts[0].Id);
+        System.assertEquals(accounts[0].Id, actualAccounts[0].Id, 'Assert that the accounts are the same.');
 
         Address__c[] actualAddresses = getAddresses();
         System.assertEquals(2, actualAddresses.size(), actualAddresses);
@@ -419,15 +419,15 @@ private class HH_Container_TEST {
             }
         }
 
-        System.assertNotEquals(null, defaultAddress);
+        System.assertNotEquals(null, defaultAddress, 'Assert that the default address is not equal to the address of the system.');
 
         contactsByHh = getContactsByHousehold();
-        System.assertEquals(1, contactsByHh.size());
+        System.assertEquals(1, contactsByHh.size(), 'Checks that the number of contacts is equal to 1.');
         Contact[] actualContacts = contactsByHh.get(accounts[0].Id);
         System.assertEquals(hhContacts.size(), actualContacts.size(), actualContacts);
 
         for (Contact c : actualContacts) {
-            System.assertEquals(defaultAddress.Id, c.Current_Address__c);
+            System.assertEquals(defaultAddress.Id, c.Current_Address__c, 'Assert that defaultAddress is the same as the current address.');
         }
     }
 
@@ -457,7 +457,7 @@ private class HH_Container_TEST {
         accounts[0] = (Account) HH_Container_LCTRL.getHousehold(accounts[0].Id);
 
         Map<Id, Contact[]> contactsByHh = getContactsByHousehold();
-        System.assertEquals(accountSize, contactsByHh.size());
+        System.assertEquals(accountSize, contactsByHh.size(), 'Checks that the account size is equal to the number of contacts in the account table.');
 
         Contact[] hhContacts = new Contact[] { contactsByHh.get(accounts[0].Id)[0] };
 
@@ -500,17 +500,17 @@ private class HH_Container_TEST {
             Contact[] contacts = contactsByHh.get(acc.Id);
             Integer expectedContactSize = acc.Id == accounts[0].Id ? 2 : 1;
 
-            System.assertNotEquals(null, contacts);
-            System.assertEquals(expectedContactSize, contacts.size());
+            System.assertNotEquals(null, contacts, 'Assert that contacts are not null.');
+            System.assertEquals(expectedContactSize, contacts.size(), 'Asserts that the size of the contacts array is equal to the expected size.');
 
             for (Contact c : contacts) {
                 if (acc.Id == accounts[0].Id) {
-                    System.assert(c.Id == hhContacts[0].Id || c.Id == hhContacts[1].Id);
+                    System.assert(c.Id == hhContacts[0].Id || c.Id == hhContacts[1].Id, 'Checks if the contacts are the same.');
                 } else if (acc.Id != accounts[1].Id) {
-                    System.assertEquals(removedContact.Id, c.Id);
+                    System.assertEquals(removedContact.Id, c.Id, 'This is a test to make sure that the contacts are removed from the database.');
                 }
 
-                System.assertEquals(accountAddresses[0].Id, c.Current_Address__c);
+                System.assertEquals(accountAddresses[0].Id, c.Current_Address__c, 'This is a test function to assert that the account addresses are the same.');
             }
         }
     }
@@ -575,7 +575,7 @@ private class HH_Container_TEST {
 
         list<Address__c> listAddrA = HH_Container_LCTRL.getAddresses(hhA.Id, null);
         // conA city, addr city
-        system.assertEquals(2, listAddrA.size());
+        system.assertEquals(2, listAddrA.size(), 'Assert that 2 lists are equal.');
 
         list<Contact> listCon = new list<Contact>();
         for (integer i = 0; i < 5; i++) {
@@ -586,7 +586,7 @@ private class HH_Container_TEST {
         listCon.add(conADup);
 
         list<Address__c> listAddr = HH_Container_LCTRL.addContactAddresses(listCon, listAddrA);
-        system.assertEquals(7, listAddr.size());
+        system.assertEquals(7, listAddr.size(), 'Assert that 7 entries are in the list.');
 
         Test.stopTest();
     }
@@ -596,7 +596,7 @@ private class HH_Container_TEST {
     */
     public static testMethod void testGetSalutations() {
         list<HH_Container_LCTRL.SelectOption> listSO = HH_Container_LCTRL.getSalutations();
-        system.assert(listSO.size() > 0);
+        system.assert(listSO.size() > 0, 'asserts that there are no more items in the list');
     }
 
     /*********************************************************************************************************
@@ -610,13 +610,13 @@ private class HH_Container_TEST {
         UTIL_UnitTestData_TEST.setFixedSearchResults(new List<Contact>{ conA, conO });
 
         list<HH_AutoCompleteDataProvider_LCTRL.ProviderResult> listPR = HH_AutoCompleteDataProvider_LCTRL.queryObjects('con', null);
-        system.assertEquals(2, listPR.size());
+        system.assertEquals(2, listPR.size(), 'Assert that 2 lists are identical.');
 
        	list<Contact> listCon = new list<Contact>();
         listCon.add(conA);
         listCon.add(conO);
         listPR = HH_AutoCompleteDataProvider_LCTRL.queryObjects('con', listCon);
-        system.assertEquals(0, listPR.size());
+        system.assertEquals(0, listPR.size(), 'Assert that listPR is empty.');
 
         Test.stopTest();
     }
@@ -697,12 +697,12 @@ private class HH_Container_TEST {
             System.assert(!String.isBlank(fieldLabels.get(undeliverableField)), 'The Label should not be blank');
 
             List<Address__c> listAddrA = HH_Container_LCTRL.getAddresses(hhA.Id, null);
-            System.assertEquals(2, listAddrA.size());
+            System.assertEquals(2, listAddrA.size(), 'This is a test to make sure that the size of the list is 2.');
 
             hhA = (Account)HH_Container_LCTRL.getHousehold(hhA.Id);
-            System.assertNotEquals(null, hha);
+            System.assertNotEquals(null, hha, 'Assert that the HHA is not null.');
             List<Contact> hhContacts = HH_Container_LCTRL.getContacts(hhA.Id);
-            System.assertEquals(1, hhContacts.size());
+            System.assertEquals(1, hhContacts.size(), 'Checks that the number of contacts is equal to 1.');
 
             HH_Container_LCTRL.saveHouseholdPage(hhA, hhContacts, new List<Contact>(), null);
 
@@ -750,12 +750,12 @@ private class HH_Container_TEST {
             insert addresses;
 
             List<Address__c> listAddrA = HH_Container_LCTRL.getAddresses(hhA.Id, null);
-            System.assertEquals(4, listAddrA.size());
+            System.assertEquals(4, listAddrA.size(), 'Checks that the size of the list is equal to 4.');
 
             hhA = (Account)HH_Container_LCTRL.getHousehold(hhA.Id);
-            System.assertNotEquals(null, hha);
+            System.assertNotEquals(null, hha, 'Assert that the HHA is not null.');
             List<Contact> hhContacts = HH_Container_LCTRL.getContacts(hhA.Id);
-            System.assertEquals(1, hhContacts.size());
+            System.assertEquals(1, hhContacts.size(), 'Checks that the number of contacts is equal to 1.');
 
             // Simulate setting a new Default Address that is Undeliverable
             copyAddressToAccount(newUndeliverableAddress, hhA);

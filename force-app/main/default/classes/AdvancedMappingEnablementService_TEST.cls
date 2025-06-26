@@ -59,7 +59,7 @@ private class AdvancedMappingEnablementService_TEST {
 
         Data_Import_Settings__c dataImportSettings = UTIL_CustomSettingsFacade.getDataImportSettings();
 
-        System.assertNotEquals(Metadata.DeployStatus.Succeeded.name(), dataImportSettings.CMT_API_Status__c);
+        System.assertNotEquals(Metadata.DeployStatus.Succeeded.name(), dataImportSettings.CMT_API_Status__c, 'Checks that deploy status is not succeeded.');
 
 
         System.assert(new AdvancedMappingEnablementService().isEnabled(), 'Advanced mapping should be enabled.');

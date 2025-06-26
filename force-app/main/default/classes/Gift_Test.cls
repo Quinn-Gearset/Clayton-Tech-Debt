@@ -90,13 +90,13 @@ private class Gift_Test {
         gift.preprocessForRecurringGift(false);
 
         // Assert
-        System.assert(dataImport.Donation_Amount__c == null);
-        System.assert(dataImport.Donation_Date__c == null);
-        System.assert(dataImport.DonationImported__c == null);
-        System.assert(dataImport.Recurring_Donation_Installment_Period__c == 'Monthly');
-        System.assert(dataImport.Recurring_Donation_Effective_Date__c == today);
-        System.assert(dataImport.Recurring_Donation_Recurring_Type__c == 'Open');
-        System.assert(dataImport.Recurring_Donation_Day_of_Month__c == '5');
+        System.assert(dataImport.Donation_Amount__c == null, 'Test if the donation amount is null.');
+        System.assert(dataImport.Donation_Date__c == null, 'Test for null values.');
+        System.assert(dataImport.DonationImported__c == null, 'This method is called by the test code to ensure that no dataImport. DonationImported');
+        System.assert(dataImport.Recurring_Donation_Installment_Period__c == 'Monthly', 'This is a test function to ensure that the Recurring Donation Installment Period is set');
+        System.assert(dataImport.Recurring_Donation_Effective_Date__c == today, 'Checks that the current date is the same as today.');
+        System.assert(dataImport.Recurring_Donation_Recurring_Type__c == 'Open', 'Checks that Recurring Donation Recurring Type is Open.');
+        System.assert(dataImport.Recurring_Donation_Day_of_Month__c == '5', 'Test for the existence of Recurring Donation Day of Month.');
     }
 
 
@@ -119,13 +119,13 @@ private class Gift_Test {
         gift.preprocessForRecurringGift(true);
 
         // Assert
-        System.assert(dataImport.Donation_Amount__c != null);
-        System.assert(dataImport.Donation_Date__c == null);
-        System.assert(dataImport.DonationImported__c == null);
-        System.assert(dataImport.Recurring_Donation_Installment_Period__c == 'Monthly');
-        System.assert(dataImport.Recurring_Donation_Effective_Date__c == today);
-        System.assert(dataImport.Recurring_Donation_Recurring_Type__c == 'Open');
-        System.assert(dataImport.Recurring_Donation_Day_of_Month__c == '5');
+        System.assert(dataImport.Donation_Amount__c != null, 'Checks that no dataImport. Donation_Amount__c is null.');
+        System.assert(dataImport.Donation_Date__c == null, 'Test for null values.');
+        System.assert(dataImport.DonationImported__c == null, 'This method is called by the test code to ensure that no dataImport. DonationImported');
+        System.assert(dataImport.Recurring_Donation_Installment_Period__c == 'Monthly', 'This is a test function to ensure that the Recurring Donation Installment Period is set');
+        System.assert(dataImport.Recurring_Donation_Effective_Date__c == today, 'Checks that the current date is the same as today.');
+        System.assert(dataImport.Recurring_Donation_Recurring_Type__c == 'Open', 'Checks that Recurring Donation Recurring Type is Open.');
+        System.assert(dataImport.Recurring_Donation_Day_of_Month__c == '5', 'Test for the existence of Recurring Donation Day of Month.');
     }
 
 
@@ -166,13 +166,13 @@ private class Gift_Test {
 
         GiftSelector mockedGiftSelector = stubFor(new GiftSelectorMock(3.00));
         authorizedGift.giftSelector = mockedGiftSelector;
-        System.assertEquals(false, authorizedGift.requiresReauthorizationBeforeChange());
+        System.assertEquals(false, authorizedGift.requiresReauthorizationBeforeChange(), 'Checks that the authorizedGift module is available and that the reauthorization flag is set.');
 
         mockedGiftSelector = stubFor(new GiftSelectorMock(5.00));
         authorizedGift.giftSelector = mockedGiftSelector;
 
         Boolean needsReauthorization = authorizedGift.requiresReauthorizationBeforeChange();
-        System.assert(needsReauthorization);
+        System.assert(needsReauthorization, 'Assert that reauthorization is not needed.');
     }
 
     @isTest
@@ -180,7 +180,7 @@ private class Gift_Test {
         DataImport__c dataImport = new DataImport__c(Payment_Status__c = null);
         Gift gift = new Gift(dataImport);
 
-        System.assertEquals(false, gift.requiresReauthorizationBeforeChange());
+        System.assertEquals(false, gift.requiresReauthorizationBeforeChange(), 'Checks that the gift module requires reauthorization before change.');
     }
 
     @isTest
@@ -193,9 +193,9 @@ private class Gift_Test {
         Gift gift = new Gift(dataImport);
 
         String donationAmountField = String.valueOf(DataImport__c.Donation_Amount__c);
-        System.assertEquals(10, gift.fields().get(donationAmountField));
-        System.assertEquals(dataImport.Id, gift.id());
-        System.assertEquals(dataImport, gift.asDataImport());
+        System.assertEquals(10, gift.fields().get(donationAmountField), 'Checks that the donation amount is equal to 10.');
+        System.assertEquals(dataImport.Id, gift.id(), 'Checks that the current gift is the same as the dataImport.');
+        System.assertEquals(dataImport, gift.asDataImport(), 'Assert that the dataImport of the Gift is the same as the one in the G');
     }
 
     @isTest
@@ -212,7 +212,7 @@ private class Gift_Test {
         );
         Gift gift = new Gift(dataImport);
 
-        System.assertEquals(2, gift.softCredits().size());
+        System.assertEquals(2, gift.softCredits().size(), 'Checks that the number of soft credits is equal to 2.');
     }
 
     @isTest
@@ -229,7 +229,7 @@ private class Gift_Test {
         );
         Gift gift = new Gift(dataImport);
 
-        System.assertEquals(0, gift.softCredits().size());
+        System.assertEquals(0, gift.softCredits().size(), 'Assert that the number of soft credits is the same as the number of soft credits');
     }
 
     @isTest
@@ -250,7 +250,7 @@ private class Gift_Test {
 
         gift.assignSoftCredits(dummySoftCredits);
 
-        System.assertEquals(3, gift.softCredits().size());
+        System.assertEquals(3, gift.softCredits().size(), 'Checks that the number of soft credits is equal to 3.');
     }
 
     @isTest
@@ -266,8 +266,8 @@ private class Gift_Test {
         gift.unitOfWork = stubFor(unitOfWorkMock);
         gift.saveRecord();
 
-        System.assertEquals(true, unitOfWorkMock.registerDirtyCalled);
-        System.assertEquals(true, unitOfWorkMock.saveCalled);
+        System.assertEquals(true, unitOfWorkMock.registerDirtyCalled, 'Assert that registerDirty was called.');
+        System.assertEquals(true, unitOfWorkMock.saveCalled, 'This test asserts that save was called on the mocked object.');
     }
 
     @isTest
@@ -275,7 +275,7 @@ private class Gift_Test {
         DataImport__c dataImport = new DataImport__c(Payment_Status__c = ElevateTransactionStatus.AUTHORIZED.name());
         Gift gift = new Gift(dataImport);
 
-        System.assertEquals(true, gift.hasAuthorizedPayment());
+        System.assertEquals(true, gift.hasAuthorizedPayment(), 'Checks that the current user is authorized to perform a Gift payment.');
     }
 
     @isTest
@@ -283,7 +283,7 @@ private class Gift_Test {
         DataImport__c dataImport = new DataImport__c(Payment_Status__c = null);
         Gift gift = new Gift(dataImport);
 
-        System.assertEquals(false, gift.hasAuthorizedPayment());
+        System.assertEquals(false, gift.hasAuthorizedPayment(), 'Checks that the current user is authorized to perform a Gift payment.');
     }
 
     @isTest
@@ -291,7 +291,7 @@ private class Gift_Test {
         DataImport__c dataImport = new DataImport__c(Status__c = BDI_DataImport_API.bdiDryRunValidated);
         Gift gift = new Gift(dataImport);
 
-        System.assertEquals(true, gift.isDryRunValidated());
+        System.assertEquals(true, gift.isDryRunValidated(), 'Checks if theDryRun attribute is set to true.');
     }
 
     @isTest
@@ -299,7 +299,7 @@ private class Gift_Test {
         DataImport__c dataImport = new DataImport__c(Status__c = BDI_DataImport_API.bdiImported);
         Gift gift = new Gift(dataImport);
 
-        System.assertEquals(false, gift.isDryRunValidated());
+        System.assertEquals(false, gift.isDryRunValidated(), 'Checks if theDryRun attribute is set to false.');
     }
 
     @isTest
@@ -321,13 +321,13 @@ private class Gift_Test {
         SoftCredits dummySoftCredits = new SoftCredits(dummyOCRs);
         gift.assignSoftCredits(dummySoftCredits);
 
-        System.assertEquals(1, gift.softCredits().size());
-        System.assertEquals(null, gift.additionalObjectString());
+        System.assertEquals(1, gift.softCredits().size(), 'Checks that the number of soft credits is equal to 1.');
+        System.assertEquals(null, gift.additionalObjectString(), 'Assert that the additionalObjectString is null.');
 
         gift.saveRecord();
 
-        System.assert(gift.additionalObjectString().contains(dummyContactId));
-        System.assert(gift.additionalObjectString().contains('Influencer'));
+        System.assert(gift.additionalObjectString().contains(dummyContactId), 'This method will assert that the dummy contact id is present in the gift additional object string');
+        System.assert(gift.additionalObjectString().contains('Influencer'), 'Assert that the gift object contains an Influencer string.');
     }
 
     @isTest
@@ -341,12 +341,12 @@ private class Gift_Test {
         insert dataImport;
         Gift gift = new Gift(dataImport);
 
-        System.assertEquals(null, gift.status());
+        System.assertEquals(null, gift.status(), 'Assert that the status of the Gift API is not null.');
         gift.dryRunThroughBDI();
-        System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, gift.status());
+        System.assertEquals(BDI_DataImport_API.bdiDryRunValidated, gift.status(), 'Checks that the BDI dry - run status of the BDI data import API is the');
 
         gift.processThroughBDI();
-        System.assertEquals(BDI_DataImport_API.bdiImported, gift.status());
+        System.assertEquals(BDI_DataImport_API.bdiImported, gift.status(), 'Checks that the BDI imported status is the same as the gift status.');
     }
 
     @isTest
@@ -385,7 +385,7 @@ private class Gift_Test {
         );
         insert dataImport;
         Gift gift = new Gift(dataImport);
-        System.assertEquals(null, gift.status());
+        System.assertEquals(null, gift.status(), 'Assert that the status of the Gift API is not null.');
 
         gift.dryRunThroughBDI();
         System.assertEquals(null, mockService.value, 'The instrumentation service should have not been called during DryRun mode');

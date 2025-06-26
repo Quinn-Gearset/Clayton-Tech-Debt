@@ -59,7 +59,7 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
         listCon = UTIL_UnitTestData_TEST.CreateMultipleTestContacts(cContact);
         insert listCon;
         listCon = [select Id, Firstname,Lastname, AccountId from Contact];
-        system.assertEquals(cContact, listCon.size());
+        system.assertEquals(cContact, listCon.size(), 'Assert that cContact is the same as the list of contacts.');
         
         // create cOpp Opportunities for each Contact
         list<Opportunity> listOpp = new list<Opportunity>();
@@ -68,11 +68,11 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
                 UTIL_UnitTestData_TEST.getClosedWonStage(), system.Today(), amount, null, null));
         } 
         insert listOpp;
-        system.assertEquals(cContact * cOpp, listOpp.size());
+        system.assertEquals(cContact * cOpp, listOpp.size(), 'Assert that cContact and cOpp are equal');
         
         // primary OCR's automatically created
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role, IsPrimary from OpportunityContactRole];
-        system.assertEquals(listOpp.size(), listOCR.size());
+        system.assertEquals(listOpp.size(), listOCR.size(), 'Assert that the size of the lists is the same as the size of the lists.');
 
         // change them to Soft Credit OCR's
         for (OpportunityContactRole ocr : listOCR) {
@@ -143,7 +143,7 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
 
       // primary OCR's automatically created
       list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role, IsPrimary from OpportunityContactRole];
-      system.assertEquals(listOpp.size(), listOCR.size());
+      system.assertEquals(listOpp.size(), listOCR.size(), 'Assert that the size of the lists is the same as the size of the lists.');
 
       List<OpportunityContactRole> dupeOCR = new List<OpportunityContactRole>();
       // change them to Soft Credit OCR's
@@ -162,14 +162,14 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
       RLLP_OppRollup rllp = new RLLP_OppRollup();
       RLLP_OppRollup_UTIL util = new RLLP_OppRollup_UTIL();        
       listCon = (list<Contact>)Database.query(util.buildContactQuery());
-      system.assertEquals(1, listCon.size());
+      system.assertEquals(1, listCon.size(), 'Assert that the list is exactly 1.');
 
       Test.startTest();
       rllp.rollupSoftCreditsWithPartialSupport(listCon);
       Test.stopTest();
       
       Contact resultContact = [SELECT Id,npo02__Soft_Credit_Total__c FROM Contact WHERE Id =: con.Id LIMIT 1];
-      System.assertEquals(100, resultContact.npo02__Soft_Credit_Total__c);
+      System.assertEquals(100, resultContact.npo02__Soft_Credit_Total__c, 'This is a test function to assert that the value of the parameter is 100.');
     }
 
     /*******************************************************************************************************
@@ -193,12 +193,12 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
         // verify results
         listCon = [select Id, Lastname, npo02__Soft_Credit_This_Year__c, npo02__Soft_Credit_Total__c,
             Number_of_Soft_Credits_This_Year__c, Number_of_Soft_Credits__c from Contact];
-        system.assertEquals(cContactTest, listCon.size());
+        system.assertEquals(cContactTest, listCon.size(), 'Checks that the list of contacts is the same.');
         for (Contact con : listCon) {
-            system.assertEquals(cOppTest * amountTest/2, con.npo02__Soft_Credit_This_Year__c);
-            system.assertEquals(cOppTest * amountTest/2, con.npo02__Soft_Credit_Total__c);
-            system.assertEquals(cOppTest, con.Number_of_Soft_Credits_This_Year__c);
-            system.assertEquals(cOppTest, con.Number_of_Soft_Credits__c);
+            system.assertEquals(cOppTest * amountTest/2, con.npo02__Soft_Credit_This_Year__c, 'Test for equality of the opp and the amount of the opp');
+            system.assertEquals(cOppTest * amountTest/2, con.npo02__Soft_Credit_Total__c, 'Test for equality of the total cOpp and the total cOpp.');
+            system.assertEquals(cOppTest, con.Number_of_Soft_Credits_This_Year__c, 'This test is used to test if the number of soft credits is equal to the number');
+            system.assertEquals(cOppTest, con.Number_of_Soft_Credits__c, 'Assert that cOppTest and con. Number_of_Soft_Credits are');
         }
         
     }
@@ -239,7 +239,7 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
         
         // primary OCR's automatically created
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role, IsPrimary from OpportunityContactRole];
-        system.assertEquals(listOpp.size(), listOCR.size());
+        system.assertEquals(listOpp.size(), listOCR.size(), 'Assert that the size of the lists is the same as the size of the lists.');
 
         // change them to Soft Credit OCR's
         for (OpportunityContactRole ocr : listOCR) {
@@ -265,7 +265,7 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
         RLLP_OppRollup rllp = new RLLP_OppRollup();
         RLLP_OppRollup_UTIL util = new RLLP_OppRollup_UTIL();        
         listCon = (list<Contact>)Database.query(util.buildContactQuery());
-        system.assertEquals(1, listCon.size());
+        system.assertEquals(1, listCon.size(), 'Assert that the list is exactly 1.');
 
         Test.startTest();
         rllp.rollupSoftCreditsWithPartialSupport(listCon);
@@ -291,22 +291,22 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
                Number_of_Soft_Credits_Last_N_Days__c
                 from Contact];
                 
-        system.assertEquals(10, con.First_Soft_Credit_Amount__c);
-        system.assertEquals(dt.addYears(-5), con.First_Soft_Credit_Date__c);
-        system.assertEquals(10, con.Largest_Soft_Credit_Amount__c);
-        system.assertEquals(dt.addYears(-5), con.Largest_Soft_Credit_Date__c);
-        system.assertEquals(10, con.Last_Soft_Credit_Amount__c);
-        system.assertEquals(dt.addYears(+1), con.Last_Soft_Credit_Date__c);
-        system.assertEquals(110, con.npo02__Soft_Credit_Total__c);
-        system.assertEquals(11, con.Number_of_Soft_Credits__c);
-        system.assertEquals(20, con.npo02__Soft_Credit_This_Year__c);
-        system.assertEquals(2, con.Number_of_Soft_Credits_This_Year__c);
-        system.assertEquals(20, con.npo02__Soft_Credit_Last_Year__c);
-        system.assertEquals(2, con.Number_of_Soft_Credits_Last_Year__c);
-        system.assertEquals(20, con.npo02__Soft_Credit_Two_Years_Ago__c);
-        system.assertEquals(2, con.Number_of_Soft_Credits_Two_Years_Ago__c);
-        system.assertEquals(60, con.Soft_Credit_Last_N_Days__c);
-        system.assertEquals(6, con.Number_of_Soft_Credits_Last_N_Days__c);
+        system.assertEquals(10, con.First_Soft_Credit_Amount__c, 'This test asserts that the first soft credit amount is 10.');
+        system.assertEquals(dt.addYears(-5), con.First_Soft_Credit_Date__c, 'This test asserts that the date passed in is the same as the date passed in.');
+        system.assertEquals(10, con.Largest_Soft_Credit_Amount__c, 'This test asserts that the value of the constant con. Largest_Soft_Credit_');
+        system.assertEquals(dt.addYears(-5), con.Largest_Soft_Credit_Date__c, 'This test asserts that the date of the largest soft credit is the same as the date of');
+        system.assertEquals(10, con.Last_Soft_Credit_Amount__c, 'This test asserts that the last soft credit amount is 10.');
+        system.assertEquals(dt.addYears(+1), con.Last_Soft_Credit_Date__c, 'This test asserts that the date passed in is the last soft credit date.');
+        system.assertEquals(110, con.npo02__Soft_Credit_Total__c, 'Test for the presence of Soft Credit Total');
+        system.assertEquals(11, con.Number_of_Soft_Credits__c, 'Checks that 11 is the number of soft credits.');
+        system.assertEquals(20, con.npo02__Soft_Credit_This_Year__c, 'This is a test case for the NPO02 Soft Credit Credit This Year');
+        system.assertEquals(2, con.Number_of_Soft_Credits_This_Year__c, 'This is a test case.');
+        system.assertEquals(20, con.npo02__Soft_Credit_Last_Year__c, 'This test asserts that the last year is 20.');
+        system.assertEquals(2, con.Number_of_Soft_Credits_Last_Year__c, 'This test checks the number of soft credits last year is equal to 2.');
+        system.assertEquals(20, con.npo02__Soft_Credit_Two_Years_Ago__c, 'This test is for the NPO - 02 version of Soft Credit Two Years Ago');
+        system.assertEquals(2, con.Number_of_Soft_Credits_Two_Years_Ago__c, 'This test is used to test the number of soft credits and two years ago.');
+        system.assertEquals(60, con.Soft_Credit_Last_N_Days__c, 'Soft Credit Last N days');
+        system.assertEquals(6, con.Number_of_Soft_Credits_Last_N_Days__c, 'This test checks the number of soft credits last N days.');
 
     }
 
@@ -351,7 +351,7 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
         
         // primary OCR's automatically created
         list<OpportunityContactRole> listOCR = [select Id, ContactId, OpportunityId, Role, IsPrimary from OpportunityContactRole];
-        system.assertEquals(listOpp.size(), listOCR.size());
+        system.assertEquals(listOpp.size(), listOCR.size(), 'Assert that the size of the lists is the same as the size of the lists.');
 
         // change them to Soft Credit OCR's
         for (OpportunityContactRole ocr : listOCR) {
@@ -393,14 +393,14 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
         // verify results
         listCon = [select Id, Lastname, npo02__Soft_Credit_This_Year__c, npo02__Soft_Credit_Total__c,
             Number_of_Soft_Credits_This_Year__c, Number_of_Soft_Credits__c from Contact];
-        system.assertEquals(1, listCon.size());
+        system.assertEquals(1, listCon.size(), 'Assert that the list is exactly 1.');
 
         decimal convertedAmount = 2 * UTIL_CurrencyConversion.convertAmountUsingStandardRates((string)nonDefaultCurrencyType.get('IsoCode'), (string)defaultCurrencyType.get('IsoCode'), 5);
 
-        system.assertEquals(10+convertedAmount, listCon[0].npo02__Soft_Credit_This_Year__c);
-        system.assertEquals(10+convertedAmount, listCon[0].npo02__Soft_Credit_Total__c);
-        system.assertEquals(4, listCon[0].Number_of_Soft_Credits_This_Year__c);
-        system.assertEquals(4, listCon[0].Number_of_Soft_Credits__c);
+        system.assertEquals(10+convertedAmount, listCon[0].npo02__Soft_Credit_This_Year__c, 'This function is used to check if the converted amount is equal to the amount in the list');
+        system.assertEquals(10+convertedAmount, listCon[0].npo02__Soft_Credit_Total__c, 'Checks if convertedAmount is equal to the soft credit total.');
+        system.assertEquals(4, listCon[0].Number_of_Soft_Credits_This_Year__c, 'This function is used to test if the number of soft credits is equal to 4.');
+        system.assertEquals(4, listCon[0].Number_of_Soft_Credits__c, 'Assert that the number of soft credits is equal to 4.');
 
         //update opportunity with default currency to non-default currency, verify PSC currency is updated
         listOpp[0].put('CurrencyIsoCode', nonDefaultCurrencyType.get('IsoCode'));
@@ -764,7 +764,7 @@ private class RLLP_OppPartialSoftCreditRollup_TEST {
             FROM Contact
             WHERE Id = :contact.Id
         ];
-        System.assertEquals(contactPartialSoftCredit.Amount__c, updatedContact[0].npo02__Soft_Credit_Total__c);
+        System.assertEquals(contactPartialSoftCredit.Amount__c, updatedContact[0].npo02__Soft_Credit_Total__c, 'This function is called when the amount of the contact is equal to the amount of the total');
       }
 
     /*******************************************************************************************************

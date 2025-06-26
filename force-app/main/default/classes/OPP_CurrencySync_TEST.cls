@@ -115,14 +115,14 @@ private class OPP_CurrencySync_TEST {
                         psc.put('CurrencyIsoCode', curr1);
                         update psc;
                     } catch (Exception ex) {
-                        System.assert(ex.getMessage().contains(err));
+                        System.assert(ex.getMessage().contains(err), 'Assert that the error message is not the same as the error message in the exception.');
                     }
 
                     try {
                         accSC.put('CurrencyIsoCode', curr1);
                         update accSC;
                     } catch (Exception ex) {
-                        System.assert(ex.getMessage().contains(err));
+                        System.assert(ex.getMessage().contains(err), 'Assert that the error message is not the same as the error message in the exception.');
                     }
                 }
             }

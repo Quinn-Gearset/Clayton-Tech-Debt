@@ -53,8 +53,8 @@ private class UTIL_CurrencyCache_TEST {
         mockcurrCache.defaultRate = 1.55;
         UTIL_CurrencyCache.instance = mockcurrCache;
 
-        System.AssertEquals(False, UTIL_CurrencyCache.getInstance().isOrgCacheAvailable());
-        System.AssertEquals(null, UTIL_CurrencyCache.orgCache);
+        System.AssertEquals(False, UTIL_CurrencyCache.getInstance().isOrgCacheAvailable(), 'Checks if the cache is available.');
+        System.AssertEquals(null, UTIL_CurrencyCache.orgCache, 'Assert that UTIL_CurrencyCache. orgCache equals to null.');
         System.AssertEquals( 1.25, UTIL_CurrencyCache.getEffectiveExchangeRate('CAD', Date.newInstance(2017,3,15)),
             'Should return the effective rate for 3/15/2017');
         System.AssertEquals( 1.50, UTIL_CurrencyCache.getEffectiveExchangeRate('CAD', Date.newInstance(2010,01,01)),
@@ -64,7 +64,7 @@ private class UTIL_CurrencyCache_TEST {
 
         // Add null rates value to simulate disabled currency.  Expect 1 if no rate found.
         UTIL_CurrencyCache.cachedMapOfRatesByCurrencyCode.put('AUD', null);
-        System.AssertEquals(1, UTIL_CurrencyCache.getEffectiveExchangeRate('AUD', null));
+        System.AssertEquals(1, UTIL_CurrencyCache.getEffectiveExchangeRate('AUD', null), 'This function is used to check if the current exchange rate is equal to 1.');
     }
 
     /**
@@ -74,7 +74,7 @@ private class UTIL_CurrencyCache_TEST {
      */
     static testMethod void test_CurrencyCache_StaticCacheVar() {
         // We won't really know if the client has a cache or not, so don't assume a response
-        System.AssertNotEquals(null, UTIL_CurrencyCache.getInstance().isOrgCacheAvailable());
+        System.AssertNotEquals(null, UTIL_CurrencyCache.getInstance().isOrgCacheAvailable(), 'Checks that the cache is not null and that the currency cache is available.');
 
         // Populate the static var version of the currency cache to use for the tests below
         UTIL_CurrencyCache.cachedMapOfRatesByCurrencyCode.put('CAD', getDummyRates(Date.Today().AddYears(-1), 0.75));
@@ -83,7 +83,7 @@ private class UTIL_CurrencyCache_TEST {
         System.AssertEquals(1, UTIL_CurrencyCache.cachedMapOfRatesByCurrencyCode.size(), 'The cache should not be empty');
 
         // validate that some values are returned for the CAD code
-        System.AssertNotEquals(null, UTIL_CurrencyCache.getInstance().getRateMapForCurrencies(new List<String>{'CAD'}));
+        System.AssertNotEquals(null, UTIL_CurrencyCache.getInstance().getRateMapForCurrencies(new List<String>{'CAD'}), 'This function will assert that the rate map is not null.');
 
         // Wipe the cahce and confirm it's wiped
         UTIL_CurrencyCache.getInstance().resetCurrencyCache();

@@ -205,7 +205,7 @@ private class HH_HouseholdNamingSettingValidator_TEST {
         String[] actualErrors = notification.getErrors();
 
         System.assertEquals(3, actualErrors.size(), actualErrors);
-        System.assertEquals(3, new Set<String>(actualErrors).size());
+        System.assertEquals(3, new Set<String>(actualErrors).size(), 'Checks that the set of errors is equal to 3.');
     }
 
     /*********************************************************************************************************
@@ -254,7 +254,7 @@ private class HH_HouseholdNamingSettingValidator_TEST {
     * @return void
     **********************************************************************************************************/
     private static void assertErrors(String[] expectedErrors, HH_HouseholdNamingSettingValidator.Notification n) {
-        System.assert(!n.isSuccess());
+        System.assert(!n.isSuccess(), 'Assert that the result of the operation is not success.');
     
         String[] actualErrors = n.getErrors();
 
@@ -279,7 +279,7 @@ private class HH_HouseholdNamingSettingValidator_TEST {
             UTIL_Namespace.StrTokenNSPrefix(fieldName)
         );
 
-        System.assert(!n.isSuccess());
+        System.assert(!n.isSuccess(), 'Assert that the result of the operation is not success.');
 
         String[] actualErrors = n.getErrors();
 

@@ -42,7 +42,7 @@ private class NPSP_Contact_TEST {
                new Contact(LastName='Test',MailingCity='testCity',MailingPostalCode='12345')
        );
 
-        System.assertNotEquals(null, npspContact.mailingAddress());
+        System.assertNotEquals(null, npspContact.mailingAddress(), 'Assert that the npspContact s mailing address is not null.');
     }
 
     @IsTest
@@ -53,7 +53,7 @@ private class NPSP_Contact_TEST {
                 new Contact(LastName='Test2',MailingCity='testCity',MailingPostalCode='12345')
         );
 
-        System.assertNotEquals(null, npspContact.mailingAddress());
+        System.assertNotEquals(null, npspContact.mailingAddress(), 'Assert that the npspContact s mailing address is not null.');
     }
 
     @IsTest
@@ -63,7 +63,7 @@ private class NPSP_Contact_TEST {
                 new Contact(LastName='Tester',FirstName='Test',npe01__Primary_Address_Type__c='Home')
         );
 
-        System.assertEquals(false, npspContact.isAddressChanged());
+        System.assertEquals(false, npspContact.isAddressChanged(), 'Checks if the address has changed.');
     }
 
 }

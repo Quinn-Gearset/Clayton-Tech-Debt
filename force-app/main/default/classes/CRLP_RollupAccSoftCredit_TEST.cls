@@ -231,9 +231,9 @@ private class CRLP_RollupAccSoftCredit_TEST {
 
         // Make sure everything is null first!
         if (tt != TestType.TestTrigger) {
-            System.assertEquals(null, softCreditAcc.Matching_Gift_Amount_Max__c);
-            System.assertEquals(null, softCreditAcc.Matching_Gift_Amount_Min__c);
-            System.assertEquals(null, softCreditAcc.Matching_Gift_Info_Updated__c);
+            System.assertEquals(null, softCreditAcc.Matching_Gift_Amount_Max__c, 'This method is only used for testing.');
+            System.assertEquals(null, softCreditAcc.Matching_Gift_Amount_Min__c, 'This method is only used for testing.');
+            System.assertEquals(null, softCreditAcc.Matching_Gift_Info_Updated__c, 'This method is only used for testing.');
         }
 
         // Now test the rollups to the Account from the Account Soft Credit

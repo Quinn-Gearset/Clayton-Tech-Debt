@@ -65,7 +65,7 @@ private with sharing class TDTM_Runnable_TEST {
         );
          
         Account acc = [SELECT Name FROM Account LIMIT 1][0];
-        System.assertNotEquals(runFutureAccountName, acc.Name);
+        System.assertNotEquals(runFutureAccountName, acc.Name, 'Assert that runFutureAccountName is not equal to acc. Name');
         
         Contact contact = new Contact(FirstName = 'Old First Name', LastName = 'Testerson', AccountId = acc.Id);        
         Test.startTest(); 
@@ -76,8 +76,8 @@ private with sharing class TDTM_Runnable_TEST {
         Account actualAccount = [SELECT Name FROM Account WHERE Id = :acc.Id];
         
         // Ensure 'ERR_ParentAccountUpdater2_TEST' trigger handler future method processing has been applied
-        System.assertEquals(runFutureContactName, actualContact.FirstName); 
-        System.assertEquals(runFutureAccountName, actualAccount.Name);
+        System.assertEquals(runFutureContactName, actualContact.FirstName, 'This is a test case for testing purposes.'); 
+        System.assertEquals(runFutureAccountName, actualAccount.Name, 'Assert that runFutureAccountName equals actualAccount.');
     }
 
     /*************************************************************************** 

@@ -82,12 +82,12 @@ private class DonationSelector_TEST {
         String expectedQueryStringForOrganizationDonor = expectedQueryString(Account.getSObjectType());
         String actualQueryStringForOrganizationDonor = selector.openDonationsQueryString(
             SObjectType.Opportunity.fields.AccountId.Name, 'DUMMY_ID');
-        System.assertEquals(expectedQueryStringForOrganizationDonor, actualQueryStringForOrganizationDonor);
+        System.assertEquals(expectedQueryStringForOrganizationDonor, actualQueryStringForOrganizationDonor, 'This method asserts that the query string is the same as the query string for the organization don');
 
         String expectedQueryStringForContactDonor = expectedQueryString(Contact.getSObjectType());
         String actualQueryStringForContactDonor = selector.openDonationsQueryString(
             SObjectType.Opportunity.fields.Primary_Contact__c.Name, 'DUMMY_ID');
-        System.assertEquals(expectedQueryStringForContactDonor, actualQueryStringForContactDonor);
+        System.assertEquals(expectedQueryStringForContactDonor, actualQueryStringForContactDonor, 'Assert that the query string is the same as the query string for the contact donor.');
     }
 
     private static String expectedQueryString(SObjectType donorType) {

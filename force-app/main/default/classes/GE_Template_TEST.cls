@@ -207,9 +207,9 @@ public with sharing class GE_Template_TEST {
                 new List<String>{String.valueOf(DataImport__c.Account1Imported__c)});
         template.layout.sections[0].elements.add(lookupField);
 
-        System.assertEquals(template.giftFieldApiNames().size(), 2);
-        System.assertEquals(template.giftFieldApiNames()[0], String.valueOf(DataImport__c.Account1_Name__c));
-        System.assertEquals(template.giftFieldApiNames()[1], String.valueOf(DataImport__c.Account1Imported__c));
+        System.assertEquals(template.giftFieldApiNames().size(), 2, 'Checks that the number of GiftField API calls is equal to 2.');
+        System.assertEquals(template.giftFieldApiNames()[0], String.valueOf(DataImport__c.Account1_Name__c), 'This test asserts that the template s account1 API names are the same as the one provided');
+        System.assertEquals(template.giftFieldApiNames()[1], String.valueOf(DataImport__c.Account1Imported__c), 'This test asserts that the API names of the Account1 are the same as the API names');
     }
 
     private class UTIL_PermissionsMock implements StubProvider {

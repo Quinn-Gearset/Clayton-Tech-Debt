@@ -53,7 +53,7 @@ public with sharing class OPP_SendAcknowledgmentBTN_TEST {
         
         listOpp = getOpps();
 
-        System.assertEquals(1, listOpp.size());
+        System.assertEquals(1, listOpp.size(), 'Assert that the size of the listOpp is equal to 1.');
 
         // we don't know if the workflow is active or not.
         System.assert(
@@ -62,8 +62,8 @@ public with sharing class OPP_SendAcknowledgmentBTN_TEST {
             'Acknowledge Status Mismatch Expected: (' +  OPP_SendAcknowledgmentBTN_CTRL.ACKNOWLEDGEMENT_FAILED +
              ' OR ' + OPP_SendAcknowledgmentBTN_CTRL.ACKNOWLEDGED + ') ACTUAL: ' + listOpp[0].Acknowledgment_Status__c
         );  
-        System.assertNotEquals(null, ctrl.oppsNotSent);
-        System.assertNotEquals(ctrl.sentCount, ctrl.notSentCount);   
+        System.assertNotEquals(null, ctrl.oppsNotSent, 'Assert that all oppsNotSent are not null.');
+        System.assertNotEquals(ctrl.sentCount, ctrl.notSentCount, 'Checks that all the messages in the ctrl are not sent.');   
     }
 
     /*********************************************************************************************************

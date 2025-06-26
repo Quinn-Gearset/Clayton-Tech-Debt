@@ -47,6 +47,6 @@ private class SoftCredit_TEST {
 
         SoftCredit softCredit = new SoftCredit(dummyOpportunityContactRoleInfluencer);
 
-        System.assertEquals(expectedHashCode, softCredit.contactRoleHashCode());
+        System.assertEquals(expectedHashCode, softCredit.contactRoleHashCode(), 'This is a utility function to assert that the hashcode of the contactRole object is the same');
     }
 }

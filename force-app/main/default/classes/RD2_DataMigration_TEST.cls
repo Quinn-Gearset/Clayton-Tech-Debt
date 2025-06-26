@@ -1988,7 +1988,7 @@ private class RD2_DataMigration_TEST {
 
         System.assertEquals(true,
             actualException.getMessage()
-                .contains(System.Label.RD2_DataMigrationInvalidPlannedInstallments));
+                .contains(System.Label.RD2_DataMigrationInvalidPlannedInstallments), 'Expected exception message is RD2_DataMigrationInvalidPlannedInstallments.');
         System.assertEquals(null, convertedRD, 'RD should not be converted');
 
         actualException = null;
@@ -2003,7 +2003,7 @@ private class RD2_DataMigration_TEST {
 
         System.assertEquals(true,
             actualException.getMessage()
-                .contains(System.Label.RD2_DataMigrationInvalidPlannedInstallments));
+                .contains(System.Label.RD2_DataMigrationInvalidPlannedInstallments), 'Expected exception message is RD2_DataMigrationInvalidPlannedInstallments.');
         System.assertEquals(null, convertedRD, 'RD should not be converted');
     }
 

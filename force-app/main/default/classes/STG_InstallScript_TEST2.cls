@@ -69,15 +69,15 @@ public with sharing class STG_InstallScript_TEST2 {
       
       //Verify handlers have been updated
       List<Trigger_Handler__c> newHandlers = [select Load_Order__c, Class__c, Trigger_Action__c from Trigger_Handler__c order by Load_Order__c];
-        System.assertEquals(0, newHandlers[0].Load_Order__c);   
-        System.assertEquals('REL_Relationships_Cm_TDTM', newHandlers[0].Class__c);   
-        System.assertEquals('AfterInsert;AfterUpdate', newHandlers[0].Trigger_Action__c);
-        System.assertEquals(1, newHandlers[1].Load_Order__c);   
-        System.assertEquals('AFFL_Affiliations_TDTM', newHandlers[1].Class__c);   
-        System.assertEquals('AfterInsert;AfterUpdate', newHandlers[1].Trigger_Action__c);  
-        System.assertEquals(2, newHandlers[2].Load_Order__c);   
-        System.assertEquals('REL_Relationships_Con_TDTM', newHandlers[2].Class__c);   
-        System.assertEquals('AfterInsert;AfterUpdate;AfterDelete', newHandlers[2].Trigger_Action__c);    
+        System.assertEquals(0, newHandlers[0].Load_Order__c, 'This is a test for the fact that the load order of the handlers is the same as');   
+        System.assertEquals('REL_Relationships_Cm_TDTM', newHandlers[0].Class__c, 'This method asserts that the handlers are the same type as the ones in the handlers array.');   
+        System.assertEquals('AfterInsert;AfterUpdate', newHandlers[0].Trigger_Action__c, 'This will assert that AfterInsert and AfterUpdate are called.');
+        System.assertEquals(1, newHandlers[1].Load_Order__c, 'This is a test for equality of the load order of handlers.');   
+        System.assertEquals('AFFL_Affiliations_TDTM', newHandlers[1].Class__c, 'Checks that the handler name is the same as the name of the Affiliations_T');   
+        System.assertEquals('AfterInsert;AfterUpdate', newHandlers[1].Trigger_Action__c, 'This will assert that AfterInsert and AfterUpdate are called.');  
+        System.assertEquals(2, newHandlers[2].Load_Order__c, 'This is a bug in the future.');   
+        System.assertEquals('REL_Relationships_Con_TDTM', newHandlers[2].Class__c, 'Checks that the handlers are the same type as the ones in the handlers array.');   
+        System.assertEquals('AfterInsert;AfterUpdate;AfterDelete', newHandlers[2].Trigger_Action__c, 'This will assert that the following three handlers are called - the ones that were triggered - the');    
     }
     
     //If the handlers in our default TDTM config are different from what it's in the org (either action or load order),
@@ -118,16 +118,16 @@ public with sharing class STG_InstallScript_TEST2 {
         //Verify handlers marked as "User Managed" were not modified
         List<Trigger_Handler__c> newHandlers = [select Load_Order__c, Class__c, Trigger_Action__c from Trigger_Handler__c order by Load_Order__c];
         //Should have been modified
-        System.assertEquals('REL_Relationships_Cm_TDTM', newHandlers[0].Class__c);   
-        System.assertEquals(0, newHandlers[0].Load_Order__c); 
-        System.assertEquals('AfterInsert;AfterUpdate', newHandlers[0].Trigger_Action__c);
+        System.assertEquals('REL_Relationships_Cm_TDTM', newHandlers[0].Class__c, 'This method asserts that the handlers are the same type as the ones in the handlers array.');   
+        System.assertEquals(0, newHandlers[0].Load_Order__c, 'This is a test for the fact that the load order of the handlers is the same as'); 
+        System.assertEquals('AfterInsert;AfterUpdate', newHandlers[0].Trigger_Action__c, 'This will assert that AfterInsert and AfterUpdate are called.');
         //Should not have been modified  
-        System.assertEquals('AFFL_Affiliations_TDTM', newHandlers[1].Class__c);   
-        System.assertEquals(1, newHandlers[1].Load_Order__c);
-        System.assertEquals('AfterInsert', newHandlers[1].Trigger_Action__c);  
+        System.assertEquals('AFFL_Affiliations_TDTM', newHandlers[1].Class__c, 'Checks that the handler name is the same as the name of the Affiliations_T');   
+        System.assertEquals(1, newHandlers[1].Load_Order__c, 'This is a test for equality of the load order of handlers.');
+        System.assertEquals('AfterInsert', newHandlers[1].Trigger_Action__c, 'This method should be called after the insert event is triggered.');  
         //Should not have been modified
-        System.assertEquals('REL_Relationships_Con_TDTM', newHandlers[2].Class__c); 
-        System.assertEquals(2, newHandlers[2].Load_Order__c);     
-        System.assertEquals('AfterInsert;AfterDelete', newHandlers[2].Trigger_Action__c);     
+        System.assertEquals('REL_Relationships_Con_TDTM', newHandlers[2].Class__c, 'Checks that the handlers are the same type as the ones in the handlers array.'); 
+        System.assertEquals(2, newHandlers[2].Load_Order__c, 'This is a bug in the future.');     
+        System.assertEquals('AfterInsert;AfterDelete', newHandlers[2].Trigger_Action__c, 'This will assert that the following three handlers are called.');     
     }
 }

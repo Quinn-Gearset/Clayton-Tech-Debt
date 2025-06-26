@@ -57,10 +57,10 @@ private class CRLP_Batch_Base_TEST {
                 new CRLP_Batch_Base.BatchQueryBuilder(accountBatchJob, null, null, null);
 
         String generatedWhereClause = queryBuilder.getMainQueryInnerJoinFilter();
-        System.assert(generatedWhereClause.contains('FROM'));
+        System.assert(generatedWhereClause.contains('FROM'), 'This method asserts that the generated WHERE clause is not empty.');
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
-        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + new RollupInfo().maxYearsAgoInteger));
+        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + new RollupInfo().maxYearsAgoInteger), 'This method is only used for testing.');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }
@@ -84,7 +84,7 @@ private class CRLP_Batch_Base_TEST {
         String generatedWhereClause = queryBuilder.getMainQueryInnerJoinFilter();
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
-        System.assert(generatedWhereClause.contains('LAST_N_DAYS:' + new RollupInfo().maxDaysBackInteger));
+        System.assert(generatedWhereClause.contains('LAST_N_DAYS:' + new RollupInfo().maxDaysBackInteger), 'This method is called by the generatedWhereClause to assert that the generatedWhereClause is not');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }
@@ -109,7 +109,7 @@ private class CRLP_Batch_Base_TEST {
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
         Integer lastNYears = new RollupInfo().maxYearsAgoInteger;
-        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + lastNYears));
+        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + lastNYears), 'This method is only used for testing.');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }
@@ -153,8 +153,8 @@ private class CRLP_Batch_Base_TEST {
         String generatedWhereClause = queryBuilder.getMainQueryInnerJoinFilter();
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
-        System.assert(generatedWhereClause.contains(userDefinedLastNDaysFieldOverride));
-        System.assert(generatedWhereClause.contains(String.valueOf(userDefinedLastNDaysValueOverride)));
+        System.assert(generatedWhereClause.contains(userDefinedLastNDaysFieldOverride), 'This method is only used for testing.');
+        System.assert(generatedWhereClause.contains(String.valueOf(userDefinedLastNDaysValueOverride)), 'This method asserts that the generatedWhereClause is not empty and only contains the last N days');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }
@@ -190,10 +190,10 @@ private class CRLP_Batch_Base_TEST {
                 new CRLP_Batch_Base.BatchQueryBuilder(contactBatchJob, null, null, null);
 
         String generatedWhereClause = queryBuilder.getMainQueryInnerJoinFilter();
-        System.assert(generatedWhereClause.contains('FROM'));
+        System.assert(generatedWhereClause.contains('FROM'), 'This method asserts that the generated WHERE clause is not empty.');
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
-        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + new RollupInfo().maxYearsAgoInteger));
+        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + new RollupInfo().maxYearsAgoInteger), 'This method is only used for testing.');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }
@@ -217,7 +217,7 @@ private class CRLP_Batch_Base_TEST {
         String generatedWhereClause = queryBuilder.getMainQueryInnerJoinFilter();
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
-        System.assert(generatedWhereClause.contains('LAST_N_DAYS:' + new RollupInfo().maxDaysBackInteger));
+        System.assert(generatedWhereClause.contains('LAST_N_DAYS:' + new RollupInfo().maxDaysBackInteger), 'This method is called by the generatedWhereClause to assert that the generatedWhereClause is not');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }
@@ -242,7 +242,7 @@ private class CRLP_Batch_Base_TEST {
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
         Integer lastNYears = new RollupInfo().maxYearsAgoInteger;
-        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + lastNYears));
+        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + lastNYears), 'This method is only used for testing.');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }
@@ -286,8 +286,8 @@ private class CRLP_Batch_Base_TEST {
         String generatedWhereClause = queryBuilder.getMainQueryInnerJoinFilter();
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
-        System.assert(generatedWhereClause.contains(userDefinedLastNDaysFieldOverride));
-        System.assert(generatedWhereClause.contains(String.valueOf(userDefinedLastNDaysValueOverride)));
+        System.assert(generatedWhereClause.contains(userDefinedLastNDaysFieldOverride), 'This method is only used for testing.');
+        System.assert(generatedWhereClause.contains(String.valueOf(userDefinedLastNDaysValueOverride)), 'This method asserts that the generatedWhereClause is not empty and only contains the last N days');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }
@@ -320,10 +320,10 @@ private class CRLP_Batch_Base_TEST {
         System.assertEquals(2, query.countMatches('SELECT'),
             'Recurring Donation Filtered query should include inner join');
 
-        System.assert(generatedWhereClause.contains('FROM'));
+        System.assert(generatedWhereClause.contains('FROM'), 'This method asserts that the generated WHERE clause is not empty.');
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
-        System.assert(generatedWhereClause.contains(userDefinedLastNDaysFieldOverride));
+        System.assert(generatedWhereClause.contains(userDefinedLastNDaysFieldOverride), 'This method is only used for testing.');
         System.assert(generatedWhereClause.contains('LAST_N_DAYS:' + overrideDays), 
                 'Where clause should use Last N Days Override: ' + overrideDays);
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
@@ -356,7 +356,7 @@ private class CRLP_Batch_Base_TEST {
         System.assertEquals(2, query.countMatches('SELECT'),
             'Recurring Donation Filtered query should include inner join');
 
-        System.assert(generatedWhereClause.contains('FROM'));
+        System.assert(generatedWhereClause.contains('FROM'), 'This method asserts that the generated WHERE clause is not empty.');
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');        
         System.assert(generatedWhereClause.contains('LAST_N_DAYS:' + rdLastNDaysValue), 
@@ -392,7 +392,7 @@ private class CRLP_Batch_Base_TEST {
         System.assertEquals(2, query.countMatches('SELECT'),
             'Recurring Donation Filtered query should include inner join');
 
-        System.assert(generatedWhereClause.contains('FROM'));
+        System.assert(generatedWhereClause.contains('FROM'), 'This method asserts that the generated WHERE clause is not empty.');
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
         System.assert(generatedWhereClause.contains('LAST_N_DAYS:' + rdTimeBoundInt), 
@@ -613,7 +613,7 @@ private class CRLP_Batch_Base_TEST {
         List<SObject> includedRecords =
             accountBatchJob.excludeSummaryWithMissingDetailRecords(new List<SObject>{rollupAccount}, new List<SObject>());
 
-        System.assertEquals(1, includedRecords.size());
+        System.assertEquals(1, includedRecords.size(), 'Checks that the number of records is equal to 1.');
         System.assertEquals(rollupAccount.Id, includedRecords[0].Id,
             'Summary records should be included if they have rollup states even if they have no detail records');
     }
@@ -692,7 +692,7 @@ private class CRLP_Batch_Base_TEST {
         List<String> nonZeroFields = rollupJob.fieldsToCheckForNonZero;
 
         System.assertEquals(1, nonZeroFields.size(), 'There should be one field identified');
-        System.assertEquals(UTIL_Namespace.StrTokenNSPrefix('Matching_Gift_Amount_Min__c'), nonZeroFields[0]);
+        System.assertEquals(UTIL_Namespace.StrTokenNSPrefix('Matching_Gift_Amount_Min__c'), nonZeroFields[0], 'This test asserts that the values of the fields matching_Gift_Amount_Min are');
     }
 
     /**
@@ -748,7 +748,7 @@ private class CRLP_Batch_Base_TEST {
         List<String> nonZeroFields = rollupJob.fieldsToCheckForNonZero;
 
         System.assertEquals(1, nonZeroFields.size(), 'There should be one field identified');
-        System.assertEquals(UTIL_Namespace.StrTokenNSPrefix('Matching_Gift_Amount_Min__c'), nonZeroFields[0]);
+        System.assertEquals(UTIL_Namespace.StrTokenNSPrefix('Matching_Gift_Amount_Min__c'), nonZeroFields[0], 'This test asserts that the values of the fields matching_Gift_Amount_Min are');
     }
 
     /**

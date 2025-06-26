@@ -59,7 +59,7 @@ private class BDI_DataImportFLSService_TEST {
         );
 
         List<DataImport__c> validatedDataImports = service.getValidRecords();
-        System.assertEquals(1, validatedDataImports.size());
+        System.assertEquals(1, validatedDataImports.size(), 'Checks that the number of data imports is equal to 1.');
     }
 
     @IsTest
@@ -88,7 +88,7 @@ private class BDI_DataImportFLSService_TEST {
             );
 
             List<DataImport__c> invalidatedDataImports = service.getInvalidRecords();
-            System.assertEquals(1, invalidatedDataImports.size());
+            System.assertEquals(1, invalidatedDataImports.size(), 'Checks that the number of invalidated data imports is equal to one.');
         }
     }
 
@@ -143,7 +143,7 @@ private class BDI_DataImportFLSService_TEST {
                 WHERE Id = :dataImport.Id
         ];
         System.assertEquals(dataImportService.statusDIFailed(),
-                processedDataImports[0].Status__c);
+                processedDataImports[0].Status__c, 'Checks that the status of the processed data imports is the same as the status of the DI');
         System.assert(processedDataImports[0].FailureInformation__c.contains(
                 System.Label.flsError.replace('{0}', 'Contact.LastName')
         ), 'The utilPermissionsMockInstance should have reported ' +
@@ -177,7 +177,7 @@ private class BDI_DataImportFLSService_TEST {
         //field, assert that it is skipped by the BDI_DataImportFLSService.isValid method
         //and the Data Import record processes successfully
         System.assertEquals(dataImportService.statusDISuccess(),
-                processedDataImports[0].Status__c);
+                processedDataImports[0].Status__c, 'Checks that the status of the processed data imports is the same as the status of the last');
         System.assertEquals(null, processedDataImports[0].FailureInformation__c,
                 'The Data Import record should have re-processed successfully, since the ' +
                         'non-updateable master-detail field should have been ' +

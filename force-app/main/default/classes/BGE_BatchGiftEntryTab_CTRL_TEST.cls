@@ -73,9 +73,9 @@ private class BGE_BatchGiftEntryTab_CTRL_TEST {
                         BGE_BatchGiftEntryTab_CTRL.TableModel.class
                 );
         Test.stopTest();
-        System.assertEquals(75, model.totalNumberOfRows);
-        System.assertEquals(50, model.batches.size());
-        System.assert(model.columns.size()>0);
+        System.assertEquals(75, model.totalNumberOfRows, 'This test is used to test the total number of rows in the database.');
+        System.assertEquals(50, model.batches.size(), 'Test that the number of batches is equal to 50.');
+        System.assert(model.columns.size()>0, 'Checks that the model has at least one column.');
     }
 
     /*********************************************************************************************************
@@ -96,10 +96,10 @@ private class BGE_BatchGiftEntryTab_CTRL_TEST {
                         BGE_BatchGiftEntryTab_CTRL.TableModel.class
                 );
         Test.stopTest();
-        System.assertEquals(75, model.totalNumberOfRows);
-        System.assertEquals(50, model.batches.size());
+        System.assertEquals(75, model.totalNumberOfRows, 'This test is used to test the total number of rows in the database.');
+        System.assertEquals(50, model.batches.size(), 'Test that the number of batches is equal to 50.');
         for (Integer i=0; i<model.batches.size(); i++) {
-            System.assertEquals(batches[i].Id, model.batches[i].Id);
+            System.assertEquals(batches[i].Id, model.batches[i].Id, 'Assert that the batch id is the same as the batch id in the model.');
         }
     }
 

@@ -235,7 +235,7 @@ private class UTIL_Query_TEST {
         Account[] actualAccounts = Database.query(soql);
 
         System.assertEquals(expectedSoql, soql, 'SOQL should include ORDER BY clause');
-        System.assertEquals(2, actualAccounts.size());
+        System.assertEquals(2, actualAccounts.size(), 'Checks that the number of accounts in the account store is equal to 2.');
     }
 
     /*********************************************************************************************************
@@ -253,7 +253,7 @@ private class UTIL_Query_TEST {
 
             System.assert(false, 'An exception should be thrown when SOQL has no select field');
         } catch (Exception e) {
-            System.assertEquals('At least one SELECT field is required.', e.getMessage());
+            System.assertEquals('At least one SELECT field is required.', e.getMessage(), 'Assert that at least one SELECT field is required.');
         }
     }
 
@@ -274,7 +274,7 @@ private class UTIL_Query_TEST {
 
                 System.assert(false, 'An exception should be thrown when SELECT field is empty or null');
             } catch (Exception e) {
-                System.assertEquals('SELECT field cannot be empty or null.', e.getMessage());
+                System.assertEquals('SELECT field cannot be empty or null.', e.getMessage(), 'Assert that the message of the given SELECT field is not empty or null.');
             }
         }
     }
@@ -296,7 +296,7 @@ private class UTIL_Query_TEST {
 
             System.assert(false, 'An exception should be thrown when SOQL has no FROM value');
         } catch (Exception e) {
-            System.assertEquals('The FROM value is required.', e.getMessage());
+            System.assertEquals('The FROM value is required.', e.getMessage(), 'Assert that the FROM value is required.');
         }
     }
 
@@ -321,7 +321,7 @@ private class UTIL_Query_TEST {
 
                 String expectedSoql = 'SELECT Id, Name FROM Account WHERE Id IN :expectedAccounts';
             } catch (Exception e) {
-                System.assertEquals('WHERE clause will be ignored when empty or null.', e.getMessage());
+                System.assertEquals('WHERE clause will be ignored when empty or null.', e.getMessage(), 'Asserts that the message is not empty or null.');
             }
         }
     }
@@ -450,11 +450,11 @@ private class UTIL_Query_TEST {
                 .withSelectFields(new List<String>{'Id', 'FirstName', 'LastName'})
                 .withOrderBy(Contact.LastName, 'LastName');
         String queryStr = query.build();
-        System.assert(!queryStr.contains('ORDER BY LastName'));
+        System.assert(!queryStr.contains('ORDER BY LastName'), 'This method asserts that the query string is not empty.');
 
         query.withOrderBy(Contact.FirstName, 'FirstName');
         queryStr = query.build();
-        System.assert(queryStr.contains('ORDER BY FirstName'));
+        System.assert(queryStr.contains('ORDER BY FirstName'), 'This method asserts that the query string is valid.');
     }
 
 

@@ -395,7 +395,7 @@ private with sharing class PS_CommitmentRequest_TEST {
         System.assertEquals('WEB', achData.achCode, 'ACH Code should be WEB');
         System.assertEquals('INDIVIDUAL', achData.type, 'AchData type should be INDIVIDUAL');
         System.assertEquals('CHECKING', achData.bankType, 'AchData bankType should be CHECKING');
-        System.assertEquals(contact.firstName + ' ' + contact.lastName, requestBody.accountName);
+        System.assertEquals(contact.firstName + ' ' + contact.lastName, requestBody.accountName, 'Assert that contact. firstName and contact. lastName are equal.');
         System.assertEquals(PAYMENT_TOKEN, requestBody.paymentMethodToken, 'Payment Method Token should match');
         System.assertEquals(UserInfo.getDefaultCurrency(), requestBody.currencyCode, 'Currency Code should match');
 
@@ -478,8 +478,8 @@ private with sharing class PS_CommitmentRequest_TEST {
 
         PS_ProductMetadata productMetadata = parseUntypedMetadata(requestBody.productMetadata);
 
-        System.assertEquals('CRM', productMetadata.origin.type);
-        System.assertEquals(rdCampaign.Id, productMetadata.campaign.id);
+        System.assertEquals('CRM', productMetadata.origin.type, 'Checks that the type of the product metadata is the same as the origin type.');
+        System.assertEquals(rdCampaign.Id, productMetadata.campaign.id, 'This method is used to assert that the campaign ID is the same as the product Metadata campaign');
     }
 
     // Helpers

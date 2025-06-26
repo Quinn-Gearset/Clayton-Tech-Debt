@@ -46,7 +46,7 @@ private class RD2_ChangeLog_TEST {
 
         RD2_ChangeLogService service = new RD2_ChangeLogService();
         RD2_ChangeLogView view = service.getChangeLogView(null, 3, null);
-        System.assertEquals(false, view.settingEnabled);
+        System.assertEquals(false, view.settingEnabled, 'Checks that setting is enabled.');
     }
 
     @IsTest
@@ -60,7 +60,7 @@ private class RD2_ChangeLog_TEST {
 
         RD2_ChangeLogService service = new RD2_ChangeLogService();
         RD2_ChangeLogView view = service.getChangeLogView(null, 3, null);
-        System.assertEquals(true, view.settingEnabled);
+        System.assertEquals(true, view.settingEnabled, 'Checks if setting is enabled.');
     }
 
     @IsTest
@@ -68,7 +68,7 @@ private class RD2_ChangeLog_TEST {
 
         RD2_ChangeView view = new RD2_ChangeLog(getChangeRecord()).getChangeView();
 
-        System.assertEquals(2, view.fields.size());
+        System.assertEquals(2, view.fields.size(), 'Checks that 2 fields are present in the view.');
 
         // fields should be in a predictable order
         System.assertEquals(5, view.fields[0].oldValue, 'Old Amount value did not match.');
@@ -86,8 +86,8 @@ private class RD2_ChangeLog_TEST {
 
         RD2_ChangeLogView view = service.getChangeLogView(null, 3, null);
 
-        System.assertEquals(0, view.changes.size());
-        System.assertEquals(false, view.hasMore);
+        System.assertEquals(0, view.changes.size(), 'Assert that the view has no changes.');
+        System.assertEquals(false, view.hasMore, 'This test asserts that the view has more items.');
     }
 
     @IsTest
@@ -100,8 +100,8 @@ private class RD2_ChangeLog_TEST {
 
         RD2_ChangeLogView view = service.getChangeLogView(null, 3, null);
 
-        System.assertEquals(3, view.changes.size());
-        System.assertEquals(true, view.hasMore);
+        System.assertEquals(3, view.changes.size(), 'Assert that the view has 3 changes.');
+        System.assertEquals(true, view.hasMore, 'Asserts that the view has more items.');
 
     }
 
@@ -111,7 +111,7 @@ private class RD2_ChangeLog_TEST {
 
         RD2_ChangeView view = new RD2_ChangeLog(record).getChangeView();
 
-        System.assertEquals(3, view.fields.size());
+        System.assertEquals(3, view.fields.size(), 'Checks that the size of the view is equal to 3.');
         RD2_FieldChangeView campaignChangeView = view.fields[2];
 
         System.assertEquals(campaignChangeView.oldId, FAKE_CAMPAIGN_ID, 'Unexpected old campaign id');
@@ -129,11 +129,11 @@ private class RD2_ChangeLog_TEST {
 
         RD2_ChangeView view = new RD2_ChangeLog(record).getChangeView();
 
-        System.assertEquals(2, view.fields.size());
-        System.assertEquals(10, view.fields[0].newValue);
-        System.assertEquals(120, view.fields[1].newValue);
-        System.assertEquals(5, view.fields[0].oldValue);
-        System.assertEquals(60, view.fields[1].oldValue);
+        System.assertEquals(2, view.fields.size(), 'Checks that 2 fields are present in the view.');
+        System.assertEquals(10, view.fields[0].newValue, 'This test asserts that the first field is equal to 10.');
+        System.assertEquals(120, view.fields[1].newValue, 'This test asserts that the value of the field is equal to 120.');
+        System.assertEquals(5, view.fields[0].oldValue, 'This test asserts that the first field s old value equals 5.');
+        System.assertEquals(60, view.fields[1].oldValue, 'This test asserts that the old value of the field is equal to 60.');
     }
 
     @IsTest
@@ -159,14 +159,14 @@ private class RD2_ChangeLog_TEST {
 
         RD2_ChangeView view = new RD2_ChangeLog(record).getChangeView();
 
-        System.assertEquals(2, view.fields.size());
-        System.assertEquals(10, view.fields[0].newValue);
-        System.assertEquals(120, view.fields[1].newValue);
-        System.assertEquals(5, view.fields[0].oldValue);
-        System.assertEquals(60, view.fields[1].oldValue);
+        System.assertEquals(2, view.fields.size(), 'Checks that 2 fields are present in the view.');
+        System.assertEquals(10, view.fields[0].newValue, 'This test asserts that the first field is equal to 10.');
+        System.assertEquals(120, view.fields[1].newValue, 'This test asserts that the value of the field is equal to 120.');
+        System.assertEquals(5, view.fields[0].oldValue, 'This test asserts that the first field s old value equals 5.');
+        System.assertEquals(60, view.fields[1].oldValue, 'This test asserts that the old value of the field is equal to 60.');
         if (isMultiCurrencyEnabled) {
-            System.assertEquals(nonDefaultCurrencyCode, view.fields[0].currencyCode);
-            System.assertEquals(nonDefaultCurrencyCode, view.fields[1].currencyCode);
+            System.assertEquals(nonDefaultCurrencyCode, view.fields[0].currencyCode, 'This method is used to assert that the currency code of the first field is the same as');
+            System.assertEquals(nonDefaultCurrencyCode, view.fields[1].currencyCode, 'This is a no - op if the first field is the currency code of the second field');
         }
     }
 
@@ -191,13 +191,13 @@ private class RD2_ChangeLog_TEST {
             String.valueOf(RecurringDonationChangeLog__c.NewExpectedTotalValue__c)
         );
 
-        System.assertEquals(3, view.fields.size());
-        System.assertEquals(field1Label, view.fields[1].label);
-        System.assertEquals(null, view.fields[1].newValue);
-        System.assertEquals(60, view.fields[1].oldValue);
-        System.assertEquals(field2Label, view.fields[2].label);
-        System.assertEquals(null, view.fields[2].newValue);
-        System.assertEquals(100, view.fields[2].oldValue);
+        System.assertEquals(3, view.fields.size(), 'Checks that the size of the view is equal to 3.');
+        System.assertEquals(field1Label, view.fields[1].label, 'Assert that the label of the first field equals the label of the second field of the view');
+        System.assertEquals(null, view.fields[1].newValue, 'Assert that the value of the first field is equal to the value of the last field.');
+        System.assertEquals(60, view.fields[1].oldValue, 'This test asserts that the old value of the field is equal to 60.');
+        System.assertEquals(field2Label, view.fields[2].label, 'Assert that the label of the second field equals the label of the first field of the view');
+        System.assertEquals(null, view.fields[2].newValue, 'Assert that the value of the field is equal to the new value of the field.');
+        System.assertEquals(100, view.fields[2].oldValue, 'This test asserts that the value of the field is equal to 100.');
     }
 
     private class RD2_ChangeLogSelectorMock implements StubProvider {

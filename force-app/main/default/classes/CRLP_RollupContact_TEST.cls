@@ -505,16 +505,16 @@ public class CRLP_RollupContact_TEST {
         }
 
         // Basic rollup asserts using existing NPSP rollup fields.
-        System.assertEquals(cnt, c.npo02__NumberOfClosedOpps__c);
-        System.assertEquals(totalDonations, c.npo02__TotalOppAmount__c);
-        System.assertEquals(maxAmt, c.npo02__LargestAmount__c);
-        System.assertEquals(closeDate, c.npo02__FirstCloseDate__c);
-        System.assertEquals(lastCloseDate, c.npo02__LastCloseDate__c);
-        System.assertEquals(totalDonations.divide(cnt, 2, System.RoundingMode.HALF_UP), c.npo02__AverageAmount__c);
-        System.assertEquals(total2YearsAgo, c.npo02__OppAmount2YearsAgo__c);
-        System.assertEquals(bestGiftYear, c.npo02__Best_Gift_Year__c);
-        System.assertEquals(last365Days, c.npo02__OppAmountLastNDays__c);
-        System.assertEquals('New', c.Department);
+        System.assertEquals(cnt, c.npo02__NumberOfClosedOpps__c, 'This function is used to assert that the number of closed ops is the same as the number');
+        System.assertEquals(totalDonations, c.npo02__TotalOppAmount__c, 'Test for equality of totalDonations and totalOppAmount.');
+        System.assertEquals(maxAmt, c.npo02__LargestAmount__c, 'Checks that the maximum amount of the Npo02 class is the same as the maximum amount');
+        System.assertEquals(closeDate, c.npo02__FirstCloseDate__c, 'This function asserts that the close date is the same as the first close date of the N');
+        System.assertEquals(lastCloseDate, c.npo02__LastCloseDate__c, 'This function asserts that the last close date is the same as the one provided.');
+        System.assertEquals(totalDonations.divide(cnt, 2, System.RoundingMode.HALF_UP), c.npo02__AverageAmount__c, 'Test for equality of total donations.');
+        System.assertEquals(total2YearsAgo, c.npo02__OppAmount2YearsAgo__c, 'This function is used to test equality of the two OppAmount2YearsAgo objects');
+        System.assertEquals(bestGiftYear, c.npo02__Best_Gift_Year__c, 'This function asserts that the best gift year is the same as the one in the C');
+        System.assertEquals(last365Days, c.npo02__OppAmountLastNDays__c, 'This is a test function to assert that the last365Days are the same as the');
+        System.assertEquals('New', c.Department, 'This test asserts that the department is New.');
 
         System.assertEquals(1, c.npo02__OppsClosed2YearsAgo__c, 'The number of close lost opps should be 1');
         System.assertEquals(wonCountLastYear, c.npo02__OppsClosedLastYear__c, 'The number of closed won opps should be equal to ' + wonCountLastYear);
@@ -526,12 +526,12 @@ public class CRLP_RollupContact_TEST {
         System.assertEquals(baseAmt, c.npo02__LastMembershipAmount__c, 'The Amount written off does not match');
         System.assertEquals(donationYears.size(), c.npo02__NumberOfMembershipOpps__c, 'The current streak should be all the years');
         System.assertEquals(donationYears.size(), c.Description.split(';').size(), 'The list of donated years should match');
-        System.assertEquals(42, c4.npo02__SmallestAmount__c);
-        System.assertEquals(4, c4.Number_of_Soft_Credits_Last_N_Days__c);
-        System.assertEquals(56, c4.Number_of_Soft_Credits_Last_Year__c);
-        System.assertEquals(314, c4.Number_of_Soft_Credits_This_Year__c);
-        System.assertEquals(4, c4.Number_of_Soft_Credits_Two_Years_Ago__c);
-        System.assertEquals(42, c4.npo02__Household_Naming_Order__c);
+        System.assertEquals(42, c4.npo02__SmallestAmount__c, 'Test for equality of NPO02.');
+        System.assertEquals(4, c4.Number_of_Soft_Credits_Last_N_Days__c, 'Number of Soft Credits Last N Days');
+        System.assertEquals(56, c4.Number_of_Soft_Credits_Last_Year__c, 'Number of Soft Credits Last Year is 56');
+        System.assertEquals(314, c4.Number_of_Soft_Credits_This_Year__c, 'This test asserts that 314 is the number of soft credits on this year.');
+        System.assertEquals(4, c4.Number_of_Soft_Credits_Two_Years_Ago__c, 'Number of soft credits two years ago');
+        System.assertEquals(42, c4.npo02__Household_Naming_Order__c, 'This file is used to test naming order of the Household.');
 
 
         // THe batch process will query all Contacts, but these 2 are special circumstances to validate
@@ -540,14 +540,14 @@ public class CRLP_RollupContact_TEST {
             Id c2Id = c2.Id;
             conQuery = CRLP_Query_SEL.buildObjectQueryForRollup(Contact.SObjectType) + ' WHERE Id = :c2Id LIMIT 1';
             c2 = database.query(conQuery);
-            System.assertEquals(0, c2.npo02__NumberOfClosedOpps__c);
+            System.assertEquals(0, c2.npo02__NumberOfClosedOpps__c, 'This test asserts that the number of closed OPPS is the same as the number of closed');
 
             // Contact3.npo02__NumberOfClosedOpps__c was set to null and has attached opps, so it remain as
             // null (vs. being reset to 0).
             Id c3Id = c3.Id;
             conQuery = CRLP_Query_SEL.buildObjectQueryForRollup(Contact.SObjectType) + ' WHERE Id = :c3Id LIMIT 1';
             c3 = database.query(conQuery);
-            System.assertEquals(null, c3.npo02__NumberOfClosedOpps__c);
+            System.assertEquals(null, c3.npo02__NumberOfClosedOpps__c, 'This function asserts that the number of closed OPPS is the same as the number of closed');
         }
     }
 

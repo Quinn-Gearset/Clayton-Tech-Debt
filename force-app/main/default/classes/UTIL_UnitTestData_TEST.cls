@@ -1132,7 +1132,7 @@ public class UTIL_UnitTestData_TEST {
             WHERE Id = :returnedUser.Id
         ];
 
-        System.assert(randomUsername.equalsIgnoreCase(queriedUser.Username));
+        System.assert(randomUsername.equalsIgnoreCase(queriedUser.Username), 'Assert that the username of the user is the same as the one in thequeried user');
     }
 
     @TestVisible
@@ -1156,7 +1156,7 @@ public class UTIL_UnitTestData_TEST {
             WHERE Id = :returnedUser.Id
         ];
 
-        System.assertEquals(false, returnedUser.IsActive);
-        System.assertEquals(false, queriedUser.IsActive);
+        System.assertEquals(false, returnedUser.IsActive, 'This method asserts that the returned user is active.');
+        System.assertEquals(false, queriedUser.IsActive, 'Checks that the user is active.');
     }
 }

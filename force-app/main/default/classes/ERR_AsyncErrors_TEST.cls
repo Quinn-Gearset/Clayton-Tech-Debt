@@ -56,7 +56,7 @@ public class ERR_AsyncErrors_TEST {
 
         System.assertEquals(
             DateTime.newInstanceGmt(2016, 8, 28, 8, 0, 0),
-            stub.pendingAsyncJobErrorsLastRun
+            stub.pendingAsyncJobErrorsLastRun, 'This method is called to assert that all of the vital attributes of a pendingAsyncJob'
         );
     }
 
@@ -83,7 +83,7 @@ public class ERR_AsyncErrors_TEST {
 
         System.assertEquals(
             DateTime.newInstanceGmt(2016, 8, 29, 8, 0, 0),
-            stub.pendingAsyncJobErrorsLastRun
+            stub.pendingAsyncJobErrorsLastRun, 'This method is called to assert that all of the vital attributes of a pendingAsyncJob'
         );
     }
 
@@ -110,7 +110,7 @@ public class ERR_AsyncErrors_TEST {
 
         System.assertEquals(
             UTIL_Namespace.HARDCODED_NPSP_NAMESPACE,
-            stub.pendingAsyncJobErrorsNamespace
+            stub.pendingAsyncJobErrorsNamespace, 'This method is invoked when a system property in the AIKA tree is equal to'
         );
     }
 
@@ -135,7 +135,7 @@ public class ERR_AsyncErrors_TEST {
 
         System.assertEquals(
             DateTime.newInstanceGmt(2016, 8, 29, 8, 0, 0),
-            stub.upsertedErrorSettings.Async_Error_Check_Last_Run__c
+            stub.upsertedErrorSettings.Async_Error_Check_Last_Run__c, 'This method is called to assert that all the fields in the record are equal.'
         );
     }
 
@@ -211,7 +211,7 @@ public class ERR_AsyncErrors_TEST {
 
         System.assertEquals(
             expectedErrors,
-            new Set<Error__c>(stub.insertedErrors)
+            new Set<Error__c>(stub.insertedErrors), 'Tests that all the errors in the expected set are equal to the ones in the log.'
         );
     }
 
@@ -239,7 +239,7 @@ public class ERR_AsyncErrors_TEST {
 
         stub.execute(null);
 
-        System.assert(stub.errorNotificationsSent);
+        System.assert(stub.errorNotificationsSent, 'Calls this method only if the stub is not already called.');
     }
 
 

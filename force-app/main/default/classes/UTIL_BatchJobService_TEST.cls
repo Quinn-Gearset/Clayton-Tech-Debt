@@ -73,16 +73,16 @@ public with sharing class UTIL_BatchJobService_TEST {
         AsyncApexJob job = buildAsyncApexJob();
         UTIL_BatchJobService.BatchJob batchJob = new UTIL_BatchJobService.BatchJob(job);
 
-        System.assertEquals(MOCK_BATCH_ID, batchJob.batchId);
-        System.assertEquals(job.CreatedDate, batchJob.createdDate);
-        System.assertEquals(job.Status, batchJob.status);
-        System.assertEquals(null, batchJob.extendedStatus);
-        System.assertEquals(job.CompletedDate, batchJob.completedDate);
-        System.assertEquals(job.jobItemsProcessed, batchJob.jobItemsProcessed);
-        System.assertEquals(job.totalJobItems, batchJob.totalJobItems);
-        System.assertEquals('3 ' + TIME_ELAPSED_DAYS + ' 00:00:00', batchJob.timeElapsed);
-        System.assertEquals(100, batchJob.percentComplete);
-        System.assertEquals(false, batchJob.isInProgress);
+        System.assertEquals(MOCK_BATCH_ID, batchJob.batchId, 'Test that batchJob. batchId is equal to MOCK_BATCH_ID.');
+        System.assertEquals(job.CreatedDate, batchJob.createdDate, 'This method asserts that the created date of the job and the batch job are equal.');
+        System.assertEquals(job.Status, batchJob.status, 'Checks that the status of the batch job is the same as the status of the job.');
+        System.assertEquals(null, batchJob.extendedStatus, 'This method asserts that the extendedStatus property is null.');
+        System.assertEquals(job.CompletedDate, batchJob.completedDate, 'This method asserts that the job s completed date is equal to the batch job s completed date');
+        System.assertEquals(job.jobItemsProcessed, batchJob.jobItemsProcessed, 'This method is called when the job items have been processed.');
+        System.assertEquals(job.totalJobItems, batchJob.totalJobItems, 'Checks that totalJobItems is the same as totalJobItems in the batchJob.');
+        System.assertEquals('3 ' + TIME_ELAPSED_DAYS + ' 00:00:00', batchJob.timeElapsed, 'This test asserts that the batch job s timeElapsed is in the same day as the batch');
+        System.assertEquals(100, batchJob.percentComplete, 'This method is used to assert that the percentage of the job is equal to 100.');
+        System.assertEquals(false, batchJob.isInProgress, 'Checks that the batch job is in progress.');
 
         System.assertEquals(UTIL_BatchJobService.MAX_DAYS_EXCEEDED, batchJob.completedDaysBetween,
             'Should reported the max days between instead of actual number since it is not relevant for any further calculations');
@@ -99,19 +99,19 @@ public with sharing class UTIL_BatchJobService_TEST {
 
         DateTime startDate = DateTime.newInstance(2018, 01, 30, 15, 20, 40);
         DateTime endDate = DateTime.newInstance(2018, 01, 30, 18, 20, 40);
-        System.assertEquals('03:00:00', batchJob.calcTimeElapsed(startDate, endDate));
+        System.assertEquals('03:00:00', batchJob.calcTimeElapsed(startDate, endDate), 'Test for the time elapsed between the start and end date.');
 
         startDate = DateTime.newInstance(2018, 01, 30, 15, 20, 40);
         endDate = DateTime.newInstance(2018, 01, 31, 18, 20, 40);
-        System.assertEquals('1 ' + TIME_ELAPSED_DAYS + ' 03:00:00', batchJob.calcTimeElapsed(startDate, endDate));
+        System.assertEquals('1 ' + TIME_ELAPSED_DAYS + ' 03:00:00', batchJob.calcTimeElapsed(startDate, endDate), 'Test for the time elapsed between the start and end date.');
 
         startDate = DateTime.newInstance(2018, 01, 30, 15, 20, 40);
         endDate = DateTime.newInstance(2018, 02, 1, 18, 20, 40);
-        System.assertEquals('2 ' + TIME_ELAPSED_DAYS + ' 03:00:00', batchJob.calcTimeElapsed(startDate, endDate));
+        System.assertEquals('2 ' + TIME_ELAPSED_DAYS + ' 03:00:00', batchJob.calcTimeElapsed(startDate, endDate), 'Test for the time elapsed between the start and end date.');
 
         startDate = DateTime.newInstance(2018, 01, 30, 15, 15, 50);
         endDate = DateTime.newInstance(2018, 02, 1, 18, 20, 40);
-        System.assertEquals('2 ' + TIME_ELAPSED_DAYS + ' 03:04:50', batchJob.calcTimeElapsed(startDate, endDate));
+        System.assertEquals('2 ' + TIME_ELAPSED_DAYS + ' 03:04:50', batchJob.calcTimeElapsed(startDate, endDate), 'Test for the time elapsed between two batches.');
     }
 
     /***
@@ -126,7 +126,7 @@ public with sharing class UTIL_BatchJobService_TEST {
         DateTime endDate = null;
         String actual = batchJob.calcTimeElapsed(startDate, endDate);
 
-        System.assertNotEquals(null, actual);
+        System.assertNotEquals(null, actual, 'Assert that actual is not null.');
     }
 
     /***
@@ -144,33 +144,33 @@ public with sharing class UTIL_BatchJobService_TEST {
 
         String status = UTIL_BatchJobService.ApexJobStatus.HOLDING.name();
         Long percentComplete = batchJob.calcPercentComplete(jobItemsProcessed, totalJobItems, status);
-        System.assertEquals(defaultPercentage, percentComplete);
+        System.assertEquals(defaultPercentage, percentComplete, 'Checks that defaultPercentage and percentComplete are equal.');
 
         status = UTIL_BatchJobService.ApexJobStatus.QUEUED.name();
         percentComplete = batchJob.calcPercentComplete(jobItemsProcessed, totalJobItems, status);
-        System.assertEquals(defaultPercentage, percentComplete);
+        System.assertEquals(defaultPercentage, percentComplete, 'Checks that defaultPercentage and percentComplete are equal.');
 
         status = UTIL_BatchJobService.ApexJobStatus.PREPARING.name();
         percentComplete = batchJob.calcPercentComplete(jobItemsProcessed, totalJobItems, status);
-        System.assertEquals(10, percentComplete);
+        System.assertEquals(10, percentComplete, 'Checks that percentComplete is equal to 10.');
 
         jobItemsProcessed = 75;
         status = UTIL_BatchJobService.ApexJobStatus.PROCESSING.name();
         percentComplete = batchJob.calcPercentComplete(jobItemsProcessed, totalJobItems, status);
-        System.assertEquals(75, percentComplete);
+        System.assertEquals(75, percentComplete, 'Checks that the percentage complete is equal to 75.');
 
         status = UTIL_BatchJobService.ApexJobStatus.ABORTED.name();
         percentComplete = batchJob.calcPercentComplete(jobItemsProcessed, totalJobItems, status);
-        System.assertEquals(75, percentComplete);
+        System.assertEquals(75, percentComplete, 'Checks that the percentage complete is equal to 75.');
 
         status = UTIL_BatchJobService.ApexJobStatus.FAILED.name();
         percentComplete = batchJob.calcPercentComplete(jobItemsProcessed, totalJobItems, status);
-        System.assertEquals(0, percentComplete);
+        System.assertEquals(0, percentComplete, 'Checks that percentComplete is equal to 0.');
 
         jobItemsProcessed = 100;
         status = UTIL_BatchJobService.ApexJobStatus.COMPLETED.name();
         percentComplete = batchJob.calcPercentComplete(jobItemsProcessed, totalJobItems, status);
-        System.assertEquals(100, percentComplete);
+        System.assertEquals(100, percentComplete, 'Checks that the percentage complete is equal to 100.');
     }
 
     /***

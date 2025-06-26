@@ -74,16 +74,16 @@ public with sharing class ADDR_Validator_Batch_TEST {
         //check household got created for contact
         contact = [select Account.Id from Contact where Id = :contact.Id];
         Id accountId = contact.Account.Id;
-        System.assertNotEquals(null, accountId);
+        System.assertNotEquals(null, accountId, 'Asserts that accountId is not null.');
         
         //check address record got created for household
         Address__c[] av = [select Id, MailingStreet__c, MailingState__c, MailingPostalCode__c, Verified__c
                              from Address__c where Household_Account__c = :accountId];
-        System.assertEquals(1, av.size());
-        System.assertEquals('single-address', av[0].MailingStreet__c);
-        System.assertEquals('California', av[0].MailingState__c);
-        System.assertEquals('95014', av[0].MailingPostalCode__c);
-        System.assertEquals(false, av[0].Verified__c);
+        System.assertEquals(1, av.size(), 'Assert that the size of the array is equal to 1.');
+        System.assertEquals('single-address', av[0].MailingStreet__c, 'Assert that the first address is the single - address.');
+        System.assertEquals('California', av[0].MailingState__c, 'Assert that California is the same as the first mailing state.');
+        System.assertEquals('95014', av[0].MailingPostalCode__c, 'Assert that the first address is 95014.');
+        System.assertEquals(false, av[0].Verified__c, 'Assert that the values of the array are equal.');
         
         //run batch address verification
         TDTM_DefaultConfig.stopTestDataInit();
@@ -95,15 +95,15 @@ public with sharing class ADDR_Validator_Batch_TEST {
         //check address record was verified
         av = [select MailingStreet__c, MailingState__c, MailingPostalCode__c, Verified__c 
                 from Address__c where Household_Account__c = :accountId];
-        System.assertEquals(1, av.size());
-        System.assertEquals('1 Infinite Loop', av[0].MailingStreet__c);
+        System.assertEquals(1, av.size(), 'Assert that the size of the array is equal to 1.');
+        System.assertEquals('1 Infinite Loop', av[0].MailingStreet__c, 'Assert that 1 Infinite Loop is equal to the first Infinite Loop.');
         if (!orgConfig.isStateCountryPicklistsEnabled()) {
-            System.assertEquals('CA', av[0].MailingState__c);
+            System.assertEquals('CA', av[0].MailingState__c, 'Assert that the current mailing state is CA.');
         } else {
-            System.assertEquals('California', av[0].MailingState__c);
+            System.assertEquals('California', av[0].MailingState__c, 'Assert that California is the same as the first mailing state.');
         }
-        System.assertEquals('95014-2083', av[0].MailingPostalCode__c);
-        System.assertEquals(true, av[0].Verified__c);
+        System.assertEquals('95014-2083', av[0].MailingPostalCode__c, 'Assert that the first address is 95014 - 2083.');
+        System.assertEquals(true, av[0].Verified__c, 'Assert that the values of the array are equal.');
         
         /*
         //check verified data got pushed to contact 
@@ -149,18 +149,18 @@ public with sharing class ADDR_Validator_Batch_TEST {
         //check households got created for contacts
         List<Id> AccountIDs = new List<Id>();
         List<Contact> contactsWithAccId = [select Account.Id from Contact where Id IN :contacts];
-        System.assertEquals(batchSize, contactsWithAccId.size());
+        System.assertEquals(batchSize, contactsWithAccId.size(), 'This method asserts that the batch size of the contactsWithAccId is equal to the batch');
         for(Contact c : contactsWithAccId) {    
 	        Id accountId = c.Account.Id;
-	        System.assertNotEquals(null, accountId);
+	        System.assertNotEquals(null, accountId, 'Asserts that accountId is not null.');
 	        AccountIDs.add(accountId);
         }
         
         //check address records got created for households, but have not yet been verified
         List<Address__c> addresses = [select Verified__c from Address__c where Household_Account__c IN :AccountIDs];
-        System.assertEquals(batchSize, addresses.size());
+        System.assertEquals(batchSize, addresses.size(), 'Checks that the batch size is equal to the number of batches in the batched query.');
         for(Address__c addr : addresses) {
-        	System.assertEquals(false, addr.Verified__c);
+        	System.assertEquals(false, addr.Verified__c, 'Test for the presence of the verified flag.');
         }
         
         //run batch address verification
@@ -174,21 +174,21 @@ public with sharing class ADDR_Validator_Batch_TEST {
         addresses = [select MailingStreet__c, MailingState__c, MailingPostalCode__c,
                 Verified__c, MailingCountry__c
                     from Address__c where Household_Account__c IN :AccountIDs];
-        System.assertEquals(batchSize, addresses.size());
+        System.assertEquals(batchSize, addresses.size(), 'Checks that the batch size is equal to the number of batches in the batched query.');
         Integer i = 1;
         for(Address__c addr : addresses) {
         	UTIL_Debug.debug(LoggingLevel.WARN, '****Asserting address record #' + i);
-	        System.assertEquals('1 Infinite Loop', addr.MailingStreet__c);
+	        System.assertEquals('1 Infinite Loop', addr.MailingStreet__c, 'Test for equality of 1 Infinite Loop.');
             //Not compatible when State/Country pl enabled
             if (orgConfig.isStateCountryPicklistsEnabled()) {
-	            System.assertEquals('California', addr.MailingState__c);
-	            System.assertEquals('United States', addr.MailingCountry__c);
+	            System.assertEquals('California', addr.MailingState__c, 'Assert that the California mailing state is equal to the mailing state.');
+	            System.assertEquals('United States', addr.MailingCountry__c, 'Assert that the current country is United States.');
             } else {
-	            System.assertEquals('CA', addr.MailingState__c);
-	            System.assertEquals('US', addr.MailingCountry__c);
+	            System.assertEquals('CA', addr.MailingState__c, 'Assert that the current mailing state is the same as the current one.');
+	            System.assertEquals('US', addr.MailingCountry__c, 'Assert that the current country is US.');
             }
-	        System.assertEquals('95014-2083', addr.MailingPostalCode__c);
-	        System.assertEquals(true, addr.Verified__c);
+	        System.assertEquals('95014-2083', addr.MailingPostalCode__c, 'Checks that the postal code is the same as the postal code of the address.');
+	        System.assertEquals(true, addr.Verified__c, 'Test for the presence of the verified field.');
 	        i++;
         }
     }
@@ -208,14 +208,14 @@ public with sharing class ADDR_Validator_Batch_TEST {
         //check household got created for contact
         contact = [select Account.Id from Contact where Id = :contact.Id];
         Id accountId = contact.Account.Id;
-        System.assertNotEquals(null, accountId);
+        System.assertNotEquals(null, accountId, 'Asserts that accountId is not null.');
         
         //check address record got created for household
         Address__c[] addresses = [select Id, MailingStreet__c, MailingState__c, MailingPostalCode__c, Verified__c
                              from Address__c where Household_Account__c = :accountId];
-        System.assertEquals(1, addresses.size());
-        System.assertEquals('90210', addresses[0].MailingPostalCode__c);
-        System.assertEquals(false, addresses[0].Verified__c);
+        System.assertEquals(1, addresses.size(), 'Checks that the size of the address table is equal to 1.');
+        System.assertEquals('90210', addresses[0].MailingPostalCode__c, 'Checks that the first address is 90210.');
+        System.assertEquals(false, addresses[0].Verified__c, 'Test for equality of the verified address.');
         
         //run batch address verification
         TDTM_DefaultConfig.stopTestDataInit();
@@ -227,15 +227,15 @@ public with sharing class ADDR_Validator_Batch_TEST {
         //check address record was verified
         addresses = [select MailingCity__c, MailingState__c, MailingPostalCode__c, Verified__c
                 from Address__c where Household_Account__c = :accountId];
-        System.assertEquals(1, addresses.size());
-        System.assertEquals('98236', addresses[0].MailingPostalCode__c);
-        System.assertEquals('Clinton', addresses[0].MailingCity__c);
+        System.assertEquals(1, addresses.size(), 'Checks that the size of the address table is equal to 1.');
+        System.assertEquals('98236', addresses[0].MailingPostalCode__c, 'Checks that the first address is the same as the first one.');
+        System.assertEquals('Clinton', addresses[0].MailingCity__c, 'Assert that the first address is the CLinton address.');
         if (!orgConfig.isStateCountryPicklistsEnabled()) {
-            System.assertEquals('WA', addresses[0].MailingState__c);
+            System.assertEquals('WA', addresses[0].MailingState__c, 'Assert that the current address is the WA address.');
         } else {
-            System.assertEquals('Washington', addresses[0].MailingState__c);
+            System.assertEquals('Washington', addresses[0].MailingState__c, 'Assert that the first address is the Washington address.');
         }
-        System.assertEquals(true, addresses[0].Verified__c);
+        System.assertEquals(true, addresses[0].Verified__c, 'Assert that the address is verified.');
     }
     
     public static testmethod void multipleValidZipcodes() {
@@ -266,28 +266,28 @@ public with sharing class ADDR_Validator_Batch_TEST {
         //check household got created for contact
         addressContact = [select Account.Id from Contact where Id = :addressContact.Id];
         Id addrAccountId = addressContact.Account.Id;
-        System.assertNotEquals(null, addrAccountId);
+        System.assertNotEquals(null, addrAccountId, 'Assert that addrAccountId is not null.');
         
         //check household got created for contact
         zipContact = [select Account.Id from Contact where Id = :zipContact.Id];
         Id zipAccountId = zipContact.Account.Id;
-        System.assertNotEquals(null, zipAccountId);
+        System.assertNotEquals(null, zipAccountId, 'Asserts that zipAccountId is not null.');
         
         //check address record got created for household
         Address__c[] av1 = [select Id, MailingStreet__c, MailingState__c, MailingPostalCode__c, Verified__c
                              from Address__c where Household_Account__c = :addrAccountId];
-        System.assertEquals(1, av1.size());
-        System.assertEquals('single-address', av1[0].MailingStreet__c);
-        System.assertEquals('California', av1[0].MailingState__c);
-        System.assertEquals('95014', av1[0].MailingPostalCode__c);
-        System.assertEquals(false, av1[0].Verified__c);
+        System.assertEquals(1, av1.size(), 'Assert that the size of the array is equal to 1.');
+        System.assertEquals('single-address', av1[0].MailingStreet__c, 'Assert that single - address is the same as the first address.');
+        System.assertEquals('California', av1[0].MailingState__c, 'Assert that California is the same as the mailing state.');
+        System.assertEquals('95014', av1[0].MailingPostalCode__c, 'Test for equality of the postal code of the first AVS.');
+        System.assertEquals(false, av1[0].Verified__c, 'Assert that the values of av1 are equal.');
 
         //check address record got created for household
         Address__c[] av2 = [select Id, MailingStreet__c, MailingState__c, MailingPostalCode__c, Verified__c
                              from Address__c where Household_Account__c = :zipAccountId];
-        System.assertEquals(1, av2.size());
-        System.assertEquals('90210', av2[0].MailingPostalCode__c);
-        System.assertEquals(false, av2[0].Verified__c);
+        System.assertEquals(1, av2.size(), 'Assert that the size of the lists is equal to 1.');
+        System.assertEquals('90210', av2[0].MailingPostalCode__c, 'Assert that 90210 is the same as 90210.');
+        System.assertEquals(false, av2[0].Verified__c, 'Assert that the values of av2 are equal.');
         
         //run batch address verification
         TDTM_DefaultConfig.stopTestDataInit();
@@ -299,28 +299,28 @@ public with sharing class ADDR_Validator_Batch_TEST {
         //check address record was verified
         av1 = [select MailingStreet__c, MailingState__c, MailingPostalCode__c, Verified__c 
                 from Address__c where Household_Account__c = :addrAccountId];
-        System.assertEquals(1, av1.size());
-        System.assertEquals('1 Infinite Loop', av1[0].MailingStreet__c);
+        System.assertEquals(1, av1.size(), 'Assert that the size of the array is equal to 1.');
+        System.assertEquals('1 Infinite Loop', av1[0].MailingStreet__c, 'Assert that 1 Infinite Loop is equal to the first address.');
         if (!orgConfig.isStateCountryPicklistsEnabled()) {
-            System.assertEquals('CA', av1[0].MailingState__c);
+            System.assertEquals('CA', av1[0].MailingState__c, 'Assert that the CA is the same as the CA.');
         } else {
-            System.assertEquals('California', av1[0].MailingState__c);
+            System.assertEquals('California', av1[0].MailingState__c, 'Assert that California is the same as the mailing state.');
         }
-        System.assertEquals('95014-2083', av1[0].MailingPostalCode__c);
-        System.assertEquals(true, av1[0].Verified__c);
+        System.assertEquals('95014-2083', av1[0].MailingPostalCode__c, 'Checks that the first AVS is the same as the second AVS.');
+        System.assertEquals(true, av1[0].Verified__c, 'Assert that the values of av1 are equal.');
         
         //check address record was verified
         av2 = [select MailingCity__c, MailingState__c, MailingPostalCode__c, Verified__c 
                 from Address__c where Household_Account__c = :zipAccountId];
-        System.assertEquals(1, av2.size());
-        System.assertEquals('98236', av2[0].MailingPostalCode__c);
-        System.assertEquals('Clinton', av2[0].MailingCity__c);
+        System.assertEquals(1, av2.size(), 'Assert that the size of the lists is equal to 1.');
+        System.assertEquals('98236', av2[0].MailingPostalCode__c, 'Assert that the first AVS is the same as the first AVS.');
+        System.assertEquals('Clinton', av2[0].MailingCity__c, 'Assert that the first AVS is the CLinton.');
         if (!orgConfig.isStateCountryPicklistsEnabled()) {
-            System.assertEquals('WA', av2[0].MailingState__c);
+            System.assertEquals('WA', av2[0].MailingState__c, 'Assert that the current mailbox is the WA mailbox.');
         } else {
-            System.assertEquals('Washington', av2[0].MailingState__c);
+            System.assertEquals('Washington', av2[0].MailingState__c, 'Assert that the Washington mailbox is the same as the first MailingState.');
         }
-        System.assertEquals(true, av2[0].Verified__c);
+        System.assertEquals(true, av2[0].Verified__c, 'Assert that the values of av2 are equal.');
     }
     
     public static testmethod void validAddressInvalidZipcode() {

@@ -43,18 +43,18 @@ public with sharing class MTCH_Opportunity_TEST {
     static testmethod void testCreateMatches() {
         MTCH_FindGifts_TEST.initTestData(false, 100);
         Opportunity oppMG = MTCH_FindGifts_TEST.oppMG;
-        system.assertNotEquals(null, oppMG);
+        system.assertNotEquals(null, oppMG, 'Assert that oppMG is not null.');
         
         oppMG = [select Id, isClosed, isWon, Name, Amount from Opportunity where Id = :oppMG.Id];
-        system.assertEquals(false, oppMG.isClosed);
-        system.assertEquals(false, oppMG.isWon);
+        system.assertEquals(false, oppMG.isClosed, 'Asserts that the oppMG is closed.');
+        system.assertEquals(false, oppMG.isWon, 'Checks that oppMG. isWon is false.');
         
         list<Opportunity> listOpp = [select Id, Matching_Gift_Account__c, Matching_Gift_Status__c 
             from Opportunity where Id <> :oppMG.Id];
-        system.assertEquals(MTCH_FindGifts_TEST.cItem, listOpp.size());
+        system.assertEquals(MTCH_FindGifts_TEST.cItem, listOpp.size(), 'This test asserts that the number of find gifts is the same as the number of');
         
         for (Opportunity opp : listOpp) {
-            system.assertNotEquals('Received', opp.Matching_Gift_Status__c);
+            system.assertNotEquals('Received', opp.Matching_Gift_Status__c, 'Assert that received message is not expected.');
             opp.Matching_Gift__c = oppMG.Id;
         }
         update listOpp;

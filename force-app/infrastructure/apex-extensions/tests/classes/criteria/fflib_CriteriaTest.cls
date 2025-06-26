@@ -85,8 +85,8 @@ private with sharing class fflib_CriteriaTest
 		fflib_Criteria criteria = new fflib_Criteria()
 				.andCriteria()
 				.equalTo(Account.Name, A_STRING);
-		System.assert(criteria.evaluate(new Account(Name = SAME_STRING)));
-		System.assertEquals('Name=\'' + A_STRING + '\'',criteria.toSOQL());
+		System.assert(criteria.evaluate(new Account(Name = SAME_STRING)), 'Test if the account is a member of the account list.');
+		System.assertEquals('Name=\'' + A_STRING + '\'',criteria.toSOQL(), 'Checks that the name of the object matches the criteria.');
 	}
 
 	@IsTest
@@ -96,7 +96,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.equalTo(Account.Name, A_STRING)
 						.evaluate(new Account(Name = ANOTHER_STRING))
-						== FAILING
+						== FAILING, 'Checks if a given Account has a valid name.'
 		);
 	}
 
@@ -107,7 +107,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.equalTo(Account.Name, A_STRING)
 						.evaluate(new Account())
-						== FAILING
+						== FAILING, 'Checks if a given Account object is found in the system.'
 		);
 	}
 
@@ -116,8 +116,8 @@ private with sharing class fflib_CriteriaTest
 	{
 		fflib_Criteria criteria = new fflib_Criteria()
 				.notEqualTo(Account.Name, A_STRING);
-		System.assert(criteria.evaluate(new Account(Name = ANOTHER_STRING)));
-		System.assertEquals('Name!=\'' + A_STRING + '\'', criteria.toSOQL());
+		System.assert(criteria.evaluate(new Account(Name = ANOTHER_STRING)), 'Evaluate the account criteria.');
+		System.assertEquals('Name!=\'' + A_STRING + '\'', criteria.toSOQL(), 'Checks that the name of the object is not equal to the given criteria.');
 	}
 
 	@IsTest
@@ -127,7 +127,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.notEqualTo('Name', A_STRING)
 						.evaluate(new Account(Name = SAME_STRING))
-						== FAILING
+						== FAILING, 'Checks if a given account has not been found in the system.'
 		);
 	}
 
@@ -136,8 +136,8 @@ private with sharing class fflib_CriteriaTest
 	{
 		fflib_Criteria criteria = new fflib_Criteria()
 				.greaterOrEqualTo(Account.AnnualRevenue, A_NUMBER);
-		System.assert(criteria.evaluate(new Account(AnnualRevenue = HIGHER_NUMBER)));
-		System.assertEquals('AnnualRevenue>=' + A_NUMBER, criteria.toSOQL());
+		System.assert(criteria.evaluate(new Account(AnnualRevenue = HIGHER_NUMBER)), 'Evaluate the account criteria.');
+		System.assertEquals('AnnualRevenue>=' + A_NUMBER, criteria.toSOQL(), 'Assert that the given criteria is equal to the current query.');
 	}
 
 	@IsTest
@@ -146,7 +146,7 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.greaterOrEqualTo('AnnualRevenue', A_NUMBER)
-						.evaluate(new Account(AnnualRevenue = SAME_NUMBER))
+						.evaluate(new Account(AnnualRevenue = SAME_NUMBER)), 'anyone else in the system has a value of A_NUMBER or SAME_NUMBER'
 		);
 	}
 
@@ -157,7 +157,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.greaterOrEqualTo(Account.AnnualRevenue, A_NUMBER)
 						.evaluate(new Account(AnnualRevenue = LOWER_NUMBER))
-						== FAILING
+						== FAILING, 'Checks if a given account is an annual revenue.'
 		);
 	}
 	@IsTest
@@ -167,7 +167,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.greaterOrEqualTo(Account.AnnualRevenue, A_NUMBER)
 						.evaluate(new Account())
-						== FAILING
+						== FAILING, 'Checks if a given account is an annual revenue or not.'
 		);
 	}
 
@@ -176,8 +176,8 @@ private with sharing class fflib_CriteriaTest
 	{
 		fflib_Criteria criteria = new fflib_Criteria()
 				.greaterThan(Account.AnnualRevenue, A_NUMBER);
-		System.assert(criteria.evaluate(new Account(AnnualRevenue = HIGHER_NUMBER)));
-		System.assertEquals('AnnualRevenue>' + A_NUMBER, criteria.toSOQL());
+		System.assert(criteria.evaluate(new Account(AnnualRevenue = HIGHER_NUMBER)), 'Evaluate the account criteria.');
+		System.assertEquals('AnnualRevenue>' + A_NUMBER, criteria.toSOQL(), 'Assert that the given criteria is equal to the current query.');
 	}
 
 	@IsTest
@@ -187,7 +187,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.greaterThan('AnnualRevenue', A_NUMBER)
 						.evaluate(new Account(AnnualRevenue = SAME_NUMBER))
-						== FAILING
+						== FAILING, 'Checks if a given user has an unambiguously - specified account.'
 		);
 	}
 
@@ -198,7 +198,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.greaterThan(Account.AnnualRevenue, A_NUMBER)
 						.evaluate(new Account(AnnualRevenue = LOWER_NUMBER))
-						== FAILING
+						== FAILING, 'Checks if a user has a non - null non - empty non - empty non - empty'
 		);
 	}
 	@IsTest
@@ -208,7 +208,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.greaterThan(Account.AnnualRevenue, A_NUMBER)
 						.evaluate(new Account())
-						== FAILING
+						== FAILING, 'Checks if a given account is an annual revenue or an annual number.'
 		);
 	}
 
@@ -218,7 +218,7 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.lessOrEqualTo(Account.AnnualRevenue, A_NUMBER)
-						.evaluate(new Account(AnnualRevenue = LOWER_NUMBER))
+						.evaluate(new Account(AnnualRevenue = LOWER_NUMBER)), 'anyone else in the system has a value of A_NUMBER'
 		);
 	}
 
@@ -228,7 +228,7 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.lessOrEqualTo('AnnualRevenue', A_NUMBER)
-						.evaluate(new Account(AnnualRevenue = SAME_NUMBER))
+						.evaluate(new Account(AnnualRevenue = SAME_NUMBER)), 'anyone else in the system has a value of A_NUMBER or SAME_NUMBER'
 		);
 	}
 
@@ -239,7 +239,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.lessOrEqualTo(Account.AnnualRevenue, A_NUMBER)
 						.evaluate(new Account(AnnualRevenue = HIGHER_NUMBER))
-						== FAILING
+						== FAILING, 'Checks if a given account has a value less than or equal to A_NUMBER or H'
 		);
 	}
 	@IsTest
@@ -248,7 +248,7 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.lessOrEqualTo(Account.AnnualRevenue, A_NUMBER)
-						.evaluate(new Account())
+						.evaluate(new Account()), 'anyone else in the system has a value of A_NUMBER'
 		);
 	}
 
@@ -258,7 +258,7 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.lessThan(Account.AnnualRevenue, A_NUMBER)
-						.evaluate(new Account(AnnualRevenue = LOWER_NUMBER))
+						.evaluate(new Account(AnnualRevenue = LOWER_NUMBER)), 'anyone else in the system has a value of A_NUMBER'
 		);
 	}
 
@@ -269,7 +269,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.lessThan('AnnualRevenue', A_NUMBER)
 						.evaluate(new Account(AnnualRevenue = SAME_NUMBER))
-						== FAILING
+						== FAILING, 'Checks if a given account is not equal to an annual revenue.'
 		);
 	}
 
@@ -280,7 +280,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.lessThan(Account.AnnualRevenue, A_NUMBER)
 						.evaluate(new Account(AnnualRevenue = HIGHER_NUMBER))
-						== FAILING
+						== FAILING, 'Checks if a node is missing an annotation or not.'
 		);
 	}
 
@@ -290,7 +290,7 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.lessThan(Account.AnnualRevenue, A_NUMBER)
-						.evaluate(new Account())
+						.evaluate(new Account()), 'anyone else in the system is not an Account. A_NUMBER or A_NUMBER'
 		);
 	}
 
@@ -299,13 +299,13 @@ private with sharing class fflib_CriteriaTest
 	{
 		fflib_Criteria criteria = new fflib_Criteria()
 				.inSet(Account.AnnualRevenue, new Set<Decimal> {1.1, 2.2});
-		System.assert(criteria.evaluate(new Account(AnnualRevenue = 1.1)));
-		System.assertEquals('AnnualRevenue IN (1.1,2.2)', criteria.toSOQL());
+		System.assert(criteria.evaluate(new Account(AnnualRevenue = 1.1)), 'Evaluate the criteria.');
+		System.assertEquals('AnnualRevenue IN (1.1,2.2)', criteria.toSOQL(), 'Assert that the specified criteria is equal to the SQL.');
 
 		fflib_Criteria criteriaB = new fflib_Criteria()
 				.inSet('AnnualRevenue', new Set<Decimal> {1.1, 2.2});
-		System.assert(criteriaB.evaluate(new Account(AnnualRevenue = 1.1)));
-		System.assertEquals('AnnualRevenue IN (1.1,2.2)', criteriaB.toSOQL());
+		System.assert(criteriaB.evaluate(new Account(AnnualRevenue = 1.1)), 'This is a test method.');
+		System.assertEquals('AnnualRevenue IN (1.1,2.2)', criteriaB.toSOQL(), 'This test asserts that the criteriaB is equal to the one provided.');
 
 	}
 
@@ -317,12 +317,12 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.inSet(Account.Id, new Set<Id> {idOne, idTwo})
-						.evaluate(new Account(Id = idOne))
+						.evaluate(new Account(Id = idOne)), 'anyone in the set of ids is in the set of accounts'
 		);
 		System.assert(
 				new fflib_Criteria()
 						.inSet('Id', new Set<Id> {idOne, idTwo})
-						.evaluate(new Account(Id = idOne))
+						.evaluate(new Account(Id = idOne)), 'anyone in the set of Id is in the set of Id'
 		);
 	}
 
@@ -332,12 +332,12 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.inSet(Account.NumberOfEmployees, new Set<Integer> {1, 10})
-						.evaluate(new Account(NumberOfEmployees = 1))
+						.evaluate(new Account(NumberOfEmployees = 1)), 'anyone in the system has a number of employees'
 		);
 		System.assert(
 				new fflib_Criteria()
 						.inSet('NumberOfEmployees', new Set<Integer> {1, 10})
-						.evaluate(new Account(NumberOfEmployees = 1))
+						.evaluate(new Account(NumberOfEmployees = 1)), 'Checks if there is a potential potential account in the system.'
 		);
 	}
 
@@ -347,12 +347,12 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.inSet(Account.Type, new Set<String> {A_STRING, HELLO_WORLD})
-						.evaluate(new Account(Type = SAME_STRING))
+						.evaluate(new Account(Type = SAME_STRING)), 'anyone in the set of accounts'
 		);
 		System.assert(
 				new fflib_Criteria()
 						.inSet('Type', new Set<String> {A_STRING, HELLO_WORLD})
-						.evaluate(new Account(Type = SAME_STRING))
+						.evaluate(new Account(Type = SAME_STRING)), 'any type in the set of strings'
 		);
 	}
 
@@ -363,7 +363,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.inSet(Account.Type, new Set<String> {A_STRING, HELLO_WORLD})
 						.evaluate(new Account(Type = ANOTHER_STRING))
-						== FAILING
+						== FAILING, 'anyone else in the system has a type'
 		);
 	}
 
@@ -374,7 +374,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.inSet(Account.Type, new Set<String> {A_STRING, HELLO_WORLD})
 						.evaluate(new Account())
-						== FAILING
+						== FAILING, 'Checks if a specific object in the system is in the set of accounts.'
 		);
 	}
 
@@ -383,8 +383,8 @@ private with sharing class fflib_CriteriaTest
 	{
 		fflib_Criteria criteria = new fflib_Criteria()
 				.notInSet(Account.Name, new Set<String> {A_STRING, HELLO_WORLD});
-		System.assert(criteria.evaluate(new Account(Name = ANOTHER_STRING)));
-		System.assertEquals('Name NOT IN (\'Example\',\'Hello World!\')', criteria.toSOQL());
+		System.assert(criteria.evaluate(new Account(Name = ANOTHER_STRING)), 'Evaluate the account criteria.');
+		System.assertEquals('Name NOT IN (\'Example\',\'Hello World!\')', criteria.toSOQL(), 'Checks that the name not in the criteria is equal to the name of the example.');
 
 	}
 
@@ -395,7 +395,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.notInSet('Name', new Set<String> {A_STRING, HELLO_WORLD})
 						.evaluate(new Account(Name = SAME_STRING))
-						== FAILING
+						== FAILING, 'anyone else in the system has a name'
 		);
 	}
 
@@ -405,12 +405,12 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.notInSet(Account.AnnualRevenue, new Set<Decimal> {1.1, 2.2})
-						.evaluate(new Account(AnnualRevenue = 3.3))
+						.evaluate(new Account(AnnualRevenue = 3.3)), 'anyone in the list of accounts is not in the list of accounts'
 		);
 		System.assert(
 				new fflib_Criteria()
 						.notInSet('AnnualRevenue', new Set<Decimal> {1.1, 2.2})
-						.evaluate(new Account(AnnualRevenue = 3.3))
+						.evaluate(new Account(AnnualRevenue = 3.3)), 'anyone in the set of all units is not in the set of all units'
 		);
 	}
 
@@ -423,12 +423,12 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.notInSet(Account.Id, new Set<Id> {idOne, idTwo})
-						.evaluate(new Account(Id = idThree))
+						.evaluate(new Account(Id = idThree)), 'anyone else in the set of ids is not in the set of accounts'
 		);
 		System.assert(
 				new fflib_Criteria()
 						.notInSet('Id', new Set<Id> {idOne, idTwo})
-						.evaluate(new Account(Id = idThree))
+						.evaluate(new Account(Id = idThree)), 'anyone else in the set of ids'
 		);
 	}
 
@@ -438,12 +438,12 @@ private with sharing class fflib_CriteriaTest
 		System.assert(
 				new fflib_Criteria()
 						.notInSet(Account.NumberOfEmployees, new Set<Integer> {1, 10})
-						.evaluate(new Account(NumberOfEmployees = 2))
+						.evaluate(new Account(NumberOfEmployees = 2)), 'anyone in the system has not employees'
 		);
 		System.assert(
 				new fflib_Criteria()
 						.notInSet('NumberOfEmployees', new Set<Integer> {1, 10})
-						.evaluate(new Account(NumberOfEmployees = 2))
+						.evaluate(new Account(NumberOfEmployees = 2)), 'anyone in the system has not employees'
 		);
 	}
 
@@ -455,7 +455,7 @@ private with sharing class fflib_CriteriaTest
 						.orCriteria()
 						.equalTo(Account.Name, A_STRING)
 						.equalTo(Account.Name, ANOTHER_STRING)
-						.evaluate(new Account(Name = A_STRING))
+						.evaluate(new Account(Name = A_STRING)), 'This method checks if all the fields of Account are equal to A_STRING or ANOT'
 		);
 	}
 
@@ -467,7 +467,7 @@ private with sharing class fflib_CriteriaTest
 						.orCriteria()
 						.equalTo(Account.Name, A_STRING)
 						.equalTo(Account.Name, ANOTHER_STRING)
-						.evaluate(new Account(Name = ANOTHER_STRING))
+						.evaluate(new Account(Name = ANOTHER_STRING)), 'This method checks if all the fields of Account are equal to A_STRING or ANOT'
 		);
 	}
 
@@ -480,7 +480,7 @@ private with sharing class fflib_CriteriaTest
 						.equalTo(Account.Name, A_STRING)
 						.equalTo(Account.Name, ANOTHER_STRING)
 						.evaluate(new Account(Name = HELLO_WORLD))
-						== FAILING
+						== FAILING, 'Checks if a given account has a valid value.'
 		);
 	}
 
@@ -495,7 +495,7 @@ private with sharing class fflib_CriteriaTest
 								.equalTo(Account.AccountNumber, '001')
 								.equalTo(Account.AccountNumber, '002')
 				)
-						.evaluate(new Account(Name = A_STRING, AccountNumber = '001'))
+						.evaluate(new Account(Name = A_STRING, AccountNumber = '001')), 'This method checks if all the fields of Account are equal to all the fields of Account.'
 		);
 	}
 
@@ -510,7 +510,7 @@ private with sharing class fflib_CriteriaTest
 								.equalTo(Account.AccountNumber, '001')
 								.equalTo(Account.AccountNumber, '002')
 				)
-						.evaluate(new Account(Name = A_STRING, AccountNumber = '002'))
+						.evaluate(new Account(Name = A_STRING, AccountNumber = '002')), 'This method checks if all the fields of Account are equal.'
 		);
 	}
 
@@ -526,7 +526,7 @@ private with sharing class fflib_CriteriaTest
 								.equalTo(Account.AccountNumber, '002')
 				)
 						.evaluate(new Account(Name = ANOTHER_STRING, AccountNumber = '001'))
-						== FAILING
+						== FAILING, 'This method checks if all the fields of an object are equal to all the fields of an'
 		);
 	}
 
@@ -543,7 +543,7 @@ private with sharing class fflib_CriteriaTest
 								.equalTo(Account.Name, HELLO_WORLD)
 								.equalTo(Account.AccountNumber, '002')
 				)
-						.evaluate(new Account(Name = ANOTHER_STRING))
+						.evaluate(new Account(Name = ANOTHER_STRING)), 'This method checks if all the fields of a specific object are equal to the values of the'
 		);
 	}
 
@@ -560,7 +560,7 @@ private with sharing class fflib_CriteriaTest
 								.equalTo(Account.Name, HELLO_WORLD)
 								.equalTo(Account.AccountNumber, '002')
 				)
-						.evaluate(new Account(Name = HELLO_WORLD, AccountNumber = '002'))
+						.evaluate(new Account(Name = HELLO_WORLD, AccountNumber = '002')), 'This method checks if all the fields of a given object are equal to the values of the'
 		);
 	}
 
@@ -578,7 +578,7 @@ private with sharing class fflib_CriteriaTest
 								.equalTo(Account.AccountNumber, '002')
 				)
 						.evaluate(new Account(Name = HELLO_WORLD))
-						== FAILING
+						== FAILING, 'This method checks if any of the given objects in the system are equal to the one in'
 		);
 	}
 
@@ -587,7 +587,7 @@ private with sharing class fflib_CriteriaTest
 	{
 		System.assert(
 				new fflib_Criteria()
-						.evaluate(new Account())
+						.evaluate(new Account()), 'Checks if a given Account object is found in the system.'
 		);
 	}
 
@@ -599,7 +599,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.andCriteria()
 						.equalTo(Account.Name, A_STRING)
-						.toSOQL()
+						.toSOQL(), 'This method checks if all the fields of an account object are equal to the other fields of'
 		);
 	}
 
@@ -615,7 +615,7 @@ private with sharing class fflib_CriteriaTest
 										.equalTo(Account.AccountNumber, '001')
 										.equalTo(Account.AccountNumber, '002')
 								)
-						.toSOQL()
+						.toSOQL(), 'This method is used to assert that all the properties of an object are equal to the values'
 		);
 	}
 
@@ -633,18 +633,18 @@ private with sharing class fflib_CriteriaTest
 		// WHEN we run a criteria con the contact record validating related data on the parent Account
 		fflib_Criteria criteriaA = new fflib_Criteria()
 				.equalTo('Account.Name', 'Dummy');
-		System.assert(criteriaA.evaluate(record));
-		System.assertEquals('Account.Name=\'Dummy\'', criteriaA.toSOQL());
+		System.assert(criteriaA.evaluate(record), 'Test if the record matches the criteriaA.');
+		System.assertEquals('Account.Name=\'Dummy\'', criteriaA.toSOQL(), 'Checks that Account. Name = Dummy is equal to criteriaB.');
 
 		fflib_Criteria criteriaB = new fflib_Criteria()
 				.inSet('Account.Name', new Set<String>{'Dummy', A_STRING });
-		System.assert(criteriaB.evaluate(record));
-		System.assertEquals('Account.Name IN (\'Dummy\',\'' + A_STRING + '\')', criteriaB.toSOQL());
+		System.assert(criteriaB.evaluate(record), 'Test if the record is satisfied by the criteriaB.');
+		System.assertEquals('Account.Name IN (\'Dummy\',\'' + A_STRING + '\')', criteriaB.toSOQL(), 'Checks that Account. Name IN criteriaB.');
 
 		fflib_Criteria criteriaC = new fflib_Criteria()
 				.notInSet('Account.Name', new Set<String>{ A_STRING, ANOTHER_STRING });
-		System.assert(criteriaC.evaluate(record) );
-		System.assertEquals('Account.Name NOT IN (\'' + A_STRING + '\',\'' + ANOTHER_STRING + '\')', criteriaC.toSOQL());
+		System.assert(criteriaC.evaluate(record), 'Test if the record matches the criteriaC.' );
+		System.assertEquals('Account.Name NOT IN (\'' + A_STRING + '\',\'' + ANOTHER_STRING + '\')', criteriaC.toSOQL(), 'Checks that Account. Name NOT IN ANOTHER_STRING or ANOTHER_STRING');
 	}
 
 	@IsTest
@@ -663,18 +663,18 @@ private with sharing class fflib_CriteriaTest
 				.equalTo(Contact.LastName, 'Smith')
 				.equalTo(Contact.FirstName, 'John')
 				.equalTo(Contact.Department, 'MIB');
-		System.assert(criteria.evaluate(record));
+		System.assert(criteria.evaluate(record), 'Test if the record matches the criteria.');
 		System.assertEquals('(TRUE AND TRUE) OR (TRUE AND FALSE)', criteria.getEvaluatedFormula(), 'Incorrect formula returned');
 		System.assertEquals(
 				'(LastName=\'Smith\' AND FirstName=\'John\') OR (LastName=\'Smith\' AND Department=\'MIB\')',
-				criteria.toSOQL());
+				criteria.toSOQL(), 'This is a workaround for the fact that the user is not able to access the user s');
 		System.assertEquals(false,
 				new fflib_Criteria()
 						.FormulaCriteria('(1 AND 2) OR (1 AND 3)')
 						.equalTo(Contact.LastName, 'Ford')
 						.equalTo(Contact.FirstName, 'John')
 						.equalTo(Contact.Department, 'MIB')
-						.evaluate(record)
+						.evaluate(record), 'This method is used to test if all fields in the object are equal.'
 		);
 
 	}
@@ -686,13 +686,13 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.FormulaCriteria('1')
 						.equalTo(Contact.LastName, 'Smith')
-						.evaluate(new Contact(LastName = 'Smith'))
+						.evaluate(new Contact(LastName = 'Smith')), 'This method checks if a contact is not null and if it is not an error.'
 		);
 		System.assertEquals(false,
 				new fflib_Criteria()
 						.FormulaCriteria('1')
 						.equalTo(Contact.LastName, 'Ford')
-						.evaluate(new Contact(LastName = 'Smith'))
+						.evaluate(new Contact(LastName = 'Smith')), 'This method checks if all values in the object are equal.'
 		);
 	}
 
@@ -708,7 +708,7 @@ private with sharing class fflib_CriteriaTest
 				new fflib_Criteria()
 						.FormulaCriteria('1')
 						.equalTo('AccountTypo.Industry', 'Energy')
-						.evaluate(record)
+						.evaluate(record), 'This method checks if all fields in the object are equal.'
 		);
 	}
 }

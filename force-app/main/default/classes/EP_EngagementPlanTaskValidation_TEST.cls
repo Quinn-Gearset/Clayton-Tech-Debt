@@ -98,7 +98,7 @@ public class EP_EngagementPlanTaskValidation_TEST {
             update taskTests;
             System.assert(false, 'An EP task with a circular dependency should fail insert.');
         } catch (Exception e) {
-            System.assert(e.getMessage().contains(Label.EPTaskDependency));
+            System.assert(e.getMessage().contains(Label.EPTaskDependency), 'Assert that the EPTaskDependency message is present');
         }
         Test.stopTest();
     }
@@ -122,7 +122,7 @@ public class EP_EngagementPlanTaskValidation_TEST {
             insert crossTemplateTask;
             System.assert(false, 'An EP task should fail if dependent task belongs to a different template.');
         } catch (Exception e) {
-            System.assert(e.getMessage().contains(Label.EPTaskTemplate));
+            System.assert(e.getMessage().contains(Label.EPTaskTemplate), 'Assert that the message contains the label of EPTaskTemplate');
         }
         Test.stopTest();
     }
@@ -148,7 +148,7 @@ public class EP_EngagementPlanTaskValidation_TEST {
             update taskTests[2];
             System.assert(false, 'An EP task should fail if tasks that are dependent on it belongs to a different template.');
         } catch (Exception e) {
-            System.assert(e.getMessage().contains(Label.EPTaskTemplate));
+            System.assert(e.getMessage().contains(Label.EPTaskTemplate), 'Assert that the message contains the label of EPTaskTemplate');
         }
         Test.stopTest();
     }
@@ -174,7 +174,7 @@ public class EP_EngagementPlanTaskValidation_TEST {
             update taskTests[1];
             System.assert(false, 'An EP task should fail when template changes and it is dependent on another task from a different template.');
         } catch (Exception e) {
-            System.assert(e.getMessage().contains(Label.EPTaskTemplate));
+            System.assert(e.getMessage().contains(Label.EPTaskTemplate), 'Assert that the message contains the label of EPTaskTemplate');
         }
         Test.stopTest();
     }

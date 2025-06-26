@@ -57,8 +57,8 @@ private with sharing class LVL_LevelEdit_TEST {
         Test.stopTest();
         
         list<Level__c> listLvl = [Select Id, Name, Target__c from Level__c];
-        system.assertEquals(1, listLvl.size());
-        system.assertEquals('test level', listLvl[0].Name);
+        system.assertEquals(1, listLvl.size(), 'Assert that listLvl is equal to 1');
+        system.assertEquals('test level', listLvl[0].Name, 'asserts that listLvl is the same as the first level');
     }
     
     /*******************************************************************************************************
@@ -79,16 +79,16 @@ private with sharing class LVL_LevelEdit_TEST {
         Test.startTest();
         ctrl.saveAndNew();
         ctrl.lvl.Name = 'test level2';
-        system.assertEquals(200, ctrl.lvl.Minimum_Amount__c);
-        system.assertEquals(null, ctrl.lvl.Maximum_Amount__c);
+        system.assertEquals(200, ctrl.lvl.Minimum_Amount__c, 'asserts that 200 is the minimum amount of the log message');
+        system.assertEquals(null, ctrl.lvl.Maximum_Amount__c, 'assert that the maximum amount is not null');
         PageReference newLevel = ctrl.save();
-        system.assertEquals(true, newLevel.getUrl().contains(ctrl.lvl.Id));
+        system.assertEquals(true, newLevel.getUrl().contains(ctrl.lvl.Id), 'Checks if newLevel is in url of newLevel');
         Test.stopTest();
         
         list<Level__c> listLvl = [Select Id, Name, Target__c from Level__c order by Name];
-        system.assertEquals(2, listLvl.size());
-        system.assertEquals('test level1', listLvl[0].Name);
-        system.assertEquals('test level2', listLvl[1].Name);
+        system.assertEquals(2, listLvl.size(), 'asserts that 2 levels are equal');
+        system.assertEquals('test level1', listLvl[0].Name, 'asserts that level1 is the same as level2');
+        system.assertEquals('test level2', listLvl[1].Name, 'asserts that level2 is the same as level1');
     }
     
     /*******************************************************************************************************
@@ -105,18 +105,18 @@ private with sharing class LVL_LevelEdit_TEST {
         ctrl.lvl.Level_Field__c = 'npo02__LastMembershipLevel__c';
         
         Test.startTest();
-        system.assertNotEquals(0, ctrl.listSOSourceFields.size());
-        system.assertNotEquals(0, ctrl.listSOLevelFields.size());
+        system.assertNotEquals(0, ctrl.listSOSourceFields.size(), 'asserts that all the fields in the list are not empty');
+        system.assertNotEquals(0, ctrl.listSOLevelFields.size(), 'asserts that all the fields in the list are not null');
 
         ctrl.lvl.Target__c = null;
         ctrl.targetChanged();
-        system.assertEquals(0, ctrl.listSOSourceFields.size());
-        system.assertEquals(0, ctrl.listSOLevelFields.size());
+        system.assertEquals(0, ctrl.listSOSourceFields.size(), 'Checks that all the fields in the list are set.');
+        system.assertEquals(0, ctrl.listSOLevelFields.size(), 'Checks that all the fields in the list are set.');
 
         ctrl.lvl.Target__c = 'Account';
         ctrl.targetChanged();
-        system.assertNotEquals(0, ctrl.listSOSourceFields.size());
-        system.assertNotEquals(0, ctrl.listSOLevelFields.size());
+        system.assertNotEquals(0, ctrl.listSOSourceFields.size(), 'asserts that all the fields in the list are not empty');
+        system.assertNotEquals(0, ctrl.listSOLevelFields.size(), 'asserts that all the fields in the list are not null');
         Test.stopTest();
     }
         
@@ -142,12 +142,12 @@ private with sharing class LVL_LevelEdit_TEST {
         ApexPages.StandardController stdCtrl = new ApexPages.StandardController(lvl);
         LVL_LevelEdit_CTRL ctrl = new LVL_LevelEdit_CTRL(stdCtrl);
         
-        system.assertEquals('test level - ' + Label.lblCloned, ctrl.lvl.Name);
-        system.assertEquals(lvl.Target__c, ctrl.lvl.Target__c);
-        system.assertEquals(lvl.Source_Field__c, ctrl.lvl.Source_Field__c);
-        system.assertEquals(lvl.Level_Field__c, ctrl.lvl.Level_Field__c);
-        system.assertEquals(lvl.Minimum_Amount__c, ctrl.lvl.Minimum_Amount__c);
-        system.assertEquals(lvl.Maximum_Amount__c, ctrl.lvl.Maximum_Amount__c);
+        system.assertEquals('test level - ' + Label.lblCloned, ctrl.lvl.Name, 'test level - test level');
+        system.assertEquals(lvl.Target__c, ctrl.lvl.Target__c, 'assertEquals - This is a convenience method for testing.');
+        system.assertEquals(lvl.Source_Field__c, ctrl.lvl.Source_Field__c, 'assertEquals - This function is called when the source field is changed.');
+        system.assertEquals(lvl.Level_Field__c, ctrl.lvl.Level_Field__c, 'assertEquals - This function is used to assert that the Level_Field class is the same');
+        system.assertEquals(lvl.Minimum_Amount__c, ctrl.lvl.Minimum_Amount__c, 'assertEquals - This function is used to assert that the values of the ctrl. lvl are');
+        system.assertEquals(lvl.Maximum_Amount__c, ctrl.lvl.Maximum_Amount__c, 'assertEquals - This function is used to assert that the log level is equal to the maximum');
         
         ctrl.lvl.Minimum_Amount__c = 200;
         ctrl.lvl.Maximum_Amount__c = null;
@@ -157,8 +157,8 @@ private with sharing class LVL_LevelEdit_TEST {
         Test.stopTest();
         
         list<Level__c> listLvl = [Select Id, Name, Target__c from Level__c order by Name];
-        system.assertEquals(2, listLvl.size());
-        system.assertEquals('test level', listLvl[0].Name);
-        system.assertEquals('test level - ' + Label.lblCloned, listLvl[1].Name);
+        system.assertEquals(2, listLvl.size(), 'asserts that 2 levels are equal');
+        system.assertEquals('test level', listLvl[0].Name, 'asserts that listLvl is the same as the first level');
+        system.assertEquals('test level - ' + Label.lblCloned, listLvl[1].Name, 'asserts that listLvl is equal to test level');
     }
 }

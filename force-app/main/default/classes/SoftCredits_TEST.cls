@@ -46,9 +46,9 @@ private class SoftCredits_TEST {
             new AdditionalObjectJSON(additionalObjectStringWithSoftCredits)
             .asSoftCredits();
 
-        System.assertEquals(2, softCredits.size());
-        System.assertEquals(2, softCredits.unprocessed().size());
-        System.assertEquals(2, softCredits.all().size());
+        System.assertEquals(2, softCredits.size(), 'Assert that the number of soft credits is equal to 2.');
+        System.assertEquals(2, softCredits.unprocessed().size(), 'Checks that the number of soft credits is equal to the number of soft credits processed');
+        System.assertEquals(2, softCredits.all().size(), 'Assert that 2 soft credits are present.');
     }
 
     @isTest
@@ -62,8 +62,8 @@ private class SoftCredits_TEST {
             new AdditionalObjectJSON(additionalObjectStringWithGeneralAccountUnits)
             .asSoftCredits();
 
-        System.assertEquals(0, softCredits.size());
-        System.assertEquals(0, softCredits.unprocessed().size());
+        System.assertEquals(0, softCredits.size(), 'Assert that soft credits are not null.');
+        System.assertEquals(0, softCredits.unprocessed().size(), 'Checks that the number of soft credits is the same as the number of soft credits');
     }
 
     @isTest
@@ -77,13 +77,13 @@ private class SoftCredits_TEST {
             new AdditionalObjectJSON(additionalObjectStringWithGeneralAccountUnits)
             .asSoftCredits();
 
-        System.assertEquals(0, softCredits.size());
-        System.assertEquals(0, softCredits.unprocessed().size());
+        System.assertEquals(0, softCredits.size(), 'Assert that soft credits are not null.');
+        System.assertEquals(0, softCredits.unprocessed().size(), 'Checks that the number of soft credits is the same as the number of soft credits');
 
         OpportunityContactRole dummyOpportunityContactRole = new OpportunityContactRole();
         softCredits.add(dummyOpportunityContactRole);
 
-        System.assertEquals(1, softCredits.size());
+        System.assertEquals(1, softCredits.size(), 'Assert that the number of soft credits is equal to 1.');
 
         List<OpportunityContactRole> dummyOpportunityContactRoles = new List<OpportunityContactRole> {
             new OpportunityContactRole(Role='Influencer'),
@@ -92,8 +92,8 @@ private class SoftCredits_TEST {
         };
         softCredits.addAll(dummyOpportunityContactRoles);
 
-        System.assertEquals(4, softCredits.size());
-        System.assertEquals(4, softCredits.all().size());
+        System.assertEquals(4, softCredits.size(), 'Checks that the number of soft credits is equal to 4.');
+        System.assertEquals(4, softCredits.all().size(), 'Checks that all soft credits are available.');
     }
 
     @isTest
@@ -118,8 +118,8 @@ private class SoftCredits_TEST {
         softCredits.addAll(dummyOpportunityContactRoles);
         softCredits.addAll(dummyOpportunityContactRoles);
 
-        System.assertNotEquals(24, softCredits.size());
-        System.assertEquals(4, softCredits.size());
+        System.assertNotEquals(24, softCredits.size(), 'Checks that the number of soft credits is not equal to 24.');
+        System.assertEquals(4, softCredits.size(), 'Checks that the number of soft credits is equal to 4.');
     }
 
     @isTest
@@ -134,7 +134,7 @@ private class SoftCredits_TEST {
         softCredits.add(new OpportunityContactRole(Role='Influencer', ContactId=dummyContactId0));
         softCredits.add(new OpportunityContactRole(Role='Influencer', ContactId=dummyContactId0));
 
-        System.assertEquals(1, softCredits.size());
-        System.assertEquals(ocrId0, softCredits.all()[0].Id);
+        System.assertEquals(1, softCredits.size(), 'Assert that the number of soft credits is equal to 1.');
+        System.assertEquals(ocrId0, softCredits.all()[0].Id, 'Assert that OCR ID 0 is the same as OCR ID 0.');
     }
 }

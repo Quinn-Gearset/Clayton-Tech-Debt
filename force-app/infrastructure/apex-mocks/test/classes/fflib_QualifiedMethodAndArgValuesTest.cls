@@ -15,10 +15,10 @@ public class fflib_QualifiedMethodAndArgValuesTest
         Object obj2 = qmaav.getMockInstance();
         String string1 = qmaav.toString();
 
-        System.assertEquals(qm1, qm2);
-        System.assertEquals(mav1, mav2);
-        System.assertEquals(obj1, obj2);
-        System.assertEquals('Type1.Method1(Integer) with args: [hello]', string1);
+        System.assertEquals(qm1, qm2, 'Assert that two Quaternion objects are equal.');
+        System.assertEquals(mav1, mav2, 'assertEquals - test for equality');
+        System.assertEquals(obj1, obj2, 'Assert equality of two objects.');
+        System.assertEquals('Type1.Method1(Integer) with args: [hello]', string1, 'Asserts that the method signature of Type1 is equal to the given string.');
 
     }
 }

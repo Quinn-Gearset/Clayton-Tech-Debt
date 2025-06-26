@@ -64,7 +64,7 @@ private with sharing class RD_AddDonationsBTN_TEST {
         RD_AddDonationsBTN_CTRL ctrl = new RD_AddDonationsBTN_CTRL(
             new ApexPages.StandardController(rd)
         );
-        System.assertEquals(rd.Id, ctrl.sc.getId());
+        System.assertEquals(rd.Id, ctrl.sc.getId(), 'Test for equality of id and sc.');
 
         PageReference returnPage = ctrl.buttonClick();
         System.assertNotEquals(null, returnPage, 'Page should be redirected on the button click');
@@ -90,7 +90,7 @@ private with sharing class RD_AddDonationsBTN_TEST {
         );
 
         //No redirect should occur on the error message display
-        System.assertEquals(null, ctrl.buttonClick());
+        System.assertEquals(null, ctrl.buttonClick(), 'Checks that the button is clicked.');
 
         UTIL_UnitTestData_TEST.assertPageHasMessage(System.Label.RD_ErrorAddDonationMissingId, ApexPages.Severity.ERROR);
 
@@ -130,7 +130,7 @@ private with sharing class RD_AddDonationsBTN_TEST {
         UTIL_UnitTestData_TEST.assertPageHasMessage(System.Label.RD_ErrorAddDonationLimitedToLegacyMode, ApexPages.Severity.ERROR);
 
         // No redirect should occur on this, even though it should be unreachable
-        System.assertEquals(null, ctrl.buttonClick());
+        System.assertEquals(null, ctrl.buttonClick(), 'Checks that the button is clicked.');
 
         System.assertEquals(false, ctrl.showContinueBtn, 'The continue button should be hidden');
 

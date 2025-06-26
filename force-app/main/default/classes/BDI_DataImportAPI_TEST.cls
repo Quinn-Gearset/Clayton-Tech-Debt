@@ -111,25 +111,25 @@ public with sharing class BDI_DataImportAPI_TEST {
         Test.stopTest();
 
         // verify expected results
-        system.assertEquals(1, listResult.size());
-        system.assertNotEquals(null, listResult[0].apexJobId);
+        system.assertEquals(1, listResult.size(), 'Checks that the listResult size is equal to 1.');
+        system.assertNotEquals(null, listResult[0].apexJobId, 'Assert that the apex job id is not null.');
 
         list<Contact> listCon = [select Id, Name from Contact];
-        system.assertEquals(1, listCon.size());
-        system.assertEquals('c3 C3', listCon[0].Name);
+        system.assertEquals(1, listCon.size(), 'Assert that the list is exactly 1.');
+        system.assertEquals('c3 C3', listCon[0].Name, 'Checks that the name of the list con is equal to the name of the first con in');
 
         listDI = [select Status__c from DataImport__c order by Id];
-        system.assertEquals(3, listDI.size());
-        system.assertEquals(null, listDI[0].Status__c);
-        system.assertEquals(null, listDI[1].Status__c);
-        system.assertEquals(BDI_DataImport_API.bdiImported, listDI[2].Status__c);
+        system.assertEquals(3, listDI.size(), 'Assert that 3 Dis is the same as the list DI.');
+        system.assertEquals(null, listDI[0].Status__c, 'Assert that the listDI is not null.');
+        system.assertEquals(null, listDI[1].Status__c, 'Assert that the listDI is not null.');
+        system.assertEquals(BDI_DataImport_API.bdiImported, listDI[2].Status__c, 'This function is used to assert that the BDI_DataImport_API. bdi');
 
         list<DataImportBatch__c> listBatches = [SELECT Id, Last_Processed_On__c, Records_Failed__c, Records_Successfully_Processed__c FROM DataImportBatch__c];
-        system.assertEquals(2, listBatches.size());
+        system.assertEquals(2, listBatches.size(), 'Asserts that the number of batches is equal to 2.');
         for (DataImportBatch__c batch : listBatches) {
-            system.assertEquals(null, batch.Last_Processed_On__c);
-            system.assertEquals(null, batch.Records_Failed__c);
-            system.assertEquals(null, batch.Records_Successfully_Processed__c);
+            system.assertEquals(null, batch.Last_Processed_On__c, 'This method asserts that batch. Last_Processed_On is null.');
+            system.assertEquals(null, batch.Records_Failed__c, 'This test asserts that the Record_Failed object is null.');
+            system.assertEquals(null, batch.Records_Successfully_Processed__c, 'This method asserts that the records successfully processed have been processed.');
         }
     }
 
@@ -159,30 +159,30 @@ public with sharing class BDI_DataImportAPI_TEST {
         Test.stopTest();
 
         // verify expected results
-        system.assertEquals(1, listResult.size());
-        system.assertNotEquals(null, listResult[0].apexJobId);
+        system.assertEquals(1, listResult.size(), 'Checks that the listResult size is equal to 1.');
+        system.assertNotEquals(null, listResult[0].apexJobId, 'Assert that the apex job id is not null.');
 
         list<Contact> listCon = [select Id, Name from Contact];
-        system.assertEquals(1, listCon.size());
-        system.assertEquals('c1 C1', listCon[0].Name);
+        system.assertEquals(1, listCon.size(), 'Assert that the list is exactly 1.');
+        system.assertEquals('c1 C1', listCon[0].Name, 'Checks that the name of the first list con is equal to the name of the first list');
 
         listDI = [select Status__c from DataImport__c order by Id];
-        system.assertEquals(3, listDI.size());
-        system.assertEquals(BDI_DataImport_API.bdiImported, listDI[0].Status__c);
-        system.assertEquals(null, listDI[1].Status__c);
-        system.assertEquals(null, listDI[2].Status__c);
+        system.assertEquals(3, listDI.size(), 'Assert that 3 Dis is the same as the list DI.');
+        system.assertEquals(BDI_DataImport_API.bdiImported, listDI[0].Status__c, 'This function is used to assert that the BDI_DataImport_API. bdi');
+        system.assertEquals(null, listDI[1].Status__c, 'Assert that the listDI is not null.');
+        system.assertEquals(null, listDI[2].Status__c, 'Assert that listDI is not null.');
 
         list<DataImportBatch__c> listBatches = [SELECT Id, Last_Processed_On__c, Records_Failed__c, Records_Successfully_Processed__c FROM DataImportBatch__c];
-        system.assertEquals(2, listBatches.size());
+        system.assertEquals(2, listBatches.size(), 'Asserts that the number of batches is equal to 2.');
         for (DataImportBatch__c batch : listBatches) {
             if (batch.Id == batch1.Id) {
-                system.assertNotEquals(null, batch.Last_Processed_On__c);
-                system.assertEquals(0, batch.Records_Failed__c);
-                system.assertEquals(1, batch.Records_Successfully_Processed__c);
+                system.assertNotEquals(null, batch.Last_Processed_On__c, 'This method asserts that batch. Last_Processed_On is not null.');
+                system.assertEquals(0, batch.Records_Failed__c, 'This test asserts that the value of Records_Failed is 0.');
+                system.assertEquals(1, batch.Records_Successfully_Processed__c, 'This test asserts that records successfully processed have been processed.');
             } else {
-                system.assertEquals(null, batch.Last_Processed_On__c);
-                system.assertEquals(null, batch.Records_Failed__c);
-                system.assertEquals(null, batch.Records_Successfully_Processed__c);
+                system.assertEquals(null, batch.Last_Processed_On__c, 'This method asserts that batch. Last_Processed_On is null.');
+                system.assertEquals(null, batch.Records_Failed__c, 'This test asserts that the Record_Failed object is null.');
+                system.assertEquals(null, batch.Records_Successfully_Processed__c, 'This method asserts that the records successfully processed have been processed.');
             }
         }
     }
@@ -213,27 +213,27 @@ public with sharing class BDI_DataImportAPI_TEST {
         Test.stopTest();
 
         // verify expected results
-        system.assertEquals(2, listResult.size());
-        system.assertNotEquals(null, listResult[0].apexJobId);
-        system.assertNotEquals(null, listResult[1].apexJobId);
+        system.assertEquals(2, listResult.size(), 'Checks that the listResult size is equal to 2.');
+        system.assertNotEquals(null, listResult[0].apexJobId, 'Assert that the apex job id is not null.');
+        system.assertNotEquals(null, listResult[1].apexJobId, 'Assert that listResult[1].apexJobId is not null.');
 
         list<Contact> listCon = [select Id, Name from Contact order by Id];
-        system.assertEquals(2, listCon.size());
-        system.assertEquals('c1 C1', listCon[0].Name);
-        system.assertEquals('c2 C2', listCon[1].Name);
+        system.assertEquals(2, listCon.size(), 'Assert that 2 lists are equal');
+        system.assertEquals('c1 C1', listCon[0].Name, 'Checks that the name of the first list con is equal to the name of the first list');
+        system.assertEquals('c2 C2', listCon[1].Name, 'Checks that the name of the con column is equal to the name of the con column.');
 
         listDI = [select Status__c from DataImport__c order by Id];
-        system.assertEquals(3, listDI.size());
-        system.assertEquals(BDI_DataImport_API.bdiImported, listDI[0].Status__c);
-        system.assertEquals(BDI_DataImport_API.bdiImported, listDI[1].Status__c);
-        system.assertEquals(null, listDI[2].Status__c);
+        system.assertEquals(3, listDI.size(), 'Assert that 3 Dis is the same as the list DI.');
+        system.assertEquals(BDI_DataImport_API.bdiImported, listDI[0].Status__c, 'This function is used to assert that the BDI_DataImport_API. bdi');
+        system.assertEquals(BDI_DataImport_API.bdiImported, listDI[1].Status__c, 'This function is used to assert that the BDI_DataImport_API. bdi');
+        system.assertEquals(null, listDI[2].Status__c, 'Assert that listDI is not null.');
 
         list<DataImportBatch__c> listBatches = [SELECT Id, Last_Processed_On__c, Records_Failed__c, Records_Successfully_Processed__c FROM DataImportBatch__c];
-        system.assertEquals(2, listBatches.size());
+        system.assertEquals(2, listBatches.size(), 'Asserts that the number of batches is equal to 2.');
         for (DataImportBatch__c batch : listBatches) {
-            system.assertNotEquals(null, batch.Last_Processed_On__c);
-            system.assertEquals(0, batch.Records_Failed__c);
-            system.assertEquals(1, batch.Records_Successfully_Processed__c);
+            system.assertNotEquals(null, batch.Last_Processed_On__c, 'This method asserts that batch. Last_Processed_On is not null.');
+            system.assertEquals(0, batch.Records_Failed__c, 'This test asserts that the value of Records_Failed is 0.');
+            system.assertEquals(1, batch.Records_Successfully_Processed__c, 'This test asserts that records successfully processed have been processed.');
         }
     }
 
@@ -270,20 +270,20 @@ public with sharing class BDI_DataImportAPI_TEST {
 
         // verify expected results
         list<Contact> listCon = [select Id, Name from Contact];
-        system.assertEquals(0, listCon.size());
+        system.assertEquals(0, listCon.size(), 'Assert that listCon is empty.');
 
         listDI = [select Status__c from DataImport__c order by Id];
-        system.assertEquals(3, listDI.size());
-        system.assertEquals(null, listDI[0].Status__c);
-        system.assertEquals(null, listDI[1].Status__c);
-        system.assertEquals(null, listDI[2].Status__c);
+        system.assertEquals(3, listDI.size(), 'Assert that 3 Dis is the same as the list DI.');
+        system.assertEquals(null, listDI[0].Status__c, 'Assert that the listDI is not null.');
+        system.assertEquals(null, listDI[1].Status__c, 'Assert that the listDI is not null.');
+        system.assertEquals(null, listDI[2].Status__c, 'Assert that listDI is not null.');
 
         list<DataImportBatch__c> listBatches = [SELECT Id, Last_Processed_On__c, Records_Failed__c, Records_Successfully_Processed__c FROM DataImportBatch__c];
-        system.assertEquals(2, listBatches.size());
+        system.assertEquals(2, listBatches.size(), 'Asserts that the number of batches is equal to 2.');
         for (DataImportBatch__c batch : listBatches) {
-            system.assertEquals(null, batch.Last_Processed_On__c);
-            system.assertEquals(null, batch.Records_Failed__c);
-            system.assertEquals(null, batch.Records_Successfully_Processed__c);
+            system.assertEquals(null, batch.Last_Processed_On__c, 'This method asserts that batch. Last_Processed_On is null.');
+            system.assertEquals(null, batch.Records_Failed__c, 'This test asserts that the Record_Failed object is null.');
+            system.assertEquals(null, batch.Records_Successfully_Processed__c, 'This method asserts that the records successfully processed have been processed.');
         }
     }
 
@@ -318,10 +318,10 @@ public with sharing class BDI_DataImportAPI_TEST {
 
         // verify expected results
         list<Contact> listCon = [select Id, Name from Contact];
-        system.assertEquals(3, listCon.size());
+        system.assertEquals(3, listCon.size(), 'Assert that 3 lists are in the list');
 
         listDI = [SELECT Id FROM DataImport__c WHERE Status__c = :BDI_DataImport_API.bdiImported];
-        system.assertEquals(3, listDI.size());
+        system.assertEquals(3, listDI.size(), 'Assert that 3 Dis is the same as the list DI.');
     }
 
     /*********************************************************************************************************
@@ -355,10 +355,10 @@ public with sharing class BDI_DataImportAPI_TEST {
 
         // verify expected results
         list<Contact> listCon = [select Id, Name from Contact];
-        system.assertEquals(0, listCon.size());
+        system.assertEquals(0, listCon.size(), 'Assert that listCon is empty.');
 
         listDI = [SELECT Id FROM DataImport__c WHERE Status__c = :BDI_DataImport_API.bdiDryRunValidated];
-        system.assertEquals(3, listDI.size());
+        system.assertEquals(3, listDI.size(), 'Assert that 3 Dis is the same as the list DI.');
     }
 
     /*********************************************************************************************************

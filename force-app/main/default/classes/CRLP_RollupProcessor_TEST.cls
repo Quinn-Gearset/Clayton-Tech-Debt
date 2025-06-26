@@ -54,13 +54,13 @@ private class CRLP_RollupProcessor_TEST {
             .withSummaryRecord(account)
             .withDetailRecords(opps);
 
-        System.assertEquals(Opportunity.SObjectType, processor.detailObjectType);
-        System.assertEquals('AccountId', processor.parentKeyField);
-        System.assertEquals('AccountId', processor.parentRelationshipField);
-        System.assertEquals(null, processor.parentRelationshipObject);
+        System.assertEquals(Opportunity.SObjectType, processor.detailObjectType, 'This method asserts that the operation portunity of the processor is the same as the detail object');
+        System.assertEquals('AccountId', processor.parentKeyField, 'Checks that the parent key field is the account id.');
+        System.assertEquals('AccountId', processor.parentRelationshipField, 'Checks that the Account ID is the same as the parent Account ID.');
+        System.assertEquals(null, processor.parentRelationshipObject, 'Checks that the processor s parentRelationshipObject is null.');
 
-        System.assertEquals(false, processor.isSkewMode);
-        System.assertEquals(false, processor.isOppContactRoleSoftCreditRollup);
+        System.assertEquals(false, processor.isSkewMode, 'Checks if the processor is in skew mode.');
+        System.assertEquals(false, processor.isOppContactRoleSoftCreditRollup, 'Checks if the OPP contact role is soft credit rollup.');
 
         Account updatedAcct = (Account)processor.startRollupProcessing()[0];
         System.assertEquals(1, updatedAcct.npo02__NumberOfClosedOpps__c,
@@ -107,23 +107,23 @@ private class CRLP_RollupProcessor_TEST {
             .withDetailRecords(pscRecords)
             .withJobOptions(options);
 
-        System.assertEquals(OpportunityContactRole.SObjectType, processor.detailObjectType);
-        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('Contact__c'), processor.parentKeyField);
-        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('Contact__c'), processor.parentRelationshipField);
-        System.assertEquals(null, processor.parentRelationshipObject);
+        System.assertEquals(OpportunityContactRole.SObjectType, processor.detailObjectType, 'This method asserts that the opportunity contact role is equal to the detail type of the');
+        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('Contact__c'), processor.parentKeyField, 'Checks that the parent key field of the processor is the same as the parent key field of');
+        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('Contact__c'), processor.parentRelationshipField, 'Checks that the parentRelationshipField of the processor is the same as the one specified in the');
+        System.assertEquals(null, processor.parentRelationshipObject, 'Checks that the processor s parentRelationshipObject is null.');
 
-        System.assertEquals(2, processor.detailRecordsByParentId.get(contact.Id).size());
+        System.assertEquals(2, processor.detailRecordsByParentId.get(contact.Id).size(), 'This method is used to check if the number of detail records in the processor is equal to');
 
-        System.assertEquals(true, processor.isSkewMode);
-        System.assertEquals(true, processor.isOppContactRoleSoftCreditRollup);
+        System.assertEquals(true, processor.isSkewMode, 'Checks if the processor is in skew mode.');
+        System.assertEquals(true, processor.isOppContactRoleSoftCreditRollup, 'Checks if the OPP contact role is soft credit rollup.');
 
         // Run the Account through the Skew Mode processor.
         List<SObject> updatedRecords = processor.startRollupProcessing();
 
-        System.assert(updatedRecords.isEmpty());
-        System.assertEquals(1, processor.getRollupDefsForParent(contact.Id).size());
-        System.assertNotEquals(null, processor.getLastParentIdProcessed());
-        System.assertEquals(true, processor.hasLastParentIdCompleted());
+        System.assert(updatedRecords.isEmpty(), 'This method asserts that there are no updated records.');
+        System.assertEquals(1, processor.getRollupDefsForParent(contact.Id).size(), 'Checks that the number of rollup definitions in the parent contacts is equal to the number of');
+        System.assertNotEquals(null, processor.getLastParentIdProcessed(), 'Assert that the last processed parent id is not null.');
+        System.assertEquals(true, processor.hasLastParentIdCompleted(), 'Checks that the processor has the last completed parent id.');
 
         List<CRLP_Rollup> previousRollupDefs = processor.getRollupDefsForParent(contact.Id);
 
@@ -153,16 +153,16 @@ private class CRLP_RollupProcessor_TEST {
     private static void shouldHandleNullJobOptions() {
         CRLP_RollupProcessor processor = new CRLP_RollupProcessor();
 
-        System.assertEquals(true, processor.options.doSummaryObjectComparison);
-        System.assertEquals(false, processor.options.useRollupDefsByParentIdMap);
+        System.assertEquals(true, processor.options.doSummaryObjectComparison, 'Checks that all objects are equal.');
+        System.assertEquals(false, processor.options.useRollupDefsByParentIdMap, 'Checks that the options are equal.');
 
         CRLP_RollupProcessingOptions.ProcessingOptions options = new CRLP_RollupProcessingOptions.ProcessingOptions();
         options.useRollupDefsByParentIdMap = true;
         options.doSummaryObjectComparison = false;
 
         processor.withJobOptions(options);
-        System.assertEquals(false, processor.options.doSummaryObjectComparison);
-        System.assertEquals(true, processor.options.useRollupDefsByParentIdMap);
+        System.assertEquals(false, processor.options.doSummaryObjectComparison, 'Checks that all objects are equal.');
+        System.assertEquals(true, processor.options.useRollupDefsByParentIdMap, 'Checks if the options are set to use RollupDefsByParentIdMap.');
     }
 
     /**
@@ -197,18 +197,18 @@ private class CRLP_RollupProcessor_TEST {
             .withBatchJobMode(CRLP_RollupProcessingOptions.BatchJobMode.SkewMode)
             .withDetailRecords(pscRecords);
 
-        System.assertEquals(false, processor.isOppAlreadyProcessedForParent(contact.Id, opp.Id));
-        System.assertEquals(false, processor.isOppAlreadyProcessedForParent(contact.Id, oppToIgnore.Id));
-        System.assertEquals(null, processor.getPreviouslyProcessedOppIds(contact.Id));
+        System.assertEquals(false, processor.isOppAlreadyProcessedForParent(contact.Id, opp.Id), 'Checks whether the opp is already processed by this contact.');
+        System.assertEquals(false, processor.isOppAlreadyProcessedForParent(contact.Id, oppToIgnore.Id), 'Checks whether the opp already processed by this contact is the one that was previously processed by');
+        System.assertEquals(null, processor.getPreviouslyProcessedOppIds(contact.Id), 'Checks that the previous opp ids were processed.');
 
         processor.withPreviouslyProcessedOppIdsMap(previouslyProcessedOpps);
 
-        System.assertEquals(false, processor.isOppAlreadyProcessedForParent(contact.Id, opp.Id));
-        System.assertEquals(true, processor.isOppAlreadyProcessedForParent(contact.Id, oppToIgnore.Id));
-        System.assertEquals(1, processor.getPreviouslyProcessedOppIds(contact.Id).size());
+        System.assertEquals(false, processor.isOppAlreadyProcessedForParent(contact.Id, opp.Id), 'Checks whether the opp is already processed by this contact.');
+        System.assertEquals(true, processor.isOppAlreadyProcessedForParent(contact.Id, oppToIgnore.Id), 'Checks whether the opp already processed parent of the oppToIgnore is the same as');
+        System.assertEquals(1, processor.getPreviouslyProcessedOppIds(contact.Id).size(), 'Checks that there are no previously processed OPPs.');
 
         List<SObject> updatedDetailRecords = processor.cleanDetailOppsListForSoftCreditMode(contact.Id, pscRecords);
-        System.assertEquals(1, updatedDetailRecords.size());
+        System.assertEquals(1, updatedDetailRecords.size(), 'Checks that the size of the updatedDetailRecords is equal to 1.');
     }
 
     /**
@@ -678,22 +678,22 @@ private class CRLP_RollupProcessor_TEST {
             .withLastParentDetails(true)
             .withJobOptions(options);
 
-        System.assertEquals(Allocation__c.SObjectType, processor.detailObjectType);
-        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('General_Accounting_Unit__c'), processor.parentKeyField);
-        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('General_Accounting_Unit__c'), processor.parentRelationshipField);
-        System.assertEquals(null, processor.parentRelationshipObject);
+        System.assertEquals(Allocation__c.SObjectType, processor.detailObjectType, 'Tests that the Processor s detail object type equals the one provided.');
+        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('General_Accounting_Unit__c'), processor.parentKeyField, 'This test asserts that the processor s parentKeyField is the same as the one specified in');
+        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('General_Accounting_Unit__c'), processor.parentRelationshipField, 'This test asserts that the processor s parentRelationshipField property is the same as the one specified');
+        System.assertEquals(null, processor.parentRelationshipObject, 'Checks that the processor s parentRelationshipObject is null.');
 
-        System.assertEquals(true, processor.isSkewMode);
+        System.assertEquals(true, processor.isSkewMode, 'Checks if the processor is in skew mode.');
 
         // Run the Account through the Skew Mode processor.
         List<SObject> updatedRecords = processor.startRollupProcessing();
 
         Test.stopTest();
 
-        System.assert(!updatedRecords.isEmpty());
-        System.assertNotEquals(null, processor.getLastParentIdProcessed());
-        System.assertEquals(true, processor.hasLastParentIdCompleted());
-        System.assertEquals(true, processor.lastParentIdRemovedFromUpdatesList);
+        System.assert(!updatedRecords.isEmpty(), 'This method is called by the updateRecord method. It asserts that there are no updated records');
+        System.assertNotEquals(null, processor.getLastParentIdProcessed(), 'Assert that the last processed parent id is not null.');
+        System.assertEquals(true, processor.hasLastParentIdCompleted(), 'Checks that the processor has the last completed parent id.');
+        System.assertEquals(true, processor.lastParentIdRemovedFromUpdatesList, 'This method asserts that the last parent id removed from updates list is the same as the last');
     }
 
     /**
@@ -738,22 +738,22 @@ private class CRLP_RollupProcessor_TEST {
             .withLastParentDetails(false)
             .withJobOptions(options);
 
-        System.assertEquals(Allocation__c.SObjectType, processor.detailObjectType);
-        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('General_Accounting_Unit__c'), processor.parentKeyField);
-        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('General_Accounting_Unit__c'), processor.parentRelationshipField);
-        System.assertEquals(null, processor.parentRelationshipObject);
+        System.assertEquals(Allocation__c.SObjectType, processor.detailObjectType, 'Tests that the Processor s detail object type equals the one provided.');
+        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('General_Accounting_Unit__c'), processor.parentKeyField, 'This test asserts that the processor s parentKeyField is the same as the one specified in');
+        System.assertEquals(UTIL_Namespace.StrAllNSPrefix('General_Accounting_Unit__c'), processor.parentRelationshipField, 'This test asserts that the processor s parentRelationshipField property is the same as the one specified');
+        System.assertEquals(null, processor.parentRelationshipObject, 'Checks that the processor s parentRelationshipObject is null.');
 
-        System.assertEquals(true, processor.isSkewMode);
+        System.assertEquals(true, processor.isSkewMode, 'Checks if the processor is in skew mode.');
 
         // Run the Account through the Skew Mode processor.
         List<SObject> updatedRecords = processor.startRollupProcessing();
 
         Test.stopTest();
 
-        System.assert(!updatedRecords.isEmpty());
-        System.assertNotEquals(null, processor.getLastParentIdProcessed());
-        System.assertEquals(false, processor.hasLastParentIdCompleted());
-        System.assertEquals(false, processor.lastParentIdRemovedFromUpdatesList);
+        System.assert(!updatedRecords.isEmpty(), 'This method is called by the updateRecord method. It asserts that there are no updated records');
+        System.assertNotEquals(null, processor.getLastParentIdProcessed(), 'Assert that the last processed parent id is not null.');
+        System.assertEquals(false, processor.hasLastParentIdCompleted(), 'Checks that the processor has the last completed parent id.');
+        System.assertEquals(false, processor.lastParentIdRemovedFromUpdatesList, 'This method asserts that the last parent id removed from updates list is false.');
     }
 
     // **************************** HELPER METHODS ****************************

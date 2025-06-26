@@ -47,10 +47,10 @@ private class GiftDTO_TEST {
 
         GiftDTO dummyGiftDTO = new GiftDTO(dummyGift);
 
-        System.assertEquals(33.33, dummyGiftDTO.fields.get(DONATION_AMOUNT_FIELD));
-        System.assertEquals(DUMMY_ACCOUNT_ID, dummyGiftDTO.fields.get(ACCOUNT1_IMPORTED_FIELD));
-        System.assertEquals(DUMMY_DATA_IMPORT_ID, dummyGiftDTO.fields.get('Id'));
-        System.assertEquals(2, dummyGiftDTO.softCreditsDTO.softCredits.size());
+        System.assertEquals(33.33, dummyGiftDTO.fields.get(DONATION_AMOUNT_FIELD), 'This method asserts that the DonationAmount field is equal to 33.');
+        System.assertEquals(DUMMY_ACCOUNT_ID, dummyGiftDTO.fields.get(ACCOUNT1_IMPORTED_FIELD), 'This method is used to assert that the AccountID field is set in the DTO.');
+        System.assertEquals(DUMMY_DATA_IMPORT_ID, dummyGiftDTO.fields.get('Id'), 'This test asserts that the DUMMY_DATA_IMPORT_ID is the same as');
+        System.assertEquals(2, dummyGiftDTO.softCreditsDTO.softCredits.size(), 'This method is used to assert that the number of soft credits is 2.');
     }
 
     private static final String DONATION_AMOUNT_FIELD = String.valueOf(DataImport__c.Donation_Amount__c);

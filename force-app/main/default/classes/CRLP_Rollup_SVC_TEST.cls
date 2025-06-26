@@ -52,15 +52,15 @@ private class CRLP_Rollup_SVC_TEST {
                         Rollups_Contact_Batch_Size__c = 20
                 ));
 
-        system.assertEquals(20, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.AccountHardCredit, CRLP_RollupProcessingOptions.BatchJobMode.NonSkewMode));
-        system.assertEquals(20, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.ContactHardCredit, CRLP_RollupProcessingOptions.BatchJobMode.NonSkewMode));
-        system.assertEquals(200, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.AccountHardCredit, CRLP_RollupProcessingOptions.BatchJobMode.SkewMode));
-        system.assertEquals(200, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.ContactHardCredit, CRLP_RollupProcessingOptions.BatchJobMode.SkewMode));
-        system.assertEquals(400, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.GAU, CRLP_RollupProcessingOptions.BatchJobMode.SkewMode));
+        system.assertEquals(20, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.AccountHardCredit, CRLP_RollupProcessingOptions.BatchJobMode.NonSkewMode), 'This function checks that the number of batches in the batch service is equal to 20.');
+        system.assertEquals(20, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.ContactHardCredit, CRLP_RollupProcessingOptions.BatchJobMode.NonSkewMode), 'This function checks that the batch size of the RollupBatch_SVC is equal to');
+        system.assertEquals(200, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.AccountHardCredit, CRLP_RollupProcessingOptions.BatchJobMode.SkewMode), 'This function checks that the batch size of the RollupBatch_SVC is 200.');
+        system.assertEquals(200, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.ContactHardCredit, CRLP_RollupProcessingOptions.BatchJobMode.SkewMode), 'This function checks that the batch size of the RollupBatch_SVC is 200.');
+        system.assertEquals(400, CRLP_RollupBatch_SVC.getBatchSize(CRLP_RollupProcessingOptions.RollupType.GAU, CRLP_RollupProcessingOptions.BatchJobMode.SkewMode), 'This function checks that the number of RollupBatches is equal to 400.');
 
-        system.assertEquals(200, CRLP_Rollup_SVC.getMaxRelatedOppsForNonSkewMode());
-        system.assertEquals(true, CRLP_Rollup_SVC.isCustomizableRollupEngineEnabled);
-        system.assertNotEquals(null, CRLP_Rollup_SVC.getSObjectFieldDescribe('Account', 'Name'));
+        system.assertEquals(200, CRLP_Rollup_SVC.getMaxRelatedOppsForNonSkewMode(), 'Check that the maximum number of related opps for non skew mode is 200.');
+        system.assertEquals(true, CRLP_Rollup_SVC.isCustomizableRollupEngineEnabled, 'Checks that CRLP_Rollup_SVC is enabled.');
+        system.assertNotEquals(null, CRLP_Rollup_SVC.getSObjectFieldDescribe('Account', 'Name'), 'This function asserts that the RollupSVC object has a non - null Account field.');
     }
 
     /**

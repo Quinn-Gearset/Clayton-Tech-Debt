@@ -132,12 +132,12 @@ private class OPP_PrimaryContactRoleMerge_TEST {
         activateTriggers();
 
         Opportunity createdOpportunity = loadOpportunityWithOCRs(opportunity.Id);
-        System.assertEquals(duplPrimaryOcrCount, createdOpportunity.OpportunityContactRoles.size());
+        System.assertEquals(duplPrimaryOcrCount, createdOpportunity.OpportunityContactRoles.size(), 'This method is used to assert that the number of opportunity OCRs is equal');
         for (OpportunityContactRole expectedOCR : createdOpportunity.OpportunityContactRoles) {
             System.assert(
                 expectedOCR.ContactId == contact.Id && 
                 expectedOCR.Role == NON_NPSP_ROLE && 
-                expectedOCR.IsPrimary
+                expectedOCR.IsPrimary, 'System. assert'
             );
         }
         
@@ -147,22 +147,22 @@ private class OPP_PrimaryContactRoleMerge_TEST {
 
         Opportunity expectedOpportunity = loadOpportunityWithPrimaryOCRs(createdOpportunity.Id);
         // Opportunity and the related Opportunity Contact Roles should not change.
-        System.assertEquals(duplPrimaryOcrCount, expectedOpportunity.OpportunityContactRoles.size());
-        System.assertEquals(duplPrimaryOcrCount, createdOpportunity.OpportunityContactRoles.size());
+        System.assertEquals(duplPrimaryOcrCount, expectedOpportunity.OpportunityContactRoles.size(), 'This is a test to make sure that the number of opportunities is the same');
+        System.assertEquals(duplPrimaryOcrCount, createdOpportunity.OpportunityContactRoles.size(), 'This method is used to assert that the number of opportunity OCRs is equal');
         for (OpportunityContactRole expectedOCR : expectedOpportunity.OpportunityContactRoles) {
             System.assert(
                 expectedOCR.ContactId == contact.Id && 
                 expectedOCR.Role == NON_NPSP_ROLE && 
-                expectedOCR.IsPrimary
+                expectedOCR.IsPrimary, 'System. assert'
             );
         }
 
         List<Error__c> errors = getErrors();
         System.assertEquals(1, errors.size(), 'An Error Log should be created: ' + errors);
-        System.assertEquals(String.format(OPP_PrimaryContactRoleMerge.ERROR_MESSAGE, new List<String>{opportunity.Name}), errors[0].Full_Message__c);
-        System.assertEquals(OPP_PrimaryContactRoleMerge.ERROR_CONTEXT, errors[0].Context_Type__c);
-        System.assertEquals(OPP_PrimaryContactRoleMerge.ERROR_SOBJECT, errors[0].Object_Type__c);
-        System.assertEquals(URL.getSalesforceBaseUrl().toExternalForm() + '/' + expectedOpportunity.Id, errors[0].Record_URL__c);
+        System.assertEquals(String.format(OPP_PrimaryContactRoleMerge.ERROR_MESSAGE, new List<String>{opportunity.Name}), errors[0].Full_Message__c, 'Checks that the error message is the same as the one in the list of opportunity');
+        System.assertEquals(OPP_PrimaryContactRoleMerge.ERROR_CONTEXT, errors[0].Context_Type__c, 'This function asserts that the context of the operation is the same as the one specified in the');
+        System.assertEquals(OPP_PrimaryContactRoleMerge.ERROR_SOBJECT, errors[0].Object_Type__c, 'This method is called when the primary contact role merge failed.');
+        System.assertEquals(URL.getSalesforceBaseUrl().toExternalForm() + '/' + expectedOpportunity.Id, errors[0].Record_URL__c, 'This function checks that the Salesforce API URL is the same as the Record URL of the');
     }
 
     /*******************************************************************************************************
@@ -201,10 +201,10 @@ private class OPP_PrimaryContactRoleMerge_TEST {
         activateTriggers();
 
         Opportunity createdOpportunity = loadOpportunityWithOCRs(opportunity.Id);
-        System.assertEquals(6, createdOpportunity.OpportunityContactRoles.size());
+        System.assertEquals(6, createdOpportunity.OpportunityContactRoles.size(), 'Checks that the number of opportunity contacts is equal to 6.');
         for (OpportunityContactRole expectedOCR : createdOpportunity.OpportunityContactRoles) {
-            System.assertEquals(contact.Id, expectedOCR.ContactId);
-            System.assertEquals(true, expectedOCR.IsPrimary);
+            System.assertEquals(contact.Id, expectedOCR.ContactId, 'Checks that contact. Id and contact. ContactId are equal.');
+            System.assertEquals(true, expectedOCR.IsPrimary, 'Checks that the OCR is primary.');
         }
 
         Test.startTest();
@@ -213,9 +213,9 @@ private class OPP_PrimaryContactRoleMerge_TEST {
 
         Opportunity expectedOpportunity = loadOpportunityWithPrimaryOCRs(createdOpportunity.Id);
         // Opportunity should have only 1 primary OCR with role = NPSP Setting Role.
-        System.assertEquals(1, expectedOpportunity.OpportunityContactRoles.size());
-        System.assert(contact.Id == expectedOpportunity.OpportunityContactRoles[0].ContactId);
-        System.assert(NPSP_ROLE == expectedOpportunity.OpportunityContactRoles[0].Role);
+        System.assertEquals(1, expectedOpportunity.OpportunityContactRoles.size(), 'Checks that the number of opportunity contacts is equal to the number of expected opport');
+        System.assert(contact.Id == expectedOpportunity.OpportunityContactRoles[0].ContactId, 'This is a test method to assert that the contact is the same as the expected opport');
+        System.assert(NPSP_ROLE == expectedOpportunity.OpportunityContactRoles[0].Role, 'This is a test to ensure that the user is in the expected opportunity contact roles');
 
         List<Error__c> errors = getErrors();
         System.assertEquals(0, errors.size(), 'No Error Log should be created: ' + errors);
@@ -322,7 +322,7 @@ private class OPP_PrimaryContactRoleMerge_TEST {
             FROM Opportunity
             WHERE Id = :opportunityId
         ];
-        System.assertEquals(1, result.size());
+        System.assertEquals(1, result.size(), 'Asserts that the result set has a size of 1.');
         return result[0];
     }
 
@@ -340,7 +340,7 @@ private class OPP_PrimaryContactRoleMerge_TEST {
             FROM Opportunity
             WHERE Id = :opportunityId
         ];
-        System.assertEquals(1, result.size());
+        System.assertEquals(1, result.size(), 'Asserts that the result set has a size of 1.');
         return result[0];
     }
 

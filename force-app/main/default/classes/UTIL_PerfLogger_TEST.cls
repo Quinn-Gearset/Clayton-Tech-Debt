@@ -68,8 +68,8 @@ public with sharing class UTIL_PerfLogger_TEST {
 
         system.assert(pl2.duration >= duration2 && pl2.duration < (duration1 + duration2), 'log2 duration should be in expected range');
         system.assert(pl1.duration >= (duration1 + duration2), 'log1 duration should be in expected range');
-        system.assertEquals(1, pl1.countCalls);
-        system.assertEquals(1, pl2.countCalls);
+        system.assertEquals(1, pl1.countCalls, 'Asserts that the number of calls to this method is equal to 1.');
+        system.assertEquals(1, pl2.countCalls, 'Asserts that the number of calls to this method is equal to 1.');
     }
 
     /*******************************************************************************************************
@@ -87,14 +87,14 @@ public with sharing class UTIL_PerfLogger_TEST {
         pl1.stop();
 
         UTIL_PerfLogger.PerfLog pl1b = perfLogger.newPerfLog('TEST', 'testLabel1', UTIL_PerfLogger.METHOD);
-        system.assertEquals(pl1, pl1b);
+        system.assertEquals(pl1, pl1b, 'Assert that two Plane objects are equal.');
 
         Long duration1b = wait(1000);
         pl1b.stop();
 
         system.assert(pl1b.duration >= (duration1 + duration1b), 'log1 duration should be in expected range');
-        system.assertEquals(2, pl1b.countCalls);
-        system.assertEquals(1, pl2.countCalls);
+        system.assertEquals(2, pl1b.countCalls, 'This test asserts that the number of calls is equal to 2.');
+        system.assertEquals(1, pl2.countCalls, 'Asserts that the number of calls to this method is equal to 1.');
     }
 
     /*******************************************************************************************************
@@ -115,21 +115,21 @@ public with sharing class UTIL_PerfLogger_TEST {
 
         system.assert(pl2.duration >= duration2 && pl2.duration < (duration1 + duration2), 'log2 duration should be in expected range');
         system.assert(pl1.duration >= (duration1 + duration2), 'log1 duration should be in expected range');
-        system.assertEquals(1, pl1.countCalls);
-        system.assertEquals(1, pl2.countCalls);
+        system.assertEquals(1, pl1.countCalls, 'Asserts that the number of calls to this method is equal to 1.');
+        system.assertEquals(1, pl2.countCalls, 'Asserts that the number of calls to this method is equal to 1.');
 
         perfLogger.stop();
         perfLogger.save();
         if (pl1.getPerfLogSObject() != null) {
             List<SOBject> logs = database.query('SELECT Id, Component__c, Label__c, Duration__c, Parent_Duration__c, Number_of_Calls__c ' +
                 'FROM PerfLog__c ORDER BY Label__c');
-            system.assertEquals(2, logs.size());
-            system.assertEquals('testLabel1', logs[0].get('Label__c'));
-            system.assertEquals('testLabel2', logs[1].get('Label__c'));
-            system.assertEquals(pl1.duration, logs[0].get('Duration__c'));
-            system.assertEquals(pl2.duration, logs[1].get('Duration__c'));
-            system.assertEquals(1, logs[1].get('Number_of_Calls__c'));
-            system.assert(double.valueOf(logs[0].get('Parent_Duration__c')) >= double.valueOf(pl1.duration));
+            system.assertEquals(2, logs.size(), 'Asserts that the number of logs is equal to 2.');
+            system.assertEquals('testLabel1', logs[0].get('Label__c'), 'Assert that testLabel1 is the same as testLabel2');
+            system.assertEquals('testLabel2', logs[1].get('Label__c'), 'This is a hack to make sure that the label2 is the same as the label2');
+            system.assertEquals(pl1.duration, logs[0].get('Duration__c'), 'Checks that the duration of the first log entry equals the duration of the last log entry.');
+            system.assertEquals(pl2.duration, logs[1].get('Duration__c'), 'Checks that the duration of the second log entry equals the one in the logs.');
+            system.assertEquals(1, logs[1].get('Number_of_Calls__c'), 'This function is used to assert that the number of calls is equal to the number of calls');
+            system.assert(double.valueOf(logs[0].get('Parent_Duration__c')) >= double.valueOf(pl1.duration), 'Checks that the parent duration is greater than the duration of the current clock.');
         }
     }
 }

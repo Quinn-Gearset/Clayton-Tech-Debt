@@ -187,11 +187,11 @@ private with sharing class BDI_ContactService_TEST {
 
         // Verify that the Home address fields were correctly copied to the temporarly contact sObject
         Contact d1c1cont = (Contact)di1c1;
-        System.assertEquals('100 Fake Blvd',d1c1cont.MailingStreet);
-        System.assertEquals('California',d1c1cont.MailingState);
-        System.assertEquals('94105',d1c1cont.MailingPostalCode);
-        System.assertEquals('Fakeville',d1c1cont.MailingCity);
-        System.assertEquals('United States',d1c1cont.MailingCountry);
+        System.assertEquals('100 Fake Blvd',d1c1cont.MailingStreet, 'The following lines are identical but the values are not.');
+        System.assertEquals('California',d1c1cont.MailingState, 'Checks that the current state of the California mailbox is the same as the current');
+        System.assertEquals('94105',d1c1cont.MailingPostalCode, 'This file contains only a small test. It is not a problem with the D1C');
+        System.assertEquals('Fakeville',d1c1cont.MailingCity, 'Testing for the fakeville mailing city');
+        System.assertEquals('United States',d1c1cont.MailingCountry, 'Checks that the current country is United States.');
 
         // Construct the mock results. We don't need a d2c1 since it will generate the same contact sObj as d1c1.
         Map<Sobject,UTIL_DuplicateMgmt.MatchDetail[]> mockResults = new Map<Sobject,UTIL_DuplicateMgmt.MatchDetail[]>{
@@ -212,32 +212,32 @@ private with sharing class BDI_ContactService_TEST {
 
         // Confirm that the Import Status and Imported Fields for each DI are updated appropriately
         // for Dry run
-        System.assertEquals(matchCont1.Id, testDi1.Contact1Imported__c);
-        System.assert(testDi1.Contact1ImportStatus__c.contains(match1c.duplicateRuleName));
+        System.assertEquals(matchCont1.Id, testDi1.Contact1Imported__c, 'This test is used to assert that the contacts are imported.');
+        System.assert(testDi1.Contact1ImportStatus__c.contains(match1c.duplicateRuleName), 'Checks if contact 1 import rule is registered.');
 
-        System.assertEquals(matchCont2.Id, testDi1.Contact2Imported__c);
-        System.assert(testDi1.Contact2ImportStatus__c.contains(match2.duplicateRuleName));
+        System.assertEquals(matchCont2.Id, testDi1.Contact2Imported__c, 'This test is used to assert that the contacts are imported.');
+        System.assert(testDi1.Contact2ImportStatus__c.contains(match2.duplicateRuleName), 'Checks if contact2 import status is not duplicated.');
 
-        System.assertEquals(matchCont1.Id, testDi2.Contact1Imported__c);
-        System.assert(testDi2.Contact1ImportStatus__c.contains(match1c.duplicateRuleName));
+        System.assertEquals(matchCont1.Id, testDi2.Contact1Imported__c, 'This test is used to assert that the contacts are imported.');
+        System.assert(testDi2.Contact1ImportStatus__c.contains(match1c.duplicateRuleName), 'Checks if contact 1 import rule is present.');
 
-        System.assertEquals(null, testDi2.Contact2Imported__c);
-        System.assertEquals(System.Label.bdiDryRunNoMatch, testDi2.Contact2ImportStatus__c);
+        System.assertEquals(null, testDi2.Contact2Imported__c, 'This method is used to assert that the contact2 imported class is the same as the contact');
+        System.assertEquals(System.Label.bdiDryRunNoMatch, testDi2.Contact2ImportStatus__c, 'Test - di testDi2. Contact2ImportStatus__c');
 
-        System.assertEquals(null, testDi3.Contact1Imported__c);
-        System.assertEquals(System.Label.bdiDryRunNoMatch, testDi3.Contact1ImportStatus__c);
+        System.assertEquals(null, testDi3.Contact1Imported__c, 'This test is not a realistic test. It is a realistic test.');
+        System.assertEquals(System.Label.bdiDryRunNoMatch, testDi3.Contact1ImportStatus__c, 'Test for the same label as the import status.');
 
-        System.assertEquals(null, testDi3.Contact2Imported__c);
-        System.assertEquals(System.Label.bdiDryRunNoMatch, testDi3.Contact2ImportStatus__c);
+        System.assertEquals(null, testDi3.Contact2Imported__c, 'This test is not a realistic test. It is a realistic test.');
+        System.assertEquals(System.Label.bdiDryRunNoMatch, testDi3.Contact2ImportStatus__c, 'Test for the same label as the bdiDryRunNoMatch label.');
 
-        System.assertEquals(null, testDi4.Contact1Imported__c);
-        System.assertEquals(System.Label.bdiDryRunNoMatch,testDi4.Contact1ImportStatus__c);
+        System.assertEquals(null, testDi4.Contact1Imported__c, 'This test is not a realistic test. It is a test case.');
+        System.assertEquals(System.Label.bdiDryRunNoMatch,testDi4.Contact1ImportStatus__c, 'Test for the same label as the import status.');
 
-        System.assertEquals(null, testDi5.Contact1Imported__c);
-        System.assertEquals(System.Label.bdiDryRunNoMatch,testDi5.Contact1ImportStatus__c);
+        System.assertEquals(null, testDi5.Contact1Imported__c, 'This test is used to assert that Contact1Imported is not null.');
+        System.assertEquals(System.Label.bdiDryRunNoMatch,testDi5.Contact1ImportStatus__c, 'Test for the same label as the import status.');
 
-        System.assertEquals(null, testDi6.Contact1Imported__c);
-        System.assertEquals(System.Label.bdiDryRunNoMatch,testDi6.Contact1ImportStatus__c);
+        System.assertEquals(null, testDi6.Contact1Imported__c, 'This test is not a realistic test. It is a realistic test.');
+        System.assertEquals(System.Label.bdiDryRunNoMatch,testDi6.Contact1ImportStatus__c, 'Test for the same label as the contact1 import status.');
 
         
         // Now re-run the same records in normal mode (no dry run).  
@@ -261,46 +261,46 @@ private with sharing class BDI_ContactService_TEST {
         Set<Id> existingContSet = new Set<Id>{matchCont1.Id,matchCont2.Id};
 
         // DI contact should match on existing contact record
-        System.assertEquals(matchCont1.Id, testDi1.Contact1Imported__c);
-        System.assert(testDi1.Contact1ImportStatus__c.contains(match1c.duplicateRuleName));
+        System.assertEquals(matchCont1.Id, testDi1.Contact1Imported__c, 'This test is used to assert that the contacts are imported.');
+        System.assert(testDi1.Contact1ImportStatus__c.contains(match1c.duplicateRuleName), 'Checks if contact 1 import rule is registered.');
 
         // DI contact should match on existing contact record
-        System.assertEquals(matchCont2.Id, testDi1.Contact2Imported__c);
-        System.assert(testDi1.Contact2ImportStatus__c.contains(match2.duplicateRuleName));
+        System.assertEquals(matchCont2.Id, testDi1.Contact2Imported__c, 'This test is used to assert that the contacts are imported.');
+        System.assert(testDi1.Contact2ImportStatus__c.contains(match2.duplicateRuleName), 'Checks if contact2 import status is not duplicated.');
 
         // DI contact should match on existing contact record
-        System.assertEquals(matchCont1.Id, testDi2.Contact1Imported__c);
-        System.assert(testDi2.Contact1ImportStatus__c.contains(match1c.duplicateRuleName));
+        System.assertEquals(matchCont1.Id, testDi2.Contact1Imported__c, 'This test is used to assert that the contacts are imported.');
+        System.assert(testDi2.Contact1ImportStatus__c.contains(match1c.duplicateRuleName), 'Checks if contact 1 import rule is present.');
         
         // DI should create contact since it doesn't match
-        System.assertNotEquals(null, testDi2.Contact2Imported__c);
-        System.assert(!existingContSet.contains(testDi2.Contact2Imported__c));
-        System.assertEquals(System.Label.bdiCreated, testDi2.Contact2ImportStatus__c);
+        System.assertNotEquals(null, testDi2.Contact2Imported__c, 'This method asserts that the contact2 is not imported.');
+        System.assert(!existingContSet.contains(testDi2.Contact2Imported__c), 'Checks that the contact2 imported class is not already imported.');
+        System.assertEquals(System.Label.bdiCreated, testDi2.Contact2ImportStatus__c, 'Test for the presence of a contact on the contact2 import.');
 
         // DI should create contact since it doesn't match
-        System.assertNotEquals(null, testDi3.Contact1Imported__c);
-        System.assert(!existingContSet.contains(testDi3.Contact1Imported__c));
-        System.assertEquals(System.Label.bdiCreated, testDi3.Contact1ImportStatus__c);
+        System.assertNotEquals(null, testDi3.Contact1Imported__c, 'This test is not a test.');
+        System.assert(!existingContSet.contains(testDi3.Contact1Imported__c), 'Checks that the contact1 imported is not already imported.');
+        System.assertEquals(System.Label.bdiCreated, testDi3.Contact1ImportStatus__c, 'Test for the presence of a contact1 import status.');
 
         // DI should create contact since it doesn't match
-        System.assertNotEquals(null, testDi3.Contact2Imported__c);
-        System.assert(!existingContSet.contains(testDi3.Contact2Imported__c));
-        System.assertEquals(System.Label.bdiCreated, testDi3.Contact2ImportStatus__c);
+        System.assertNotEquals(null, testDi3.Contact2Imported__c, 'This method asserts that the contact2Imported property is not null.');
+        System.assert(!existingContSet.contains(testDi3.Contact2Imported__c), 'Checks that the contact2 imported is not already in the set.');
+        System.assertEquals(System.Label.bdiCreated, testDi3.Contact2ImportStatus__c, 'Test for the presence of a contact on the contact 2 import status.');
         
         // DI should create contact since it doesn't match
-        System.assertNotEquals(null, testDi4.Contact1Imported__c);
-        System.assert(!existingContSet.contains(testDi4.Contact1Imported__c));
-        System.assertEquals(System.Label.bdiCreated,testDi4.Contact1ImportStatus__c);
+        System.assertNotEquals(null, testDi4.Contact1Imported__c, 'This test is not a strict test.');
+        System.assert(!existingContSet.contains(testDi4.Contact1Imported__c), 'Checks that the contact1 imported is not already imported.');
+        System.assertEquals(System.Label.bdiCreated,testDi4.Contact1ImportStatus__c, 'Checks that the label of the Contact1ImportStatus is the same as the label of the');
         
         // DI should create contact since it doesn't match
-        System.assertNotEquals(null, testDi5.Contact1Imported__c);
-        System.assert(!existingContSet.contains(testDi5.Contact1Imported__c));
-        System.assertEquals(System.Label.bdiCreated,testDi5.Contact1ImportStatus__c);
+        System.assertNotEquals(null, testDi5.Contact1Imported__c, 'This test fails if the contact1 is imported.');
+        System.assert(!existingContSet.contains(testDi5.Contact1Imported__c), 'Checks that the contact1 imported is not already imported.');
+        System.assertEquals(System.Label.bdiCreated,testDi5.Contact1ImportStatus__c, 'Checks that the label of the Contact1ImportStatus is the same as the label of the');
         
         // Confirm that the contact in the second identical DI is marked as matched,
         // and has the same id as the first identical DI.
-        System.assertEquals(testDi5.Contact1Imported__c, testDi6.Contact1Imported__c);
-        System.assertEquals(System.Label.bdiMatched,testDi6.Contact1ImportStatus__c);
+        System.assertEquals(testDi5.Contact1Imported__c, testDi6.Contact1Imported__c, 'This test asserts that Contact1Imported__c is the same as Contact1Imported__d');
+        System.assertEquals(System.Label.bdiMatched,testDi6.Contact1ImportStatus__c, 'Assert that the label of the contact 1 import status is the same as the label of the');
 
         Test.stopTest();
     }

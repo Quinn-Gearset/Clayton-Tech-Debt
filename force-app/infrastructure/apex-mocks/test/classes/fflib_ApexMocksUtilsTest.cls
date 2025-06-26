@@ -68,20 +68,20 @@ public class fflib_ApexMocksUtilsTest
 		))[0];
 
 		//Then
-		System.assertEquals(acc.Id, accWithRelationships.Id);
-		System.assertEquals(acc.Name, accWithRelationships.Name);
-		System.assertEquals(acc.NumberOfEmployees, accWithRelationships.NumberOfEmployees);
+		System.assertEquals(acc.Id, accWithRelationships.Id, 'Assert that the Accumulator objects are equal.');
+		System.assertEquals(acc.Name, accWithRelationships.Name, 'Assert that acc and relationships are equal.');
+		System.assertEquals(acc.NumberOfEmployees, accWithRelationships.NumberOfEmployees, 'This method is used to assert that the number of Employees is equal to the number');
 		
 		//Assert relationship fields
 		List<Contact> contacts = accWithRelationships.Contacts;
-		System.assertNotEquals(null, contacts);
-		System.assertEquals(2, contacts.size());
+		System.assertNotEquals(null, contacts, 'Assert that contacts are not null.');
+		System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
 
-		System.assertEquals(contact1.Id, contacts[0].Id);
-		System.assertEquals(contact1.DoNotCall, contacts[0].DoNotCall);
+		System.assertEquals(contact1.Id, contacts[0].Id, 'Assert that contacts are equal.');
+		System.assertEquals(contact1.DoNotCall, contacts[0].DoNotCall, 'This is a test to make sure that contacts are not called by the same method.');
 
-		System.assertEquals(contact2.Id, contacts[1].Id);
-		System.assertEquals(contact2.DoNotCall, contacts[1].DoNotCall);
+		System.assertEquals(contact2.Id, contacts[1].Id, 'Assert that contacts are equal.');
+		System.assertEquals(contact2.DoNotCall, contacts[1].DoNotCall, 'This is a test to make sure that contacts are not called by the same method.');
 	}
 
 	@isTest
@@ -111,20 +111,20 @@ public class fflib_ApexMocksUtilsTest
 		))[0];
 
 		//Then
-		System.assertEquals(acc.Id, accWithRelationships.Id);
-		System.assertEquals(acc.get('Name'), accWithRelationships.get('Name'));
-		System.assertEquals(acc.get('NumberOfEmployees'), accWithRelationships.get('NumberOfEmployees'));
+		System.assertEquals(acc.Id, accWithRelationships.Id, 'Assert that the Accumulator objects are equal.');
+		System.assertEquals(acc.get('Name'), accWithRelationships.get('Name'), 'Assert that the current accession and relationship data are equal.');
+		System.assertEquals(acc.get('NumberOfEmployees'), accWithRelationships.get('NumberOfEmployees'), 'This method is used to assert that the number of Employees is equal to the number');
 
 		//Assert relationship fields
 		List<SObject> contacts = accWithRelationships.getSObjects('Contacts');
-		System.assertNotEquals(null, contacts);
-		System.assertEquals(2, contacts.size());
+		System.assertNotEquals(null, contacts, 'Assert that contacts are not null.');
+		System.assertEquals(2, contacts.size(), 'Checks that the number of contacts is equal to 2.');
 
-		System.assertEquals(contact1.Id, contacts[0].Id);
-		System.assertEquals((Boolean)contact1.get('DoNotCall'), (Boolean)contacts[0].get('DoNotCall'));
+		System.assertEquals(contact1.Id, contacts[0].Id, 'Assert that contacts are equal.');
+		System.assertEquals((Boolean)contact1.get('DoNotCall'), (Boolean)contacts[0].get('DoNotCall'), 'This function is used to assert that the DoNotCall property of contacts is true.');
 
-		System.assertEquals(contact2.Id, contacts[1].Id);
-		System.assertEquals((Boolean)contact2.get('DoNotCall'), (Boolean)contacts[1].get('DoNotCall'));
+		System.assertEquals(contact2.Id, contacts[1].Id, 'Assert that contacts are equal.');
+		System.assertEquals((Boolean)contact2.get('DoNotCall'), (Boolean)contacts[1].get('DoNotCall'), 'This function is used to assert that the two contacts are not called.');
 	}
 
 	@isTest
@@ -151,7 +151,7 @@ public class fflib_ApexMocksUtilsTest
 		} catch (Exception exc) {
 			errorMessage = exc.getMessage();
 		}
-		System.assertEquals('SObject type not found: MyInvalidParentType', errorMessage);
+		System.assertEquals('SObject type not found: MyInvalidParentType', errorMessage, 'Checks that the SObject type is found.');
 	}
 
 	@isTest
@@ -178,7 +178,7 @@ public class fflib_ApexMocksUtilsTest
 		} catch (Exception exc) {
 			errorMessage = exc.getMessage();
 		}
-		System.assertEquals('SObject type not found: MyInvalidChildType', errorMessage);
+		System.assertEquals('SObject type not found: MyInvalidChildType', errorMessage, 'This test asserts that the error message is not the same as the actual error message.');
 	}
 
 	@isTest
@@ -205,7 +205,7 @@ public class fflib_ApexMocksUtilsTest
 		} catch (Exception exc) {
 			errorMessage = exc.getMessage();
 		}
-		System.assertEquals('SObject field not found: MyInvalidField', errorMessage);
+		System.assertEquals('SObject field not found: MyInvalidField', errorMessage, 'This test asserts that the field not found is the same as the error message.');
 	}
 
 	@isTest
@@ -222,7 +222,7 @@ public class fflib_ApexMocksUtilsTest
 		);
 		Test.stopTest();
 
-		System.assertEquals(userId, acc.CreatedById);
+		System.assertEquals(userId, acc.CreatedById, 'Assert that the user id is equal to the created by id.');
 	}
 
 	@isTest
@@ -239,7 +239,7 @@ public class fflib_ApexMocksUtilsTest
 		);
 		Test.stopTest();
 
-		System.assertEquals(lastRefDate, acc.LastReferencedDate);
+		System.assertEquals(lastRefDate, acc.LastReferencedDate, 'This is a test function to assert that the last ref date is the same as the acc');
 	}
 
 	@isTest
@@ -256,6 +256,6 @@ public class fflib_ApexMocksUtilsTest
 		);
 		Test.stopTest();
 
-		System.assertEquals(isDeleted, acc.IsDeleted);
+		System.assertEquals(isDeleted, acc.IsDeleted, 'Assert that the IsDeleted value is equal to the value of the IsDeleted property.');
 	}
 }

@@ -142,8 +142,8 @@ private with sharing class ADDR_CopyAddrHHObjBTN_TEST {
         createCopyAddressBtnCtrl(contactRecord.Id);
 
         UTIL_UnitTestData_TEST.assertPageHasError(System.Label.addrCopyConAddBtnFls);
-        System.assertEquals(Contact.SObjectType, mockPerms.readSObjType);
-        System.assert(mockPerms.readSObjFields.contains(Contact.MailingStreet));
+        System.assertEquals(Contact.SObjectType, mockPerms.readSObjType, 'This test asserts that the mockPerms parameter is equal to the readSObjectType parameter.');
+        System.assert(mockPerms.readSObjFields.contains(Contact.MailingStreet), 'This is a mock');
     }
 
     /***
@@ -156,8 +156,8 @@ private with sharing class ADDR_CopyAddrHHObjBTN_TEST {
         createCopyAddressBtnCtrl(householdRecord.Id);
 
         UTIL_UnitTestData_TEST.assertPageHasError(System.Label.addrCopyConAddBtnFls);
-        System.assertEquals(npo02__Household__c.SObjectType, mockPerms.readSObjType);
-        System.assert(mockPerms.readSObjFields.contains(npo02__Household__c.npo02__MailingStreet__c));
+        System.assertEquals(npo02__Household__c.SObjectType, mockPerms.readSObjType, 'This test asserts that the readSObjectType is the same as the mockPerms. read');
+        System.assert(mockPerms.readSObjFields.contains(npo02__Household__c.npo02__MailingStreet__c), 'This is a test function to assert that the readSObjFields member of the mockPerms');
     }
 
     /***
@@ -170,8 +170,8 @@ private with sharing class ADDR_CopyAddrHHObjBTN_TEST {
         createCopyAddressBtnCtrl(householdRecord.Id);
 
         UTIL_UnitTestData_TEST.assertPageHasError(System.Label.addrCopyConAddBtnFls);
-        System.assertEquals(Contact.SObjectType, mockPerms.updateSObjType);
-        System.assert(mockPerms.updateSObjFields.contains(Contact.MailingStreet));
+        System.assertEquals(Contact.SObjectType, mockPerms.updateSObjType, 'This test asserts that the contact object is the same as the mock object.');
+        System.assert(mockPerms.updateSObjFields.contains(Contact.MailingStreet), 'This method is only used for tests.');
     }
 
     /***
@@ -184,8 +184,8 @@ private with sharing class ADDR_CopyAddrHHObjBTN_TEST {
         createCopyAddressBtnCtrl(contactRecord.Id);
 
         UTIL_UnitTestData_TEST.assertPageHasError(System.Label.addrCopyConAddBtnFls);
-        System.assertEquals(npo02__Household__c.SObjectType, mockPerms.updateSObjType);
-        System.assert(mockPerms.updateSObjFields.contains(npo02__Household__c.npo02__MailingStreet__c));
+        System.assertEquals(npo02__Household__c.SObjectType, mockPerms.updateSObjType, 'This test asserts that the mockPerms object is the same as the one provided.');
+        System.assert(mockPerms.updateSObjFields.contains(npo02__Household__c.npo02__MailingStreet__c), 'This is a test method to assert that the mockPerms. updateSObjFields contains the');
     }
 
     /***
@@ -369,7 +369,7 @@ private with sharing class ADDR_CopyAddrHHObjBTN_TEST {
     * @return void
     */
     private static void verifyNoteRecordCount(Id parentId) {
-        System.assertEquals(1, [SELECT count() FROM Note where ParentID = :parentId]);
+        System.assertEquals(1, [SELECT count() FROM Note where ParentID = :parentId], 'Checks that the number of notes in the parent has been seen.');
     }
 
 }

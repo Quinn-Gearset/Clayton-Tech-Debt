@@ -62,7 +62,7 @@ private with sharing class UTIL_DuplicateMgmt_TEST {
         // Skipping over the asserts if there is an exception message for now since an exception is thrown
         // in orgs that have no active contact duplicate rules.
         if (exceptionMsg == null) {
-            System.assertEquals(200,sObjToMatchResults.size());
+            System.assertEquals(200,sObjToMatchResults.size(), 'Assert that the number of objects returned is 200.');
 
             Integer foundResult = 0;
             for (SObject contSObj : contSObjs) {
@@ -100,11 +100,11 @@ private with sharing class UTIL_DuplicateMgmt_TEST {
         }
         
         // Confirm there are the correct number of keys in the results
-        System.assertEquals(5,sObjToMatchResults.size());
+        System.assertEquals(5,sObjToMatchResults.size(), 'Assert that the number of objects returned is equal to 5.');
 
         UTIL_DuplicateMgmt.MatchDetail[] matchDetailsForFirst = sObjToMatchResults.get(contSobjs[0]);
         // Confirm that the first element has two match details
-        System.assertEquals(2, matchDetailsForFirst.size());
+        System.assertEquals(2, matchDetailsForFirst.size(), 'Assert that 2 matches are available.');
     }
 
     /** 

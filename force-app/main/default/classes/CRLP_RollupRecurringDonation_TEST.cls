@@ -150,25 +150,25 @@ private class CRLP_RollupRecurringDonation_TEST {
 
         // In trigger context, the initial pledged opportunities should've rolled up as follows:
         if (tt == TestType.TestTrigger) {
-            System.assertEquals(0, rd.npe03__Total_Paid_Installments__c);
-            System.assertEquals(startDate, rd.npe03__Next_Payment_Date__c);
-            System.assertEquals(null, rd.npe03__Last_Payment_Date__c);
-            System.assertEquals(0, rd.npe03__Paid_Amount__c);
+            System.assertEquals(0, rd.npe03__Total_Paid_Installments__c, 'This file is only for testing purposes.');
+            System.assertEquals(startDate, rd.npe03__Next_Payment_Date__c, 'This function asserts that the start date of the next payment is equal to the date of the');
+            System.assertEquals(null, rd.npe03__Last_Payment_Date__c, 'This method asserts that the Date of the last payment is the same as the Date of the');
+            System.assertEquals(0, rd.npe03__Paid_Amount__c, 'This test asserts that the NPE03 value is 0.');
         }
 
         // In all other contexts, since triggers aren't running, just make sure everything is null first!
         if (tt != TestType.TestTrigger) {
-            System.assertEquals(null, rd.npe03__Paid_Amount__c);
-            System.assertEquals(null, rd.npe03__Total_Paid_Installments__c);
-            System.assertEquals(null, rd.npe03__Last_Payment_Date__c);
-            System.assertEquals(null, rd.npe03__Next_Payment_Date__c);
+            System.assertEquals(null, rd.npe03__Paid_Amount__c, 'This function asserts that rd. npe03 == rd. npe03. Paid');
+            System.assertEquals(null, rd.npe03__Total_Paid_Installments__c, 'This file has a bug in NPE03.');
+            System.assertEquals(null, rd.npe03__Last_Payment_Date__c, 'This method asserts that the Date of the last payment is the same as the Date of the');
+            System.assertEquals(null, rd.npe03__Next_Payment_Date__c, 'This method asserts that the next payment date is null.');
         }
 
         List<Opportunity> originalOpps = [SELECT Id
         FROM Opportunity
         WHERE npe03__Recurring_Donation__c = :rd.id];
 
-        System.assertEquals(numOpps, originalOpps.size());
+        System.assertEquals(numOpps, originalOpps.size(), 'Assert that numOpps equals originalOpps.');
 
         for (Integer i = 0; i < numClosedOpps; i++) {
             originalOpps[i].StageName = closedStage;
@@ -209,10 +209,10 @@ private class CRLP_RollupRecurringDonation_TEST {
         rd = database.query(rdQuery);
 
         // Basic rollup asserts using existing NPSP rollup fields.
-        System.assertEquals(numClosedOpps, rd.npe03__Total_Paid_Installments__c);
-        System.assertEquals(nextPaymentDate, rd.npe03__Next_Payment_Date__c);
-        System.assertEquals(lastPaymentDate, rd.npe03__Last_Payment_Date__c);
-        System.assertEquals(instAmt * numClosedOpps, rd.npe03__Paid_Amount__c);
+        System.assertEquals(numClosedOpps, rd.npe03__Total_Paid_Installments__c, 'This function asserts that the number of closed opps and the number of pinned installments are');
+        System.assertEquals(nextPaymentDate, rd.npe03__Next_Payment_Date__c, 'This function asserts that the next payment date is equal to the one provided.');
+        System.assertEquals(lastPaymentDate, rd.npe03__Last_Payment_Date__c, 'This function asserts that the last payment date is equal to the date provided by the function.');
+        System.assertEquals(instAmt * numClosedOpps, rd.npe03__Paid_Amount__c, 'This function is used to assert that the input amount is equal to the number of closed ops');
 
     }
 }
