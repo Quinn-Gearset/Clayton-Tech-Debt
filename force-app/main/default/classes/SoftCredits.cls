@@ -41,22 +41,27 @@ public inherited sharing class SoftCredits {
         this.opportunityContactRoles = deduplicate(opportunityContactRoles);
     }
 
+    /* Get all opportunity contact roles. */
     public List<OpportunityContactRole> all() {
         return opportunityContactRoles;
     }
 
+    /* Returns the number of opportunity contact roles. */
     public Integer size() {
         return opportunityContactRoles.size();
     }
 
+    /* Adds the given opportunity contact role to the list of metatags. */
     public void add(OpportunityContactRole opportunityContactRole) {
         addAll(new List<OpportunityContactRole> { opportunityContactRole });
     }
 
+    /* Adds all the opportunity - contact roles from the given list. */
     public void addAll(List<OpportunityContactRole> moreOpportunityContacRoles) {
         this.opportunityContactRoles = deduplicate(moreOpportunityContacRoles);
     }
 
+    /* Get the list of OpportunityContactRoles that are unprocessed. */
     public List<OpportunityContactRole> unprocessed() {
         List<OpportunityContactRole> unprocessed = new List<OpportunityContactRole>();
         for (OpportunityContactRole ocr : this.opportunityContactRoles) {

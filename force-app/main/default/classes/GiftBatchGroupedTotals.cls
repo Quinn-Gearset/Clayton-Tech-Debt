@@ -36,6 +36,7 @@ public inherited sharing class GiftBatchGroupedTotals {
 
     private Map<Id, GiftBatchTotals> giftBatchTotalsByBatchId = new Map<Id, GiftBatchTotals>();
 
+    /* This method returns the totals for the given batch. */
     public Map<String, Integer> totalsFor(Id batchId) {
         if (giftBatchTotalsByBatchId.get(batchId) == null) {
             return new GiftBatchTotals().toMap();

@@ -84,6 +84,7 @@ private class ElevateBatchCapturer_TEST {
     public class GiftBatchServiceMock implements StubProvider {
         public Boolean giftsFailedCaptureForCalled = false;
 
+        /* Handle a method call. */
         public Object handleMethodCall(Object stubbedObject,
             String stubbedMethodName,
             Type returnType,

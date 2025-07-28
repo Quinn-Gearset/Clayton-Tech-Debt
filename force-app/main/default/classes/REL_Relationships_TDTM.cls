@@ -443,6 +443,7 @@ public class REL_Relationships_TDTM extends TDTM_Runnable {
         }
     }
 
+    /* Synchronize the fields of a relationship. */
     public static void syncRelationshipFields(npe4__Relationship__c sourceRel, npe4__Relationship__c targetRel) {
             for (String f : syncFields) {
                 targetRel.put(f,sourceRel.get(f));

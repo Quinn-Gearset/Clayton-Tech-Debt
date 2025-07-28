@@ -41,21 +41,25 @@ public class BDI_BatchNumberSettingsController {
     static AN_AutoNumberService autoNumberService =
             new AN_AutoNumberService(sObjType);
 
+    /* Checks if the current user is an admin. */
     @AuraEnabled
     public static Boolean isSysAdmin() {
         return STG_Panel.runningUserIsAdmin();
     }
 
+    /* Activates the auto number service. */
     @AuraEnabled
     public static void activate(String autoNumberId) {
         autoNumberService.activate(autoNumberId);
     }
 
+    /* Deactivate the auto number. */
     @AuraEnabled
     public static void deactivate(String autoNumberId) {
         autoNumberService.deactivate(autoNumberId);
     }
 
+    /* Save an auto number. */
     @AuraEnabled
     public static AutoNumber__c save(String autoNumber) {
         try {
@@ -65,6 +69,7 @@ public class BDI_BatchNumberSettingsController {
         }
     }
 
+    /* Get the list of auto numbers for the given object type. */
     @AuraEnabled
     public static List<AutoNumber__c> getAutoNumbers() {
         return autoNumberService.getAutoNumbers(sObjType);

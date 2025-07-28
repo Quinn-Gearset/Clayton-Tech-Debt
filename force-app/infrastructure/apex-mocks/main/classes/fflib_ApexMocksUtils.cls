@@ -155,7 +155,8 @@ public class fflib_ApexMocksUtils
 			this.childrenParser.nextToken(); // Consume the outer array token
 		}
 
-		public void nextToken(JSONParser fromStream, Integer depth, JSONGenerator toStream) {
+		/* This method is called to advance the current token in the stream to the next token in the */
+  public void nextToken(JSONParser fromStream, Integer depth, JSONGenerator toStream) {
 			// Inject children?
 			JSONToken currentToken = fromStream.getCurrentToken();
 			if(depth == 2 && currentToken == JSONToken.END_OBJECT ) {

@@ -80,44 +80,54 @@ public inherited sharing class NPSP_Contact {
         this.contact = contact;
     }
 
+    /* Get the record. */
     public Contact getRecord() {
         return this.contact;
     }
 
+    /* Sets the current address of the contact. */
     public void setCurrentAddress(IAddress npspAddress) {
         contact.Current_Address__c = npspAddress.getRecord()?.Id;
         mailingAddress(npspAddress);
     }
 
+    /* Returns true if this contact is undeliverable. */
     public Boolean isUndeliverableMailingAddress() {
         return contact.Undeliverable_Address__c;
     }
 
+    /* setUndeliverableMailingAddress This sets the value of the Undeliverable_Address */
     public void setUndeliverableMailingAddress(Boolean isUndeliverableAddress) {
         contact.Undeliverable_Address__c = isUndeliverableAddress;
     }
 
+    /* Returns true if the Undeliverable_Address attribute of this Contact has changed. */
     public Boolean isUndeliverableStatusChanged() {
         return (isNewContact() && contact.Undeliverable_Address__c) || (!isNewContact() &&
             contact.Undeliverable_Address__c != oldContact.Undeliverable_Address__c);
     }
 
+    /* Returns true if this is a new contact. */
     public Boolean isNewContact() {
         return oldContact == null;
     }
 
+    /* Returns the current address of the contact. */
     public Id currentAddress() {
         return contact.Current_Address__c;
     }
 
+    /* Returns true if the contact has an address override. */
     public Boolean hasAddressOverride() {
         return contact.is_Address_Override__c;
     }
 
+    /* Returns true if the account has changed. */
     public Boolean accountChanged() {
         return oldContact?.AccountId != contact.AccountId;
     }
 
+    /* Checks if the address of the contact has changed. */
     public Boolean isAddressChanged() {
         Boolean addressEmpty = isContactAddressEmpty();
         return oldContact == null ? !addressEmpty :
@@ -125,6 +135,7 @@ public inherited sharing class NPSP_Contact {
             (!addressEmpty && primaryAddressTypeChanged());
     }
 
+    /* Returns true if the address is empty. */
     public Boolean isAddressEmpty() {
         return isContactAddressEmpty();
     }
@@ -146,38 +157,47 @@ public inherited sharing class NPSP_Contact {
         return isEmpty;
     }
 
+    /* Returns true if the address override has changed. */
     public Boolean addressOverrideChanged() {
         return contact.is_Address_Override__c != oldContact?.is_Address_Override__c;
     }
 
+    /* Returns true if the current address has changed. */
     public Boolean currentAddressChanged() {
         return contact.Current_Address__c != oldContact?.Current_Address__c;
     }
 
+    /* Returns true if the primary address type has changed. */
     public Boolean primaryAddressTypeChanged() {
         return primaryAddressType(contact) != primaryAddressType(oldContact);
     }
 
+    /* Returns true if the contact has an account. */
     public Boolean hasAccount() {
         return contact.AccountId != null;
     }
 
+    /* Returns true if the Household and Account are different. */
     public Boolean householdAndAccountDiffer() {
         return contact.HHId__c != contact.AccountId;
     }
 
+    /* Returns the account id of the contact. */
     public Id accountId() {
         return contact.AccountId;
     }
 
+    /* Returns the household id of this contact. */
     public Id householdId() {
         return contact.npo02__household__c;
     }
 
+    /* Returns true if the current node is moving to an anew household. */
     public Boolean isMovingToANewHousehold() {
         return accountChanged() && !isAddressEmpty();
     }
 
+    /* mailingAddress - The address of the contact. */
     public void mailingAddress(IAddress anAddress) {
         addressService.copyOntoSObject(
                 anAddress, contact, 'Mailing',
@@ -185,10 +205,12 @@ public inherited sharing class NPSP_Contact {
         this.mailingAddress = anAddress;
     }
 
+    /* Returns the mailing address. */
     public IAddress mailingAddress() {
         return mailingAddress != null ? mailingAddress : new NPSP_Address(contact);
     }
 
+    /* Returns true if this address is different from the given address. */
     public Boolean mailingAddressIsDifferentFrom(IAddress other) {
        return mailingAddress().isDifferentIncludingLatLong(other) ||
                isCurrentAddressDifferent(other) ||
@@ -216,26 +238,32 @@ public inherited sharing class NPSP_Contact {
                 ('npe01__Primary_Address_Type__c');
     }
 
+    /* Returns an NPSP_Contact object that contains the old version of the contact. */
     public NPSP_Contact oldVersion() {
         return new NPSP_Contact(oldContact);
     }
 
+    /* Returns true if the address override has been changed and the node has no address override. */
     public Boolean isClearingAddressOverride() {
         return (addressOverrideChanged() && !hasAddressOverride());
     }
 
+    /* Returns true if the current version of the JVM had an address. */
     public Boolean hadAnAddress() {
         return oldVersion().currentAddress() != null;
     }
 
+    /* Returns true if the fields of the fields that have been changed have been added to the address */
     public Boolean noAddressFieldsChanged() {
         return !isAddressChanged() && hadAnAddress();
     }
 
+    /* Returns true if the current address is changing to an anew address. */
     public Boolean isChangingToANewCurrentAddress() {
         return isCurrentAddressChanged() && hasAddressOverride();
     }
 
+    /* Returns true if the current address has changed. */
     public Boolean isCurrentAddressChanged() {
         return currentAddressChanged() && currentAddress() != null;
     }

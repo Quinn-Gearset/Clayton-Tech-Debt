@@ -260,7 +260,8 @@ private with sharing class fflib_SObjectSelectorTest
 			super(includeFieldSetFields, enforceCRUD, enforceFLS, sortSelectFields);
 		}
 		
-		public List<Schema.SObjectField> getSObjectFieldList()
+		/* This method returns a list of all the fields in the schema. */
+  public List<Schema.SObjectField> getSObjectFieldList()
 		{
 			return new List<Schema.SObjectField> {
 				Account.Name,
@@ -270,12 +271,14 @@ private with sharing class fflib_SObjectSelectorTest
 			};
 		}
 		
-		public Schema.SObjectType getSObjectType()
+		/* Get the schema object type. */
+  public Schema.SObjectType getSObjectType()
 		{
 			return Account.sObjectType;
 		}
 		
-		public override String getOrderBy()
+		/* This method is overridden to provide the order by for the query. */
+  public override String getOrderBy()
 		{
 			String sortVal = 'AnnualRevenue ASC NULLS LAST';
 			if (isAccountNameSortable) {

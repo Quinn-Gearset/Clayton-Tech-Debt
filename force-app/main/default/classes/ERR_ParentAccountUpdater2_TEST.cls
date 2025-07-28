@@ -36,6 +36,7 @@
 @isTest
 public with sharing class ERR_ParentAccountUpdater2_TEST extends TDTM_Runnable {
 	
+    /* This method is called when a new list of objects is added to the database. It is */
     public override DmlWrapper run(List<SObject> newlist, List<SObject> oldlist, 
      TDTM_Runnable.Action triggerAction, Schema.DescribeSObjectResult objResult) {
          
