@@ -108,23 +108,28 @@ public inherited sharing class NPSP_Address implements IAddress {
         address.MailingCountry__c = household.npo02__MailingCountry__c;
     }
 
+    /* Returns a new NPSP_Address object with the old version of the address. */
     public NPSP_Address oldVersion() {
         return new NPSP_Address(oldAddress);
     }
 
+    /* Is this calendar a seasonal. */
     public Boolean isSeasonal() {
         return (this.address.Seasonal_Start_Month__c != null && this.address.Seasonal_Start_Day__c != null &&
                 this.address.Seasonal_End_Month__c != null && this.address.Seasonal_End_Day__c != null);
     }
 
+    /* get the record. */
     public Address__c getRecord() {
         return address;
     }
 
+    /* Household ID. */
     public String householdId() {
         return this.address.Household_Account__c;
     }
 
+    /* Is this address match fuzzy with the given address? */
     public Boolean isAddressMatchFuzzyWith(NPSP_Address other) {
         Address__c otherAddress = other.getRecord();
 
@@ -165,6 +170,7 @@ public inherited sharing class NPSP_Address implements IAddress {
         return cChange <= 1;
     }
 
+    /* Get the key for the address field. */
     public String getAddrKey() {
         String strKey =
                 strCleanup(address.MailingStreet__c) +
@@ -196,6 +202,7 @@ public inherited sharing class NPSP_Address implements IAddress {
         return str;
     }
 
+    /* Checks if this address overlaps with the given address. */
     public Boolean overlapsWith(NPSP_Address other) {
         if (other == null) {
             return false;
@@ -232,25 +239,31 @@ public inherited sharing class NPSP_Address implements IAddress {
         }
 
     }
+    /* Returns the id of the resource. */
     public Id getId() {
         return address.Id;
     }
+    /* The seasonal end day. */
     public String endDay() {
         return address.Seasonal_End_Day__c;
     }
 
+    /* The seasonal end month. */
     public String endMonth() {
         return address.Seasonal_End_Month__c;
     }
 
+    /* The start day of the season. */
     public String startDay() {
         return address.Seasonal_Start_Day__c;
     }
 
+    /* The calendar start month. */
     public String startMonth() {
         return address.Seasonal_Start_Month__c;
     }
 
+    /* IsEqualToIncludingAddressType - This method is a convenience method that is used to */
     public Boolean isEqualToIncludingAddressType(IAddress other, Boolean includeAddressType) {
         if (address == null || other == null) {
             return false;
@@ -273,6 +286,7 @@ public inherited sharing class NPSP_Address implements IAddress {
         );
     }
 
+    /* Checks if this address is different in excluding the LatLong. */
     public Boolean isDifferentIncludingLatLong(IAddress other) {
         Boolean isDifferent = (
                         !isEqualToIncludingAddressType(other, false) ||
@@ -302,22 +316,27 @@ public inherited sharing class NPSP_Address implements IAddress {
         }
     }
 
+    /* Returns true if the certificate is the default certificate. */
     public Boolean isDefault() {
         return address.Default_Address__c;
     }
 
+    /* Returns true if this address is the new default address. */
     public Boolean isNewDefault() {
         return address.Default_Address__c && (address.Default_Address__c != oldAddress.Default_Address__c);
     }
 
+    /* Returns true if the default address has changed. */
     public Boolean hasDefaultChanged() {
         return address.Default_Address__c != oldAddress?.Default_Address__c;
     }
 
+    /* Set the address as the default. */
     public void setAsDefault() {
         address.Default_Address__c = true;
     }
 
+    /* Returns the type of the address. */
     public String getType() {
         return address.Address_Type__c;
     }
@@ -362,6 +381,7 @@ public inherited sharing class NPSP_Address implements IAddress {
         return val;
     }
 
+    /* Check for partial sequencer errors. */
     public void checkForPartialSeasonalErrors() {
         if (isPartialSeasonalAddr()) {
             this.address.addError(Label.addrSeasonalPartial);
@@ -481,11 +501,13 @@ public inherited sharing class NPSP_Address implements IAddress {
                         address.Seasonal_End_Day__c != oldAddress.Seasonal_End_Day__c);
     }
 
+    /* Returns true if the address changes should be made to contact overrides. */
     public Boolean shouldSyncAddressChangesToContactOverrides() {
         return !isDefault() && (!isEqualToIncludingAddressType(oldVersion(), TRUE) ||
                 isUndeliverableStatusChanged());
     }
 
+    /* shouldSyncAddressToHouseholdAccountAndContacts - Check if the address should be sync */
     public Boolean shouldSyncAddressToHouseholdAccountAndContacts() {
         if (oldAddress == null) {
             return isDefault() ||
@@ -506,30 +528,37 @@ public inherited sharing class NPSP_Address implements IAddress {
         return false;
     }
 
+    /* Set the state of the mailing. */
     public void state(String state) {
         address.MailingState__c = state;
     }
 
+    /* Get the mailing street. */
     public String street() {
         return address?.MailingStreet__c;
     }
 
+    /* Street 2. */
     public String street2() {
         return address?.MailingStreet2__c;
     }
 
+    /* The city of the user. */
     public String city() {
         return address?.MailingCity__c;
     }
 
+    /* Returns the current state of the current mailing session. */
     public String state() {
         return address?.MailingState__c;
     }
 
+    /* Get the postal code. */
     public String postalCode() {
         return address?.MailingPostalCode__c;
     }
 
+    /* Returns the country of the mailing address. */
     public String country() {
         return address?.MailingCountry__c;
     }

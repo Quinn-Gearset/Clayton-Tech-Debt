@@ -95,6 +95,7 @@ public with sharing class RD2_EntryFormController {
         private set;
     }
 
+    /* This method initializes the initial view. */
     @AuraEnabled
     public static RD2_AppView getInitialView(Id parentId, Id recordId) {
         RD2_AppView view = new RD2_AppView();
@@ -143,10 +144,12 @@ public with sharing class RD2_EntryFormController {
         return view;
     }
 
+    /* get the default installment period */
     public String getDefaultInstallmentPeriod() {
         return UTIL_Describe.getDefaultSelectOption('npe03__Recurring_Donation__c', 'npe03__Installment_Period__c');
     }
 
+    /* Get the installment period picklist. */
     public List<Map<String, String>> getInstallmentPeriodPicklistValues() {
         return UTIL_Describe.getLightningSelectOptions('npe03__Recurring_Donation__c','npe03__Installment_Period__c');
     }
@@ -245,6 +248,7 @@ public with sharing class RD2_EntryFormController {
         return fields;
     }
 
+    /* Save a recurring donation. */
     @AuraEnabled
     public static SaveResultView saveRecurringDonation(RD2_SaveRequest saveRequest) {
         npe03__Recurring_Donation__c rd = saveRequest.removeNonCreateableCustomFields().toRecord();

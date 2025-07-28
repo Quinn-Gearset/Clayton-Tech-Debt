@@ -78,6 +78,7 @@ public virtual class CRLP_VRollupHandler implements CRLP_Rollup_SVC.IRollupHandl
      * Logic is implemented by the class that extends this virtual class
      */
     public virtual void initRollup() { }
+    /* Process rollups. */
     public virtual void processRollups(List<SObject> details, Map<Id, List<SObject>> childRecordsByDetailId) { }
 
     // ===================================================================================================
@@ -101,6 +102,7 @@ public virtual class CRLP_VRollupHandler implements CRLP_Rollup_SVC.IRollupHandl
         }
     }
 
+    /* Sets the RollupTypeFilter for this resource. */
     public void setRollupTypeFilter(CRLP_RollupProcessingOptions.RollupTypeFilter jobFilter) {
         this.jobFilter = jobFilter;
     }
@@ -159,6 +161,7 @@ public virtual class CRLP_VRollupHandler implements CRLP_Rollup_SVC.IRollupHandl
      * evaluation succeeded.
      */
     protected Set<Id> processedOppIds = new Set<Id>();
+    /* Returns the set of opp ids that have been rolled up. */
     public Set<Id> getListOfOppIdsThatWereRolledUp() {
         return processedOppIds;
     }

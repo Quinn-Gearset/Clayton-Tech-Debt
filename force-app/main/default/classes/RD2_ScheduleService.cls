@@ -1072,6 +1072,7 @@ public without sharing class RD2_ScheduleService {
     */
     public class PauseScheduleHandler {
 
+        /* Creates a pause schedule. */
         public RecurringDonationSchedule__c createPauseSchedule(String statusReason, Date startDate, Date endDate, Id rdId) {
             return new RecurringDonationSchedule__c(
                 RecurringDonation__c = rdId,
@@ -1082,6 +1083,7 @@ public without sharing class RD2_ScheduleService {
             );
         }
 
+        /* Create Elevate pause schedule. */
         public ElevatePauseSchedule createElevatePauseSchedule (RD2_PauseForm_CTRL.PauseData pause, RD2_RecurringDonation rd) {
             return new ElevatePauseSchedule(rd.getSObject().RecurringDonationSchedules__r, pause);
         }
@@ -1194,6 +1196,7 @@ public without sharing class RD2_ScheduleService {
             update schedule;
         }
 
+        /* Deactivate pause schedule. */
         public RecurringDonationSchedule__c deactivatePauseSchedule(RecurringDonationSchedule__c schedule) {
             schedule.EndDate__c = currentDate.addDays(-1);
             return schedule;

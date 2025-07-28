@@ -51,12 +51,14 @@ public virtual with sharing class fflib_Ids
 		super(getIdList(objects));
 	}
 
-	public Set<Id> getIds()
+	/* Get the ids of this node. */
+ public Set<Id> getIds()
 	{
 		return new Set<Id>(getIdList());
 	}
 
-	public List<Id> getIdList()
+	/* Get the list of all ids in the database. */
+ public List<Id> getIdList()
 	{
 		return (List<Id>) getObjects();
 	}

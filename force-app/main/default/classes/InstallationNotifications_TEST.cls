@@ -153,26 +153,31 @@ private class InstallationNotifications_TEST {
       private Boolean withAudience = true;
       private String audience = '';
 
+      /* WithRedirectURL - If true redirects to the specified URL. */
       public InstallationNotificationsSelectorMock withRedirectURL (Boolean withRedirectURL) {
          this.withRedirectURL = withRedirectURL;
          return this;
       }
 
+      /* Allows you to specify whether the notification is active or not. */
       public InstallationNotificationsSelectorMock withIsActive (Boolean isActive) {
          this.isActive = isActive;
          return this;
       }
 
+      /* WithAudience - If true the expectation is not met. */
       public InstallationNotificationsSelectorMock withAudience (Boolean withAudience) {
          this.withAudience = withAudience;
          return this;
       }
 
+      /* Allows you to specify the audience of the installation notifications. */
       public InstallationNotificationsSelectorMock withAudienceImpl (String audience) {
          this.audience = audience;
          return this;
       }
 
+       /* This method is called when a method is called from a stubbed object. */
        public Object handleMethodCall(
            Object stubbedObject,
            String stubbedMethodName,
@@ -220,6 +225,7 @@ private class InstallationNotifications_TEST {
 
 
    private class CustomNotificationTypeSelectorMock implements StubProvider {
+      /* This method is called when a method is stubbed. It is called by the generated code */
       public Object handleMethodCall(
           Object stubbedObject,
           String stubbedMethodName,

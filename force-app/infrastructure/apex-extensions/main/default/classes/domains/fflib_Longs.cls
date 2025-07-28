@@ -46,12 +46,14 @@ public virtual with sharing class fflib_Longs
 		super(elements);
 	}
 
-	public Set<Long> getLongSet()
+	/* Get Long Set */
+ public Set<Long> getLongSet()
 	{
 		return new Set<Long>(getLongs());
 	}
 
-	public List<Long> getLongs()
+	/* Get the list of Long objects in the database. */
+ public List<Long> getLongs()
 	{
 		return (List<Long>) getObjects();
 	}

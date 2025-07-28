@@ -82,6 +82,7 @@ public without sharing class UTIL_Currency implements UTIL_Currency.Interface_x 
      * - This is as accurate an assessment as we can get within Apex at present.
      */
     private Boolean isACMEnabled = null;
+    /* Is Advanced Currency Management enabled? */
     public Boolean isAdvancedCurrencyManagementEnabled() {
         if (isACMEnabled == null) {
             isACMEnabled = false;

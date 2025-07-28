@@ -59,6 +59,7 @@ public without sharing class RD2_CommitmentService {
         return response;
     }
 
+    /* handleCommitmentPause - handle an elevate commitment pause request. */
     public UTIL_Http.Response handleCommitmentPause(RD2_ScheduleService.ElevatePauseSchedule schedule, RD2_RecurringDonation rd) {
         UTIL_Http.Response response;
 
@@ -74,6 +75,7 @@ public without sharing class RD2_CommitmentService {
         return response;
     }
 
+    /* remove a specific commitment from the recurring donation */
     public UTIL_Http.Response handleRemoveCommitmentPause(RD2_RecurringDonation rd) {
         UTIL_Http.Response response;
 

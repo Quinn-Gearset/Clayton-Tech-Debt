@@ -144,6 +144,7 @@ private with sharing class RD2_SustainerEvaluationService_TEST {
             this.contactsWithClosedRd = contactsWithClosedRd;
         }
 
+        /* Handle a method call. */
         public Object handleMethodCall(Object stubbedObject,
             String stubbedMethodName,
             Type returnType,
