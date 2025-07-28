@@ -31,8 +31,8 @@ private with sharing class fflib_SObjectSelectorTest
 	static testMethod void testGetSObjectName()
 	{
 		Testfflib_SObjectSelector selector = new Testfflib_SObjectSelector();
-		system.assertEquals(null, selector.getSObjectFieldSetList());
-		system.assertEquals('Account',selector.getSObjectName());
+		system.assertEquals(null, selector.getSObjectFieldSetList(), 'Assert that the SObjectFieldSetList is equal to the SObjectFieldSetList in');
+		system.assertEquals('Account',selector.getSObjectName(), 'Asserts that the current object is the Account object.');
 	}
 	
 	static testMethod void testSelectSObjectsById()
@@ -51,13 +51,13 @@ private with sharing class fflib_SObjectSelectorTest
 		List<Account> result = (List<Account>) selector.selectSObjectsById(idSet);		
 		Test.stopTest();
 		
-		system.assertEquals(2,result.size());
-		system.assertEquals('TestAccount2',result[0].Name);
-		system.assertEquals('A2',result[0].AccountNumber);
-		system.assertEquals(12345.67,result[0].AnnualRevenue);
-		system.assertEquals('TestAccount1',result[1].Name);
-		system.assertEquals('A1',result[1].AccountNumber);
-		system.assertEquals(76543.21,result[1].AnnualRevenue);
+		system.assertEquals(2,result.size(), 'Asserts that the number of results is equal to 2.');
+		system.assertEquals('TestAccount2',result[0].Name, 'TestAccount2 - TestAccount2');
+		system.assertEquals('A2',result[0].AccountNumber, 'Checks that the account number is equal to A2.');
+		system.assertEquals(12345.67,result[0].AnnualRevenue, 'Assert that 12345. 67 is the same as the annual revenue.');
+		system.assertEquals('TestAccount1',result[1].Name, 'TestAccount1 is the same as TestAccount2');
+		system.assertEquals('A1',result[1].AccountNumber, 'Checks that the account number is equal to A1.');
+		system.assertEquals(76543.21,result[1].AnnualRevenue, 'Checks that the result of a query is equal to the annual revenue of the last');
 	}
 
 	static testMethod void testQueryLocatorById()
@@ -79,15 +79,15 @@ private with sharing class fflib_SObjectSelectorTest
 
 		System.assert(true, iteratorResult.hasNext());
 		Account account = (Account) iteratorResult.next();
-		system.assertEquals('TestAccount2',account.Name);
-		system.assertEquals('A2',account.AccountNumber);
-		system.assertEquals(12345.67,account.AnnualRevenue);				
+		system.assertEquals('TestAccount2',account.Name, 'TestAccount2 - TestAccount2');
+		system.assertEquals('A2',account.AccountNumber, 'Asserts that A2 is the same as AccountNumber.');
+		system.assertEquals(12345.67,account.AnnualRevenue, 'Checks that 12345. 67 is the same as the annual revenue.');				
 		System.assert(true, iteratorResult.hasNext());
 		account = (Account) iteratorResult.next();
-		system.assertEquals('TestAccount1',account.Name);
-		system.assertEquals('A1',account.AccountNumber);
-		system.assertEquals(76543.21,account.AnnualRevenue);				
-		System.assertEquals(false, iteratorResult.hasNext());
+		system.assertEquals('TestAccount1',account.Name, 'TestAccount1 is the same as TestAccount2');
+		system.assertEquals('A1',account.AccountNumber, 'Asserts that A1 is the same as AccountNumber.');
+		system.assertEquals(76543.21,account.AnnualRevenue, 'Checks if the value of the constant is the annual revenue value.');				
+		System.assertEquals(false, iteratorResult.hasNext(), 'This method asserts that the result of the iterator is false.');
 	}
 	
 	static testMethod void testAssertIsAccessible()
@@ -114,7 +114,7 @@ private with sharing class fflib_SObjectSelectorTest
 			}
 			catch(fflib_SObjectDomain.DomainException e)
 			{
-				System.assertEquals('Permission to access an Account denied.',e.getMessage());
+				System.assertEquals('Permission to access an Account denied.',e.getMessage(), 'This method will assert that the given exception is not a PermissionDenied exception.');
 			}
 		}
 	}
@@ -162,18 +162,18 @@ private with sharing class fflib_SObjectSelectorTest
 	static testMethod void testDefaultConfig()
 	{
 		Testfflib_SObjectSelector selector = new Testfflib_SObjectSelector();
-		System.assertEquals(false, selector.isEnforcingFLS());
-		System.assertEquals(true, selector.isEnforcingCRUD());
-		System.assertEquals(false, selector.isIncludeFieldSetFields());
+		System.assertEquals(false, selector.isEnforcingFLS(), 'Checks that the selector is enforcing FLS.');
+		System.assertEquals(true, selector.isEnforcingCRUD(), 'Checks if the CRUD is enforcing.');
+		System.assertEquals(false, selector.isIncludeFieldSetFields(), 'Checks that the selector is not including field set fields.');
 		
-		System.assertEquals('Account', selector.getSObjectName());
-		System.assertEquals(Account.SObjectType, selector.getSObjectType2());
+		System.assertEquals('Account', selector.getSObjectName(), 'Asserts that the account object is the same as the account object in the selector.');
+		System.assertEquals(Account.SObjectType, selector.getSObjectType2(), 'Assert that account selector is equal to account selector.');
 	}
 	
 	private static void assertFieldListString(String fieldListString, String prefix) {
 		String prefixString = (!String.isBlank(prefix)) ? prefix + '.' : '';
 		List<String> fieldList = fieldListString.split(',{1}\\s?');
-		System.assertEquals(UserInfo.isMultiCurrencyOrganization() ? 5 : 4, fieldList.size()); 
+		System.assertEquals(UserInfo.isMultiCurrencyOrganization() ? 5 : 4, fieldList.size(), 'Checks that the size of the fieldList is equal to the number of fields in the fieldList.'); 
 		Set<String> fieldSet = new Set<String>();
 		fieldSet.addAll(fieldList);
 		String expected = prefixString + 'AccountNumber';
@@ -213,7 +213,7 @@ private with sharing class fflib_SObjectSelectorTest
 		soqlMatcher.matches();
 
 		List<String> actualSelectFields = soqlMatcher.group(1).deleteWhiteSpace().split(',');
-		System.assertEquals(expectedSelectFields, new Set<String>(actualSelectFields));
+		System.assertEquals(expectedSelectFields, new Set<String>(actualSelectFields), 'Assert that the select fields are the same.');
 	}
 
 	// Test case of ordering with NULLS LAST option passed into the ordering method
@@ -245,7 +245,7 @@ private with sharing class fflib_SObjectSelectorTest
 		Set<String> expected = new Set<String>(expectedSelectFields.deleteWhiteSpace().split(','));
 		Set<String> actual = new Set<String>(actualSelectFields.deleteWhiteSpace().split(','));
 
-		System.assertEquals(expected, actual);
+		System.assertEquals(expected, actual, 'Assert that two strings are equal.');
 	}
 	
 	private class Testfflib_SObjectSelector extends fflib_SObjectSelector

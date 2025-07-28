@@ -52,11 +52,11 @@ public with sharing class ERR_ExceptionData_TEST {
             String JSONString = ERR_ExceptionData.createExceptionWrapperJSONString(e);
 
             ERR_ExceptionData deserializedWrapper = (ERR_ExceptionData)JSON.deserialize(JSONString, ERR_ExceptionData.class);
-            System.assertEquals(null, deserializedWrapper.errorMessage);
-            System.assertEquals(1, deserializedWrapper.DMLErrorFieldNameMapping.size());
-            System.assertEquals(1, deserializedWrapper.DMLErrorMessageMapping.size());
-            System.assertEquals(Label.exceptionRequiredField + ' [Name]', deserializedWrapper.DMLErrorMessageMapping.values()[0]);
-            System.assertEquals('Name', deserializedWrapper.DMLErrorFieldNameMapping.values()[0][0]);
+            System.assertEquals(null, deserializedWrapper.errorMessage, 'Assert that the deserializedWrapper. errorMessage is not null.');
+            System.assertEquals(1, deserializedWrapper.DMLErrorFieldNameMapping.size(), 'Checks that the size of the field mappings is equal to 1.');
+            System.assertEquals(1, deserializedWrapper.DMLErrorMessageMapping.size(), 'Checks that the size of the mapping array is equal to 1.');
+            System.assertEquals(Label.exceptionRequiredField + ' [Name]', deserializedWrapper.DMLErrorMessageMapping.values()[0], 'Checks that the exceptionRequiredField label is equal to the first mapping of the DML error');
+            System.assertEquals('Name', deserializedWrapper.DMLErrorFieldNameMapping.values()[0][0], 'Checks that the name of the field is the same as the name of the deserialized field.');
 
         }
     }
@@ -76,9 +76,9 @@ public with sharing class ERR_ExceptionData_TEST {
 
             ERR_ExceptionData deserializedWrapper = (ERR_ExceptionData)JSON.deserialize(JSONString, ERR_ExceptionData.class);
 
-            System.assertEquals(divideByZeroError, deserializedWrapper.errorMessage);
-            System.assertEquals(0, deserializedWrapper.DMLErrorFieldNameMapping.size());
-            System.assertEquals(0, deserializedWrapper.DMLErrorMessageMapping.size());
+            System.assertEquals(divideByZeroError, deserializedWrapper.errorMessage, 'This test asserts that the message returned by the wrapped object is equal to the message returned by');
+            System.assertEquals(0, deserializedWrapper.DMLErrorFieldNameMapping.size(), 'Checks that the size of the field mappings is 0.');
+            System.assertEquals(0, deserializedWrapper.DMLErrorMessageMapping.size(), 'Checks that the size of the DMLErrorMessageMapping array is equal to the size of the');
         }
     }
 

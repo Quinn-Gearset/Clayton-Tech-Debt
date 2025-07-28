@@ -72,9 +72,9 @@ public with sharing class AllocationParent_TEST {
         AllocationParent parent = new AllocationParent(testCampaign.id);
 
         DescribeSObjectResult describe = Campaign.SObjectType.getDescribe();
-        System.assertEquals(describe.getKeyPrefix(), parent.getKeyPrefix());
-        System.assertEquals(describe.getName(), parent.getObjectApiName());
-        System.assertEquals(describe.getLabelPlural(), parent.getObjectLabelPlural());
+        System.assertEquals(describe.getKeyPrefix(), parent.getKeyPrefix(), 'Assert that describe and parent key prefixes are the same.');
+        System.assertEquals(describe.getName(), parent.getObjectApiName(), 'Assert that describe and parent objectApiName are the same.');
+        System.assertEquals(describe.getLabelPlural(), parent.getObjectLabelPlural(), 'Asserts that the labels of the describe object are the same as the labels of the parent object');
     }
 
     @IsTest
@@ -82,7 +82,7 @@ public with sharing class AllocationParent_TEST {
         Campaign testCampaign = insertCampaign();
         AllocationParent parent = new AllocationParent(testCampaign.id);
 
-        System.assertEquals('fooCampaign', parent.getRecordName());
+        System.assertEquals('fooCampaign', parent.getRecordName(), 'Checks that the record name of the parent record matches the record name of the parent.');
     }
 
     @IsTest
@@ -92,14 +92,14 @@ public with sharing class AllocationParent_TEST {
 
         System.assertEquals(
             String.valueOf(Allocation__c.SObjectType.fields.Campaign__c),
-            parentCampaign.getAllocationLookupApiName());
+            parentCampaign.getAllocationLookupApiName(), 'Method assertEquals.');
 
         Opportunity testOpportunity = insertOpportunity(10);
         AllocationParent parentOpportunity = new AllocationParent(testOpportunity.id);
 
         System.assertEquals(
             String.valueOf(Allocation__c.SObjectType.fields.Opportunity__c),
-            parentOpportunity.getAllocationLookupApiName());
+            parentOpportunity.getAllocationLookupApiName(), 'Method assertEquals.');
     }
 
     @IsTest
@@ -107,7 +107,7 @@ public with sharing class AllocationParent_TEST {
         Opportunity testOpportunity = insertOpportunity(10);
         AllocationParent parentOpportunity = new AllocationParent(testOpportunity.id);
 
-        System.assert(parentOpportunity.isOpportunity());
+        System.assert(parentOpportunity.isOpportunity(), 'Assert that the parent Opportunity is Opportunity.');
     }
 
     @IsTest
@@ -115,7 +115,7 @@ public with sharing class AllocationParent_TEST {
         npe01__OppPayment__c testPayment = insertPayment(10);
         AllocationParent parentPayment = new AllocationParent(testPayment.id);
 
-        System.assert(parentPayment.isPayment());
+        System.assert(parentPayment.isPayment(), 'This method asserts that the parent payment is a payment.');
     }
 
     @IsTest
@@ -123,12 +123,12 @@ public with sharing class AllocationParent_TEST {
         npe01__OppPayment__c testPayment = insertPayment(100);
         AllocationParent parentPayment = new AllocationParent(testPayment.id);
 
-        System.assert(parentPayment.hasAmountField());
+        System.assert(parentPayment.hasAmountField(), 'This method asserts that the parent payment has a valid amount field.');
 
         Opportunity testOpportunity = insertOpportunity(10);
         AllocationParent parentOpportunity = new AllocationParent(testOpportunity.id);
 
-        System.assert(parentOpportunity.hasAmountField());
+        System.assert(parentOpportunity.hasAmountField(), 'This method asserts that the parent opportunity has a amount field.');
     }
 
     @IsTest
@@ -136,7 +136,7 @@ public with sharing class AllocationParent_TEST {
         Opportunity testOpportunity = insertOpportunity(0);
         AllocationParent parentOpportunity = new AllocationParent(testOpportunity.id);
 
-        System.assert(parentOpportunity.isOpportunityWithZeroAmount());
+        System.assert(parentOpportunity.isOpportunityWithZeroAmount(), 'Checks that the parent opportunity is a opportunity with zero amount.');
     }
 
     @IsTest
@@ -144,11 +144,11 @@ public with sharing class AllocationParent_TEST {
         npe01__OppPayment__c testPayment = insertPayment(100);
         AllocationParent parentPayment = new AllocationParent(testPayment.id);
 
-        System.assertEquals(100, parentPayment.getAmount());
+        System.assertEquals(100, parentPayment.getAmount(), 'This method is called when the parent payment amount is equal to 100.');
 
         Opportunity testOpportunity = insertOpportunity(5);
         AllocationParent parentOpportunity = new AllocationParent(testOpportunity.id);
 
-        System.assertEquals(5, parentOpportunity.getAmount());
+        System.assertEquals(5, parentOpportunity.getAmount(), 'Test that the parentOpportunity is equal to 5.');
     }
 }

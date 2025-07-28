@@ -56,15 +56,15 @@ public class UTIL_RecordTypes_TEST {
             Id rtId = UTIL_RecordTypes.getRecordTypeId(Opportunity.SObjectType, oppRTs[0].Name);
             System.assertEquals(oppRTs[0].Id, rtId, oppRTs[0].Name);
             String rtName = UTIL_RecordTypes_API.GetRecordTypeName('Opportunity', oppRTs[0].Id);
-            System.assertEquals(oppRTs[0].Name, rtName);
+            System.assertEquals(oppRTs[0].Name, rtName, 'Assert that the RT name is the same as the first RT in the OPP RTs');
 
             // try all the functions
             Set<Id> oppRtSet = UTIL_RecordTypes_API.GetRecordTypeIdSet('Opportunity',
                 new Set<String>{'Bogus', 'Master', 'Grant', oppRTs[0].Name});
-            System.assert(oppRtSet.size() > 0);
+            System.assert(oppRtSet.size() > 0, 'Assert that there is no oppRtSet.');
 
             List<SelectOption> rtOptions = UTIL_RecordTypes.getRecordTypesForSelectList(Opportunity.SObjectType);
-            System.assert(rtOptions.size() > 0);
+            System.assert(rtOptions.size() > 0, 'Assert that there are no options in the command line.');
         }
     }
 
@@ -78,13 +78,13 @@ public class UTIL_RecordTypes_TEST {
         Set<Id> setId = UTIL_RecordTypes.GetRecordTypeIdSet(Opportunity.SObjectType, setStr);
 
         if (idGift!=null) {
-            System.assert(setId.contains(idGift));
+            System.assert(setId.contains(idGift), 'Assert that the idGift is set.');
 
             System.assertEquals(UTIL_RecordTypes.getRecordTypeNameForGiftsTests(Opportunity.SObjectType),
-                UTIL_RecordTypes.GetRecordTypeName(Opportunity.SObjectType, idGift));
+                UTIL_RecordTypes.GetRecordTypeName(Opportunity.SObjectType, idGift), 'Tests that the record type name of the given Gift is the same as the one in');
 
             List<SelectOption> listSO = UTIL_RecordTypes.getRecordTypesForSelectList(Opportunity.SObjectType);
-            System.assert(listSO.IsEmpty() == false);
+            System.assert(listSO.IsEmpty() == false, 'Test if the list is empty.');
         }
     }
 
