@@ -47,7 +47,7 @@ public class CRLP_RollupUI_TEST {
     private static void getRollupDefinitionsReturnsTheCurrentRollups() {
         mockRollupCMTValues();
         List<CRLP_RollupUI_SVC.RollupTableItem> rollups = CRLP_RollupUI_SVC.getRollupDefinitions();
-        System.assertEquals(2,rollups.size());
+        System.assertEquals(2,rollups.size(), 'Asserts that the number of rollups is equal to 2.');
     }
 
     /*********************************************************************************************************
@@ -57,7 +57,7 @@ public class CRLP_RollupUI_TEST {
     private static void getFilterGroupsReturnsTheCurrentFilterGroups() {
         mockRollupCMTValues();
         List<CRLP_RollupUI_SVC.FilterGroupTableItem> filterGroups = CRLP_RollupUI_SVC.getFilterGroupDefinitions();
-        System.assertEquals(1,filterGroups.size());
+        System.assertEquals(1,filterGroups.size(), 'Checks that the filter groups are the same.');
     }
 
     /*********************************************************************************************************
@@ -131,7 +131,7 @@ public class CRLP_RollupUI_TEST {
         } catch (Exception e) {
             errMessage = e.getMessage();
         }
-        System.assert(!errMessage.contains(scriptError));
+        System.assert(!errMessage.contains(scriptError), 'Assert that scriptError is not a scriptError in the error message.');
         System.assertEquals('', errMessage, 'No exception is returned when Einstein is enabled');
     }
 
@@ -209,7 +209,7 @@ public class CRLP_RollupUI_TEST {
         List<Map<String,String>> options = CRLP_RollupUI_SVC.getFilterRuleConstantPicklistOptions(objectName, fieldName);
         List<PicklistEntry> picklistValues = Schema.getGlobalDescribe().get('Opportunity').getDescribe().fields.getMap().get('StageName').getDescribe().getPicklistValues();
 
-        System.assertEquals(picklistValues.size(), options.size());
+        System.assertEquals(picklistValues.size(), options.size(), 'Assert that the number of options and picklist values are the same.');
     }
 
     /*********************************************************************************************************
@@ -228,14 +228,14 @@ public class CRLP_RollupUI_TEST {
             // we know this will fail because the rollupName is not found
             CRLP_RollupUI_SVC.getDeploymentStatus('jobId', 'rollupName', 'Rollup', 'create');
         } catch (Exception e) {
-            System.assertNotEquals(null, e.getMessage());
+            System.assertNotEquals(null, e.getMessage(), 'Assert that the message of the exception is not null.');
         }
 
         try {
             // we know this will fail because the filterName is not found
             CRLP_RollupUI_SVC.getDeploymentStatus('jobId', 'rollupName', 'Filter', 'edit');
         } catch (Exception e) {
-            System.assertNotEquals(null, e.getMessage());
+            System.assertNotEquals(null, e.getMessage(), 'Assert that the message of the exception is not null.');
         }
     }
 
@@ -255,12 +255,12 @@ public class CRLP_RollupUI_TEST {
         String resultString = CRLP_RollupUI_SVC.getDeploymentStatus('jobId', recordName, 'Rollup', 'edit');
         CRLP_RollupUI_SVC.DeploymentResult response = (CRLP_RollupUI_SVC.DeploymentResult)JSON.deserialize(resultString, CRLP_RollupUI_SVC.DeploymentResult.class);
 
-        System.assertNotEquals(null, response);
+        System.assertNotEquals(null, response, 'Assert that the response is not null.');
 
         resultString = CRLP_RollupUI_SVC.getDeploymentStatus('jobId', recordName, 'Filter', 'edit');
         response = (CRLP_RollupUI_SVC.DeploymentResult)JSON.deserialize(resultString, CRLP_RollupUI_SVC.DeploymentResult.class);
 
-        System.assertNotEquals(null, response);
+        System.assertNotEquals(null, response, 'Assert that the response is not null.');
 
     }
 

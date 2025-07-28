@@ -40,25 +40,25 @@ private with sharing class UTIL_Namespace_TEST {
     @isTest 
     private static void TestNamespacePrefixFixups() {
         if (UTIL_Namespace.getNamespace()!='') {
-            system.assertNotEquals('',UTIL_Namespace.getNamespace());
-            system.assertEquals(UTIL_Namespace.getNamespace()+'__foo', UTIL_Namespace.StrTokenNSPrefix('foo'));
-            system.assertEquals(UTIL_Namespace.getNamespace()+'__foo__c', UTIL_Namespace.StrTokenNSPrefix('foo__c'));     
-            system.assertEquals('foo', UTIL_Namespace.StrAllNSPrefix('foo'));
-            system.assertEquals(UTIL_Namespace.getNamespace()+'__foo__c', UTIL_Namespace.StrAllNSPrefix('foo__c'));
-            system.assertEquals(UTIL_Namespace.getNamespace()+'__foo_bar_baz__c', UTIL_Namespace.StrAllNSPrefix('foo_bar_baz__c'));
-            system.assertEquals('select '+UTIL_Namespace.getNamespace()+'__foo__c, bar, '+UTIL_Namespace.getNamespace()+'__baz1__c, '+UTIL_Namespace.getNamespace()+'__biz_buz__c from Contact', UTIL_Namespace.StrAllNSPrefix('select foo__c, bar, baz1__c, biz_buz__c from Contact'));
+            system.assertNotEquals('',UTIL_Namespace.getNamespace(), 'Assert that UTIL_Namespace is not empty.');
+            system.assertEquals(UTIL_Namespace.getNamespace()+'__foo', UTIL_Namespace.StrTokenNSPrefix('foo'), 'asserts that UTIL_Namespace is the same as the namespace prefix');
+            system.assertEquals(UTIL_Namespace.getNamespace()+'__foo__c', UTIL_Namespace.StrTokenNSPrefix('foo__c'), 'asserts that UTIL_Namespace is the same as UTIL_Namespace.');     
+            system.assertEquals('foo', UTIL_Namespace.StrAllNSPrefix('foo'), 'asserts that foo is the same as foo namespace');
+            system.assertEquals(UTIL_Namespace.getNamespace()+'__foo__c', UTIL_Namespace.StrAllNSPrefix('foo__c'), 'asserts that UTIL_Namespace is the same as the UTIL_Namespace prefix');
+            system.assertEquals(UTIL_Namespace.getNamespace()+'__foo_bar_baz__c', UTIL_Namespace.StrAllNSPrefix('foo_bar_baz__c'), 'asserts that UTIL_Namespace is the same as foo_bar_baz');
+            system.assertEquals('select '+UTIL_Namespace.getNamespace()+'__foo__c, bar, '+UTIL_Namespace.getNamespace()+'__baz1__c, '+UTIL_Namespace.getNamespace()+'__biz_buz__c from Contact', UTIL_Namespace.StrAllNSPrefix('select foo__c, bar, baz1__c, biz_buz__c from Contact'), 'asserts that contact table contains all values');
         } else {
-            system.assertEquals('foo', UTIL_Namespace.StrTokenNSPrefix('foo'));
-            system.assertEquals('foo__c', UTIL_Namespace.StrTokenNSPrefix('foo__c'));     
-            system.assertEquals('foo', UTIL_Namespace.StrAllNSPrefix('foo'));
-            system.assertEquals('foo__c', UTIL_Namespace.StrAllNSPrefix('foo__c'));
-            system.assertEquals('foo_bar_baz__c', UTIL_Namespace.StrAllNSPrefix('foo_bar_baz__c'));
-            system.assertEquals('select foo__c, bar, baz1__c, biz_buz__c from Contact', UTIL_Namespace.StrAllNSPrefix('select foo__c, bar, baz1__c, biz_buz__c from Contact'));           
+            system.assertEquals('foo', UTIL_Namespace.StrTokenNSPrefix('foo'), 'Test that foo is the same as foo.');
+            system.assertEquals('foo__c', UTIL_Namespace.StrTokenNSPrefix('foo__c'), 'Test for equality of foo_c.');     
+            system.assertEquals('foo', UTIL_Namespace.StrAllNSPrefix('foo'), 'asserts that foo is the same as foo namespace');
+            system.assertEquals('foo__c', UTIL_Namespace.StrAllNSPrefix('foo__c'), 'asserts that foo is the same as foo__c');
+            system.assertEquals('foo_bar_baz__c', UTIL_Namespace.StrAllNSPrefix('foo_bar_baz__c'), 'This test asserts that foo_bar_baz is the same as foo_bar_');
+            system.assertEquals('select foo__c, bar, baz1__c, biz_buz__c from Contact', UTIL_Namespace.StrAllNSPrefix('select foo__c, bar, baz1__c, biz_buz__c from Contact'), 'Assert that contact table contains all values.');           
         }
-        system.assertEquals('npe01__foo__c', UTIL_Namespace.StrTokenRemoveNSPrefix('npe01__foo__c'));
-        system.assertEquals('npe5__foo__c', UTIL_Namespace.StrTokenRemoveNSPrefix('npe5__foo__c'));
-        system.assertEquals('foo__c', UTIL_Namespace.StrTokenRemoveNSPrefix('npsp__foo__c'));
-        system.assertEquals('foo_npsp__c', UTIL_Namespace.StrTokenRemoveNSPrefix('foo_npsp__c'));
+        system.assertEquals('npe01__foo__c', UTIL_Namespace.StrTokenRemoveNSPrefix('npe01__foo__c'), 'This test asserts that the string is a valid NPE01 string.');
+        system.assertEquals('npe5__foo__c', UTIL_Namespace.StrTokenRemoveNSPrefix('npe5__foo__c'), 'This test asserts that the string is a valid NPE5 string.');
+        system.assertEquals('foo__c', UTIL_Namespace.StrTokenRemoveNSPrefix('npsp__foo__c'), 'asserts that foo__c is removed from nspsp');
+        system.assertEquals('foo_npsp__c', UTIL_Namespace.StrTokenRemoveNSPrefix('foo_npsp__c'), 'This test asserts that the string foo_npsp__c is the same as the');
     } 
     
     /*******************************************************************************************************************
@@ -86,7 +86,7 @@ private with sharing class UTIL_Namespace_TEST {
     @isTest 
     private static void testSandboxEmailToRealEmail() {
         String fixedEmail = UTIL_Namespace.sandboxEmailToRealEmail('awheeler=universalcontainers.com@example.com');	
-        System.assertEquals('awheeler@universalcontainers.com', fixedEmail);
+        System.assertEquals('awheeler@universalcontainers.com', fixedEmail, 'Checks that the email is the same as the fixed email.');
     }
     
     //we have some packaged labels that we no longer reference.

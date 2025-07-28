@@ -53,7 +53,7 @@ public with sharing class ElevateAuthorizedGift_TEST {
             batchItem = new ElevateBatchItem(createAuthorizedGiftResponse());
         Test.stopTest();
 
-        System.assertEquals(DUMMY_PAYMENT_TYPE, batchItem.paymentMethod());
+        System.assertEquals(DUMMY_PAYMENT_TYPE, batchItem.paymentMethod(), 'The batchItem. paymentMethod property is only used for testing.');
         System.assertEquals(DUMMY_ID, batchItem.id());
         System.assertEquals(DUMMY_ID, batchItem.gatewayTransactionId());
         System.assertEquals(DUMMY_ID, batchItem.originalTransactionId());

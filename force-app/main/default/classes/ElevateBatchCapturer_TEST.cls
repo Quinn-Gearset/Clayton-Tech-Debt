@@ -35,9 +35,9 @@ private class ElevateBatchCapturer_TEST {
         ElevateBatchCapturer capturer = new ElevateBatchCapturer(
                 UTIL_UnitTestData_TEST.mockId(DataImportBatch__c.getSObjectType()),
                 buildElevateBatchIds(200));
-        System.assert(capturer.queueableElevateBatches.hasGroupsToCapture());
-        System.assertEquals(4, capturer.queueableElevateBatches.partitionSize());
-        System.assertEquals(50, capturer.queueableElevateBatches.idsToCapture().size());
+        System.assert(capturer.queueableElevateBatches.hasGroupsToCapture(), 'This method will assert that there are no groups of elevate batches to capture.');
+        System.assertEquals(4, capturer.queueableElevateBatches.partitionSize(), 'This test asserts that the partition size of the queueableElevateBatches is the same');
+        System.assertEquals(50, capturer.queueableElevateBatches.idsToCapture().size(), 'Test that 50 elevate batches are captured.');
     }
 
     @IsTest static void shouldCaptureEnqueuedElevateBatches() {
@@ -51,7 +51,7 @@ private class ElevateBatchCapturer_TEST {
         UTIL_Http_TEST.mockSuccessCalloutResponse(validResponse);
         capturer.execute(null);
         Test.stopTest();
-        System.assert(capturer.failReasonByElevateBatchId.isEmpty());
+        System.assert(capturer.failReasonByElevateBatchId.isEmpty(), 'Test if the fail reason is empty.');
     }
 
     @IsTest static void shouldPopulateFailReasonMapForFailedCaptures() {
@@ -68,9 +68,9 @@ private class ElevateBatchCapturer_TEST {
         capturer.execute(null);
         Test.stopTest();
 
-        System.assert(giftBatchServiceMock.giftsFailedCaptureForCalled);
-        System.assertEquals(50, capturer.failReasonByElevateBatchId.size());
-        System.assertEquals(capturer.failReasonByElevateBatchId.values()[0], 'id: Must be a valid UUID');
+        System.assert(giftBatchServiceMock.giftsFailedCaptureForCalled, 'This method should only be called once.');
+        System.assertEquals(50, capturer.failReasonByElevateBatchId.size(), 'The capturer fail reason is 50 but the batch size is not guaranteed to be equal to');
+        System.assertEquals(capturer.failReasonByElevateBatchId.values()[0], 'id: Must be a valid UUID', 'Asserts that the failReasonByElevateBatchId contains the expected value.');
     }
 
     static Set<String> buildElevateBatchIds(Integer numOfElevateBatchIds) {
