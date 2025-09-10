@@ -1015,7 +1015,7 @@ public without sharing class BDI_MigrationMappingUtility {
             }
 
             if (validFieldsByObjectName.get(objectName) == null) {
-                SObjectType objectType = Schema.getGlobalDescribe().get(objectName);
+                SObjectType objectType = ((SObject) Type.forName(objectName).newInstance()).getSObjectType();
                 Set<String> validFields = objectType.getDescribe().fields.getMap().keySet();
                 validFieldsByObjectName.put(objectName, validFields);
 

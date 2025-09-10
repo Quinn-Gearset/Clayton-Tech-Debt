@@ -87,16 +87,16 @@ public class fflib_ApexMocksUtilsTest
 	@isTest
 	private static void makeRelationship_GenericOverload_ReturnsObjectsWithRelationFieldSet() {
 		//Given
-		SObject acc = Schema.getGlobalDescribe().get('Account').newSObject();
+		SObject acc = ((SObject) Type.forName('Account').newInstance()).getSObjectType().newSObject();
 		acc.put('Id', fflib_IDGenerator.generate(acc.getSObjectType()));
 		acc.put('Name', 'AccName');
 		acc.put('NumberOfEmployees', 7);
 
-		SObject contact1 = Schema.getGlobalDescribe().get('Contact').newSObject();
+		SObject contact1 = ((SObject) Type.forName('Contact').newInstance()).getSObjectType().newSObject();
 		contact1.put('Id', fflib_IDGenerator.generate(contact1.getSObjectType()));
 		contact1.put('DoNotCall', true);
 
-		SObject contact2 = Schema.getGlobalDescribe().get('Contact').newSObject();
+		SObject contact2 = ((SObject) Type.forName('Contact').newInstance()).getSObjectType().newSObject();
 		contact2.put('Id', fflib_IDGenerator.generate(contact2.getSObjectType()));
 		contact2.put('DoNotCall', false);
 
@@ -131,11 +131,11 @@ public class fflib_ApexMocksUtilsTest
 	private static void makeRelationship_GenericOverload_ThrowsErrorOnInvalidParentType() {
 
 		// Setup parent object
-		SObject acc = Schema.getGlobalDescribe().get('Account').newSObject();
+		SObject acc = ((SObject) Type.forName('Account').newInstance()).getSObjectType().newSObject();
 		acc.put('Id', fflib_IDGenerator.generate(acc.getSObjectType()));
 
 		// Setup child object
-		SObject cont = Schema.getGlobalDescribe().get('Contact').newSObject();
+		SObject cont = ((SObject) Type.forName('Contact').newInstance()).getSObjectType().newSObject();
 		cont.put('Id', fflib_IDGenerator.generate(cont.getSObjectType()));
 
 		String errorMessage = '';
@@ -158,11 +158,11 @@ public class fflib_ApexMocksUtilsTest
 	private static void makeRelationship_GenericOverload_ThrowsErrorOnInvalidChildType() {
 
 		// Setup parent object
-		SObject acc = Schema.getGlobalDescribe().get('Account').newSObject();
+		SObject acc = ((SObject) Type.forName('Account').newInstance()).getSObjectType().newSObject();
 		acc.put('Id', fflib_IDGenerator.generate(acc.getSObjectType()));
 
 		// Setup child object
-		SObject cont = Schema.getGlobalDescribe().get('Contact').newSObject();
+		SObject cont = ((SObject) Type.forName('Contact').newInstance()).getSObjectType().newSObject();
 		cont.put('Id', fflib_IDGenerator.generate(cont.getSObjectType()));
 
 		String errorMessage = '';
@@ -185,11 +185,11 @@ public class fflib_ApexMocksUtilsTest
 	private static void makeRelationship_GenericOverload_ThrowsErrorOnInvalidFieldName() {
 
 		// Setup parent object
-		SObject acc = Schema.getGlobalDescribe().get('Account').newSObject();
+		SObject acc = ((SObject) Type.forName('Account').newInstance()).getSObjectType().newSObject();
 		acc.put('Id', fflib_IDGenerator.generate(acc.getSObjectType()));
 
 		// Setup child object
-		SObject cont = Schema.getGlobalDescribe().get('Contact').newSObject();
+		SObject cont = ((SObject) Type.forName('Contact').newInstance()).getSObjectType().newSObject();
 		cont.put('Id', fflib_IDGenerator.generate(cont.getSObjectType()));
 
 		String errorMessage = '';
