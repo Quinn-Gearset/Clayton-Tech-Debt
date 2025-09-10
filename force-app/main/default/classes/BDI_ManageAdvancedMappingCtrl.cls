@@ -450,7 +450,7 @@ public class BDI_ManageAdvancedMappingCtrl {
             customMetadata.fullName = sObjectName + '.' + recordName;
             customMetadata.label = (String)sObjectCastedCustomMetadata.get('MasterLabel');
 
-            schema.SObjectType sObjectType = Schema.getGlobalDescribe().get(sObjectName );
+            schema.SObjectType sObjectType = ((SObject) Type.forName(sObjectName).newInstance()).getSObjectType();
 
             Map<String, Schema.sObjectField> sObjectFields = sObjectType.getDescribe().fields.getMap();
 
@@ -791,7 +791,7 @@ public class BDI_ManageAdvancedMappingCtrl {
 
                 //Get sObjectType of the object being looked up to for comparison purposes.
                 Schema.SObjectType lookupToObjectType = 
-                    Schema.getGlobalDescribe().get(lookupToObjectName.toLowerCase());
+                    ((SObject) Type.forName(lookupToObjectName.toLowerCase()).newInstance()).getSObjectType();
 
                 if (objTypes != null) {
                     for (Schema.sObjectType objType : objTypes) {

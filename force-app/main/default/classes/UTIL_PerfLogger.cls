@@ -121,9 +121,9 @@ public virtual with sharing class UTIL_PerfLogger {
         get {
             if (!hasTriedSchemaPerfLog) {
                 // first we try in our namespace, and then without a namespace
-                sObjectTypePerfLog = Schema.getGlobalDescribe().get(UTIL_Namespace.StrTokenNSPrefix('PerfLog__c'));
+                sObjectTypePerfLog = ((SObject) Type.forName(UTIL_Namespace.StrTokenNSPrefix('PerfLog__c')).newInstance()).getSObjectType();
                 if (sObjectTypePerfLog == null) {
-                    sObjectTypePerfLog = Schema.getGlobalDescribe().get('PerfLog__c');
+                    sObjectTypePerfLog = ((SObject) Type.forName('PerfLog__c').newInstance()).getSObjectType();
                 }
                 hasTriedSchemaPerfLog = true;
             }

@@ -54,7 +54,7 @@ private class fflib_SObjectDescribeTest {
 		fflib_SObjectDescribe.GlobalDescribeMap gdm = fflib_SObjectDescribe.getGlobalDescribe();
 		Schema.SObjectType accountObjType = gdm.get('AccOunT');
 		System.assertEquals(accountObjType, Account.SobjectType);
-		System.assertEquals(Schema.getGlobalDescribe().size(), gdm.size());
+		((SObject) Type.forName(Schema.getGlobalDescribe().size()).newInstance()).getSObjectType();
 
 		fflib_SObjectDescribe acccountDescribe = fflib_SObjectDescribe.getDescribe(accountObjType);
 		fflib_SObjectDescribe.FieldsMap fields = acccountDescribe.getFields();

@@ -153,7 +153,7 @@ public abstract with sharing class UTIL_IntegrationConfig {
         */
         protected override Boolean initIsInstalled() {
             Schema.SObjectType archiveRollupSummaryType =
-                Schema.getGlobalDescribe().get(prefixNamespace('ArchiveRollupSummary__b'));
+                ((SObject) Type.forName(prefixNamespace('ArchiveRollupSummary__b')).newInstance()).getSObjectType();
 
             if (archiveRollupSummaryType == null) {
                 return false;
