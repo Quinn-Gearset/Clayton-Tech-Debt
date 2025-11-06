@@ -57,10 +57,10 @@ private class CRLP_Batch_Base_TEST {
                 new CRLP_Batch_Base.BatchQueryBuilder(accountBatchJob, null, null, null);
 
         String generatedWhereClause = queryBuilder.getMainQueryInnerJoinFilter();
-        System.assert(generatedWhereClause.contains('FROM'));
+        System.assert(generatedWhereClause.contains('FROM'), 'This method asserts that the generated WHERE clause is not empty .');
         System.assert(generatedWhereClause.contains('WHERE'), 'The incremental mode ' +
                 'where clause for the inner join should contain a where filter on the Opportunities.');
-        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + new RollupInfo().maxYearsAgoInteger));
+        System.assert(generatedWhereClause.contains('LAST_N_YEARS:' + new RollupInfo().maxYearsAgoInteger), 'This method is only used for testing .');
         System.assert(!batchStartOuterQueryContainsOrderByAndLimit(queryBuilder.buildQuery()),
                 'The outer query should not contain both "ORDER BY" and "LIMIT".');
     }

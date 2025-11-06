@@ -111,10 +111,10 @@ public with sharing class RLLP_OppRollup_TEST {
         strSoql = strSoql.replace('select id,', 'select id, Firstname, LastName,');
         listConTest = database.query(strSoql);
 
-        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c );
-        System.AssertEquals ( 0 , listConTest[0].npo02__OppAmount2YearsAgo__c );
+        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the list .' );
+        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c, 'Test for equality of the NPO 2 . 0 opp amount of this year' );
+        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c, 'This test is used to check if the current list is equal to 60 items .' );
+        System.AssertEquals ( 0 , listConTest[0].npo02__OppAmount2YearsAgo__c, 'Test for equality of the NPO 2 . 0 opp amount of years ago' );
         return true;
     }
 
@@ -196,9 +196,9 @@ public with sharing class RLLP_OppRollup_TEST {
         insert o;
         Test.StopTest();
 
-        system.assertEquals('true', [select npe01__Is_Opp_from_Individual__c from Opportunity where id = :o.id].npe01__Is_Opp_from_Individual__c);
-        system.AssertEquals(1, [select count() from OpportunityContactRole where ContactId = :c.id and isPrimary = true]);
-        system.AssertEquals(1, [select count() from Account where npe01__One2OneContact__c = :c.id and npe01__SYSTEMIsIndividual__c = true]);
+        system.assertEquals('true', [select npe01__Is_Opp_from_Individual__c from Opportunity where id = :o.id].npe01__Is_Opp_from_Individual__c, 'Assert that all opportunity objects are true .');
+        system.AssertEquals(1, [select count() from OpportunityContactRole where ContactId = :c.id and isPrimary = true], 'Checks that the number of opportunity contact roles is equal to 1 .');
+        system.AssertEquals(1, [select count() from Account where npe01__One2OneContact__c = :c.id and npe01__SYSTEMIsIndividual__c = true], 'Checks that the number of accounts in the system is equal to 1 .');
 
         //now test that a contact has received the proper member stats from the trigger
         Contact UpdatedCon = [SELECT id, npo02__OppAmountLastNDays__c, npo02__OppAmountThisYear__c, npo02__TotalMembershipOppAmount__c,
@@ -207,14 +207,14 @@ public with sharing class RLLP_OppRollup_TEST {
                                     npo02__household__r.npo02__TotalOppAmount__c, npo02__TotalOppAmount__c, npo02__LastCloseDate__c
                                     FROM Contact WHERE Id = :c.id];
 
-        system.AssertEquals(100, UpdatedCon.npo02__TotalOppAmount__c);
-        system.AssertEquals(100, UpdatedCon.npo02__Household__r.npo02__TotalOppAmount__c);
-        system.AssertEquals(100, UpdatedCon.npo02__OppAmountThisYear__c);
-        system.AssertEquals(0, UpdatedCon.npo02__OppAmountLastYear__c);
-        system.AssertEquals(100, UpdatedCon.npo02__Best_Gift_Year_Total__c);
-        system.AssertEquals(string.valueof(datClose.year()), UpdatedCon.npo02__Best_Gift_Year__c);
-        system.AssertEquals(100, UpdatedCon.npo02__household__r.npo02__Best_Gift_Year_Total__c);
-        system.AssertEquals(string.valueof(datClose.year()), UpdatedCon.npo02__household__r.npo02__Best_Gift_Year__c);
+        system.AssertEquals(100, UpdatedCon.npo02__TotalOppAmount__c, 'Checks that the total OPP amount is equal to 100 .');
+        system.AssertEquals(100, UpdatedCon.npo02__Household__r.npo02__TotalOppAmount__c, 'Check that the total OPP amount of the Household is 100 .');
+        system.AssertEquals(100, UpdatedCon.npo02__OppAmountThisYear__c, 'This function checks that the updated con is equal to 100 .');
+        system.AssertEquals(0, UpdatedCon.npo02__OppAmountLastYear__c, 'This function checks if the updated con is the same as the last year .');
+        system.AssertEquals(100, UpdatedCon.npo02__Best_Gift_Year_Total__c, 'This is the best Gift Year total .');
+        system.AssertEquals(string.valueof(datClose.year()), UpdatedCon.npo02__Best_Gift_Year__c, 'This function checks if the current date is the best Gift year .');
+        system.AssertEquals(100, UpdatedCon.npo02__household__r.npo02__Best_Gift_Year_Total__c, 'This is a test function to check if the household of the current year is the same');
+        system.AssertEquals(string.valueof(datClose.year()), UpdatedCon.npo02__household__r.npo02__Best_Gift_Year__c, 'This function checks if the current date is the best Gift year .');
     }
 
     /*********************************************************************************************************
@@ -288,10 +288,10 @@ public with sharing class RLLP_OppRollup_TEST {
             id FirstConId = TestCons[0].id;
             Contact UpdatedCon = [SELECT id, account.npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__household__c, npo02__household__r.npo02__TotalOppAmount__c, npo02__TotalOppAmount__c, npo02__household__r.npo02__MembershipEndDate__c, npo02__MembershipJoinDate__c FROM Contact WHERE Id = :FirstConId];
 
-            System.AssertEquals ( 100 , UpdatedCon.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 100 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c);
-            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmountLastYear__c);
+            System.AssertEquals ( 100 , UpdatedCon.npo02__TotalOppAmount__c, 'Total OPP amount is 100' );
+            System.AssertEquals ( 100 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c, 'This function is used to check the total opp amount of the NPO - 02 house' );
+            System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c, 'OppAmountThisYear is 100');
+            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmountLastYear__c, 'UpdatedCon . npo02 . OppAmountLastYear');
 
             // now roll up manually
             RLLP_OppRollup rg = new RLLP_OppRollup();
@@ -308,10 +308,10 @@ public with sharing class RLLP_OppRollup_TEST {
                                 npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__household__c,
                                 npo02__household__r.npo02__TotalOppAmount__c, npo02__TotalOppAmount__c FROM Contact WHERE Id = :FirstConId];
 
-            System.AssertEquals (100 , UpdatedCon.npo02__TotalOppAmount__c);
-            System.AssertEquals (100 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c);
-            System.AssertEquals (100 , UpdatedCon.npo02__OppAmountThisYear__c);
-            System.AssertEquals (0 , UpdatedCon.npo02__OppAmountLastYear__c);
+            System.AssertEquals (100 , UpdatedCon.npo02__TotalOppAmount__c, 'Total OPP amount is 100');
+            System.AssertEquals (100 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c, 'This function is used to check the total opp amount of the NPO - 02 house');
+            System.AssertEquals (100 , UpdatedCon.npo02__OppAmountThisYear__c, 'This is a test function to assert that the updated con is equal to 100 .');
+            System.AssertEquals (0 , UpdatedCon.npo02__OppAmountLastYear__c, 'This function is used to check if the updated con is the same as the last year .');
     }
 
     /*********************************************************************************************************
@@ -386,9 +386,9 @@ public with sharing class RLLP_OppRollup_TEST {
             id FirstConId = TestCons[0].id;
             Contact UpdatedCon = [SELECT id, Account.npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__Household__c, npo02__Household__r.npo02__TotalOppAmount__c, npo02__TotalOppAmount__c FROM Contact WHERE Id = :FirstConId];
 
-            System.AssertEquals ( 0 , UpdatedCon.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 0 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmountThisYear__c);
+            System.AssertEquals ( 0 , UpdatedCon.npo02__TotalOppAmount__c, 'This function is used to check if the total OPP amount is 0 .' );
+            System.AssertEquals ( 0 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c, 'This function is used to check if the total opp amount of the NPO - 2' );
+            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmountThisYear__c, 'This function is a convenience method for testing the updated con s opp amount this year .');
 
             // now roll up manually
             RLLP_OppRollup rg = new RLLP_OppRollup();
@@ -402,10 +402,10 @@ public with sharing class RLLP_OppRollup_TEST {
             //make sure the values are still right
             UpdatedCon = [SELECT id, Account.npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__Household__c, npo02__Household__r.npo02__TotalOppAmount__c, npo02__TotalOppAmount__c FROM Contact WHERE Id = :FirstConId];
 
-            System.AssertEquals (0, UpdatedCon.npo02__TotalOppAmount__c );
-            System.AssertEquals (0, UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c );
-            System.AssertEquals (0, UpdatedCon.npo02__OppAmountThisYear__c);
-            System.AssertEquals (0, UpdatedCon.npo02__OppAmountLastYear__c);
+            System.AssertEquals (0, UpdatedCon.npo02__TotalOppAmount__c, 'This function is used to check if the total OPP amount is 0 .' );
+            System.AssertEquals (0, UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c, 'This function is used to check if the NPO - 02 household amount is 0 .' );
+            System.AssertEquals (0, UpdatedCon.npo02__OppAmountThisYear__c, 'This function is a convenience method for testing the updated con s opp amount this year .');
+            System.AssertEquals (0, UpdatedCon.npo02__OppAmountLastYear__c, 'UpdatedCon . npo02 . OppAmountLastYear');
         }
     }
 
@@ -481,10 +481,10 @@ public with sharing class RLLP_OppRollup_TEST {
             id FirstConId = TestCons[0].id;
             Contact UpdatedCon = [SELECT id, account.npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__household__c, npo02__household__r.npo02__TotalOppAmount__c, npo02__TotalOppAmount__c FROM Contact WHERE Id = :FirstConId];
 
-            System.AssertEquals ( 100 , UpdatedCon.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 100 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c);
-            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmountLastYear__c);
+            System.AssertEquals ( 100 , UpdatedCon.npo02__TotalOppAmount__c, 'Total OPP amount is 100' );
+            System.AssertEquals ( 100 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c, 'This function is used to check the total opp amount of the NPO - 02 house' );
+            System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c, 'OppAmountThisYear is 100');
+            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmountLastYear__c, 'UpdatedCon . npo02 . OppAmountLastYear');
 
             // now roll up manually
             RLLP_OppRollup rg = new RLLP_OppRollup();
@@ -499,10 +499,10 @@ public with sharing class RLLP_OppRollup_TEST {
             //make sure the values are still right
             UpdatedCon = [SELECT id, account.npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__household__c, npo02__household__r.npo02__TotalOppAmount__c, npo02__TotalOppAmount__c FROM Contact WHERE Id = :FirstConId];
 
-            System.AssertEquals ( 100 , UpdatedCon.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 100 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c);
-            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmountLastYear__c);
+            System.AssertEquals ( 100 , UpdatedCon.npo02__TotalOppAmount__c, 'Total OPP amount is 100' );
+            System.AssertEquals ( 100 , UpdatedCon.npo02__household__r.npo02__TotalOppAmount__c, 'This function is used to check the total opp amount of the NPO - 02 house' );
+            System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c, 'OppAmountThisYear is 100');
+            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmountLastYear__c, 'UpdatedCon . npo02 . OppAmountLastYear');
 
     }
 
@@ -578,10 +578,10 @@ public with sharing class RLLP_OppRollup_TEST {
             Contact UpdatedCon = [SELECT id, npo02__TotalMembershipOppAmount__c,npo02__LastMembershipOrigin__c,
                 npo02__LastMembershipAmount__c, npo02__LastMembershipDate__c
                 from contact where id =: firstconid];
-            System.AssertEquals (100 , updatedcon.npo02__TotalMembershipOppAmount__c );
-            System.AssertEquals (100 , updatedcon.npo02__LastMembershipAmount__c );
-            System.AssertEquals ('Renewal' , updatedcon.npo02__LastMembershipOrigin__c );
-            System.AssertEquals (system.today() , updatedcon.npo02__LastMembershipDate__c );
+            System.AssertEquals (100 , updatedcon.npo02__TotalMembershipOppAmount__c, 'Checks that total membership opp amount is equal to 100 .' );
+            System.AssertEquals (100 , updatedcon.npo02__LastMembershipAmount__c, 'Last membership amount is 100 .' );
+            System.AssertEquals ('Renewal' , updatedcon.npo02__LastMembershipOrigin__c, 'The last membership origin of the renewal .' );
+            System.AssertEquals (system.today() , updatedcon.npo02__LastMembershipDate__c, 'Assert that last membership date is equal to current date .' );
         }
     }
 
@@ -645,17 +645,17 @@ public with sharing class RLLP_OppRollup_TEST {
         RLLP_OppRollup_UTIL oppRollupUtil = new RLLP_OppRollup_UTIL();
         Account updatedAcct = Database.query(oppRollupUtil.buildAccountQuery() + ' where id =\''+testacct.id+'\'');
 
-        System.AssertEquals ( 33333 , updatedAcct.npo02__TotalOppAmount__c );
+        System.AssertEquals ( 33333 , updatedAcct.npo02__TotalOppAmount__c, 'This function is a test function to check if the total OPP amount is equal to 3' );
 
         // now roll up manually
         RLLP_OppRollup rg = new RLLP_OppRollup();
         rg.rollupAccounts(new map<id, Account>(new list<Account>{updatedAcct}));
 
         testAcct = [select id, npo02__TotalOppAmount__c, npo02__LastMembershipOrigin__c from account where id =: testacct.id];
-        System.AssertEquals ( 33333 , testAcct.npo02__TotalOppAmount__c );
+        System.AssertEquals ( 33333 , testAcct.npo02__TotalOppAmount__c, 'Test for the total OPP amount of the NPO02 system .' );
 
         // validate that the Membership Origin on the Account is null
-        System.AssertEquals ( null , testAcct.npo02__LastMembershipOrigin__c );
+        System.AssertEquals ( null , testAcct.npo02__LastMembershipOrigin__c, 'Test for equality of the last membership origin .' );
 
         // Requery the Account object object to pass to the rollup logic
         updatedAcct = Database.query(oppRollupUtil.buildAccountQuery() + ' where id =\''+testacct.id+'\'');
@@ -714,11 +714,11 @@ public with sharing class RLLP_OppRollup_TEST {
             RLLP_OppRollup_UTIL oppRollupUtil = new RLLP_OppRollup_UTIL();
             Account updatedAcct = Database.query(oppRollupUtil.buildAccountQuery() + ' where id =\''+testacct.id+'\'');
 
-            System.AssertEquals ( 33333 , updatedAcct.npo02__TotalMembershipOppAmount__c );
-            System.AssertEquals ( system.today() , updatedAcct.npo02__LastMembershipDate__c );
-            System.AssertEquals ( 33333 , updatedAcct.npo02__LastMembershipAmount__c );
-            System.AssertEquals ( 'Gold' , updatedAcct.npo02__LastMembershipLevel__c );
-            System.AssertEquals ( 'New' , updatedAcct.npo02__LastMembershipOrigin__c );
+            System.AssertEquals ( 33333 , updatedAcct.npo02__TotalMembershipOppAmount__c, 'This function asserts that the total membership opp amount is equal to 33333 .' );
+            System.AssertEquals ( system.today() , updatedAcct.npo02__LastMembershipDate__c, 'Assert that last membership date is equal to current date .' );
+            System.AssertEquals ( 33333 , updatedAcct.npo02__LastMembershipAmount__c, 'This test asserts that the last membership amount is 33333 .' );
+            System.AssertEquals ( 'Gold' , updatedAcct.npo02__LastMembershipLevel__c, 'Test if last membership level is equal to gold' );
+            System.AssertEquals ( 'New' , updatedAcct.npo02__LastMembershipOrigin__c, 'This test asserts that the last membership origin is the same as the last membership origin .' );
 
             // now roll up manually
             RLLP_OppRollup rg = new RLLP_OppRollup();
@@ -726,7 +726,7 @@ public with sharing class RLLP_OppRollup_TEST {
 
             // Verify that the membership amount was updated
             testAcct = [select id, npo02__TotalMembershipOppAmount__c from account where id =: testacct.id];
-            System.AssertEquals ( 33333 , testAcct.npo02__TotalMembershipOppAmount__c );
+            System.AssertEquals ( 33333 , testAcct.npo02__TotalMembershipOppAmount__c, 'Test for the total membership opp amount of the NPO - 02 membership opps .' );
 
             // Reset these to null
             newOpp.npe01__member_level__c = null;
@@ -735,7 +735,7 @@ public with sharing class RLLP_OppRollup_TEST {
 
             // validate that the Membership Origin on the Account is now null
             testAcct = [select id, npo02__LastMembershipOrigin__c from account where id =: testacct.id];
-            System.AssertEquals ( null , testAcct.npo02__LastMembershipOrigin__c );
+            System.AssertEquals ( null , testAcct.npo02__LastMembershipOrigin__c, 'Test for equality of the last membership origin .' );
 
             // Requery the Account object object to pass to the rollup logic
             updatedAcct = Database.query(oppRollupUtil.buildAccountQuery() + ' where id =\''+testacct.id+'\'');
@@ -807,9 +807,9 @@ public with sharing class RLLP_OppRollup_TEST {
         if (!setupTestData(numCon, strProcessor))
             return;
 
-        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c );
+        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the list .' );
+        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c, 'Test for equality of the NPO 2 . 0 opp amount of this year' );
+        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c, 'This test is used to check if the current list is equal to 60 items .' );
 
         // now chg the amts for both opps (cheapskate!)
         listOppTest[0].Amount = 50;
@@ -822,9 +822,9 @@ public with sharing class RLLP_OppRollup_TEST {
 
         ID ThisConId = listConTest[0].id;
         Contact UpdatedCon = [SELECT Id, npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c  FROM Contact WHERE Id = :ThisConId];
-        System.AssertEquals ( 75 , UpdatedCon.npo02__TotalOppAmount__c );
-        System.AssertEquals ( 50 , UpdatedCon.npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 25 , UpdatedCon.npo02__OppAmountLastYear__c );
+        System.AssertEquals ( 75 , UpdatedCon.npo02__TotalOppAmount__c, 'Checks that the total OPP amount is 75 .' );
+        System.AssertEquals ( 50 , UpdatedCon.npo02__OppAmountThisYear__c, 'This function is used to assert that the updated con is at least 50 .' );
+        System.AssertEquals ( 25 , UpdatedCon.npo02__OppAmountLastYear__c, 'OppAmountLastYear is the same as UpdatedCon . npo02 . Opp' );
     }
 
     static testMethod void OneContactMultipleOppsOne2One_2(){
@@ -839,9 +839,9 @@ public with sharing class RLLP_OppRollup_TEST {
         if (!setupTestData(numCon, strProcessor))
             return;
 
-        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c );
+        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the list .' );
+        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c, 'Test for equality of the NPO 2 . 0 opp amount of this year' );
+        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c, 'This test is used to check if the current list is equal to 60 items .' );
 
         // now create a gift from 2 yrs ago
         Opportunity[] testGift3 = UTIL_UnitTestData_TEST.OppsForContactListByRecTypeId ( listConTest, null, UTIL_UnitTestData_TEST.getClosedWonStage(), dat2YearAgo, 10 , giftRecordTypeIdForTests,null);
@@ -854,10 +854,10 @@ public with sharing class RLLP_OppRollup_TEST {
         ID ThisConId = listConTest[0].id;
         Contact UpdatedCon = [SELECT Id, npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__OppAmount2YearsAgo__c  FROM Contact WHERE Id = :ThisConId];
 
-        System.AssertEquals ( 170 , UpdatedCon.npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c );
-        System.AssertEquals ( 10 , UpdatedCon.npo02__OppAmount2YearsAgo__c );
+        System.AssertEquals ( 170 , UpdatedCon.npo02__TotalOppAmount__c, 'UpdatedCon . npo02 . TotalOppAmount c' );
+        System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c, 'OppAmountThisYear is 100' );
+        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c, 'OppAmountLastYear is a constant' );
+        System.AssertEquals ( 10 , UpdatedCon.npo02__OppAmount2YearsAgo__c, 'OppAmount2YearsAgo - > UpdatedCon . npo02 . Opp' );
     }
 
     static testMethod void OneContactMultipleOppsOne2One_3(){
@@ -872,9 +872,9 @@ public with sharing class RLLP_OppRollup_TEST {
         if (!setupTestData(numCon, strProcessor))
             return;
 
-        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c );
+        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the list .' );
+        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c, 'Test for equality of the NPO 2 . 0 opp amount of this year' );
+        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c, 'This test is used to check if the current list is equal to 60 items .' );
 
         // add another from this year (to test adding)
         Opportunity[] testGift4 = UTIL_UnitTestData_TEST.OppsForContactListByRecTypeId ( listConTest, null, UTIL_UnitTestData_TEST.getClosedWonStage(), datToday, 25 , giftRecordTypeIdForTests,null);
@@ -888,10 +888,10 @@ public with sharing class RLLP_OppRollup_TEST {
 
         ID ThisConId = listConTest[0].id;
         Contact UpdatedCon = [SELECT Id, npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__OppAmount2YearsAgo__c  FROM Contact WHERE Id = :ThisConId];
-        System.AssertEquals ( 210 , UpdatedCon.npo02__TotalOppAmount__c );
-        System.AssertEquals ( 150 , UpdatedCon.npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c );
-        System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c );
+        System.AssertEquals ( 210 , UpdatedCon.npo02__TotalOppAmount__c, 'Check that the total OPP amount is equal to the total OPP amount of the updated' );
+        System.AssertEquals ( 150 , UpdatedCon.npo02__OppAmountThisYear__c, 'This is a test case for the NPO02 . OPPAmountThisYear class .' );
+        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c, 'OppAmountLastYear is a constant' );
+        System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c, 'UpdatedCon . npo02 . OppAmount2YearsAgo' );
     }
 
     static testMethod void OneContactMultipleOppsOne2One_4(){
@@ -906,9 +906,9 @@ public with sharing class RLLP_OppRollup_TEST {
         if (!setupTestData(numCon, strProcessor))
             return;
 
-        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c );
+        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the list .' );
+        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c, 'Test for equality of the NPO 2 . 0 opp amount of this year' );
+        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c, 'This test is used to check if the current list is equal to 60 items .' );
 
         // TBD add a gift from longer ago
         Opportunity[] testGift5 = UTIL_UnitTestData_TEST.OppsForContactListByRecTypeId ( listConTest, null, UTIL_UnitTestData_TEST.getClosedWonStage(), dat4YearAgo, 200 , giftRecordTypeIdForTests,null);
@@ -922,10 +922,10 @@ public with sharing class RLLP_OppRollup_TEST {
         ID ThisConId = listConTest[0].id;
         Contact UpdatedCon = [SELECT Id, npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__OppAmount2YearsAgo__c  FROM Contact WHERE Id = :ThisConId];
 
-        System.AssertEquals ( 360 , UpdatedCon.npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c );
-        System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c );
+        System.AssertEquals ( 360 , UpdatedCon.npo02__TotalOppAmount__c, 'Check that the total OPP amount is equal to the total OPP amount .' );
+        System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c, 'OppAmountThisYear is 100' );
+        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c, 'OppAmountLastYear is a constant' );
+        System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c, 'UpdatedCon . npo02 . OppAmount2YearsAgo' );
     }
 
     static testMethod void OneContactMultipleOppsOne2One_5(){
@@ -940,9 +940,9 @@ public with sharing class RLLP_OppRollup_TEST {
         if (!setupTestData(numCon, strProcessor))
             return;
 
-        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c );
+        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the list .' );
+        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c, 'Test for equality of the NPO 2 . 0 opp amount of this year' );
+        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c, 'This test is used to check if the current list is equal to 60 items .' );
 
         // TBD add non-won gift
         Opportunity[] testGift6 = UTIL_UnitTestData_TEST.OppsForContactListByRecTypeId ( listConTest, null, UTIL_UnitTestData_TEST.getOpenStage(), dat4YearAgo, 35 , giftRecordTypeIdForTests,null);
@@ -955,10 +955,10 @@ public with sharing class RLLP_OppRollup_TEST {
         // totals should not have changed at all
         ID ThisConId = listConTest[0].id;
         Contact UpdatedCon = [SELECT Id, npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__OppAmount2YearsAgo__c  FROM Contact WHERE Id = :ThisConId];
-        System.AssertEquals ( 160 , UpdatedCon.npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c );
-        System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c );
+        System.AssertEquals ( 160 , UpdatedCon.npo02__TotalOppAmount__c, 'Check that the total OPP amount is equal to 160 .' );
+        System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c, 'OppAmountThisYear is 100' );
+        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c, 'OppAmountLastYear is a constant' );
+        System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c, 'UpdatedCon . npo02 . OppAmount2YearsAgo' );
     }
 
     static testMethod void OneContactMultipleOppsOne2One_6(){
@@ -973,9 +973,9 @@ public with sharing class RLLP_OppRollup_TEST {
         if (!setupTestData(numCon, strProcessor))
             return;
 
-        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c );
+        System.AssertEquals ( 160 , listConTest[0].npo02__TotalOppAmount__c, 'Test for equality of the total OPP amount of the list .' );
+        System.AssertEquals ( 100 , listConTest[0].npo02__OppAmountThisYear__c, 'Test for equality of the NPO 2 . 0 opp amount of this year' );
+        System.AssertEquals ( 60 , listConTest[0].npo02__OppAmountLastYear__c, 'This test is used to check if the current list is equal to 60 items .' );
 
         // now delete the 1st gift, totals should decrease
         decimal dblAmt = listOppTest[0].Amount;
@@ -988,10 +988,10 @@ public with sharing class RLLP_OppRollup_TEST {
         ID ThisConId = listConTest[0].id;
         Contact UpdatedCon = [SELECT Id, npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__OppAmount2YearsAgo__c  FROM Contact WHERE Id = :ThisConId];
 
-        System.AssertEquals ( 160-dblAmt , UpdatedCon.npo02__TotalOppAmount__c );
-        System.AssertEquals ( 100-dblAmt , UpdatedCon.npo02__OppAmountThisYear__c );
-        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c );
-        System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c );
+        System.AssertEquals ( 160-dblAmt , UpdatedCon.npo02__TotalOppAmount__c, 'This function is used to check if the updated con is equal to 160 - dblAmt' );
+        System.AssertEquals ( 100-dblAmt , UpdatedCon.npo02__OppAmountThisYear__c, 'This function is called when the updated con is updated .' );
+        System.AssertEquals ( 60 , UpdatedCon.npo02__OppAmountLastYear__c, 'OppAmountLastYear is a constant' );
+        System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c, 'UpdatedCon . npo02 . OppAmount2YearsAgo' );
     }
 
     static testMethod void OneContactOneInkindOne2One(){
@@ -1035,7 +1035,7 @@ public with sharing class RLLP_OppRollup_TEST {
             id ThisConId = TestCons[0].id;
             contact UpdatedCon = [SELECT Id,  npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__OppAmount2YearsAgo__c FROM Contact WHERE Id = :ThisConId];
 
-            System.Assert(!(UpdatedCon.npo02__TotalOppAmount__c>0));
+            System.Assert(!(UpdatedCon.npo02__TotalOppAmount__c>0), 'Checks that the updated con has not been updated .');
     }
 
     static testMethod void testGivingRollupBulkOne2One(){
@@ -1088,10 +1088,10 @@ public with sharing class RLLP_OppRollup_TEST {
             id FirstConId = TestCons[10].id;
             Contact UpdatedCon = [SELECT Id,  npo02__TotalOppAmount__c, npo02__OppAmountThisYear__c, npo02__OppAmountLastYear__c, npo02__OppAmount2YearsAgo__c FROM Contact WHERE Id = :FirstConId];
 
-            System.AssertEquals ( 150 , UpdatedCon.npo02__TotalOppAmount__c );
-            System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c );
-            System.AssertEquals ( 50 , UpdatedCon.npo02__OppAmountLastYear__c );
-            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c );
+            System.AssertEquals ( 150 , UpdatedCon.npo02__TotalOppAmount__c, 'Check that the total OPP amount is equal to 150 .' );
+            System.AssertEquals ( 100 , UpdatedCon.npo02__OppAmountThisYear__c, 'OppAmountThisYear is 100' );
+            System.AssertEquals ( 50 , UpdatedCon.npo02__OppAmountLastYear__c, 'OppAmountLastYear is updated' );
+            System.AssertEquals ( 0 , UpdatedCon.npo02__OppAmount2YearsAgo__c, 'UpdatedCon . npo02 . OppAmount2YearsAgo' );
     }
 
     /**
