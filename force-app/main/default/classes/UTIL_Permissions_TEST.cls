@@ -358,6 +358,7 @@ public with sharing class UTIL_Permissions_TEST {
         public Set<SObjectField> updateSObjFields = new Set<SObjectField>();
         public Set<SObjectField> createSObjFields = new Set<SObjectField>();
 
+        /* Handle a method call in the base class . */
         public Object handleMethodCall(
             Object stubbedObject,
             String methodName,

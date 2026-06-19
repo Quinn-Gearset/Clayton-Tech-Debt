@@ -738,13 +738,16 @@ public class fflib_QueryFactory { //No explicit sharing declaration - inherit fr
 			this.field = field;
 			this.nullsLast = nullsLast;
 		}
-		public String getField(){
+		/* Get the field name . */
+  public String getField(){
 			return this.field;
 		}
-		public SortOrder getDirection(){
+		/* Get the sort direction . */
+  public SortOrder getDirection(){
 			return direction;
 		}
-		public String toSOQL(){
+		/* Returns the SQL query string for this sort . */
+  public String toSOQL(){
 			return field + ' ' + (direction == SortOrder.ASCENDING ? 'ASC' : 'DESC') + (nullsLast ? ' NULLS LAST ' : ' NULLS FIRST ');
 		}
 	}

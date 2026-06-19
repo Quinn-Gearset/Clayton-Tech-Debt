@@ -62,7 +62,8 @@ public virtual class fflib_StringBuilder
 		buffer.add(value);
 	}
 	
-	public virtual override String toString()
+	/* This method is used to return the string representation of the result . */
+ public virtual override String toString()
 	{
 		return String.join(buffer, '');
 	}
@@ -90,23 +91,27 @@ public virtual class fflib_StringBuilder
 			super(values);
 		}
 		
-		public void setItemPrefix(String itemPrefix)
+		/* Set the item prefix . */
+  public void setItemPrefix(String itemPrefix)
 		{
 			this.itemPrefix = itemPrefix;
 		}
 		
-		public void setDelimiter(String delimiter)
+		/* Set the delimiter for the SQL statement . */
+  public void setDelimiter(String delimiter)
 		{
 			this.delimiter = delimiter;
 		}
 		
-		public String getStringValue(String itemPrefix)
+		/* Get the string value of the item with the given prefix . */
+  public String getStringValue(String itemPrefix)
 		{
 			setItemPrefix(itemPrefix);
 			return toString();
 		}
 		
-		public override String toString()
+		/* This method is used to return a string representation of the result . */
+  public override String toString()
 		{
 			return itemPrefix + String.join(buffer, delimiter + itemPrefix);
 		}

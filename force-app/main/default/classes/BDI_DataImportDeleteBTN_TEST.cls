@@ -358,6 +358,7 @@ class BDI_DataImportDeleteBTN_TEST {
 
         public Boolean canDeleteDataImport = true;
 
+        /* Handle a method call . */
         public Object handleMethodCall(Object stubbedObject, String stubbedMethodName,
                 Type returnType, List<Type> listOfParamTypes, List<String> listOfParamNames,
                 List<Object> listOfArgs) {

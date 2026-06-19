@@ -47,10 +47,15 @@ public with sharing class BDI_SettingsUI_CTRL {
     * @description getter's to provide the page our API behaviors (which the page can't refer to directly)
     */
     public string getDoNotMatch() { return BDI_DataImport_API.DoNotMatch; }
+    /* Returns the require no match . */
     public string getRequireNoMatch() { return BDI_DataImport_API.RequireNoMatch; }
+    /* Returns the RequireExactMatch value . */
     public string getRequireExactMatch() { return BDI_DataImport_API.RequireExactMatch; }
+    /* Returns the exact match or creates it if it does not exist . */
     public string getExactMatchOrCreate() { return BDI_DataImport_API.ExactMatchOrCreate; }
+    /* Returns the RequireBestMatch value . */
     public string getRequireBestMatch() { return BDI_DataImport_API.RequireBestMatch; }
+    /* Returns the best match or creates it if it doesn t exist . */
     public string getBestMatchOrCreate() { return BDI_DataImport_API.BestMatchOrCreate; }
 
     /*******************************************************************************************************
