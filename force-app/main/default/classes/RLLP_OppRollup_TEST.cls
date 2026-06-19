@@ -801,6 +801,7 @@ public with sharing class RLLP_OppRollup_TEST {
     static testMethod void OneContactMultipleOppsHHAccount_1(){
         OneContactMultipleOpps_1(CAO_Constants.HH_ACCOUNT_PROCESSOR);
     }
+    /* OneContactMultipleOpps_1 - Tests for one contact multiple opps . */
     public static void OneContactMultipleOpps_1(string strProcessor) {
 
         integer numCon = 1;
@@ -833,6 +834,7 @@ public with sharing class RLLP_OppRollup_TEST {
     static testMethod void OneContactMultipleOppsHHAccount_2(){
         OneContactMultipleOpps_2(CAO_Constants.HH_ACCOUNT_PROCESSOR);
     }
+    /* OneContactMultipleOpps_2 test method . */
     public static void OneContactMultipleOpps_2(string strProcessor) {
 
         integer numCon = 1;
@@ -866,6 +868,7 @@ public with sharing class RLLP_OppRollup_TEST {
     static testMethod void OneContactMultipleOppsHHAccount_3(){
         OneContactMultipleOpps_3(CAO_Constants.HH_ACCOUNT_PROCESSOR);
     }
+    /* OneContactMultipleOpps_3 test method . */
     public static void OneContactMultipleOpps_3(string strProcessor) {
 
         integer numCon = 1;
@@ -900,6 +903,7 @@ public with sharing class RLLP_OppRollup_TEST {
     static testMethod void OneContactMultipleOppsHHAccount_4(){
         OneContactMultipleOpps_4(CAO_Constants.HH_ACCOUNT_PROCESSOR);
     }
+    /* OneContactMultipleOpps_4 - This test checks that the total number of OPPs */
     public static void OneContactMultipleOpps_4(string strProcessor) {
 
         integer numCon = 1;
@@ -934,6 +938,7 @@ public with sharing class RLLP_OppRollup_TEST {
     static testMethod void OneContactMultipleOppsHHAccount_5(){
         OneContactMultipleOpps_5(CAO_Constants.HH_ACCOUNT_PROCESSOR);
     }
+    /* OneContactMultipleOpps_5 test . */
     public static void OneContactMultipleOpps_5(string strProcessor) {
 
         integer numCon = 1;
@@ -967,6 +972,7 @@ public with sharing class RLLP_OppRollup_TEST {
     static testMethod void OneContactMultipleOppsHHAccount_6(){
         OneContactMultipleOpps_6(CAO_Constants.HH_ACCOUNT_PROCESSOR);
     }
+    /* OneContactMultipleOpps_6 test . */
     public static void OneContactMultipleOpps_6(string strProcessor) {
 
         integer numCon = 1;

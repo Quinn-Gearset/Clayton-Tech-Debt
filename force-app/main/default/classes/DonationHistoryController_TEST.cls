@@ -170,6 +170,7 @@ public class DonationHistoryController_TEST {
             this.yearsWithDonation = yearsWithDonation;
         }
 
+        /* Handle a method call that has been stubbed . */
         public Object handleMethodCall(Object stubbedObject, String stubbedMethodName, 
         Type returnType, List<Type> listOfParamTypes, List<String> listOfParamNames, 
         List<Object> listOfArgs) {

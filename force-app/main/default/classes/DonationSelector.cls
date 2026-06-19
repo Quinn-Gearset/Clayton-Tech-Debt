@@ -37,14 +37,17 @@ public with sharing class DonationSelector {
     
     public DonationSelector() {}
 
+    /* Get the open donations for a given donor . */
     public List<Opportunity> getOpenDonations(String relationshipField, Id donorId) {
         return Database.query(openDonationsQueryString(relationshipField, donorId));
     }
 
+    /* Get the unit of the unit . */
     public List<Opportunity> getDonation(Id opportunityId) {
         return getDonations(new List<Id> { opportunityId });
     }
 
+    /* Get the assignments of the opportunities in the system . */
     public List<Opportunity> getDonations(List<Id> opportunityIds) {
         List<String> selectFields = new List<String> {
             opportunityContactRoleSubqueryString()

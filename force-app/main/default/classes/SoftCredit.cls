@@ -48,6 +48,7 @@ public inherited sharing class SoftCredit {
         return this.opportunityContactRole.ContactId;
     }
 
+    /* Returns the hash code of this contact s role . */
     public Integer contactRoleHashCode() {
         return (role() + contactId()).hashCode();
     }

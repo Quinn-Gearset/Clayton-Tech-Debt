@@ -35,6 +35,7 @@
 
 public with sharing class CustomNotificationTypeSelector {
 
+   /* Get the list of custom notification types for the given list of active notification channels . */
    public List<CustomNotificationType> getCustomNotificationTypesFor (List<String> activeNotificationChannels) {
       return [
         SELECT Id, CustomNotifTypeName

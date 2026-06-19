@@ -66,7 +66,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.internalMatchers = validate(internalMatchers);
 		}
 		
-		public Boolean matches(Object arg)
+		/* Matches this object against the given object . */
+  public Boolean matches(Object arg)
 		{
 			for (fflib_IMatcher internalMatcher : internalMatchers)
 			{
@@ -117,7 +118,8 @@ public with sharing class fflib_MatcherDefinitions
 			return innerMatchers;
 		}
 
-		public override String toString()
+		/* This method is used to return a string representation of the condition that can be used to evaluate */
+  public override String toString()
 		{
 			List<String> internalDescriptions = new List<String>();
 			for (fflib_IMatcher internalMatcher : internalMatchers)
@@ -165,12 +167,14 @@ public with sharing class fflib_MatcherDefinitions
 			this.toMatch = validateNotNull(toMatch);
 		}
 		
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches the filter . */
+  public Boolean matches(Object arg)
 		{
 			return toMatch == arg;
 		}
 
-		public override String toString()
+		/* String representation of the expectation . */
+  public override String toString()
 		{
 			return '[equals ' + stringify(toMatch) + ']';
 		}
@@ -193,12 +197,14 @@ public with sharing class fflib_MatcherDefinitions
 			this.toMatch = validateNotNull(toMatch);
 		}
 		
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches this filter . */
+  public Boolean matches(Object arg)
 		{
 			return toMatch === arg;
 		}
 
-		public override String toString()
+		/* String representation of the expectation . */
+  public override String toString()
 		{
 			return '[reference equals ' + fflib_MatcherDefinitions.stringify(toMatch) + ']';
 		}
@@ -213,12 +219,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyBoolean implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object is a Boolean . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Boolean;
 		}
 
-		public override String toString()
+		/* This method is used to return a string representation of the object . */
+  public override String toString()
 		{
 			return '[any Boolean]';
 		}
@@ -229,12 +237,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyDate implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object is a date . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Date;
 		}
 
-		public override String toString()
+		/* This method is used to return a string representation of the object . */
+  public override String toString()
 		{
 			return '[any Date]';
 		}
@@ -245,12 +255,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyDatetime implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object is a Datetime object . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Datetime;
 		}
 
-		public override String toString()
+		/* This method is used to return a string representation of the object . */
+  public override String toString()
 		{
 			return '[any DateTime]';
 		}
@@ -261,12 +273,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyDecimal implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object is a Decimal . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Decimal;
 		}
 
-		public override String toString()
+		/* String representation of the object */
+  public override String toString()
 		{
 			return '[any Decimal]';
 		}
@@ -277,12 +291,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyDouble implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the argument is a Double . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Double;
 		}
 
-		public override String toString()
+		/* String representation of the object */
+  public override String toString()
 		{
 			return '[any Double]';
 		}
@@ -293,12 +309,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyFieldSet implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* matches a FieldSet */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Schema.FieldSet;
 		}
 
-		public override String toString()
+		/* This method is used to return a string representation of the FieldSet . */
+  public override String toString()
 		{
 			return '[any FieldSet]';
 		}
@@ -309,12 +327,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyId implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches the filter . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Id;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any Id]';
 		}
@@ -325,12 +345,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyInteger implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object is an Integer . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Integer;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any Integer]';
 		}
@@ -341,12 +363,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyList implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches the filter . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof List<Object>;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any list]';
 		}
@@ -357,12 +381,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyLong implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object is a Long . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof Long;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any Long]';
 		}
@@ -373,12 +399,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyObject implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches this filter . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any Object]';
 		}
@@ -389,12 +417,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnyString implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object is a String . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof String;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any String]';
 		}
@@ -405,12 +435,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnySObject implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object is an SObject . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof SObject;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any SObject]';
 		}
@@ -421,12 +453,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnySObjectField implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the argument is a SObjectField . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof SObjectField;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any SObjectField]';
 		}
@@ -437,12 +471,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class AnySObjectType implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches the filter . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null && arg instanceof SObjectType;
 		}
 
-		public override String toString()
+		/* This method is used to return the string representation of the object . */
+  public override String toString()
 		{
 			return '[any SObjectType]';
 		}
@@ -472,7 +508,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.inclusive = (Boolean)validateNotNull(inclusive);
 		}
 		
-		public Boolean matches(Object arg)
+		/* This method checks if the given object is a valid date and time . */
+  public Boolean matches(Object arg)
 		{
 			if (arg instanceof Datetime)
 			{
@@ -483,7 +520,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* This method is used to return a string representation of the condition . */
+  public override String toString()
 		{
 			if (inclusive)
 			{
@@ -516,7 +554,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.inclusive = (Boolean)validateNotNull(inclusive);
 		}
 		
-		public Boolean matches(Object arg)
+		/* matches - returns true if the object is a valid date or if the object is a Datetime */
+  public Boolean matches(Object arg)
 		{
 			if (arg instanceof Datetime)
 			{
@@ -527,7 +566,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* String representation of the condition . */
+  public override String toString()
 		{
 			if (inclusive)
 			{
@@ -566,7 +606,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.inclusiveTo = (Boolean)validateNotNull(inclusiveTo);
 		}
 		
-		public Boolean matches(Object arg)
+		/* Checks if the given object is a valid date time range . */
+  public Boolean matches(Object arg)
 		{
 			if (arg instanceof Datetime)
 			{
@@ -581,7 +622,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* Serialize the filter . */
+  public override String toString()
 		{
 			return String.format('[{0} {1} and {2} {3}]', new List<String>{
 				inclusiveFrom ? 'on or after' : 'after',
@@ -622,7 +664,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.inclusiveUpper = (Boolean)validateNotNull(inclusiveUpper);
 		}
 
-		public Boolean matches(Object arg)
+		/* Checks if the given object is a valid number within this range . */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof Decimal)
 			{
@@ -638,7 +681,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* String representation of the filter . */
+  public override String toString()
 		{
 			return String.format('{0} {1} and {2} {3}', new List<String>{
 				inclusiveLower ? 'greater than or equal to' : 'greater than',
@@ -669,7 +713,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.inclusive = (Boolean)validateNotNull(inclusive);
 		}
 
-		public Boolean matches(Object arg)
+		/* matches the given object */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof Decimal)
 			{
@@ -680,7 +725,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* String representation of the condition . */
+  public override String toString()
 		{
 			if (inclusive)
 			{
@@ -713,7 +759,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.inclusive = (Boolean)validateNotNull(inclusive);
 		}
 
-		public Boolean matches(Object arg)
+		/* matches method . */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof Decimal)
 			{
@@ -724,7 +771,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* String representation of the condition . */
+  public override String toString()
 		{
 			if (inclusive)
 			{
@@ -763,12 +811,14 @@ public with sharing class fflib_MatcherDefinitions
 			this.toMatch = new Set<Schema.FieldSetMember>(((Schema.FieldSet)validateNotNull(toMatch)).getFields());
 		}
 
-		public Boolean matches(Object arg)
+		/* matches a FieldSet */
+  public Boolean matches(Object arg)
 		{
 			return (toMatch != null && arg != null && arg instanceof Schema.FieldSet) ? toMatch == new Set<Schema.FieldSetMember>(((FieldSet)arg).getFields()) : false;
 		}
 
-		public override String toString()
+		/* String representation of the FieldSet . */
+  public override String toString()
 		{
 			return '[FieldSet with fields ' + fflib_MatcherDefinitions.stringify(toMatch) + ']';
 		}
@@ -783,12 +833,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class IsNotNull implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches this filter . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null;
 		}
 
-		public override String toString()
+		/* Returns a string representation of the object . */
+  public override String toString()
 		{
 			return '[is not null]';
 		}
@@ -799,12 +851,14 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class IsNull implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches this filter . */
+  public Boolean matches(Object arg)
 		{
 			return arg == null;
 		}
 
-		public override String toString()
+		/* This method is used to return a string representation of the object . */
+  public override String toString()
 		{
 			return '[is null]';
 		}
@@ -831,7 +885,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.toMatch = toMatch;
 		}
 
-		public Boolean matches(Object arg)
+		/* This method checks if the object matches the object in the list . */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof List<Object>)
 			{
@@ -847,7 +902,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* String representation of the expectation . */
+  public override String toString()
 		{
 			return '[list containing ' + fflib_MatcherDefinitions.stringify(toMatch) + ']';
 		}
@@ -858,14 +914,16 @@ public with sharing class fflib_MatcherDefinitions
 	 */
 	public class ListIsEmpty implements fflib_IMatcher
 	{
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches this filter . */
+  public Boolean matches(Object arg)
 		{
 			return arg != null
 				&& arg instanceof List<Object>
 				&& ((List<Object>)arg).isEmpty();
 		}
 
-		public override String toString()
+		/* Returns the string representation of the object . */
+  public override String toString()
 		{
 			return '[empty list]';
 		}
@@ -892,7 +950,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.objectType = (Schema.SObjectType)validateNotNull(objectType);
 		}
 
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches this filter . */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof SObject)
 			{
@@ -903,7 +962,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* String representation of the object */
+  public override String toString()
 		{
 			return '[SObject of type ' + objectType + ']';
 		}
@@ -930,7 +990,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.toMatch = validate(toMatch);
 		}
 
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches the filter . */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof SObject)
 			{
@@ -955,7 +1016,8 @@ public with sharing class fflib_MatcherDefinitions
 			return arg;
 		}
 
-		public override String toString()
+		/* String representation of the expectation . */
+  public override String toString()
 		{
 			return '[SObject with fields ' + fflib_MatcherDefinitions.stringify(toMatch) + ']';
 		}
@@ -1012,7 +1074,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.toMatch = validate(toMatch);
 			this.matchInOrder = true;
 		}
-		public Boolean matches(Object arg)
+		/* This method checks if the given object matches the expected object . */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof list<SObject>)
 			{
@@ -1093,7 +1156,8 @@ public with sharing class fflib_MatcherDefinitions
 			return arg;
 		}
 
-		public override String toString()
+		/* String representation of the object . */
+  public override String toString()
 		{
 			if (matchInOrder)
 			{
@@ -1154,7 +1218,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.toMatch = (Id)validateNotNull(toMatch);
 		}
 
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches this object . */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof SObject)
 			{
@@ -1165,7 +1230,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* String representation of the object . */
+  public override String toString()
 		{
 			return '[SObject with Id "' + toMatch + '"]';
 		}
@@ -1188,7 +1254,8 @@ public with sharing class fflib_MatcherDefinitions
 			this.toMatch = (String)validateNotNull(toMatch);
 		}
 
-		public Boolean matches(Object arg)
+		/* Checks if the given object matches this object . */
+  public Boolean matches(Object arg)
 		{
 			if (arg != null && arg instanceof SObject)
 			{
@@ -1206,7 +1273,8 @@ public with sharing class fflib_MatcherDefinitions
 			return false;
 		}
 
-		public override String toString()
+		/* String description of the object */
+  public override String toString()
 		{
 			return '[SObject with Name "' + toMatch + '"]';
 		}
